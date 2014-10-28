@@ -1,9 +1,9 @@
 class XmlController < ApplicationController
-  caches_page :feed, :if => Proc.new {|c|
+  caches_page :feed, if: proc do|c|
     c.request.query_string == ''
-  }
+  end
 
-  NORMALIZED_FORMAT_FOR = {'atom' => 'atom', 'rss' => 'rss',
+  NORMALIZED_FORMAT_FOR = { 'atom' => 'atom', 'rss' => 'rss',
     'atom10' => 'atom', 'atom03' => 'atom', 'rss20' => 'rss',
     'googlesitemap' => 'googlesitemap', 'rsd' => 'rsd' }
 
@@ -24,11 +24,11 @@ class XmlController < ApplicationController
     when 'article'
       redirect_to Article.find(params[:id]).feed_url(@format), status: :moved_permanently
     when 'tag', 'author'
-      redirect_to self.send("#{params[:type]}_url", params[:id], format: @format), status: :moved_permanently
+      redirect_to send("#{params[:type]}_url", params[:id], format: @format), status: :moved_permanently
     when 'trackbacks'
       redirect_to trackbacks_url(format: @format), status: :moved_permanently
     when 'sitemap'
-      @items = Array.new
+      @items = []
       @blog = this_blog
 
       @feed_title = this_blog.blog_name
@@ -61,7 +61,6 @@ class XmlController < ApplicationController
   end
 
   def rsd
-    render "rsd", formats: [:rsd], handlers: [:builder]
+    render 'rsd', formats: [:rsd], handlers: [:builder]
   end
-
 end

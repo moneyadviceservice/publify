@@ -64,7 +64,7 @@ Common attributes:
 }
       end
 
-      def self.macrofilter(blog,content,attrib,params,text="")
+      def self.macrofilter(blog,content,attrib,_params,_text="")
         style         = attrib['style']
         caption       = attrib['caption']
         title         = attrib['title']
@@ -81,8 +81,8 @@ Common attributes:
 
           FlickRaw.api_key = FLICKR_KEY
           FlickRaw.shared_secret = FLICKR_SECRET
-          flickrimage = flickr.photos.getInfo(:photo_id => img)
-          sizes = flickr.photos.getSizes(:photo_id => img)
+          flickrimage = flickr.photos.getInfo(photo_id: img)
+          sizes = flickr.photos.getSizes(photo_id: img)
 
           thumbdetails = sizes.find {|s| s['label'].downcase == thumbsize.downcase } || sizes.first
           displaydetails = sizes.find {|s| s['label'].downcase == displaysize.downcase } || sizes.first

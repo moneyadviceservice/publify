@@ -8,7 +8,7 @@ module Stateful
       self.class.to_s.demodulize
     end
 
-    def exit_hook(target_state)
+    def exit_hook(_target_state)
       ::Rails.logger.debug("#{model} leaving state #{self}")
     end
 
@@ -81,7 +81,7 @@ module Stateful
       end_meth
     end
 
-    def state_writer_method(name, states, initial_state)
+    def state_writer_method(name, states, _initial_state)
       module_eval <<-end_meth
         def #{name}=(state)
           case state
