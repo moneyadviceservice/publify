@@ -4,7 +4,7 @@ class PublifyApp
       plugin_display_name "HTML Filter"
       plugin_description 'Strip HTML tags'
 
-      def self.filtertext(blog,content,text,params)
+      def self.filtertext(_blog,_content,text,_params)
         # First, autolink
         text = text.to_s
         URI.extract(text, ["http", "https", "mailto", "gopher"]) do |item|

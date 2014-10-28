@@ -17,7 +17,7 @@ class Sidebar < ActiveRecord::Base
       options[:label] || key.humanize.gsub(/url/i, 'URL')
     end
 
-    def label_html(sidebar)
+    def label_html(_sidebar)
       content_tag('label', label)
     end
 
@@ -242,7 +242,7 @@ class Sidebar < ActiveRecord::Base
     short_name + '-' + id.to_s
   end
 
-  def parse_request(contents, params)
+  def parse_request(_contents, _params)
   end
 
   def fields

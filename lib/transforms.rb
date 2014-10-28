@@ -98,7 +98,7 @@ class String
     string.gsub('%date%', Time.mktime(*params.values_at(:year, :month, :day)).strftime(format))
   end
   
-  def parse_page(string, params)
+  def parse_page(_string, params)
     return '' unless params[:page]
     "#{I18n.t('.articles.index.page')} #{params[:page]}"
   end

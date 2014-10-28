@@ -30,7 +30,7 @@ class TextFilterPlugin
     if (self.to_s =~ /::([a-zA-Z]+)$/)
       "plugins/textfilters/#{$1}".downcase
     else
-      raise "I don't know who I am: #{self.to_s}"
+      raise "I don't know who I am: #{self}"
     end
   end
 
@@ -98,7 +98,7 @@ class TextFilterPlugin::Macro < TextFilterPlugin
       macrofilter(blog,content,attributes_parse(match),params)
     end
 
-    new_text = new_text.gsub(regex2) do |match|
+    new_text = new_text.gsub(regex2) do |_match|
       macrofilter(blog,content,attributes_parse($1.to_s),params,$2.to_s)
     end
 
