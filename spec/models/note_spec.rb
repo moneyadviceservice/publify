@@ -24,10 +24,9 @@ describe Note, type: :model do
     end
 
     describe 'permalink' do
-      let(:note) do
-        Rails.cache.clear
-        create(:note, body: 'àé')
-      end
+      before { RouteCache.clear }
+
+      let(:note) { create(:note, body: 'àé') }
 
       it { expect(note.permalink).to eq("#{note.id}-ae") }
       it { expect(note.permalink_url).to eq("#{blog.base_url}/note/#{note.id}-ae") }
