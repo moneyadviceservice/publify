@@ -13,8 +13,10 @@ describe Page, type: :model do
 
   describe 'permalink' do
     context 'with an existing page' do
-      before(:each) { Rails.cache.clear }
+      before(:each) { RouteCache.clear }
+
       let(:page) { create(:page, name: 'page_one') }
+
       it { expect(page.permalink_url).to eq('http://myblog.net/pages/page_one') }
     end
   end

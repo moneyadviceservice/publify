@@ -8,8 +8,8 @@ describe Blog, type: :model do
   end
 
   describe 'A blog' do
-    before(:each) do
-      Rails.cache.clear
+    before do
+      RouteCache.clear
       @blog = Blog.new
     end
 
