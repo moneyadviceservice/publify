@@ -31,7 +31,6 @@
   z-index: $z-foreground;
   position: relative;
   padding-top: baseline-unit(1);
-  font-size: 0; // stops spaces creeping in between tags
 
   @include respond-to($mq-m) {
     text-align: right;
