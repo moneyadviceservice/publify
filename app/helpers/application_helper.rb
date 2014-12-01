@@ -57,9 +57,8 @@ module ApplicationHelper
     avatar_class.get_avatar(options)
   end
 
-  def meta_tag(name, value, property = false)
-    return tag :meta, name: name, content: value unless property || value.blank?
-    tag :meta, property: name, content: value unless value.blank?
+  def meta_tag(name, value)
+    tag :meta, name: name, content: value unless value.blank?
   end
 
   def markup_help_popup(markup, text)
@@ -183,7 +182,7 @@ module ApplicationHelper
     if this_blog.date_format == 'setting_date_format_distance_of_time_in_words'
       timeago_tag timestamp, date_only: false
     else
-      "#{display_date(timestamp)}"
+      "#{display_date(timestamp)} #{t('helper.at')} #{display_time(timestamp)}"
     end
   end
 
