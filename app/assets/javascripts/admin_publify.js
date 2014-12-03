@@ -19,7 +19,6 @@ function tag_manager() {
   var tagUrl = "/admin/content/auto_complete_for_article_keywords";
 
   $.getJSON(tagUrl, function (tags) {
-
     $('#article_keywords').val($('#article_keywords').val().replace(/\"/g,""));
 
     var tagApi = $("#article_keywords").tagsManager({
