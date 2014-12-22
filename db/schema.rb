@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141222135309) do
+ActiveRecord::Schema.define(version: 20141222162933) do
 
   create_table "articles_tags", id: false, force: true do |t|
     t.integer "article_id"
@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(version: 20141222135309) do
   create_table "campaigns", force: true do |t|
     t.string   "title"
     t.text     "description"
-    t.boolean  "active"
+    t.boolean  "active",              default: false
     t.string   "hero_image"
     t.string   "hero_image_alt_text"
     t.datetime "created_at"
