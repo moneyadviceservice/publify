@@ -31,6 +31,7 @@ Publify has been around since 2004 and is the oldest Ruby on Rails open source p
 This repository comes equipped with a self-setup script:
 
 ```bash
+$ cp config/database.yml.mysql config/database.yml
 $ ./bin/setup
 $ rails s
 ```
@@ -60,7 +61,7 @@ This repo uses the [asset sync](https://github.com/rumblelabs/asset_sync) gem to
 
 **Staging**
 
-  * Make sure you have a copy of `.env` in the project root 
+  * Make sure you have a copy of `.env` in the project root
     * This file should contain the necessary environment variables for deployment
   * Make sure you are working from an up to date version of master
   * Run `./bin/deploy`
