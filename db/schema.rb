@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141222162933) do
+ActiveRecord::Schema.define(version: 20141222163214) do
 
   create_table "articles_tags", id: false, force: true do |t|
     t.integer "article_id"
@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 20141222162933) do
   create_table "campaign_links", force: true do |t|
     t.string   "title"
     t.string   "url"
-    t.string   "type"
+    t.string   "link_type"
     t.integer  "campaign_id"
     t.datetime "created_at"
     t.datetime "updated_at"
