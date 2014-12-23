@@ -1,7 +1,6 @@
 feature 'Campaigns' do
-  let(:campaigns_page)        { CampaignsPage.new }
-  let(:fake_campaign)         { create(:campaign, title: 'Save money at the supermarket') }
-  let(:second_fake_campaign)  { create(:campaign, title: 'Only fools and horses') }
+  let(:campaigns_page)  { CampaignsPage.new }
+  let!(:fake_campaign)  { create(:campaign, title: 'Save money at the supermarket', active: true, primary_link: create(:campaign_link), secondary_link: create(:campaign_link, link_type: 'blog')) }
 
   background do
     create(:blog)
@@ -9,7 +8,7 @@ feature 'Campaigns' do
     campaigns_page.load
   end
 
-  scenario 'Viewing all campaigns' do
+  scenario 'when viewing all campaigns' do
     when_i_view_the_campaigns_page_as_an_admin
     i_can_see_all_campaigns
   end
@@ -19,8 +18,7 @@ feature 'Campaigns' do
   end
 
   def i_can_see_all_campaigns
-    expect(page).to have_content(fake_campaign.title)
-    expect(page).to have_content(second_fake_campaign.title)
+    expect(page).to have_selector('a', text: fake_campaign.title)
   end
 
 end
