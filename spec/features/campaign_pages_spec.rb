@@ -1,7 +1,7 @@
 feature 'Campaigns' do
   let(:campaigns_page)     { CampaignsPage.new }
   let(:new_campaigns_page) { NewCampaignsPage.new }
-  let!(:fake_campaign)     { create(:campaign, title: 'Save money at the supermarket', active: true, primary_link: create(:campaign_link), secondary_link: create(:campaign_link, link_type: 'blog')) }
+  let!(:fake_campaign)     { create(:campaign, title: 'Save money at the supermarket', active: true) }
 
   background do
     create(:blog)
@@ -34,7 +34,7 @@ feature 'Campaigns' do
   end
 
   def and_i_create_a_new_campaign
-    new_campaigns_page.title.set 'Save money at the supermarket'
+    new_campaigns_page.campaign_title.set 'Save money at the supermarket'
     new_campaigns_page.description.set 'Going to university is all about having a good time, discovering yourself and making new friends, right?'
     new_campaigns_page.active.set(true)
     new_campaigns_page.primary_link_type.select 'Ma Says'
