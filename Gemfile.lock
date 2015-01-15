@@ -7,6 +7,15 @@ GIT
       orm_adapter (~> 0.5.0)
 
 GIT
+  remote: git://github.com/mailjet/mailjet-gem.git
+  revision: fe3787f1a296b736157041c3cb6bbe73ac907563
+  specs:
+    mailjet (1.0.1)
+      activesupport (>= 3.1.0)
+      rack (>= 1.4.0)
+      rest-client
+
+GIT
   remote: https://github.com/moneyadviceservice/bowndler.git
   revision: f836a295f0eac8ba02a6dc4733d000a7f1fc8a00
   specs:
@@ -199,7 +208,7 @@ GEM
       rubocop (~> 0.20)
     hike (1.2.3)
     hitimes (1.2.2)
-    htmlentities (4.3.2)
+    htmlentities (4.3.3)
     http (0.5.1)
       http_parser.rb
     http_parser.rb (0.6.0)
@@ -233,10 +242,6 @@ GEM
     lumberjack (1.0.9)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
-    mailjet (1.0.1)
-      activesupport (>= 3.1.0)
-      rack (>= 1.4.0)
-      rest-client
     memoizable (0.4.2)
       thread_safe (~> 0.3, >= 0.3.1)
     method_source (0.8.2)
@@ -252,7 +257,7 @@ GEM
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
     net-ssh (2.9.1)
-    netrc (0.8.0)
+    netrc (0.10.2)
     nokogiri (1.6.3.1)
       mini_portile (= 0.6.0)
     non-stupid-digest-assets (1.0.4)
@@ -447,7 +452,7 @@ DEPENDENCIES
   kaminari
   launchy
   letter_opener
-  mailjet
+  mailjet!
   mini_magick (~> 3.8.1)
   mysql2
   non-stupid-digest-assets
