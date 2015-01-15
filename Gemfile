@@ -1,11 +1,11 @@
 source 'https://rubygems.org'
-ruby '2.1.3'
+ruby '2.2.0'
 
 gem 'dough-ruby', '~> 4.0', git: 'https://github.com/moneyadviceservice/dough.git', require: 'dough'
 gem 'bowndler', git: 'https://github.com/moneyadviceservice/bowndler.git'
 
 gem 'mysql2'
-gem 'rails', '~> 4.1.1'
+gem 'rails', '~> 4.2.0'
 gem 'htmlentities'
 gem 'bluecloth', '~> 2.1'
 gem 'coderay', '~> 1.1.0'
