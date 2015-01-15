@@ -323,6 +323,8 @@ GEM
     rb-inotify (0.9.5)
       ffi (>= 0.5.0)
     recaptcha (0.3.6)
+    responders (2.0.2)
+      railties (>= 4.2.0.alpha, < 5)
     rest-client (1.7.2)
       mime-types (>= 1.16, < 3.0)
       netrc (~> 0.7)
@@ -466,6 +468,7 @@ DEPENDENCIES
   rails_autolink (~> 1.1.0)
   rake (~> 10.3.2)
   recaptcha
+  responders (~> 2.0)
   rspec-rails (~> 3.1.0)
   rubocop
   rubypants (~> 0.2.0)
