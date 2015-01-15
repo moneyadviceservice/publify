@@ -255,7 +255,7 @@ class Article < Content
   end
 
   def cast_to_boolean(value)
-    ActiveRecord::ConnectionAdapters::Column.value_to_boolean(value)
+    ActiveRecord::Type::Boolean.new.type_cast_from_database(value)
   end
   # Cast the input value for published= before passing it to the state.
   def published=(newval)
