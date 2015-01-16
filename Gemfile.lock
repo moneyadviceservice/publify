@@ -7,6 +7,15 @@ GIT
       orm_adapter (~> 0.5.0)
 
 GIT
+  remote: git://github.com/mailjet/mailjet-gem.git
+  revision: fe3787f1a296b736157041c3cb6bbe73ac907563
+  specs:
+    mailjet (1.0.1)
+      activesupport (>= 3.1.0)
+      rack (>= 1.4.0)
+      rest-client
+
+GIT
   remote: https://github.com/moneyadviceservice/bowndler.git
   revision: f836a295f0eac8ba02a6dc4733d000a7f1fc8a00
   specs:
@@ -25,38 +34,48 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
+    CFPropertyList (2.3.0)
     RedCloth (4.2.9)
-    actionmailer (4.1.8)
-      actionpack (= 4.1.8)
-      actionview (= 4.1.8)
+    actionmailer (4.2.0)
+      actionpack (= 4.2.0)
+      actionview (= 4.2.0)
+      activejob (= 4.2.0)
       mail (~> 2.5, >= 2.5.4)
-    actionpack (4.1.8)
-      actionview (= 4.1.8)
-      activesupport (= 4.1.8)
-      rack (~> 1.5.2)
+      rails-dom-testing (~> 1.0, >= 1.0.5)
+    actionpack (4.2.0)
+      actionview (= 4.2.0)
+      activesupport (= 4.2.0)
+      rack (~> 1.6.0)
       rack-test (~> 0.6.2)
+      rails-dom-testing (~> 1.0, >= 1.0.5)
+      rails-html-sanitizer (~> 1.0, >= 1.0.1)
     actionpack-page_caching (1.0.2)
       actionpack (>= 4.0.0, < 5)
-    actionview (4.1.8)
-      activesupport (= 4.1.8)
+    actionview (4.2.0)
+      activesupport (= 4.2.0)
       builder (~> 3.1)
       erubis (~> 2.7.0)
-    activemodel (4.1.8)
-      activesupport (= 4.1.8)
+      rails-dom-testing (~> 1.0, >= 1.0.5)
+      rails-html-sanitizer (~> 1.0, >= 1.0.1)
+    activejob (4.2.0)
+      activesupport (= 4.2.0)
+      globalid (>= 0.3.0)
+    activemodel (4.2.0)
+      activesupport (= 4.2.0)
       builder (~> 3.1)
-    activerecord (4.1.8)
-      activemodel (= 4.1.8)
-      activesupport (= 4.1.8)
-      arel (~> 5.0.0)
-    activesupport (4.1.8)
-      i18n (~> 0.6, >= 0.6.9)
+    activerecord (4.2.0)
+      activemodel (= 4.2.0)
+      activesupport (= 4.2.0)
+      arel (~> 6.0)
+    activesupport (4.2.0)
+      i18n (~> 0.7)
       json (~> 1.7, >= 1.7.7)
       minitest (~> 5.1)
-      thread_safe (~> 0.1)
+      thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
     addressable (2.3.6)
     akismet (1.0.0)
-    arel (5.0.1.20140414130214)
+    arel (6.0.0)
     ast (2.0.0)
     astrolabe (1.3.0)
       parser (>= 2.2.0.pre.3, < 3.0)
@@ -114,39 +133,66 @@ GEM
       http_parser.rb (~> 0.6.0)
     equalizer (0.0.9)
     erubis (2.7.0)
-    eventmachine (1.0.3)
-    excon (0.40.0)
+    eventmachine (1.0.4)
+    excon (0.43.0)
     execjs (2.2.2)
     factory_girl (4.5.0)
       activesupport (>= 3.0.0)
     faraday (0.9.0)
       multipart-post (>= 1.2, < 3)
     ffi (1.9.6)
+    fission (0.5.0)
+      CFPropertyList (~> 2.2)
     flickraw (0.9.8)
     flickraw-cached (20120701)
       flickraw (>= 0.9)
-    fog (1.24.0)
-      fog-brightbox
-      fog-core (~> 1.23)
+    fog (1.27.0)
+      fog-atmos
+      fog-aws (~> 0.0)
+      fog-brightbox (~> 0.4)
+      fog-core (~> 1.27, >= 1.27.3)
+      fog-ecloud
       fog-json
+      fog-profitbricks
       fog-radosgw (>= 0.0.2)
       fog-sakuracloud (>= 0.0.4)
+      fog-serverlove
       fog-softlayer
+      fog-storm_on_demand
+      fog-terremark
+      fog-vmfusion
+      fog-voxel
+      fog-xml (~> 0.1.1)
       ipaddress (~> 0.5)
       nokogiri (~> 1.5, >= 1.5.11)
-    fog-brightbox (0.6.1)
+    fog-atmos (0.1.0)
+      fog-core
+      fog-xml
+    fog-aws (0.0.6)
+      fog-core (~> 1.27)
+      fog-json (~> 1.0)
+      fog-xml (~> 0.1)
+      ipaddress (~> 0.8)
+    fog-brightbox (0.7.1)
       fog-core (~> 1.22)
       fog-json
-      inflecto
-    fog-core (1.24.0)
+      inflecto (~> 0.0.2)
+    fog-core (1.27.3)
       builder
       excon (~> 0.38)
       formatador (~> 0.2)
       mime-types
       net-scp (~> 1.1)
       net-ssh (>= 2.1.3)
+    fog-ecloud (0.0.2)
+      fog-core
+      fog-xml
     fog-json (1.0.0)
       multi_json (~> 1.0)
+    fog-profitbricks (0.0.1)
+      fog-core
+      fog-xml
+      nokogiri
     fog-radosgw (0.0.3)
       fog-core (>= 1.21.0)
       fog-json
@@ -154,10 +200,25 @@ GEM
     fog-sakuracloud (0.1.1)
       fog-core
       fog-json
-    fog-softlayer (0.3.22)
+    fog-serverlove (0.1.1)
       fog-core
       fog-json
-    fog-xml (0.1.0)
+    fog-softlayer (0.3.28)
+      fog-core (>= 1.27.3)
+      fog-json
+    fog-storm_on_demand (0.1.0)
+      fog-core
+      fog-json
+    fog-terremark (0.0.3)
+      fog-core
+      fog-xml
+    fog-vmfusion (0.0.1)
+      fission
+      fog-core
+    fog-voxel (0.0.2)
+      fog-core
+      fog-xml
+    fog-xml (0.1.1)
       fog-core
       nokogiri (~> 1.5, >= 1.5.11)
     foreman (0.76.0)
@@ -165,6 +226,8 @@ GEM
       thor (~> 0.19.1)
     formatador (0.2.5)
     fssm (0.2.10)
+    globalid (0.3.0)
+      activesupport (>= 4.1.0)
     guard (2.7.0)
       formatador (>= 0.2.4)
       listen (~> 2.7)
@@ -188,11 +251,11 @@ GEM
       rubocop (~> 0.20)
     hike (1.2.3)
     hitimes (1.2.2)
-    htmlentities (4.3.2)
+    htmlentities (4.3.3)
     http (0.5.1)
       http_parser.rb
     http_parser.rb (0.6.0)
-    i18n (0.6.11)
+    i18n (0.7.0)
     inflecto (0.0.2)
     ipaddress (0.8.0)
     jbuilder (2.2.6)
@@ -205,7 +268,7 @@ GEM
       railties (>= 3.2.16)
     jshint_ruby (0.1)
       execjs
-    json (1.8.1)
+    json (1.8.2)
     kaminari (0.16.1)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
@@ -217,31 +280,29 @@ GEM
       celluloid (>= 0.15.2)
       rb-fsevent (>= 0.9.3)
       rb-inotify (>= 0.9)
+    loofah (2.0.1)
+      nokogiri (>= 1.5.9)
     lumberjack (1.0.9)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
-    mailjet (1.0.1)
-      activesupport (>= 3.1.0)
-      rack (>= 1.4.0)
-      rest-client
     memoizable (0.4.2)
       thread_safe (~> 0.3, >= 0.3.1)
     method_source (0.8.2)
     mime-types (2.4.3)
     mini_magick (3.8.1)
       subexec (~> 0.2.1)
-    mini_portile (0.6.0)
-    minitest (5.4.3)
+    mini_portile (0.6.2)
+    minitest (5.5.1)
     multi_json (1.10.1)
     multipart-post (2.0.0)
     mysql2 (0.3.16)
     naught (1.0.0)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
-    net-ssh (2.9.1)
-    netrc (0.8.0)
-    nokogiri (1.6.3.1)
-      mini_portile (= 0.6.0)
+    net-ssh (2.9.2)
+    netrc (0.10.2)
+    nokogiri (1.6.5)
+      mini_portile (~> 0.6.0)
     non-stupid-digest-assets (1.0.4)
     orm_adapter (0.5.0)
     parser (2.2.0.pre.5)
@@ -260,19 +321,28 @@ GEM
       slop (~> 3.4)
     pry-rails (0.3.2)
       pry (>= 0.9.10)
-    rack (1.5.2)
-    rack-test (0.6.2)
+    rack (1.6.0)
+    rack-test (0.6.3)
       rack (>= 1.0)
-    rails (4.1.8)
-      actionmailer (= 4.1.8)
-      actionpack (= 4.1.8)
-      actionview (= 4.1.8)
-      activemodel (= 4.1.8)
-      activerecord (= 4.1.8)
-      activesupport (= 4.1.8)
+    rails (4.2.0)
+      actionmailer (= 4.2.0)
+      actionpack (= 4.2.0)
+      actionview (= 4.2.0)
+      activejob (= 4.2.0)
+      activemodel (= 4.2.0)
+      activerecord (= 4.2.0)
+      activesupport (= 4.2.0)
       bundler (>= 1.3.0, < 2.0)
-      railties (= 4.1.8)
-      sprockets-rails (~> 2.0)
+      railties (= 4.2.0)
+      sprockets-rails
+    rails-deprecated_sanitizer (1.0.3)
+      activesupport (>= 4.2.0.alpha)
+    rails-dom-testing (1.0.5)
+      activesupport (>= 4.2.0.beta, < 5.0)
+      nokogiri (~> 1.6.0)
+      rails-deprecated_sanitizer (>= 1.0.1)
+    rails-html-sanitizer (1.0.1)
+      loofah (~> 2.0)
     rails-observers (0.1.2)
       activemodel (~> 4.0)
     rails-timeago (2.11.1)
@@ -285,9 +355,9 @@ GEM
       rails (> 3.1)
     rails_serve_static_assets (0.0.2)
     rails_stdout_logging (0.0.3)
-    railties (4.1.8)
-      actionpack (= 4.1.8)
-      activesupport (= 4.1.8)
+    railties (4.2.0)
+      actionpack (= 4.2.0)
+      activesupport (= 4.2.0)
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rainbow (2.0.0)
@@ -296,6 +366,8 @@ GEM
     rb-inotify (0.9.5)
       ffi (>= 0.5.0)
     recaptcha (0.3.6)
+    responders (2.0.2)
+      railties (>= 4.2.0.alpha, < 5)
     rest-client (1.7.2)
       mime-types (>= 1.16, < 3.0)
       netrc (~> 0.7)
@@ -425,20 +497,21 @@ DEPENDENCIES
   kaminari
   launchy
   letter_opener
-  mailjet
+  mailjet!
   mini_magick (~> 3.8.1)
   mysql2
   non-stupid-digest-assets
   pg
   poltergeist
   pry-rails
-  rails (~> 4.1.1)
+  rails (~> 4.2.0)
   rails-observers (~> 0.1.2)
   rails-timeago (~> 2.0)
   rails_12factor
   rails_autolink (~> 1.1.0)
   rake (~> 10.3.2)
   recaptcha
+  responders (~> 2.0)
   rspec-rails (~> 3.1.0)
   rubocop
   rubypants (~> 0.2.0)

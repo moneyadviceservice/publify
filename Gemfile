@@ -1,11 +1,11 @@
 source 'https://rubygems.org'
-ruby '2.1.3'
+ruby '2.2.0'
 
 gem 'dough-ruby', '~> 4.0', git: 'https://github.com/moneyadviceservice/dough.git', require: 'dough'
 gem 'bowndler', git: 'https://github.com/moneyadviceservice/bowndler.git'
 
 gem 'mysql2'
-gem 'rails', '~> 4.1.1'
+gem 'rails', '~> 4.2.0'
 gem 'htmlentities'
 gem 'bluecloth', '~> 2.1'
 gem 'coderay', '~> 1.1.0'
@@ -23,6 +23,7 @@ gem 'carrierwave', '~> 0.10.0'
 gem 'akismet', '~> 1.0'
 gem 'twitter', '~> 5.6.0'
 gem 'jbuilder'
+gem 'responders', '~> 2.0'
 
 gem 'jquery-rails', '~> 3.1.0'
 gem 'jquery-ui-rails', '~> 5.0.2'
@@ -33,7 +34,7 @@ gem 'rails_autolink', '~> 1.1.0'
 gem 'dynamic_form', '~> 1.1.4'
 gem 'sass-rails', ' ~> 4.0.3'
 gem 'non-stupid-digest-assets'
-gem 'mailjet'
+gem 'mailjet', github: "mailjet/mailjet-gem"
 gem 'thin'
 
 # removed from Rails-core as Rails 4.0

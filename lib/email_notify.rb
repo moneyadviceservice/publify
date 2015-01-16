@@ -19,7 +19,7 @@ class EmailNotify
 
     begin
       email = NotificationMailer.article(article, user)
-      email.deliver
+      email.deliver_now
     rescue => err
       logger.error "Unable to send article email: #{err.inspect}"
     end
