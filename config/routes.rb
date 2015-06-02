@@ -65,6 +65,7 @@ Rails.application.routes.draw do
   end
 
   get '/news', to: 'tags#show', defaults: { id: 'news' }
+  get '/news/:id', to: 'news#show_article'
 
   # SetupController
   match '/setup', to: 'setup#index', via: [:get, :post], format: false
