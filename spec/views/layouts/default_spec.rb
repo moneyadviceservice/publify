@@ -1,5 +1,5 @@
 describe "layouts/default.html.erb", :type => :view do
-  let(:popular_articles) { double(:most_popular_article, articles: []) }
+  let(:popular_articles) { double(:most_popular_article, articles: [], empty?: true) }
 
   before(:each) do
     assign(:keywords, ["foo", "bar"])
