@@ -573,3 +573,6 @@ DEPENDENCIES
   unicorn
   uuidtools (~> 2.1.1)
   webpurify
+
+BUNDLED WITH
+   1.10.2
