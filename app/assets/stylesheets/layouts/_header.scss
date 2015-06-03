@@ -115,6 +115,7 @@
 }
 
 .l-header__bottom {
+  margin-top: baseline-unit(2);
   overflow: hidden;
 
   @include respond-to($mq-m) {
@@ -333,14 +334,12 @@
   width: 100%;
   margin: 0 auto;
   max-width: 530px;
-  margin-bottom: baseline-unit(6);
+  margin-bottom: baseline-unit(2);
 
   @include respond-to($mq-m) {
     @include font-size(18);
     margin-top: baseline-unit(2);
-    margin-bottom: baseline-unit(10);
+    margin-bottom: baseline-unit(4);
     clear: both;
   }
 }
-
-
