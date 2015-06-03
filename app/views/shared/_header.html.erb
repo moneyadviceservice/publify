@@ -40,7 +40,9 @@
     <div class="l-header__bottom">
       <div class="l-header-logo">
         <% if use_custom_header? %>
-          <h1 class="l-header-logo__title">Your Money Advice</h1>
+          <h1 class="l-header-logo__title">
+            <%= link_to "Your Money Advice", "#content", class: "l-header-logo__link" %>
+          </h1>
         <% else %>
           <span class="l-header-logo__title">
             <a href="/" class="l-header-title__link">Your Money Advice <span class="visually-hidden">home page</span></a>

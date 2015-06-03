@@ -273,7 +273,8 @@
   }
 }
 
-.l-header-title__link {
+.l-header-title__link,
+.l-header-logo__link {
   &:link,
   &:focus,
   &:hover,
