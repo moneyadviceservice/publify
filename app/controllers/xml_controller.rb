@@ -47,6 +47,18 @@ class XmlController < ApplicationController
     end
   end
 
+  def news_feed
+    @blog = this_blog
+    @feed_title = this_blog.blog_name
+    @link = this_blog.base_url
+    @self_url = url_for(params)
+    @items = Article.find_already_published(1000).news.where('published_at > ?', Time.now - 48.hours)
+
+    respond_to do |format|
+      format.googlesitemap
+    end
+  end
+
   # TODO: Move redirects into config/routes.rb, if possible
   def articlerss
     redirect_to Article.find(params[:id]).feed_url('rss'), status: :moved_permanently
