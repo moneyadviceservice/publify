@@ -61,7 +61,10 @@ en:
       next_page: "Next page"
       previous_page: "Previous page"
     show:
-      articles_tagged_as: Articles tagged as
+      tag:
+        articles_tagged_as: Articles tagged as
+      news:
+        articles_tagged_as: ''
   helper:
     at: "at"
   articles:

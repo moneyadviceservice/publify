@@ -1,11 +1,50 @@
 # coding: utf-8
 describe Article, type: :model do
-
   let!(:blog) { create(:blog) }
 
   it 'test_content_fields' do
     a = Article.new
     assert_equal [:body, :extended], a.content_fields
+  end
+
+  describe '::exclude_news' do
+    context 'when an article is not tagged with news' do
+      let(:subject) { described_class.new(title: 'my article') }
+
+      it 'it is not returned' do
+        subject.save!
+        expect(described_class.exclude_news).to include(subject)
+      end
+    end
+
+    context 'when an article is tagged with news' do
+      let(:subject) { described_class.new(title: 'my news article', keywords: "News,General") }
+
+      it 'it is not returned' do
+        subject.save!
+        expect(described_class.exclude_news).to be_empty
+      end
+    end
+  end
+
+  describe '::news' do
+    context 'when an article is not tagged with news' do
+      let(:subject) { described_class.new(title: 'my article') }
+
+      it 'it is not returned' do
+        subject.save!
+        expect(described_class.news).to be_empty
+      end
+    end
+
+    context 'when an article is tagged with news' do
+      let(:subject) { described_class.new(title: 'my news article', keywords: "News") }
+
+      it 'it is not returned' do
+        subject.save!
+        expect(described_class.news).to include(subject)
+      end
+    end
   end
 
   describe '#permalink_url' do

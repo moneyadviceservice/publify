@@ -57,6 +57,15 @@ class Article < Content
       .limit(5)
   }
 
+  scope :exclude_news, lambda {
+    sub_query = Article.joins(:tags).where(tags: {name: 'news'})
+    where.not(id: sub_query)
+  }
+
+  scope :news, lambda {
+    joins(:tags).where(tags: {name: 'news'})
+  }
+
   setting :password, :string, ''
 
   attr_accessor :keywords
