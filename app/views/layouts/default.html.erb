@@ -30,6 +30,7 @@
 
   <title><%= h(page_title) %></title>
   <%= render 'shared/page_header' %>
+  <%= yield :extra_head_content %>
 </head>
 <body class="<%= use_custom_header? ? 'homepage' : '' %> <%= !@article ? 'non-article-page' : 'article-page' %>">
   <%= render 'shared/header' %>

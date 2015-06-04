@@ -211,7 +211,7 @@ class Article < Content
     elsif !query_s.empty? && !args.empty?
       Article.searchstring(query).page(args[:page]).per(args[:per])
     else
-      []
+      Article.none.page
     end
   end
 
