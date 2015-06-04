@@ -42,7 +42,6 @@ gem 'responders', '~> 2.0'
 gem 'actionpack-page_caching', '~> 1.0.2'
 gem 'rails-observers', '~> 0.1.2'
 gem 'ckeditor', github: 'galetahub/ckeditor'
-gem 'autoprefixer-rails'
 
 gem 'oauth2', '1.0.0'
 gem 'google-api-client', '0.7.1'

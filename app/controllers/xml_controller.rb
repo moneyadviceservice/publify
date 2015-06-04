@@ -35,7 +35,7 @@ class XmlController < ApplicationController
       @link = this_blog.base_url
       @self_url = url_for(params)
 
-      @items += Article.find_already_published(1000)
+      @items += Article.exclude_news.find_already_published(1000)
       @items += Page.find_already_published(1000)
       @items += Tag.find_all_with_article_counters unless this_blog.unindex_tags
 
@@ -44,6 +44,18 @@ class XmlController < ApplicationController
       end
     else
       return render(text: 'Unsupported feed type', status: 404)
+    end
+  end
+
+  def news_feed
+    @blog = this_blog
+    @feed_title = this_blog.blog_name
+    @link = this_blog.base_url
+    @self_url = url_for(params)
+    @items = Article.find_already_published(1000).news.where('published_at > ?', Time.now - 48.hours)
+
+    respond_to do |format|
+      format.googlesitemap
     end
   end
 

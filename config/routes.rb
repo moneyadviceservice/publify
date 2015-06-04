@@ -25,6 +25,7 @@ Rails.application.routes.draw do
 
   get 'xml/:format', to: 'xml#feed', type: 'feed', constraints: { format: 'rss' }, as: 'xml'
   get 'sitemap.xml', to: 'xml#feed', format: 'googlesitemap', type: 'sitemap', as: 'sitemap_xml'
+  get 'news-sitemap.xml', to: 'xml#news_feed', format: 'googlesitemap', type: 'news'
 
   scope controller: 'xml', path: 'xml', as: 'xml' do
     scope action: 'feed' do
