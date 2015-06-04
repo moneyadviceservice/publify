@@ -35,7 +35,7 @@ class XmlController < ApplicationController
       @link = this_blog.base_url
       @self_url = url_for(params)
 
-      @items += Article.find_already_published(1000)
+      @items += Article.exclude_news.find_already_published(1000)
       @items += Page.find_already_published(1000)
       @items += Tag.find_all_with_article_counters unless this_blog.unindex_tags
 
