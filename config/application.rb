@@ -37,6 +37,8 @@ module Publify
     config.action_dispatch.ignore_accept_header = true
 
     config.active_record.raise_in_transactional_callbacks = true
+
+    config.middleware.use Rack::TrailingSlashes::Middleware
   end
 
   # Load included libraries.
