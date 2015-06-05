@@ -355,6 +355,7 @@ GEM
     rack (1.6.0)
     rack-test (0.6.3)
       rack (>= 1.0)
+    rack-trailing_slashes (0.0.1)
     rails (4.2.1)
       actionmailer (= 4.2.1)
       actionpack (= 4.2.1)
@@ -553,6 +554,7 @@ DEPENDENCIES
   pg
   poltergeist
   pry-rails
+  rack-trailing_slashes
   rails (~> 4.2.1)
   rails-observers (~> 0.1.2)
   rails-timeago (~> 2.0)

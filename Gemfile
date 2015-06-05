@@ -24,6 +24,7 @@ gem 'akismet', '~> 1.0'
 gem 'twitter', '~> 5.6.0'
 gem 'jbuilder'
 gem 'webpurify', require: 'web_purify'
+gem 'rack-trailing_slashes'
 
 gem 'jquery-rails', '~> 3.1.0'
 gem 'jquery-ui-rails', '~> 5.0.2'
