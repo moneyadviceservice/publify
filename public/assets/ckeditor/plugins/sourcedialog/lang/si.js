@@ -1,1 +1,10 @@
-CKEDITOR.plugins.setLang("sourcedialog","si",{toolbar:"\u0db8\u0dd4\u0dbd\u0dcf\u0dc1\u0dca\u200d\u0dbb\u0dba",title:"\u0db8\u0dd4\u0dbd\u0dcf\u0dc1\u0dca\u200d\u0dbb\u0dba"});
+/*
+Copyright (c) 2003-2014, CKSource - Frederico Knabben. All rights reserved.
+For licensing, see LICENSE.md or http://ckeditor.com/license
+*/
+
+
+CKEDITOR.plugins.setLang( 'sourcedialog', 'si', {
+	toolbar: 'මුලාශ්‍රය',
+	title: 'මුලාශ්‍රය'
+} );

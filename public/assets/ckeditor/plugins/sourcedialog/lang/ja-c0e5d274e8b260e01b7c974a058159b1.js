@@ -1,1 +1,0 @@
-CKEDITOR.plugins.setLang("sourcedialog","ja",{toolbar:"\u30bd\u30fc\u30b9",title:"\u30bd\u30fc\u30b9"});

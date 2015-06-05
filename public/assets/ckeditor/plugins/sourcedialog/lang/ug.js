@@ -1,1 +1,10 @@
-CKEDITOR.plugins.setLang("sourcedialog","ug",{toolbar:"\u0645\u06d5\u0646\u0628\u06d5",title:"\u0645\u06d5\u0646\u0628\u06d5"});
+/*
+Copyright (c) 2003-2014, CKSource - Frederico Knabben. All rights reserved.
+For licensing, see LICENSE.md or http://ckeditor.com/license
+*/
+
+
+CKEDITOR.plugins.setLang( 'sourcedialog', 'ug', {
+	toolbar: 'مەنبە',
+	title: 'مەنبە'
+} );

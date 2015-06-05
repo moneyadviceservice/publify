@@ -1,1 +1,10 @@
-CKEDITOR.plugins.setLang("sourcedialog","km",{toolbar:"\u17a2\u1780\u17d2\u179f\u179a\u200b\u1780\u17bc\u178a",title:"\u17a2\u1780\u17d2\u179f\u179a\u200b\u1780\u17bc\u178a"});
+/*
+Copyright (c) 2003-2014, CKSource - Frederico Knabben. All rights reserved.
+For licensing, see LICENSE.md or http://ckeditor.com/license
+*/
+
+
+CKEDITOR.plugins.setLang( 'sourcedialog', 'km', {
+	toolbar: 'អក្សរ​កូដ',
+	title: 'អក្សរ​កូដ'
+} );

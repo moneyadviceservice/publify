@@ -1,1 +1,10 @@
-CKEDITOR.plugins.setLang("sourcedialog","ar",{toolbar:"\u0627\u0644\u0645\u0635\u062f\u0631",title:"\u0627\u0644\u0645\u0635\u062f\u0631"});
+/*
+Copyright (c) 2003-2014, CKSource - Frederico Knabben. All rights reserved.
+For licensing, see LICENSE.md or http://ckeditor.com/license
+*/
+
+
+CKEDITOR.plugins.setLang( 'sourcedialog', 'ar', {
+	toolbar: 'المصدر',
+	title: 'المصدر'
+} );

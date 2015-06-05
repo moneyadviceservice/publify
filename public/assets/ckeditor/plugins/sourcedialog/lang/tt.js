@@ -1,1 +1,10 @@
-CKEDITOR.plugins.setLang("sourcedialog","tt",{toolbar:"\u0427\u044b\u0433\u0430\u043d\u0430\u043a",title:"\u0427\u044b\u0433\u0430\u043d\u0430\u043a"});
+/*
+Copyright (c) 2003-2014, CKSource - Frederico Knabben. All rights reserved.
+For licensing, see LICENSE.md or http://ckeditor.com/license
+*/
+
+
+CKEDITOR.plugins.setLang( 'sourcedialog', 'tt', {
+	toolbar: 'Чыганак',
+	title: 'Чыганак'
+} );

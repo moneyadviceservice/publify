@@ -1,1 +1,10 @@
-CKEDITOR.plugins.setLang("sourcedialog","th",{toolbar:"\u0e14\u0e39\u0e23\u0e2b\u0e31\u0e2a HTML",title:"\u0e14\u0e39\u0e23\u0e2b\u0e31\u0e2a HTML"});
+/*
+Copyright (c) 2003-2014, CKSource - Frederico Knabben. All rights reserved.
+For licensing, see LICENSE.md or http://ckeditor.com/license
+*/
+
+
+CKEDITOR.plugins.setLang( 'sourcedialog', 'th', {
+	toolbar: 'ดูรหัส HTML',
+	title: 'ดูรหัส HTML'
+} );

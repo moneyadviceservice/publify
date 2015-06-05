@@ -1,1 +1,10 @@
-CKEDITOR.plugins.setLang("sourcedialog","pl",{toolbar:"\u0179r\xf3d\u0142o dokumentu",title:"\u0179r\xf3d\u0142o dokumentu"});
+/*
+Copyright (c) 2003-2014, CKSource - Frederico Knabben. All rights reserved.
+For licensing, see LICENSE.md or http://ckeditor.com/license
+*/
+
+
+CKEDITOR.plugins.setLang( 'sourcedialog', 'pl', {
+	toolbar: 'Źródło dokumentu',
+	title: 'Źródło dokumentu'
+} );

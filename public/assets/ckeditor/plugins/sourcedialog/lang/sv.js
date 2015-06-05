@@ -1,1 +1,10 @@
-CKEDITOR.plugins.setLang("sourcedialog","sv",{toolbar:"K\xe4lla",title:"K\xe4lla"});
+/*
+Copyright (c) 2003-2014, CKSource - Frederico Knabben. All rights reserved.
+For licensing, see LICENSE.md or http://ckeditor.com/license
+*/
+
+
+CKEDITOR.plugins.setLang( 'sourcedialog', 'sv', {
+	toolbar: 'Källa',
+	title: 'Källa'
+} );

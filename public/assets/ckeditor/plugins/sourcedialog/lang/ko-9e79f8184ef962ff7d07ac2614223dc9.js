@@ -1,1 +1,0 @@
-CKEDITOR.plugins.setLang("sourcedialog","ko",{toolbar:"\uc18c\uc2a4",title:"\uc18c\uc2a4"});

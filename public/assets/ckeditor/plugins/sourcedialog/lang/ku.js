@@ -1,1 +1,10 @@
-CKEDITOR.plugins.setLang("sourcedialog","ku",{toolbar:"\u0633\u06d5\u0631\u0686\u0627\u0648\u06d5",title:"\u0633\u06d5\u0631\u0686\u0627\u0648\u06d5"});
+/*
+Copyright (c) 2003-2014, CKSource - Frederico Knabben. All rights reserved.
+For licensing, see LICENSE.md or http://ckeditor.com/license
+*/
+
+
+CKEDITOR.plugins.setLang( 'sourcedialog', 'ku', {
+	toolbar: 'سەرچاوە',
+	title: 'سەرچاوە'
+} );

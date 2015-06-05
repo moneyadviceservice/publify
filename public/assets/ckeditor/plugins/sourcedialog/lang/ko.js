@@ -1,1 +1,10 @@
-CKEDITOR.plugins.setLang("sourcedialog","ko",{toolbar:"\uc18c\uc2a4",title:"\uc18c\uc2a4"});
+/*
+Copyright (c) 2003-2014, CKSource - Frederico Knabben. All rights reserved.
+For licensing, see LICENSE.md or http://ckeditor.com/license
+*/
+
+
+CKEDITOR.plugins.setLang( 'sourcedialog', 'ko', {
+	toolbar: '소스',
+	title: '소스'
+} );

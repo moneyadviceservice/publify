@@ -1,1 +1,301 @@
-!function(t){"use strict";t.support.pushState=window.history&&window.history.pushState&&window.history.replaceState&&!navigator.userAgent.match(/((iPod|iPhone|iPad).+\bOS\s+[1-4]|WebApps\/.+CFNetwork)/);var i={init:function(i,o){o.options=t.extend({scrollContainer:window,scrollPadding:100,scrollEventDelay:300},i),this.options=o.options,this.container=o.container,o.scrollModule=this,this._toplock=!0,this._bottomlock=!0,this.scrollContainer=t(this.options.scrollContainer),this.updateEntities(),this.sortMarkers(),this.currentPage=null,this.container.on("jes:afterPageLoad",t.proxy(function(t,i,o){if(this.updateEntities(),this.sortMarkers(),this.checkMarker(),"top"==o){var n=this.markers[1].top,e=this.scrollContainer.scrollTop();this.scrollContainer.scrollTop(e+n)}},this)),this.bind()},updateEntities:function(){this.entities=t(this.options.entity,this.container)},sortMarkers:function(){var i=[];t(".jes-marker",this.container).each(function(){i.push({top:t(this).position().top,url:t(this).data("jesUrl")})}),this.markers=i},checkMarker:function(){for(var i=this.markers[0],o=this.scrollContainer.scrollTop(),n=1;n<this.markers.length&&o>this.markers[n].top;n++)i=this.markers[n];i.url!=this.currentPage&&(this.currentPage=i.url,t(this.container).trigger("jes:scrollToPage",i.url))},bind:function(){this.scrollContainer.on("scroll.jes",t.proxy(function(i){this._tId||(this.scrollHandler(i),this._tId=setTimeout(t.proxy(function(){this._tId=null},this),this.options.scrollEventDelay))},this))},unbind:function(){t(this.options.scrollContainer).off("scroll.jes")},scrollHandler:function(){var i=this.scrollContainer,o=this.entities,n=o.first(),e=o.last(),s=i.scrollTop(),r=i.height(),a=s+r,h=n.position().top,l=h+this.options.scrollPadding,c=e.outerHeight()+e.position().top,p=c-this.options.scrollPadding;l>s?this._toplock||(t(this.container).trigger("jes:topThreshold"),this._toplock=!0):this._toplock=!1,a>p?this._bottomlock||(t(this.container).trigger("jes:bottomThreshold"),this._bottomlock=!0):this._bottomlock=!1,this.checkMarker()}},o={init:function(i,o){o.options=t.extend({},i),this.options=o.options,this.container=o.container,this.setMarker(t(this.options.entity,this.container).first(),location.href),o.ajaxModule=this},loadPage:function(i,o,n){var e={top:{find:"first",inject:"insertBefore"},bottom:{find:"last",inject:"insertAfter"}},s=e[o];this.container.trigger("jes:beforePageLoad",[i,o]),t.get(i,null,t.proxy(function(e){var r=t("<div>").html(e),a=this.options.container,h=t(a,r).first();if(h.length){var l=h.find(this.options.entity);"bottom"==o&&l.each(function(){var i=t(this).attr("id");i&&t("#"+i,this.container).remove()});var c=t(this.options.entity,a)[s.find]();l[s.inject](c),this.setMarker(l.first(),i)}t.isFunction(n)&&n(r),this.container.trigger("jes:afterPageLoad",[i,o,r,l])},this),"html")},setMarker:function(t,i){t.addClass("jes-marker").data("jesUrl",i)}},n={init:function(i,o){o.options=t.extend({nextPage:".pagination a[rel=next]",previousPage:".pagination a[rel=previous]"},i),this.options=o.options,this.container=o.container,t.each([{selector:this.options.nextPage,event:"jes:bottomThreshold.navigation",placement:"bottom"},{selector:this.options.previousPage,event:"jes:topThreshold.navigation",placement:"top"}],t.proxy(function(i,n){if(n.element=t(n.selector),n.element.length){var e=n.element.prop("href"),s=!1,r=function(){!s&&e&&(s=!0,o.ajaxModule.loadPage(e,n.placement,t.proxy(function(i){var o=t(n.selector,t(i));o.length?(s=!1,e=o.prop("href"),n.element.attr("href",e)):(t(this).off(n.event),n.element.remove())},this)))};t(this.container).on(n.event,r),t(n.element).on("click",t.proxy(function(t){t.preventDefault(),r.apply(this.container)},this))}},this))}},e={init:function(i,o){t.support.pushState&&o.container.on("jes:scrollToPage",function(t,i){history.replaceState({},null,i)})}};t.endlessScroll=function(s){if(this.options=t.extend(!0,{container:"#container",entity:".entity",_modules:[o,i,n,e],modules:[]},s),this.container=t(this.options.container),!this.container.length)throw"Container for endless scroll isn't available on the page";return t.merge(this.options.modules,this.options._modules),this.options.modules.forEach(t.proxy(function(t){t.init(this.options,this)},this)),this}}(jQuery);
+/**
+ * Author: Sergey Kukunin
+ * See: https://github.com/Kukunin/jquery-endless-scroll
+ */
+
+(function($) {
+	'use strict';
+
+	// Is pushState supported by this browser?
+	$.support.pushState =
+		window.history && window.history.pushState && window.history.replaceState &&
+		// pushState isn't reliable on iOS until 5.
+		!navigator.userAgent.match(/((iPod|iPhone|iPad).+\bOS\s+[1-4]|WebApps\/.+CFNetwork)/)
+
+	//Declaration of modules
+	var scrollModule = {
+		init: function(options, obj) {
+			obj.options = $.extend({
+				scrollContainer: window,
+				scrollPadding: 100,
+				scrollEventDelay: 300
+			}, options);
+			this.options = obj.options;
+			this.container = obj.container;
+			obj.scrollModule = this;
+
+			this._toplock = true;
+			this._bottomlock = true;
+
+			this.scrollContainer = $(this.options.scrollContainer);
+
+			this.updateEntities();
+			this.sortMarkers();
+
+			this.currentPage = null;
+
+			this.container.on("jes:afterPageLoad", $.proxy(function(event, url, placement) {
+				this.updateEntities();
+				this.sortMarkers();
+				this.checkMarker();
+
+				if ( placement == "top" ) {
+					//Get offset between first and second pages
+					var offset = this.markers[1].top,
+						scrollTop = this.scrollContainer.scrollTop();
+
+					this.scrollContainer.scrollTop(scrollTop + offset);
+				}
+			}, this));
+
+			this.bind();
+		},
+		updateEntities: function() {
+			this.entities = $(this.options.entity, this.container);
+		},
+		sortMarkers: function() {
+			var markers = [];
+			$(".jes-marker", this.container).each(function() {
+				markers.push({ top: $(this).position().top, url: $(this).data("jesUrl") });
+			});
+			this.markers = markers;
+		},
+		//Check, whether user scrolled to another page
+		checkMarker: function() {
+			var newPage = this.markers[0],
+				scrollTop = this.scrollContainer.scrollTop();
+
+			//Determine, what is current page
+			for ( var i = 1; i < this.markers.length; i++ ) {
+				if ( scrollTop > this.markers[i].top ) {
+					newPage = this.markers[i];
+				} else {
+					break;
+				}
+			}
+			if ( newPage.url != this.currentPage ) {
+				this.currentPage = newPage.url;
+				$(this.container).trigger("jes:scrollToPage", newPage.url);
+			}
+		},
+		bind: function() {
+			this.scrollContainer.on("scroll.jes", $.proxy(function(event) {
+				if ( this._tId ) { return; }
+
+				this.scrollHandler(event);
+				//Clean up mark
+				this._tId= setTimeout($.proxy(function(){
+					this._tId = null;
+				},this), this.options.scrollEventDelay);
+
+			}, this));
+		},
+		unbind: function() {
+			$(this.options.scrollContainer).off("scroll.jes");
+		},
+		scrollHandler: function(ev) {
+			var $scrollable = this.scrollContainer,
+				$entities = this.entities,
+				$firstEntity = $entities.first(),
+				$lastEntity = $entities.last();
+
+			var scrollTop = $scrollable.scrollTop(),
+				height = $scrollable.height(),
+				scrollBottom = scrollTop + height;
+
+			var topEntityPosition = $firstEntity.position().top,
+				topTarget = topEntityPosition + this.options.scrollPadding,
+				bottomEntityPosition = $lastEntity.outerHeight() + $lastEntity.position().top,
+				bottomTarget = bottomEntityPosition - this.options.scrollPadding;
+
+			//Don't trigger event again, if already fired
+			//Visitor have to leave the area and get back to fire event again
+			//Process top threshold
+			if ( scrollTop < topTarget ) {
+				if ( !this._toplock ) {
+					$(this.container).trigger("jes:topThreshold");
+					this._toplock = true;
+				}
+			} else {
+				this._toplock = false;
+			}
+
+			//Process bottom threshold
+			if ( scrollBottom > bottomTarget ) {
+				if ( !this._bottomlock ) {
+					$(this.container).trigger("jes:bottomThreshold");
+					this._bottomlock = true;
+				}
+			} else {
+				this._bottomlock = false;
+			}
+
+			this.checkMarker();
+		}
+	}
+
+	var ajaxModule = {
+		init: function(options, obj) {
+			obj.options = $.extend({
+			}, options);
+
+			this.options = obj.options;
+			this.container = obj.container;
+
+			//markers
+			this.setMarker($(this.options.entity, this.container).first(), location.href);
+
+			obj.ajaxModule = this;
+		},
+		loadPage: function(url, placement, callback) {
+			//The hash with methods list
+			//depends from placement
+			var actions = {
+					top: {
+						find: 'first',
+						inject: 'insertBefore'
+					},
+					bottom: {
+						find: 'last',
+						inject: 'insertAfter'
+					}
+				},
+				action = actions[placement];
+
+			this.container.trigger("jes:beforePageLoad", [url, placement]);
+
+			//Make AJAX query
+			$.get(url, null, $.proxy(function (_data) {
+				var data = $("<div>").html(_data),
+				containerSelector = this.options.container,
+				container = $(containerSelector, data).first();
+
+				if ( container.length ) {
+					//Find entities
+					var entities = container.find(this.options.entity);
+
+					if ( placement == "bottom" ) {
+						//Remove duplicated (staled) entities from page
+						entities.each(function(i) {
+							var id = $(this).attr("id");
+							if ( id ) {
+								$('#' + id, this.container).remove();
+							}
+						});
+					}
+
+					//Find the cursor
+					var cursor = $(this.options.entity, containerSelector)[action.find]();
+
+					//Find and insert entities
+					entities[action.inject](cursor);
+					this.setMarker(entities.first(), url);
+				}
+
+				if ( $.isFunction(callback) ) {
+					callback(data);
+				}
+				this.container.trigger("jes:afterPageLoad", [url, placement, data, entities]);
+			}, this), 'html');
+		},
+		setMarker: function(entity, url) {
+			entity.addClass("jes-marker").data("jesUrl", url);
+		}
+	}
+
+	var navigationModule = {
+		init: function(options, obj) {
+			obj.options = $.extend({
+				nextPage: ".pagination a[rel=next]",
+				previousPage: ".pagination a[rel=previous]"
+			}, options);
+
+			this.options = obj.options;
+			this.container = obj.container;
+
+			$.each([{
+				selector: this.options.nextPage,
+				event: "jes:bottomThreshold.navigation",
+				placement: 'bottom'
+			}, {
+				selector: this.options.previousPage,
+				event: "jes:topThreshold.navigation",
+				placement: 'top'
+			}], $.proxy(function(i, v) {
+				v.element = $(v.selector);
+				if ( v.element.length ) {
+					var url = v.element.prop("href"),
+					lock = false;
+
+					var handler = function() {
+						//this object is container
+						if ( lock || !url ) return;
+
+						lock = true;
+						obj.ajaxModule.loadPage(url, v.placement, $.proxy(function( data ) {
+							//Search new next link
+							var newElement = $(v.selector, $(data));
+							if ( newElement.length ) {
+								//Update URL and remove lock
+								lock = false;
+								url = newElement.prop("href");
+								v.element.attr("href", url);
+							} else {
+								//Remove event at all
+								$(this).off(v.event);
+								v.element.remove();
+							}
+						}, this));
+					};
+
+					$(this.container).on(v.event, handler);
+					$(v.element).on("click", $.proxy(function(ev) {
+						ev.preventDefault();
+						handler.apply(this.container)
+					}, this));
+				}
+			},this));
+		}
+	}
+
+	var pushStateHistory = {
+		init: function(options, obj) {
+			if ( !$.support.pushState ) {
+				return;
+			}
+
+			obj.container.on("jes:scrollToPage", function(event, url) {
+				history.replaceState({}, null, url);
+			});
+		}
+	}
+
+	$.endlessScroll = function(options) {
+
+		//Initialize modules
+		this.options = $.extend(true, {
+			container: "#container",
+			entity: ".entity",
+			_modules: [ ajaxModule, scrollModule, navigationModule, pushStateHistory ],
+			modules: []
+		}, options);
+
+		this.container = $(this.options.container);
+		if ( !this.container.length ) {
+			throw "Container for endless scroll isn't available on the page";
+			return;
+		}
+
+
+		//Merge custom options with default
+		$.merge(this.options.modules, this.options._modules);
+		//Init modules
+		this.options.modules.forEach($.proxy(function(module) {
+			module.init(this.options, this);
+		},this));
+
+
+		return this;
+	}
+
+})(jQuery);

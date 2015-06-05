@@ -1,1 +1,0 @@
-CKEDITOR.plugins.setLang("sourcedialog","ar",{toolbar:"\u0627\u0644\u0645\u0635\u062f\u0631",title:"\u0627\u0644\u0645\u0635\u062f\u0631"});

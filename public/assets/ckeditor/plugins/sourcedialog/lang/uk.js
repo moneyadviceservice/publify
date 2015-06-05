@@ -1,1 +1,10 @@
-CKEDITOR.plugins.setLang("sourcedialog","uk",{toolbar:"\u0414\u0436\u0435\u0440\u0435\u043b\u043e",title:"\u0414\u0436\u0435\u0440\u0435\u043b\u043e"});
+/*
+Copyright (c) 2003-2014, CKSource - Frederico Knabben. All rights reserved.
+For licensing, see LICENSE.md or http://ckeditor.com/license
+*/
+
+
+CKEDITOR.plugins.setLang( 'sourcedialog', 'uk', {
+	toolbar: 'Джерело',
+	title: 'Джерело'
+} );

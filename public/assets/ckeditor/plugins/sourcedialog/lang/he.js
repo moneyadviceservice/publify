@@ -1,1 +1,10 @@
-CKEDITOR.plugins.setLang("sourcedialog","he",{toolbar:"\u05de\u05e7\u05d5\u05e8",title:"\u05de\u05e7\u05d5\u05e8"});
+/*
+Copyright (c) 2003-2014, CKSource - Frederico Knabben. All rights reserved.
+For licensing, see LICENSE.md or http://ckeditor.com/license
+*/
+
+
+CKEDITOR.plugins.setLang( 'sourcedialog', 'he', {
+	toolbar: 'מקור',
+	title: 'מקור'
+} );

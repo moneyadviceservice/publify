@@ -1,1 +1,10 @@
-CKEDITOR.plugins.setLang("sourcedialog","bn",{toolbar:"\u09b8\u09cb\u09b0\u09cd\u09b8",title:"\u09b8\u09cb\u09b0\u09cd\u09b8"});
+/*
+Copyright (c) 2003-2014, CKSource - Frederico Knabben. All rights reserved.
+For licensing, see LICENSE.md or http://ckeditor.com/license
+*/
+
+
+CKEDITOR.plugins.setLang( 'sourcedialog', 'bn', {
+	toolbar: 'সোর্স',
+	title: 'সোর্স'
+} );
