@@ -16,3 +16,11 @@
   overflow: hidden;
   position: absolute;
 }
+
+@mixin absolutely-centre-horizontally($element-width) {
+  left: 50%;
+  margin-left: -1 * $element-width / 2;
+  position: absolute;
+  top: 0;
+  width: $element-width;
+}

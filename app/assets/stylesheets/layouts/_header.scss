@@ -115,7 +115,6 @@
 }
 
 .l-header__bottom {
-  margin-top: baseline-unit(2);
   overflow: hidden;
 
   @include respond-to($mq-m) {
@@ -179,25 +178,8 @@
 }
 
 .l-header-logo {
-  display: inline-block;
-
-  @include respond-to($mq-m) {
-    position: absolute;
-    top: 0;
-    left: 35%;
-
-    .homepage & {
-      left: 0;
-      position: relative;
-    }
-  }
-
-  @include respond-to($mq-l) {
-    left: 38%;
-  }
-
-  @include respond-to($mq-xl) {
-    left: 40%;
+  .homepage & {
+    margin-top: baseline-unit(1.5);
   }
 }
 
@@ -211,10 +193,6 @@
     width: 100%;
     margin-top: baseline-unit(2);
     margin-bottom: baseline-unit(3);
-
-    @include respond-to($mq-m) {
-
-    }
 
     @include respond-to($mq-l) {
       width: 100%;
@@ -248,12 +226,10 @@
 
 .l-header-logo__title {
   @include font-size(18);
-  margin-left: baseline-unit(2);
   margin-top: baseline-unit(4);
   margin-bottom: baseline-unit(4);
   font-family: $brand-font-stack;
   font-weight: $brand-font-weight;
-  float: left;
   color: $link-color--negative;
 
   .homepage & {
@@ -270,6 +246,17 @@
       @include font-size(48);
       margin-top: baseline-unit(1);
     }
+  }
+}
+
+.l-header-title__link {
+  display: inline-block;
+  margin: baseline-unit(4) 0;
+
+  @include respond-to($mq-m) {
+    @include absolutely-centre-horizontally(220px);
+    margin-bottom: 0;
+    text-align: center;
   }
 }
 
