@@ -54,19 +54,3 @@ $ ./node_modules/karma/bin/karma start ./spec/js/karma.conf.js --single-run
 $ ./node_modules/jscs/bin/jscs app/assets/javascripts/components/
 $ ./node_modules/jshint/bin/jshint app/assets/javascripts/components/ --config .jshintrc
 ```
-
-
-#### Deploying
-
-**Assets**
-
-This repo uses the [asset sync](https://github.com/rumblelabs/asset_sync) gem to synchronise and store assets to Rackspace Cloud Files when deploying.
-
-**Staging**
-
-  * Make sure you have a copy of `.env` in the project root 
-    * This file should contain the necessary environment variables for deployment
-  * Make sure you are working from an up to date version of master
-  * Run `./bin/deploy`
-
-
