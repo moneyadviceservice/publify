@@ -1,21 +1,12 @@
 #!/usr/bin/env sh
 
-# Basic deploy script to help us precompile the latest assets to our CDN and deploy to our staging environment on
-# Heroku.
-#
-# This script will generate new assets and then send them off to your CDN of choice using `assets_sync` making assets
-# management a little less painful.
-#
-# NOTE: Make sure that you are working with a current master branch
-#
+# Run this script to deploy the app to Heroku.
 
 set -e
 
-# Compile assets
-RAILS_ENV=production bundle exec foreman run rake assets:precompile
+branch="$(git symbolic-ref HEAD --short)"
+target="${1:-staging}"
 
-# Update manifest
-git add public/assets/*.json
-
-git commit -m 'Update assets manifest'
-git push origin master
+git push "$target" "$branch:master"
+heroku run rake db:migrate --remote "$target"
+heroku restart --remote "$target"
