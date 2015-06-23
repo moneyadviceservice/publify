@@ -8,9 +8,8 @@ xm.item do
   xm.description content_html + item.get_rss_description
   xm.pubDate item.published_at.rfc822
   xm.guid "urn:uuid:#{item.guid}", "isPermaLink" => "false"
-  if item.link_to_author?
-    xm.author "#{item.user.email} (#{item.user.name})"
-  end
+
+  xm.author "blog@moneyadviceservice.org.uk (#{item.user.name})"
 
   if item.is_a?(Article)
     xm.comments(item.permalink_url("comments"))
