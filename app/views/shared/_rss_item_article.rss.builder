@@ -13,22 +13,24 @@ xm.item do
 
   if item.is_a?(Article)
     xm.comments(item.permalink_url("comments"))
+
     for tag in item.tags
       xm.category tag.display_name
     end
-    # RSS 2.0 only allows a single enclosure per item, so only include the first one here.
-    if not item.resources.empty?
-      resource = item.resources.first
+
+    if (image = item.hero_image) && (image.file)
+      file = image.versions[:resized].file
+
       xm.enclosure(
-        :url => item.blog.file_url(resource.upload_url),
-        :length => resource.size,
-        :type => resource.mime)
-      end
+        url: "#{item.blog.base_url}#{image.url(:resized)}",
+        length: file.size,
+        type: file.content_type)
     end
+  end
 
   if item.allow_pings?
     xm.trackback :ping, item.trackback_url
   end
+
   xm.link item.permalink_url
 end
-
