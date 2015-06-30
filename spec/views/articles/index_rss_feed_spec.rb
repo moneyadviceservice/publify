@@ -45,8 +45,8 @@ describe 'articles/index_rss_feed.rss.builder', type: :view do
         render
       end
 
-      it 'does not have an author entry' do
-        expect(rendered_entry.css('author')).to be_empty
+      it 'has an author entry' do
+        expect(rendered_entry.css('author')).to_not be_empty
       end
     end
 
@@ -65,19 +65,8 @@ describe 'articles/index_rss_feed.rss.builder', type: :view do
           expect(rendered_entry.css('author')).not_to be_empty
         end
 
-        it "has the author's email in the author entry" do
-          expect(rendered_entry.css('author').first.content).to match(/foo@bar.com/)
-        end
-      end
-
-      describe 'on a blog that does not link' do
-        before(:each) do
-          Blog.default.link_to_author = false
-          render
-        end
-
-        it 'does not have an author entry' do
-          expect(rendered_entry.css('author')).to be_empty
+        it "has the blog email in the author entry" do
+          expect(rendered_entry.css('author').first.content).to match(/blog@moneyadviceservice.org.uk/)
         end
       end
     end
