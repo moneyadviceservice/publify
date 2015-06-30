@@ -19,7 +19,8 @@ xm.item do
     end
 
     if (image = item.hero_image) && (image.file)
-      if (file = image.versions[:resized].file)
+      if (image.versions[:resized].file.exists?)
+        file = image.versions[:resized].file
         xm.enclosure(
           url: "#{item.blog.base_url}#{image.url(:resized)}",
           length: file.size,
