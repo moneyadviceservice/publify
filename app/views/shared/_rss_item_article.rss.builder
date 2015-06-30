@@ -22,7 +22,7 @@ xm.item do
       if (image.versions[:resized].file.exists?)
         file = image.versions[:resized].file
         xm.enclosure(
-          url: "#{item.blog.base_url}#{image.url(:resized)}",
+          url: image.url(:resized),
           length: file.size,
           type: file.content_type)
       end
