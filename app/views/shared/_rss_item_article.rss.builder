@@ -19,12 +19,12 @@ xm.item do
     end
 
     if (image = item.hero_image) && (image.file)
-      file = image.versions[:resized].file
-
-      xm.enclosure(
-        url: "#{item.blog.base_url}#{image.url(:resized)}",
-        length: file.size,
-        type: file.content_type)
+      if (file = image.versions[:resized].file)
+        xm.enclosure(
+          url: "#{item.blog.base_url}#{image.url(:resized)}",
+          length: file.size,
+          type: file.content_type)
+      end
     end
   end
 
