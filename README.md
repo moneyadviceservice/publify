@@ -58,15 +58,12 @@ $ ./node_modules/jshint/bin/jshint app/assets/javascripts/components/ --config .
 
 #### Deploying
 
-First make sure you have the following git remotes:
+First you need to make sure you have the production and stagin git remotes. If you have previously run the `./bin/setup` script these will be added automatically, if not you can manually add them with:
 
-```
-production git@heroku.work:mas-marketing-blog.git
-staging	git@heroku.work:mas-marketing-blog-staging.git
-```
+    $ git remote add staging git@heroku.com:mas-marketing-blog-staging.git
+    $ git remote add production git@heroku.com:mas-marketing-blog.git
 
-If you have previously run the `./bin/setup` script,
-you can deploy to staging and production with:
+You can deploy to staging and production with:
 
     $ ./bin/deploy staging
     $ ./bin/deploy production
