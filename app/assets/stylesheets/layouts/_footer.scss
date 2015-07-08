@@ -127,12 +127,16 @@
 }
 
 .l-newsletter__left {
-  @include column(12);
+  @include column(10);
+  @include push(1);
+
+  @include respond-to($mq-s) {
+    @include column(8);
+    @include push(2);
+  }
 
   @include respond-to($mq-m) {
-    float: left;
     @include column(5);
-    margin-top: baseline-unit(-11);
     margin-bottom: baseline-unit(6);
   }
 }
@@ -149,19 +153,16 @@
 }
 
 .l-newsletter__headline {
-  @include font-size(22);
-  margin-top: baseline-unit(6);
-
-  @include respond-to($mq-m) {
-    margin-top: baseline-unit(10);
-  }
+  @include visually-hidden;
 }
 
 .l-newsletter__text {
+  @extend %base-font-style;
   margin-bottom: baseline-unit(2);
   clear: both;
   float: left;
   width: 100%;
+  text-align: center;
 
   .l-newsletter__right & {
     width: 100%;
@@ -181,6 +182,14 @@
       width: auto;
     }
   }
+}
+
+.l-newsletter__large-text {
+  display: block;
+  @include font-size(22);
+  font-weight: 700;
+  color: $astronaut-blue;
+  margin-top: baseline-unit(3);
 }
 
 .l-newsletter__logo {
