@@ -28,7 +28,7 @@ Publify has been around since 2004 and is the oldest Ruby on Rails open source p
 - Bower
 - MYSQL
 
-Note: Make sure you've added all the required API keys for the app to work properly. 
+Note: Make sure you've added all the required API keys for the app to work properly.
 
 This repository comes equipped with a self-setup script:
 
@@ -58,10 +58,15 @@ $ ./node_modules/jshint/bin/jshint app/assets/javascripts/components/ --config .
 
 #### Deploying
 
+First make sure you have the following git remotes:
+
+```
+production git@heroku.work:mas-marketing-blog.git
+staging	git@heroku.work:mas-marketing-blog-staging.git
+```
+
 If you have previously run the `./bin/setup` script,
 you can deploy to staging and production with:
 
     $ ./bin/deploy staging
     $ ./bin/deploy production
-
-
