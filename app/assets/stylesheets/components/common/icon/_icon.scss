@@ -1,0 +1,35 @@
+//= depend_on_asset icon-sprite.png
+
+%icon {
+  // prevent IE8 from breaking when extending .icon into a :before it doesn't understand
+  background-image: image_url('icon-sprite.png');
+  background-repeat: no-repeat;
+  @include inline-block;
+}
+
+.icon {
+  background-image: image_url('icon-sprite.png');
+  background-repeat: no-repeat;
+  @include inline-block;
+}
+
+.icon--accessibility {
+  background-position: -475px -264px;
+  width: 20px;
+  height: 20px;
+}
+
+@include device-pixel-ratio() {
+  .icon {
+    background-size: $sprite-background-size;
+  }
+
+  %icon {
+    // prevent HD screens from breaking when extending .icon
+    background-size: $sprite-background-size;
+  }
+
+  .icon--accessibility {
+    background-position: -256px -126px;
+  }
+}
