@@ -187,9 +187,12 @@
 .l-newsletter__large-text {
   display: block;
   @include font-size(22);
-  font-weight: 700;
   color: $astronaut-blue;
   margin-top: baseline-unit(3);
+}
+
+.l-newsletter__large-text--emphasise {
+  font-weight: 700;
 }
 
 .l-newsletter__logo {
