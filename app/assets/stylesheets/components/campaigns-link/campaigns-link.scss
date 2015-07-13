@@ -28,26 +28,3 @@
   width: 21px;
   height: 34px;
 }
-
-.campaigns-link--ma-says {
-  color: $bilbao;
-  padding-top: 1.6em;
-
-  &:visited,
-  &:hover,
-  &:active, {
-    color: $bilbao;
-  }
-}
-
-.campaigns-link--ma-says .campaigns-link__arrow {
-  fill: $bilbao;
-}
-
-.campaigns-link--ma-says .ma-says {
-  @include font-size(17);
-  position: absolute;
-  top: 0;
-  left: 0;
-
-}
