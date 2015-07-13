@@ -94,14 +94,6 @@
   }
 }
 
-.l-campaigns__links__item--ma-says {
-  display: none;
-
-  @include respond-to($mq-l) {
-    display: block;
-  }
-}
-
 .l-campaigns__links__item {
   margin-bottom: baseline_unit(6);
 }
