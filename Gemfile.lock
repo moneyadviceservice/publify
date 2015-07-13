@@ -15,12 +15,12 @@ GIT
 
 GIT
   remote: https://github.com/moneyadviceservice/dough.git
-  revision: bc5f79550769ec436a1398bd378a8af78185651a
+  revision: b15316726043054191107c0a2e6cf21e178a55e1
   specs:
-    dough-ruby (4.0.0)
+    dough-ruby (5.7.2)
       activesupport
       rails (>= 3.2)
-      sass-rails
+      sass-rails (~> 4.0.0)
 
 GEM
   remote: https://rubygems.org/
@@ -525,7 +525,7 @@ DEPENDENCIES
   csslint_ruby
   database_cleaner
   dotenv-rails
-  dough-ruby (~> 4.0)!
+  dough-ruby (~> 5.0)!
   dynamic_form (~> 1.1.4)
   factory_girl (~> 4.5.0)
   flickraw-cached
@@ -575,6 +575,3 @@ DEPENDENCIES
   unicorn
   uuidtools (~> 2.1.1)
   webpurify
-
-BUNDLED WITH
-   1.10.3

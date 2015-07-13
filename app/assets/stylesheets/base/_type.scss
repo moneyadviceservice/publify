@@ -8,6 +8,10 @@ body {
   font-size: $base-font-size + px;
   line-height: $base-line-height;
   font-weight: $font-weight-light;
+  color: $color-text-default;
+  @extend %type;
+  @extend %font-smoothing;
+  @extend %prevent-text-zooming;
 }
 
 p {
