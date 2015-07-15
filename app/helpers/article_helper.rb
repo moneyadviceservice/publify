@@ -13,7 +13,7 @@ module ArticleHelper
   end
 
   def report_comment_link(comment)
-    mail_to ENV['REPORT_COMMENT_EMAIL_ADDRESS'],
+    mail_to ENV['BLOG_REPORT_COMMENT_EMAIL_ADDRESS'],
             t('.report_comment'),
             subject: "Reported comment in article '#{comment.article.title}'",
             body: report_comment_email_template(comment)
