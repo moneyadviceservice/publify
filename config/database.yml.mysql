@@ -1,18 +1,24 @@
 login: &login
   adapter: mysql2
   host: localhost
+  pool: 5
+  timeout: 5000
+  encoding: utf8
   username: root
-  password:
 
 
 development:
-  database: publify_dev
+  database: blog_development
   <<: *login
 
 test:
-  database: publify_tests
+  database: blog_test
   <<: *login
 
 production:
-  database: publify
-  <<: *login
+  adapter: mysql2
+  pool: 5
+  timeout: 5000
+  encoding: utf8
+  reconnect: true
+  url: <%= ENV["MAS_BLOG_DATABASE_URL"] %>
