@@ -44,7 +44,7 @@ RAILS_ENV=production RAILS_GROUPS=assets rake assets:precompile
 
 echo "Uploading assets"
 echo "----"
-/usr/local/bin/upload-blog-assets.sh $(pwd)/public
+/usr/local/bin/upload_blog_assets.sh $(pwd)/public
 
 echo "Creating RPM"
 echo "----"
