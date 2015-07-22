@@ -79,8 +79,3 @@ group :test do
   gem 'capybara'
   gem 'rspec-rails', '~> 3.1.0'
 end
-
-group :staging, :production do
-  gem 'pg'
-  gem 'rails_12factor'
-end
