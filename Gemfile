@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
+source 'http://gems.test.mas'
 ruby '2.2.0'
 
 gem 'dough-ruby', '~> 4.0', git: 'https://github.com/moneyadviceservice/dough.git', require: 'dough'
-gem 'bowndler', git: 'https://github.com/moneyadviceservice/bowndler.git'
 
 gem 'mysql2'
 gem 'rails', '~> 4.2.1'
@@ -54,6 +54,10 @@ gem 'csslint_ruby'
 gem 'compass-rails'
 gem 'coffee-rails', ' ~> 4.0.1'
 gem 'uglifier'
+
+group :build, :test, :development do
+  gem 'bowndler', '~> 1.0'
+end
 
 group :development, :test do
   gem 'factory_girl', '~> 4.5.0'
