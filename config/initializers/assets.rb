@@ -37,6 +37,7 @@ Rails.application.configure do
 
   # Application JavaScript
   config.assets.precompile += %w(
+    optimizely.js
     publify.js
     publify_admin.js
     components/*.js
