@@ -77,12 +77,12 @@ group :development, :test do
   gem 'foreman'
   gem 'letter_opener'
   gem 'database_cleaner'
+  gem 'rspec-rails', '~> 3.1.0'
 end
 
 group :test do
   gem 'site_prism'
   gem 'capybara'
-  gem 'rspec-rails', '~> 3.1.0'
   gem 'rspec_junit_formatter'
 end
 
