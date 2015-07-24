@@ -83,6 +83,7 @@ group :test do
   gem 'site_prism'
   gem 'capybara'
   gem 'rspec-rails', '~> 3.1.0'
+  gem 'rspec_junit_formatter'
 end
 
 group :production do
