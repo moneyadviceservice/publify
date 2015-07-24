@@ -7,13 +7,6 @@ GIT
       orm_adapter (~> 0.5.0)
 
 GIT
-  remote: https://github.com/moneyadviceservice/bowndler.git
-  revision: f836a295f0eac8ba02a6dc4733d000a7f1fc8a00
-  specs:
-    bowndler (1.0.2)
-      thor
-
-GIT
   remote: https://github.com/moneyadviceservice/dough.git
   revision: bc5f79550769ec436a1398bd378a8af78185651a
   specs:
@@ -24,6 +17,7 @@ GIT
 
 GEM
   remote: https://rubygems.org/
+  remote: http://gems.test.mas/
   specs:
     CFPropertyList (2.3.1)
     RedCloth (4.2.9)
@@ -77,6 +71,8 @@ GEM
     autoprefixer-rails (3.1.2.20141016)
       execjs
     bluecloth (2.2.0)
+    bowndler (1.0.2)
+      thor
     buftok (0.2.0)
     builder (3.2.2)
     capybara (2.4.4)
@@ -339,7 +335,6 @@ GEM
     parser (2.2.0.pre.5)
       ast (>= 1.1, < 3.0)
       slop (~> 3.4, >= 3.4.5)
-    pg (0.18.1)
     poltergeist (1.5.1)
       capybara (~> 2.1)
       cliver (~> 0.3.1)
@@ -380,13 +375,8 @@ GEM
     rails-timeago (2.11.1)
       actionpack (>= 3.1)
       activesupport (>= 3.1)
-    rails_12factor (0.0.3)
-      rails_serve_static_assets
-      rails_stdout_logging
     rails_autolink (1.1.6)
       rails (> 3.1)
-    rails_serve_static_assets (0.0.2)
-    rails_stdout_logging (0.0.3)
     railties (4.2.1)
       actionpack (= 4.2.1)
       activesupport (= 4.2.1)
@@ -469,6 +459,7 @@ GEM
       activesupport (>= 3.0)
       sprockets (>= 2.8, < 4.0)
     subexec (0.2.3)
+    syslog-logger (1.6.8)
     thor (0.19.1)
     thread_safe (0.3.5)
     tilt (1.4.1)
@@ -515,7 +506,7 @@ DEPENDENCIES
   akismet (~> 1.0)
   autoprefixer-rails
   bluecloth (~> 2.1)
-  bowndler!
+  bowndler (~> 1.0)
   capybara
   carrierwave (~> 0.10.0)
   ckeditor!
@@ -551,14 +542,12 @@ DEPENDENCIES
   mysql2
   non-stupid-digest-assets
   oauth2 (= 1.0.0)
-  pg
   poltergeist
   pry-rails
   rack-trailing_slashes
   rails (~> 4.2.1)
   rails-observers (~> 0.1.2)
   rails-timeago (~> 2.0)
-  rails_12factor
   rails_autolink (~> 1.1.0)
   rake (~> 10.3.2)
   recaptcha
@@ -570,6 +559,7 @@ DEPENDENCIES
   simplecov
   site_prism
   spring-commands-rspec
+  syslog-logger
   twitter (~> 5.6.0)
   uglifier
   unicorn

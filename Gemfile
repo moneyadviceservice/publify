@@ -83,3 +83,7 @@ group :test do
   gem 'capybara'
   gem 'rspec-rails', '~> 3.1.0'
 end
+
+group :production do
+  gem 'syslog-logger'
+end
