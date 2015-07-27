@@ -46,9 +46,9 @@ echo "Uploading assets"
 echo "----"
 /usr/local/bin/upload_blog_assets.sh $(pwd)/public
 
-echo "Migrating database and seeding data"
+echo "Migrating database"
 echo "----"
-bundle exec rake db:migrate db:seed
+bundle exec rake db:migrate
 
 echo "Creating RPM"
 echo "----"
