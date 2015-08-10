@@ -24,6 +24,8 @@ rm -rf public/assets vendor/cache coverage log/* tmp/*
 
 echo "Running Bundle package"
 echo "----"
+#Temporary Hack to install pg gem properly
+export PATH=/usr/pgsql-9.4/bin:$PATH bundle install pg
 bundle package --all
 
 echo "Running Bower cache clean"
