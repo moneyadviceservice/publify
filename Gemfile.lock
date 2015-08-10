@@ -316,7 +316,6 @@ GEM
     multi_json (1.11.0)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
-    mysql2 (0.3.16)
     naught (1.0.0)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
@@ -335,6 +334,7 @@ GEM
     parser (2.2.0.pre.5)
       ast (>= 1.1, < 3.0)
       slop (~> 3.4, >= 3.4.5)
+    pg (0.18.1)
     poltergeist (1.5.1)
       capybara (~> 2.1)
       cliver (~> 0.3.1)
@@ -543,9 +543,9 @@ DEPENDENCIES
   letter_opener
   mailjet
   mini_magick (~> 3.8.1)
-  mysql2
   non-stupid-digest-assets
   oauth2 (= 1.0.0)
+  pg
   poltergeist
   pry-rails
   rack-trailing_slashes

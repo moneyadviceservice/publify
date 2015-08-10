@@ -1,10 +1,9 @@
 login: &login
-  adapter: mysql2
+  adapter: postgresql
   host: localhost
   pool: 5
   timeout: 5000
   encoding: utf8
-  username: root
 
 
 development:
@@ -18,7 +17,7 @@ test:
   timeout: 5000
 
 production:
-  adapter: mysql2
+  adapter: postgresql
   pool: 5
   timeout: 5000
   encoding: utf8
