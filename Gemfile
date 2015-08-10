@@ -4,7 +4,7 @@ ruby '2.2.0'
 
 gem 'dough-ruby', '~> 4.0', git: 'https://github.com/moneyadviceservice/dough.git', require: 'dough'
 
-gem 'mysql2'
+gem 'pg'
 gem 'rails', '~> 4.2.1'
 gem 'htmlentities'
 gem 'bluecloth', '~> 2.1'
