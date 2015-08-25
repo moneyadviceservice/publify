@@ -326,6 +326,7 @@ GEM
       net-ssh (>= 2.6.5)
     net-ssh (2.9.2)
     netrc (0.10.3)
+    newrelic_rpm (3.13.0.299)
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
     non-stupid-digest-assets (1.0.4)
@@ -549,6 +550,7 @@ DEPENDENCIES
   mailjet
   mini_magick (~> 3.8.1)
   mysql2
+  newrelic_rpm
   non-stupid-digest-assets
   oauth2 (= 1.0.0)
   pg
