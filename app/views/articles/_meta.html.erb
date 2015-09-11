@@ -3,7 +3,9 @@
 
   <p class="article-info__content">
     Published by
-    <a class="article-info__link" href="#"><%= link_to(article.user.nickname, author_path(article.user.login), rel: :author) %></a>
+    <span class="article-info__link">
+      <%= link_to("<!-- Author Start -->#{article.user.nickname}<!-- Author End -->".html_safe, author_path(article.user.login), rel: :author) %>
+    </span>
   </p>
 
   <p class="article-info__content">
