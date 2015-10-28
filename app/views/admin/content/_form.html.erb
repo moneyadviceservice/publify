@@ -42,6 +42,9 @@
         <div class="article-callout">
           <button class="btn btn-success" data-toggle="modal" data-target="#answerReveal">Answer/Reveal</button>
         </div>
+        <div class="article-callout">
+          <button class="btn btn-success" data-toggle="modal" data-target="#newsletterSignup">Newsletter</button>
+        </div>
       </div>
     </div>
   </div>
@@ -273,6 +276,40 @@
         <p>Copy the snippet below and paste it to the desired place by clicking on the 'Source' button. <b>Note:</b> Add a \n to the answer to start a new paragraph.</p>
         <textarea disabled="true" class="modal-body__code">
 <hr class="snippet" data-snippet-name="answerreveal" data-snippet-text-question="[ENTER QUESTION TEXT HERE]" data-snippet-text-answer="[ENTER ANSWER TEXT HERE]" data-snippet-text-callout="[ENTER CALLOUT TEXT HERE]" data-snippet-url-callout="[ENTER CALLOUT URL HERE]" />
+        </textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal"><%= t('.close_modal') %></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="newsletterSignup" tabindex="-1" role="dialog" aria-labelledby="newsletterSignup" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Newsletter snippet</h2>
+      </div>
+      <div class="modal-body">
+        <p>Copy the snippet below and paste it to the desired place by clicking on the 'Source' button.</p>
+        <textarea disabled="true" class="modal-body__code">
+          <form action="https://www.moneyadviceservice.org.uk/en/users/sign_up" method="get">
+          <div class="l-news-signup-inpage">
+            <div class="news-signup-inpage">
+              <div class="news-signup-inpage__header">
+                <div class="news-signup-inpage__image"></div>
+                <div class="news-signup-inpage__text-container">
+                  <h3 class="news-signup-inpage__title">
+                    <span class="news-signup-inpage__title-text">200,000 people are taking care of their money with our FREE money advice newsletter.</span>
+                  </h3>
+                  <p class="news-signup-inpage__supplementary-text">Sign up today!</p>
+                  <input class="button--newsletter" type="submit" value="Send me money advice">
+                </div>
+              </div>
+            </div>
+          </div>
+          </form>
         </textarea>
       </div>
       <div class="modal-footer">
