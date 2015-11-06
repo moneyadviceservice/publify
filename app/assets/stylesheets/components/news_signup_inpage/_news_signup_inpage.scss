@@ -10,15 +10,15 @@ $bg-img-stripe: url(data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.o
   position: relative;
   background-color: $concrete;
   border-radius: $border-radius;
-  width:100%;
-  padding-bottom:$baseline-unit*2;
+  width: 100%;
+  padding-bottom: $baseline-unit*2;
 
   @include respond-to($mq-two-col) {
-    width:100%;
+    width: 100%;
   }
 
   @include respond-to($mq-l) {
-    max-width:550px;
+    max-width: 550px;
   }
 
 }
@@ -35,7 +35,7 @@ $bg-img-stripe: url(data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.o
 
   & p:first-of-type {
     color: $color-black;
-    font-size:1rem;
+    font-size: 1rem;
   }
 
   @include respond-to($mq-m) {
@@ -68,13 +68,13 @@ $bg-img-stripe: url(data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.o
   @include respond-to($mq-l) {
     @include body(18, 24);
     margin: 20px 20px;
-    min-height:45px;
+    min-height: 45px;
   }
 
   @include respond-to($mq-xl) {
     @include body(20, 24);
     margin: 20px 40px 15px 40px;
-    min-height:45px;
+    min-height: 45px;
   }
 
 }

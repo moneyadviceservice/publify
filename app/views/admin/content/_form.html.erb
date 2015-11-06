@@ -45,6 +45,9 @@
         <div class="article-callout">
           <button class="btn btn-success" data-toggle="modal" data-target="#newsletterSignup">Newsletter</button>
         </div>
+        <div class="article-callout">
+          <button class="btn btn-success" data-toggle="modal" data-target="#costCalculator">Cost Calculator</button>
+        </div>
       </div>
     </div>
   </div>
@@ -310,6 +313,32 @@
             </div>
           </div>
           </form>
+        </textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal"><%= t('.close_modal') %></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="costCalculator" tabindex="-1" role="dialog" aria-labelledby="costCalculator" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Insert cost calculator</h2>
+      </div>
+      <div class="modal-body">
+        <p>Copy the snippet below and paste it to the desired place by clicking on the 'Source' button. <b>Note:</b> Replace [CALC_ID] with the ID of the cost calculator you wish to embed.</p>
+        <textarea disabled="true" class="modal-body__code">
+          <iframe id="calculator_embed"
+            frameborder="0"
+            width="100%"
+            height="1000px"
+            class="calculator-preview__iframe"
+            src="https://www.moneyadviceservice.org.uk/en/cost-calculator-builder/embed/calculators/[CALC_ID]">
+          </iframe>
+          <script src="https://6716c801720b2d014ddd-90dd74bb468e514261468bbc28ae4817.ssl.cf3.rackcdn.com/a/cost_calculator_builder/embed-06ce0df8c79534fead5871af5a3875bd.js"></script>
         </textarea>
       </div>
       <div class="modal-footer">
