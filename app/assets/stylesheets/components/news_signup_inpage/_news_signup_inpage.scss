@@ -1,0 +1,160 @@
+$bg-img-stripe: url(data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%228%22%20height%3D%228%22%20viewBox%3D%220%200%2080%2080%22%20enable-background%3D%22new%200%200%2080%2080%22%3E%3Cpath%20stroke%3D%22%23999%22%20d%3D%22M0%2080L80%200%22%2F%3E%3C%2Fsvg%3E);
+
+%stripe-bg {
+  background-image: $bg-img-stripe;
+}
+
+.news-signup-inpage {
+  @extend %stripe-bg;
+  @include clearfix;
+  position: relative;
+  background-color: $concrete;
+  border-radius: $border-radius;
+  width: 100%;
+  padding-bottom: $baseline-unit*2;
+
+  @include respond-to($mq-two-col) {
+    width: 100%;
+  }
+
+  @include respond-to($mq-l) {
+    max-width: 550px;
+  }
+
+}
+
+.news-signup-inpage__header {
+  @include clearfix;
+  display: block;
+  position: relative;
+}
+
+.news-signup-inpage__text-container {
+  position: relative;
+  margin-left: 0;
+
+  & p:first-of-type {
+    color: $color-black;
+    font-size: 1rem;
+  }
+
+  @include respond-to($mq-m) {
+    margin-left: 140px;
+  }
+
+}
+
+.news-signup-inpage__title {
+  @include body(16, 22);
+  color: $color-heading-extra-small;
+  text-align: center;
+  margin: 10px 170px 25px 20px;
+  font-weight: 400;
+  min-height: 130px;
+  position: relative;
+
+  @include respond-to($mq-s) {
+    @include body(18, 24);
+    margin: 0 170px 10px 20px;
+    min-height: 110px;
+  }
+
+  @include respond-to($mq-m) {
+    @include body(16, 23);
+    margin: 20px 10px 10px 10px;
+    min-height: 75px;
+  }
+
+  @include respond-to($mq-l) {
+    @include body(18, 24);
+    margin: 20px 20px;
+    min-height: 45px;
+  }
+
+  @include respond-to($mq-xl) {
+    @include body(20, 24);
+    margin: 20px 40px 15px 40px;
+    min-height: 45px;
+  }
+
+}
+
+.news-signup-inpage__title-text {
+  @include respond-to($mq-xs) {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    margin: 10px auto;
+  }
+
+  @include respond-to($mq-m) {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    margin: auto;
+  }
+
+  @include respond-to($mq-two-col) {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+  }
+
+  @include respond-to($mq-l) {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    margin: auto;
+  }
+
+}
+
+.news-signup-inpage__supplementary-text {
+  @include body(16, 24);
+  text-align: center;
+  font-weight: 800;
+  margin-top: $baseline-unit*3;
+
+  @include respond-to($mq-s) {
+    margin-top: 0;
+  }
+
+  @include respond-to($mq-m) {
+    margin-bottom: 10px;
+  }
+
+  @include respond-to($mq-l) {
+    @include body(18, 24);
+  }
+
+}
+
+.news-signup-inpage__image {
+  display: block;
+  position: absolute;
+  background-color: transparent;
+  background-image: image_url('news_signup_inpage/paper_clip_image.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  right: 0;
+  width: 155px;
+  height: 151px;
+  margin-left: -10px;
+  margin-top: -5px;
+
+  @include device-pixel-ratio() {
+    background-image: image_url('news_signup_inpage/paper_clip_image-2x.png');
+  }
+
+  @include respond-to($mq-m) {
+    right: auto;
+    left: 0;
+  }
+
+}
