@@ -100,6 +100,7 @@ Blog.create
   how-to
   having-a-baby
   news
+  survive-january
 ).map {|tag| Tag.create(name: tag, display_name: tag.gsub(/-/, " ").titleize) }
 
 PageSidebar.create(active_position: 0, staged_position: 0)
