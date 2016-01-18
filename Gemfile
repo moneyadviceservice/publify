@@ -2,10 +2,13 @@ source 'https://rubygems.org'
 source 'http://gems.test.mas'
 ruby '2.2.0'
 
+# Forked to include a fix to make RAILS_RELATIVE_URL_ROOT work 
+# - https://github.com/rails/rails/pull/17724
+gem 'rails', '~> 4.2.1', git: 'git@github.com:moneyadviceservice/rails.git', branch: 'mas-marketing-blog'
+
 gem 'dough-ruby', '~> 4.0', git: 'https://github.com/moneyadviceservice/dough.git', require: 'dough'
 
 gem 'pg'
-gem 'rails', '~> 4.2.1'
 gem 'htmlentities'
 gem 'bluecloth', '~> 2.1'
 gem 'coderay', '~> 1.1.0'
@@ -78,6 +81,7 @@ group :development, :test do
   gem 'letter_opener'
   gem 'database_cleaner'
   gem 'rspec-rails', '~> 3.1.0'
+  gem 'byebug'
 end
 
 group :test do
