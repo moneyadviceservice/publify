@@ -5,7 +5,7 @@ ruby '2.2.0'
 gem 'dough-ruby', '~> 4.0', git: 'https://github.com/moneyadviceservice/dough.git', require: 'dough'
 
 gem 'pg'
-gem 'rails', '~> 4.2.1'
+gem 'rails', '~> 4.2.1', git: 'git@github.com:jongilbraith/rails.git', branch: 'mas-marketing-blog'
 gem 'htmlentities'
 gem 'bluecloth', '~> 2.1'
 gem 'coderay', '~> 1.1.0'
@@ -78,6 +78,7 @@ group :development, :test do
   gem 'letter_opener'
   gem 'database_cleaner'
   gem 'rspec-rails', '~> 3.1.0'
+  gem 'byebug'
 end
 
 group :test do
