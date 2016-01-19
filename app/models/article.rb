@@ -125,10 +125,6 @@ class Article < Content
     blog.url_for("comments?article_id=#{id}", only_path: true)
   end
 
-  def preview_comment_url
-    blog.url_for("comments/preview?article_id=#{id}", only_path: true)
-  end
-
   def really_send_pings
     return unless blog.send_outbound_pings
 
