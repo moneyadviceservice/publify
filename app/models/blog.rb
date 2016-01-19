@@ -189,8 +189,11 @@ class Blog < ActiveRecord::Base
   end
 
   def per_page(format)
-    return limit_article_display if format.nil? || format == 'html'
-    limit_rss_display
+    if format.nil? || format == 'html'
+      limit_article_display
+    else
+      limit_rss_display
+    end
   end
 
   def rss_limit_params

@@ -49,7 +49,6 @@ Rails.application.routes.draw do
     get '/search(/:q(.:format))', action: 'search'
     get '/search/', action: 'search', as: 'search_base'
     get '/archives/', action: 'archives'
-    get '/page/:page', action: 'index', page: /\d+/
     get '/pages/*name', action: 'view_page'
     get 'previews(/:id)', action: 'preview'
     get 'articles/tag', action: 'tag'
