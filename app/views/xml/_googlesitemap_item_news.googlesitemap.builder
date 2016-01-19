@@ -1,5 +1,5 @@
 xm.url do
-  xm.loc item.permalink_url
+  xm.loc item_url(item)
   xm.tag!('news:news') do
     xm.tag!('news:publication') do
       xm.tag!('news:name') do

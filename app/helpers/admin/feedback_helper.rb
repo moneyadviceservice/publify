@@ -26,7 +26,7 @@ module Admin::FeedbackHelper
   end
 
   def button_to_actual_comment(item)
-    link_to(content_tag(:span, '', class: 'glyphicon glyphicon-share-alt'), item.permalink_url, class: 'btn btn-default btn-xs btn-action')
+    link_to(content_tag(:span, '', class: 'glyphicon glyphicon-share-alt'), item_path(item), class: 'btn btn-default btn-xs btn-action')
   end
 
   def change_status(item, context = 'listing')
