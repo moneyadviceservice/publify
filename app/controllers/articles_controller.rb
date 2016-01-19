@@ -14,28 +14,16 @@ class ArticlesController < ContentController
     conditions = (Blog.default.statuses_in_timeline) ? ['type in (?, ?)', 'Article', 'Note'] : ['type = ?', 'Article']
 
     limit = this_blog.per_page(params[:format])
-    unless params[:year].blank?
-      @articles = Content.published_at(params.values_at(:year, :month, :day)).where(conditions).limit(limit)
-    else
-      @articles = Content.published.where(conditions).limit(limit)
-    end
 
+    @articles = Content.published.where(conditions).limit(limit)
     @page_title = this_blog.home_title_template
     @description = this_blog.home_desc_template
-    if params[:year]
-      @page_title = this_blog.archives_title_template
-      @description = this_blog.archives_desc_template
-    elsif params[:page]
-      @page_title = this_blog.paginated_title_template
-      @description = this_blog.paginated_desc_template
-    end
+
     @page_title = @page_title.to_title(@articles, this_blog, params)
     @description = @description.to_title(@articles, this_blog, params)
 
     @keywords = this_blog.meta_keywords
     @lead_campaign = Campaign.lead.last
-
-    suffix = params[:year].nil? ? '' : '/'
 
     respond_to do |format|
       format.html { render_paginated_index }
@@ -76,13 +64,6 @@ class ArticlesController < ContentController
 
     @article = factory.match_permalink_format(from, this_blog.permalink_format)
     return show_article if @article
-
-    # Redirect old version with /:year/:month/:day/:title to new format,
-    # because it's changed
-    ['%year%/%month%/%day%/%title%', 'articles/%year%/%month%/%day%/%title%'].each do |part|
-      @article = factory.match_permalink_format(from, part)
-      return redirect_to @article.permalink_url, status: 301 if @article
-    end
 
     r = Redirect.find_by_from_path(from)
     return redirect_to r.full_to_path, status: 301 if r
