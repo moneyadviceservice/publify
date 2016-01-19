@@ -107,10 +107,6 @@ class ArticlesController < ContentController
     @comment = Comment.new(params[:comment])
   end
 
-  def tag
-    redirect_to tags_path, status: 301
-  end
-
   def view_page
     if (@page = Page.find_by_name(Array(params[:name]).join('/'))) && @page.published?
       @page_title = @page.title

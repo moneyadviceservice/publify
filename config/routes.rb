@@ -50,7 +50,6 @@ Rails.application.routes.draw do
     get '/archives/', action: 'archives'
     get '/pages/*name', action: 'view_page'
     get 'previews/:id', action: 'preview'
-    get 'articles/tag', action: 'tag'
   end
 
   get '/news', to: 'tags#show', defaults: { id: 'news' }
