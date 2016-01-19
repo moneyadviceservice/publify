@@ -1,4 +1,5 @@
 class ArticlesController < ContentController
+  before_filter :check_for_redirect, only: :show
   before_filter :login_required, only: :preview
   before_filter :auto_discovery_feed, only: [:show, :index]
   before_filter :verify_config
@@ -54,7 +55,7 @@ class ArticlesController < ContentController
     render 'read'
   end
 
-  def redirect
+  def show
     if (@article = Article.find_by_permalink(params[:from])).present?
       @comment     = Comment.new(article: @article, author: session[:author], email: session[:email])
       @page_title  = @article.title_meta_tag.present? ? @article.title_meta_tag : @article.title
@@ -69,8 +70,6 @@ class ArticlesController < ContentController
         format.rss  { render_feedback_feed('rss') }
         format.xml  { render_feedback_feed('atom') }
       end
-    elsif (redirect = Redirect.find_by_from_path(params[:from])).present?
-      redirect_to redirect.full_to_path, status: 301
     else
       render 'errors/404', status: 404
     end
@@ -104,6 +103,12 @@ class ArticlesController < ContentController
   end
 
   private
+
+  def check_for_redirect
+    if (redirect = Redirect.find_by_from_path(params[:from])).present?
+      redirect_to redirect.full_to_path, status: 301
+    end
+  end
 
   def verify_config
     if  !this_blog.configured?
