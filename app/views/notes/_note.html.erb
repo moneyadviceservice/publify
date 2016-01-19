@@ -3,7 +3,7 @@
   <div class='p-name entry-title e-content entry-content article'><%= note.html(:body) %></div>
   <footer>
     <small>
-      <%= link_to_permalink(note, display_date_and_time(note.published_at)) %> |
+      <%= link_to(display_date_and_time(note.published_at), note.permalink) %> |
       <%= link_to note.redirects.first.to_url, note.redirects.first.to_url %> |
       <%= author_link note %>
       <%- unless note.twitter_id.blank? %>
