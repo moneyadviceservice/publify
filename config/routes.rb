@@ -32,12 +32,7 @@ Rails.application.routes.draw do
   get 'xml/rsd', to: 'xml#rsd', format: false
   get 'xml/feed', to: 'xml#feed'
 
-  # CommentsController
-  resources :comments do
-    collection do
-      match :preview, via: [:get, :post, :put, :delete]
-    end
-  end
+  resources :comments
 
   resources :trackbacks
 

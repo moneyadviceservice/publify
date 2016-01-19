@@ -1,5 +1,4 @@
 class CommentsController < FeedbackController
-  before_filter :get_article, only: [:create, :preview]
 
   layout 'default.html.erb'
 
@@ -28,27 +27,6 @@ class CommentsController < FeedbackController
       render "articles/#{@article.post_type}"
     end
 
-  end
-
-  def preview
-    if !session
-      session session: new
-    end
-
-    comment_params = params[:comment]
-    if (params_comment[:body].blank? rescue true)
-      render nothing: true
-      return
-    end
-
-    set_headers
-    @comment = Comment.new(params_comment)
-
-    unless @article.comments_closed?
-      render 'articles/comment_preview', locals: { comment: @comment }
-    else
-      render text: 'Comment are closed'
-    end
   end
 
   protected

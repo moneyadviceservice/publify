@@ -4,7 +4,7 @@ class ArticlesController < ContentController
   before_filter :auto_discovery_feed, only: [:show, :index]
   before_filter :verify_config
 
-  layout 'default.html.erb', except: [:comment_preview, :trackback]
+  layout 'default.html.erb', except: :trackback
 
   cache_sweeper :blog_sweeper
   caches_page :index, :archives, :view_page, :redirect, if: Proc.new { |c| c.request.query_string == '' }
@@ -80,16 +80,6 @@ class ArticlesController < ContentController
     @page_title = this_blog.archives_title_template.to_title(@articles, this_blog, params)
     @keywords = this_blog.meta_keywords
     @description = this_blog.archives_desc_template.to_title(@articles, this_blog, params)
-  end
-
-  def comment_preview
-    if (params[:comment][:body].blank? rescue true)
-      render nothing: true
-      return
-    end
-
-    headers['Content-Type'] = 'text/html; charset=utf-8'
-    @comment = Comment.new(params[:comment])
   end
 
   def view_page
