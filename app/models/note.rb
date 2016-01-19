@@ -90,10 +90,6 @@ class Note < Content
 
   content_fields :body
 
-  def password_protected?
-    false
-  end
-
   def access_by?(user)
     user.admin? || user_id == user.id
   end

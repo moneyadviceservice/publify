@@ -57,8 +57,6 @@ es-MX:
   helper:
     at: "a"
   articles:
-    password_form:
-      submit: "Enviar"
     index:
       next_page: "Siguiente p&aacute;gina"
       previous_page: "P&aacute;gina anterior"

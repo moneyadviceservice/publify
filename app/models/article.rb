@@ -66,8 +66,6 @@ class Article < Content
     joins(:tags).where(tags: {name: 'news'})
   }
 
-  setting :password, :string, ''
-
   attr_accessor :keywords
 
   include Article::States
@@ -274,10 +272,6 @@ class Article < Content
     parts = value.split(/\n?<!--more-->\n?/, 2)
     self.body = parts[0]
     self.extended = parts[1] || ''
-  end
-
-  def password_protected?
-    not password.blank?
   end
 
   def add_comment(params)
