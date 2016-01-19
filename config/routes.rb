@@ -45,9 +45,8 @@ Rails.application.routes.draw do
   post 'trackbacks/:id/:day/:month/:year', to: 'trackbacks#create', format: false
 
   controller 'articles', format: false do
-    get '/search/:q(.:format)/page/:page', action: 'search', as: 'search', defaults: { page: 1 }
-    get '/search(/:q(.:format))', action: 'search'
-    get '/search/', action: 'search', as: 'search_base'
+    # Initial search goes to /search?q=foo, subsequent pages go to /search/foo/pages/2
+    get '/search(/:q/page/:page)', action: 'search', as: 'search'
     get '/archives/', action: 'archives'
     get '/pages/*name', action: 'view_page'
     get 'previews/:id', action: 'preview'
