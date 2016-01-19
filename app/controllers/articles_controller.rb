@@ -55,16 +55,25 @@ class ArticlesController < ContentController
   end
 
   def redirect
-    from = extract_feed_format(params[:from])
-    factory = Article::Factory.new(this_blog, current_user)
+    if (@article = Article.find_by_permalink(params[:from])).present?
+      @comment     = Comment.new(article: @article, author: session[:author], email: session[:email])
+      @page_title  = @article.title_meta_tag.present? ? @article.title_meta_tag : @article.title
+      @description = @article.description_meta_tag
+      @keywords    = @article.tags.map { |g| g.name }.join(', ')
 
-    @article = factory.match_permalink_format(from, this_blog.permalink_format)
-    return show_article if @article
-
-    r = Redirect.find_by_from_path(from)
-    return redirect_to r.full_to_path, status: 301 if r
-
-    render 'errors/404', status: 404
+      auto_discovery_feed
+      
+      respond_to do |format|
+        format.html { render "articles/#{@article.post_type}" }
+        format.atom { render_feedback_feed('atom') }
+        format.rss  { render_feedback_feed('rss') }
+        format.xml  { render_feedback_feed('atom') }
+      end
+    elsif (redirect = Redirect.find_by_from_path(params[:from])).present?
+      redirect_to redirect.full_to_path, status: 301
+    else
+      render 'errors/404', status: 404
+    end
   end
 
   def archives
@@ -106,39 +115,9 @@ class ArticlesController < ContentController
     end
   end
 
-  # See an article We need define @article before
-  def show_article
-    @comment      = Comment.new(article: @article, author: session[:author], email: session[:email])
-    @page_title   = @article.title_meta_tag.present? ? @article.title_meta_tag : @article.title
-    @description = @article.description_meta_tag
-    groupings = @article.tags
-    @keywords = groupings.map { |g| g.name }.join(', ')
-
-    auto_discovery_feed
-    respond_to do |format|
-      format.html { render "articles/#{@article.post_type}" }
-      format.atom { render_feedback_feed('atom') }
-      format.rss  { render_feedback_feed('rss') }
-      format.xml  { render_feedback_feed('atom') }
-    end
-  rescue ActiveRecord::RecordNotFound
-    render 'errors/404', status: 404
-  end
-
   def render_feedback_feed format
     @feedback = @article.published_feedback
     render "feedback_#{format}_feed", layout: false
-  end
-
-  def extract_feed_format(from)
-    if from =~ /^.*\.rss$/
-      request.format = 'rss'
-      from = from.gsub(/\.rss/, '')
-    elsif from =~ /^.*\.atom$/
-      request.format = 'atom'
-      from = from.gsub(/\.atom$/, '')
-    end
-    from
   end
 
   def use_custom_header?

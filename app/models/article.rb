@@ -179,28 +179,6 @@ class Article < Content
     result.map { |d| [d.published_at.strftime('%Y-%m')] }.uniq
   end
 
-  # Finds one article which was posted on a certain date and matches the supplied dashed-title
-  # params is a Hash
-  def self.find_by_permalink(params)
-    date_range = PublifyTime.delta(params[:year], params[:month], params[:day])
-
-    req_params = {}
-    req_params[:permalink] = params[:title] if params[:title]
-    req_params[:published_at] = date_range if date_range
-
-    return nil if req_params.empty? # no search if no params send
-    article = published.where(req_params).first
-    return article if article
-
-    if params[:title]
-      req_params[:permalink] = CGI.escape(params[:title])
-      article = published.where(req_params).first
-      return article if article
-    end
-
-    raise ActiveRecord::RecordNotFound
-  end
-
   # Fulltext searches the body of published articles
   def self.search(query, args = {})
     query_s = query.to_s.strip
