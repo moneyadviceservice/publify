@@ -40,13 +40,6 @@ module ApplicationHelper
     controller.send(:render_to_string, *args, &block)
   end
 
-  def link_to_permalink(item, title, anchor = nil, style = nil, nofollow = nil, only_path = false)
-    options = {}
-    options[:class] = style if style
-    options[:rel] = 'nofollow' if nofollow
-    link_to title, item.permalink_url(anchor, only_path), options
-  end
-
   def avatar_tag(options = {})
     begin
       avatar_class = this_blog.plugin_avatar.constantize

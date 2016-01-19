@@ -4,7 +4,7 @@
     <article>
       <p class='p-name entry-title e-content entry-content article'><%= note.html(:body) %></p>
       <footer>
-        <small><%= link_to_permalink(note, display_date_and_time(note.published_at)) %></small>
+        <small><%= link_to(display_date_and_time(note.published_at), note.permalink) %></small>
       </footer>
     </article>
         <hr>
