@@ -9,7 +9,14 @@
             <%= render 'popular_tags' if index === 2 %>
             <%= render partial: 'article', object: article, locals: { index: index } %>
           <% end %>
-          <%= paginate @articles, views_prefix: 'archives' %>
+          <div class="l-tile l-tile--archive">
+            <a href="/archives" class="l-index-archive__link">
+              All Articles
+              <svg class="l-index-archive__link-arrow">
+                <use xlink:href="#svg-arrow-right"></use>
+              </svg>
+            </a>
+          </div>
         </div>
       </div>
     </div>
