@@ -21,11 +21,7 @@ class ArticlesController < ContentController
 
     respond_to do |format|
       format.html do
-        if @articles.present?
-          auto_discovery_feed(only_path: false)
-        else
-          error!
-        end
+        auto_discovery_feed(only_path: false)
       end
       format.atom do
         render "index_atom_feed", layout: false
@@ -126,7 +122,7 @@ class ArticlesController < ContentController
       format.xml  { render_feedback_feed('atom') }
     end
   rescue ActiveRecord::RecordNotFound
-    error!
+    render 'errors/404', status: 404
   end
 
   def render_feedback_feed format
@@ -143,11 +139,6 @@ class ArticlesController < ContentController
       from = from.gsub(/\.atom$/, '')
     end
     from
-  end
-
-  def error!
-    @message = I18n.t('errors.no_posts_found')
-    render 'articles/error', status: 200
   end
 
   def use_custom_header?
