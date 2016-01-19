@@ -90,8 +90,9 @@ class GroupingController < ContentController
   end
 
   # For some reasons, the permalink_url does not take the pagination.
-  def permalink_with_page grouping, page
-    suffix = page.nil? ? '/' : "/page/#{page}/"
-    grouping.permalink_url + suffix
+  def permalink_with_page(grouping, page)
+    # Making an assumption here that this is a tag, as this is only
+    # subclassed by TagsController
+    tag_path(grouping.permalink, page: page)
   end
 end

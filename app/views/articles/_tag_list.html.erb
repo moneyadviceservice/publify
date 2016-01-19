@@ -4,7 +4,7 @@
     <% (0..2).each_with_index do |index| %>
       <% if tags[index] %>
         <li class="tag-list__item">
-          <a href="<%= tags[index].permalink_url(nil, true) %>" class="tag-list__link"><%= tags[index].display_name %></a>
+          <a href="<%= tag_path(tags[index].permalink) %>" class="tag-list__link"><%= tags[index].display_name %></a>
       <% end %>
     <% end %>
   </ul>
@@ -18,7 +18,7 @@
   <ul class="tag-list tag-list--extra" data-dough-collapsable-target="tags-list">
     <% (3..tags.count-1).each do|index| %>
       <li class="tag-list__item">
-        <a href="<%= tags[index].permalink_url(nil, true) %>" class="tag-list__link"><%= tags[index].display_name %></a>
+        <a href="<%= tag_path(tags[index].permalink) %>" class="tag-list__link"><%= tags[index].display_name %></a>
     <% end %>
   </ul>
 <% end %>
