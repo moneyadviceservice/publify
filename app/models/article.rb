@@ -121,10 +121,6 @@ class Article < Content
     logger.info(e.message)
   end
 
-  def comment_url
-    blog.url_for("comments?article_id=#{id}", only_path: true)
-  end
-
   def really_send_pings
     return unless blog.send_outbound_pings
 
