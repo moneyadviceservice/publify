@@ -50,7 +50,7 @@ Rails.application.routes.draw do
     get '/search/', action: 'search', as: 'search_base'
     get '/archives/', action: 'archives'
     get '/pages/*name', action: 'view_page'
-    get 'previews(/:id)', action: 'preview'
+    get 'previews/:id', action: 'preview'
     get 'articles/tag', action: 'tag'
   end
 
