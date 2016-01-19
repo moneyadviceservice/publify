@@ -4,7 +4,7 @@
   <ul>
     <% for page in sidebar.pages -%>
       <li>
-    <%= link_to page.title, page.permalink_url %>
+    <%= link_to page.title, page_path(name: page.name) %>
     </li>
   <% end %>
   </ul>
