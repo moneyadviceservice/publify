@@ -136,40 +136,6 @@ class Blog < ActiveRecord::Base
     settings.key?('blog_name')
   end
 
-  # Generate a URL based on the +base_url+.  This allows us to generate URLs
-  # without needing a controller handy, so we can produce URLs from within models
-  # where appropriate.
-  #
-  # It also caches the result in the RouteCache, so repeated URL generation
-  # requests should be fast, as they bypass all of Rails' route logic.
-  def url_for_with_base_url(options = {}, extra_params = {})
-    case options
-    when String
-      if extra_params[:only_path]
-        url_generated = root_path
-      else
-        url_generated = base_url
-      end
-      url_generated += "/#{options}" # They asked for 'url_for "/some/path"', so return it unedited.
-      url_generated += "##{extra_params[:anchor]}" if extra_params[:anchor]
-      url_generated
-    when Hash
-      merged_opts = options.reverse_merge!(only_path: false, controller: '',
-                                           action: 'permalink',
-                                           host: host_with_port,
-                                           script_name: root_path)
-      cache_key = merged_opts.values.prepend('blog-urlfor-withbaseurl').join('-')
-      unless Rails.cache.exist?(cache_key)
-        Rails.cache.write(cache_key, url_for_without_base_url(merged_opts))
-      end
-      Rails.cache.read(cache_key)
-    else
-      raise "Invalid URL in url_for: #{options.inspect}"
-    end
-  end
-
-  alias_method_chain :url_for, :base_url
-
   # The URL for a static file.
   def file_url(filename)
     if CarrierWave.configure { |config| config.storage == CarrierWave::Storage::Fog }

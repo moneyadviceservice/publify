@@ -17,30 +17,6 @@ describe Blog, type: :model do
         expect(@blog.sp_global).to eq(expected)
       end
     end
-
-    ['', '/sub-uri'].each do |sub_url|
-      describe "when running in with http://myblog.net#{sub_url}" do
-
-        before :each do
-          @base_url = "http://myblog.net#{sub_url}"
-          @blog.base_url = @base_url
-        end
-
-        [true, false].each do |only_path|
-          describe 'blog.url_for' do
-            describe "with a hash argument and only_path = #{only_path}" do
-              subject { @blog.url_for(controller: 'tags', action: 'show', id: 1, only_path: only_path) }
-              it { is_expected.to eq("#{only_path ? sub_url : @base_url}/tag/1") }
-            end
-
-            describe "with a string argument and only_path = #{only_path}" do
-              subject { @blog.url_for('tag/1', only_path: only_path) }
-              it { is_expected.to eq("#{only_path ? sub_url : @base_url}/tag/1") }
-            end
-          end
-        end
-      end
-    end
   end
 
   describe 'The first blog' do
