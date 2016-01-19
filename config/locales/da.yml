@@ -263,8 +263,6 @@ da:
         feed_articles: "Article excerpts"
         feed_settings: "RSS Feed Settings"
         feed_excerpts_only: "Show only article excerpts in feed"
-        feedburner_help: "Enter your FeedBurner ID if you wish to use your Google FeedBurner account instead of using the Publify feed URL."
-        feedburner_id: "FeedBurner ID"
         publishing_options: "Publishing Options"
         status_main_feed: "Display statuses in the main feed"
         statuses: "Statuses"
