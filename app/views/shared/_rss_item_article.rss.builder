@@ -30,7 +30,7 @@ xm.item do
   end
 
   if item.allow_pings?
-    xm.trackback :ping, item.trackback_url
+    xm.trackback :ping, trackbacks_path(article_id: item)
   end
 
   xm.link article_path(item.permalink)
