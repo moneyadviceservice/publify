@@ -110,11 +110,6 @@ class Article < Content
     scoped.order('created_at DESC')
   end
 
-  def permalink_url(anchor = nil, only_path = false)
-    @cached_permalink_url ||= {}
-    @cached_permalink_url["#{anchor}#{only_path}"] ||= blog.url_for(permalink_url_options, anchor: anchor, only_path: only_path)
-  end
-
   def save_attachments!(files)
     files ||= {}
     files.values.each { |f| self.save_attachment!(f) }
@@ -136,10 +131,6 @@ class Article < Content
 
   def preview_comment_url
     blog.url_for("comments/preview?article_id=#{id}", only_path: true)
-  end
-
-  def feed_url(format)
-    "#{permalink_url}.#{format.gsub(/\d/, '')}"
   end
 
   def really_send_pings
@@ -283,19 +274,6 @@ class Article < Content
   end
 
   private
-
-  def permalink_url_options
-    format_url = blog.permalink_format.dup
-    format_url.gsub!('%year%', published_at.year.to_s)
-    format_url.gsub!('%month%', sprintf('%.2d', published_at.month))
-    format_url.gsub!('%day%', sprintf('%.2d', published_at.day))
-    format_url.gsub!('%title%', URI.encode(permalink.to_s))
-    if format_url[0, 1] == '/'
-      format_url[1..-1]
-    else
-      format_url
-    end
-  end
 
   def html_urls_to_ping
     urls_to_ping = []

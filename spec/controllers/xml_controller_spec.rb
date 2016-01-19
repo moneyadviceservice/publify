@@ -92,21 +92,21 @@ describe XmlController, type: :controller do
       describe 'without format parameter' do
         it 'redirects article feed to Article RSS feed' do
           get :feed, type: 'article', id: @article.id
-          assert_moved_permanently_to @article.feed_url('rss')
+          assert_moved_permanently_to article_path(@article.permalink, format: :rss)
         end
       end
 
       describe 'with format rss20' do
         it 'redirects the article feed to the article RSS feed' do
           get :feed, format: 'rss20', type: 'article', id: @article.id
-          assert_moved_permanently_to @article.feed_url('rss')
+          assert_moved_permanently_to article_path(@article.permalink, format: :rss)
         end
       end
 
       describe 'with format atom10' do
         it 'redirects the article feed to the article Atom feed' do
           get :feed, format: 'atom10', type: 'article', id: @article.id
-          assert_moved_permanently_to @article.feed_url('atom')
+          assert_moved_permanently_to article_path(@article.permalink, format: :atom)
         end
       end
     end
@@ -130,7 +130,7 @@ describe XmlController, type: :controller do
 
     it 'redirects permanently to the article RSS feed' do
       get :articlerss, id: @article.id
-      assert_moved_permanently_to @article.feed_url('rss')
+      assert_moved_permanently_to article_path(@article.permalink, format: :rss)
     end
   end
 
