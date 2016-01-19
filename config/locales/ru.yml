@@ -57,8 +57,6 @@ ru:
   helper:
     at: "at"
   articles:
-    password_form:
-      submit: "Submit"
     index:
       next_page: "Следующая страница"
       previous_page: "Предыдущая страница"

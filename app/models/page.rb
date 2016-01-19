@@ -5,7 +5,6 @@ class Page < Content
   include ConfigManager
 
   serialize :settings, Hash
-  setting :password, :string, ''
 
   before_save :set_permalink
   after_save :shorten_url
