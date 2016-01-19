@@ -114,7 +114,6 @@ da:
       your_blog: "your blog"
       your_email: "Din email"
       your_message: "Din besked"
-      comment_markup_help: "Hjælp med kommentar markup"
       preview_comment: "Vis kommentar eksempel"
     article_links:
       comments:

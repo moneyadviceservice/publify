@@ -115,7 +115,6 @@ fr:
       your_blog: "votre blog"
       your_email: "Votre courriel"
       your_message: "Votre commentaire"
-      comment_markup_help: "Aide sur le balisage des commentaires"
       preview_comment: "Prévisualiser le commentaire"
     article_links:
       comments:

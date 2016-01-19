@@ -148,11 +148,6 @@ class ArticlesController < ContentController
     end
   end
 
-  # TODO: Move to TextfilterController?
-  def markup_help
-    render text: TextFilter.find(params[:id]).commenthelp
-  end
-
   private
 
   def verify_config
