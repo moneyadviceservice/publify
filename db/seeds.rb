@@ -118,7 +118,6 @@ b.save
 
 PageSidebar.create(active_position: 0, staged_position: 0)
 TagSidebar.create(active_position: 1)
-ArchivesSidebar.create(active_position: 2)
 StaticSidebar.create(active_position: 3)
 MetaSidebar.create(active_position: 4)
 
