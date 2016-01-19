@@ -69,12 +69,6 @@ class ArticlesController < ContentController
     end
   end
 
-  def live_search
-    @search = params[:q]
-    @articles = Article.search(@search)
-    render :live_search, layout: false
-  end
-
   def preview
     @article = Article.last_draft(params[:id])
     @comment = Comment.new

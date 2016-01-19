@@ -45,7 +45,6 @@ Rails.application.routes.draw do
   post 'trackbacks/:id/:day/:month/:year', to: 'trackbacks#create', format: false
 
   controller 'articles', format: false do
-    get '/live_search/', action: 'live_search', as: :live_search_articles
     get '/search/:q(.:format)/page/:page', action: 'search', as: 'search', defaults: { page: 1 }
     get '/search(/:q(.:format))', action: 'search'
     get '/search/', action: 'search', as: 'search_base'
