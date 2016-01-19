@@ -106,5 +106,5 @@ Rails.application.routes.draw do
 
   root to: 'articles#index', format: false
 
-  get '*from', to: 'articles#redirect', format: false
+  get '*from', to: 'articles#show', format: false
 end
