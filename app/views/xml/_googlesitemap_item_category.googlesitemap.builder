@@ -1,3 +1,3 @@
 xm.url do
-  xm.loc item.permalink_url
+  xm.loc item_url(item)
 end
