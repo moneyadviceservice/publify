@@ -67,7 +67,6 @@ class Blog < ActiveRecord::Base
   setting :feedburner_url,             :string, ''
   setting :rss_description,            :boolean, false
   setting :rss_description_text,       :string, "<hr /><p><small>Original article written by %author% and published on <a href='%blog_url%'>%blog_name%</a> | <a href='%permalink_url%'>direct link to this article</a> | If you are reading this article anywhere other than on <a href='%blog_url%'>%blog_name%</a>, it has been illegally reproduced and without proper authorization.</small></p>"
-  setting :permalink_format,           :string, '/%year%/%month%/%day%/%title%'
   setting :robots,                     :string, 'User-agent: *\nAllow: /\nDisallow: /admin\n'
   setting :humans,                     :string, "/* TEAM */\nYour title: Your name.\nSite: email, link to a contact form, etc.\nTwitter: your Twitter username.\n\n/* SITE */\nSoftware: Publify [http://publify.co] #{PUBLIFY_VERSION}"
 
@@ -107,8 +106,6 @@ class Blog < ActiveRecord::Base
   setting :twitter_consumer_secret,   :string, ''
   setting :custom_url_shortener,      :string, ''
   setting :statuses_in_timeline,      :boolean, true
-
-  validate :permalink_has_identifier
 
   # The default Blog. This is the lowest-numbered blog, almost always
   # id==1. This should be the only blog as well.
@@ -201,16 +198,6 @@ class Blog < ActiveRecord::Base
     limit.zero? \
       ? {} \
       : { limit: limit }
-  end
-
-  def permalink_has_identifier
-    unless permalink_format =~ /(%title%)/
-      errors.add(:base, I18n.t('errors.permalink_need_a_title'))
-    end
-
-    if permalink_format =~ /\.(atom|rss)$/
-      errors.add(:permalink_format, I18n.t('errors.cant_end_with_rss_or_atom'))
-    end
   end
 
   def root_path
