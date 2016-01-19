@@ -115,7 +115,6 @@ es-MX:
       your_blog: "Tu blog"
       your_email: "Tu email"
       your_message: "Tu comentario"
-      comment_markup_help: "Ayuda del marcado"
       preview_comment: "Previsualizar comentario"
     article_links:
       comments:

@@ -115,7 +115,6 @@ pl:
       your_blog: "Twój blog"
       your_email: "Twój email"
       your_message: "Treść"
-      comment_markup_help: "Pomoc języka formatowania"
       preview_comment: "Obejrzyj komentarz"
     article_links:
       comments:

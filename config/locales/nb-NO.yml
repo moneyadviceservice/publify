@@ -115,7 +115,6 @@ nb-NO:
       your_blog: "bloggen din"
       your_email: "Din epost"
       your_message: "Beskjed"
-      comment_markup_help: "Hjelp med markup for kommentar"
       preview_comment: "Vis eksempel på kommentar"
     article_links:
       comments:
