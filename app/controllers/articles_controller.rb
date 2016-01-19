@@ -15,9 +15,9 @@ class ArticlesController < ContentController
 
     limit = this_blog.per_page(params[:format])
     unless params[:year].blank?
-      @articles = Content.published_at(params.values_at(:year, :month, :day)).where(conditions).page(params[:page]).per(limit)
+      @articles = Content.published_at(params.values_at(:year, :month, :day)).where(conditions).limit(limit)
     else
-      @articles = Content.published.where(conditions).page(params[:page]).per(limit)
+      @articles = Content.published.where(conditions).limit(limit)
     end
 
     @page_title = this_blog.home_title_template
@@ -35,7 +35,7 @@ class ArticlesController < ContentController
     @keywords = this_blog.meta_keywords
     @lead_campaign = Campaign.lead.last
 
-    suffix = (params[:page].nil? and params[:year].nil?) ? '' : '/'
+    suffix = params[:year].nil? ? '' : '/'
 
     respond_to do |format|
       format.html { render_paginated_index }
