@@ -40,6 +40,26 @@ module ApplicationHelper
     controller.send(:render_to_string, *args, &block)
   end
 
+  def item_path(item, options = {})
+    case item
+    when Article
+      article_path(item.permalink, options)
+    when Comment
+      options.merge!(anchor: "comment-#{item.id}")
+      article_path(item.article.permalink, options)
+    end
+  end
+
+  def item_url(item, options = {})
+    case item
+    when Article
+      article_url(item.permalink, options)
+    when Comment
+      options.merge!(anchor: "comment-#{item.id}")
+      article_url(item.article.permalink, options)
+    end
+  end
+
   def avatar_tag(options = {})
     begin
       avatar_class = this_blog.plugin_avatar.constantize

@@ -7,4 +7,4 @@ content_html = fetch_html_content_for_feeds(item, this_blog)
 json.description content_html + item.get_rss_description
 json.pubDate item.published_at.rfc822
 
-json.link item.permalink_url
+json.link item_url(item)
