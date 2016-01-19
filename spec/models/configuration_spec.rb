@@ -230,10 +230,6 @@ describe 'Given a new blog', type: :model do
   it 'should have an empty custom url shortener' do
     expect(blog.custom_url_shortener).to eq('')
   end
-
-  it 'a new blog should display statuses in the main feed' do
-    expect(blog.statuses_in_timeline).to eq(true)
-  end
 end
 
 describe 'Given a new user', type: :model do
