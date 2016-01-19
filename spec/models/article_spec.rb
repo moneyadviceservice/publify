@@ -420,13 +420,6 @@ describe Article, type: :model do
     end
   end
 
-  describe '#comment_url' do
-    it 'should render complete url of comment' do
-      article = build_stubbed(:article, id: 123)
-      expect(article.comment_url).to eq("/comments?article_id=#{article.id}")
-    end
-  end
-
   it 'test_can_ping_fresh_article_iff_it_allows_pings' do
     a = create(:article, allow_pings: true)
     assert_equal(false, a.pings_closed?)
