@@ -1,5 +1,5 @@
 class ArticlesController < ContentController
-  before_filter :login_required, only: [:preview, :preview_page]
+  before_filter :login_required, only: :preview
   before_filter :auto_discovery_feed, only: [:show, :index]
   before_filter :verify_config
 
@@ -121,11 +121,6 @@ class ArticlesController < ContentController
 
   def tag
     redirect_to tags_path, status: 301
-  end
-
-  def preview_page
-    @page = Page.find(params[:id])
-    render 'view_page'
   end
 
   def view_page

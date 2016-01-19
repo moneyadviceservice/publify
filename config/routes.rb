@@ -53,7 +53,6 @@ Rails.application.routes.draw do
     get '/page/:page', action: 'index', page: /\d+/
     get '/pages/*name', action: 'view_page'
     get 'previews(/:id)', action: 'preview'
-    get 'previews_pages(/:id)', action: 'preview_page'
     get 'articles/tag', action: 'tag'
   end
 
