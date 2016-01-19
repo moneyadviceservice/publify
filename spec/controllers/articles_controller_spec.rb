@@ -458,32 +458,3 @@ describe ArticlesController, 'assigned keywords', type: :controller do
     end
   end
 end
-
-describe ArticlesController, 'preview page', type: :controller do
-  let!(:blog) { create(:blog) }
-
-  describe 'with non logged user' do
-    before :each do
-      @request.session = {}
-      get :preview_page, id: create(:article).id
-    end
-
-    it 'should redirect to login' do
-      expect(response).to redirect_to(controller: 'accounts', action: 'login')
-    end
-  end
-
-  describe 'with logged user' do
-    let!(:page) { create(:page) }
-
-    before(:each) do
-      henri = create(:user, login: 'henri', profile: create(:profile_admin, label: Profile::ADMIN))
-      @request.session = { user: henri.id }
-    end
-
-    it 'should assigns article define with id' do
-      get :preview_page, id: page.id
-      expect(assigns[:page]).to eq(page)
-    end
-  end
-end
