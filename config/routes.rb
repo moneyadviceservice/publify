@@ -59,11 +59,8 @@ Rails.application.routes.draw do
   # SetupController
   match '/setup', to: 'setup#index', via: [:get, :post], format: false
 
-  # TagsController (imitate inflected_resource)
-  resources :tags, except: [:show, :update, :destroy, :edit]
-  resources :tags, path: 'tag', only: [:show]
-  get '/tag/:id/page/:page', to: 'tags#show', format: false
-  get '/tags/page/:page', to: 'tags#index', format: false
+  # Tags - note that the tags index has been forgotten about and is unstyled
+  get '/tag/:id(/page/:page)', to: 'tags#show', as: :tag
 
   resources :author, only: :show
 
