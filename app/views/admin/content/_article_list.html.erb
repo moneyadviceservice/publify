@@ -10,7 +10,7 @@
 <tr>
   <td>
     <%- if article.published %>
-      <%= link_to_permalink(article, article.title, nil, 'published')%>
+      <%= link_to(article.title, article_path(article.permalink), class: :published) %>
     <%- else %>
       <%- if article.draft? %>
         <strong class="label label-info">Draft</strong>

@@ -1,4 +1,4 @@
-feed.entry item, :id => "urn:uuid:#{item.guid}", :url => item.permalink_url do |entry|
+feed.entry item, :id => "urn:uuid:#{item.guid}", :url => article_url(item.permalink) do |entry|
   entry.author do
     name = item.user.name rescue item.author
     email = item.user.email rescue nil

@@ -4,7 +4,7 @@
   <li class='alert'><%= t(".nothing_to_show_yet") %> !</li>
   <% else %>
     <% sidebar.popular.each do |article| %>
-    <%= sprintf("%s (%s)", link_to_permalink(article, article.title), t(".comments", count: article.comment_count)) %>
+    <%= sprintf("%s (%s)", link_to(article.title, article_path(article.permalink)), t(".comments", count: article.comment_count)) %>
     <% end %>
   <% end %>
   </li>

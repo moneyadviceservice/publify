@@ -19,7 +19,7 @@ class CommentsController < FeedbackController
     session[:email] = @comment.email if @comment.email.present?
 
     if recaptcha_ok_for?(@comment)  && @comment.save
-      redirect_to @article.permalink_url + "#comment-#{@comment.id}"
+      redirect_to article_path(@article.permalink, anchor: "comment-#{@comment.id}")
     else
       @page_title = @article.title_meta_tag.present? ? @article.title_meta_tag : @article.title
       @description = @article.description_meta_tag
@@ -65,7 +65,7 @@ class CommentsController < FeedbackController
       user: @current_user,
       user_agent: request.env['HTTP_USER_AGENT'],
       referrer: request.env['HTTP_REFERER'],
-      permalink: @article.permalink_url }.stringify_keys
+      permalink: article_url(@article.permalink) }.stringify_keys
   end
 
   def set_headers

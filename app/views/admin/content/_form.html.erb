@@ -228,7 +228,7 @@
       <% if @article.draft? || @article.withdrawn? %>
         <%= link_to t('.preview'), { controller: '/articles', action: 'preview', id: @article.id }, target: 'blank' %>
       <% else %>
-        <%= link_to t('.view'), @article.permalink_url, target: 'blank' %>
+        <%= link_to t('.view'), article_path(@article.permalink), target: 'blank' %>
       <% end %>
     <% end %>
   </div>

@@ -27,7 +27,7 @@ module ArticleHelper
 
   def report_comment_email_template(comment)
     <<-EOS
-      Reported comment: #{comment.article.permalink_url + "#comment-#{comment.id}"}
+      Reported comment: #{article_url(comment.article.permalink, anchor: "comment-#{comment.id}")}
 
       Please enter any further notes below:
     EOS
