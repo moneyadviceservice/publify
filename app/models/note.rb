@@ -94,16 +94,6 @@ class Note < Content
     user.admin? || user_id == user.id
   end
 
-  def permalink_url(anchor = nil, only_path = false)
-    blog.url_for(
-      controller: '/notes',
-      action: 'show',
-      permalink: permalink,
-      anchor: anchor,
-      only_path: only_path
-    )
-  end
-
   def short_link
     path = redirects.first.from_path
     prefix.sub!(/^https?\:\/\//, '')
