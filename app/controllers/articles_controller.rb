@@ -11,19 +11,13 @@ class ArticlesController < ContentController
   helper :'admin/base'
 
   def index
-    conditions = (Blog.default.statuses_in_timeline) ? ['type in (?, ?)', 'Article', 'Note'] : ['type = ?', 'Article']
-
-    limit = this_blog.per_page(params[:format])
-
-    @articles = Content.published.where(conditions).limit(limit)
-    @page_title = this_blog.home_title_template
-    @description = this_blog.home_desc_template
-
-    @page_title = @page_title.to_title(@articles, this_blog, params)
-    @description = @description.to_title(@articles, this_blog, params)
-
+    @page_title = this_blog.home_title_template.to_title(@articles, this_blog, params)
+    @description = this_blog.home_desc_template.to_title(@articles, this_blog, params)
     @keywords = this_blog.meta_keywords
     @lead_campaign = Campaign.lead.last
+
+    @articles = Content.published.where('type = ?', 'Article')
+    @articles = @articles.limit(this_blog.per_page(params[:format]))
 
     respond_to do |format|
       format.html do
