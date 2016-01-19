@@ -33,5 +33,5 @@ xm.item do
     xm.trackback :ping, item.trackback_url
   end
 
-  xm.link item.permalink_url
+  xm.link article_path(item.permalink)
 end
