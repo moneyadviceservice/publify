@@ -104,7 +104,6 @@ class Blog < ActiveRecord::Base
   setting :twitter_consumer_key,      :string, ''
   setting :twitter_consumer_secret,   :string, ''
   setting :custom_url_shortener,      :string, ''
-  setting :statuses_in_timeline,      :boolean, true
 
   # The default Blog. This is the lowest-numbered blog, almost always
   # id==1. This should be the only blog as well.
