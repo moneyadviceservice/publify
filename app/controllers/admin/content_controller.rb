@@ -28,13 +28,21 @@ class Admin::ContentController < Admin::BaseController
   end
 
   def new
-    @article = Article::Factory.new(this_blog, current_user).default
+    @article = Article.new.tap do |art|
+      art.allow_comments = this_blog.default_allow_comments
+      art.allow_pings = this_blog.default_allow_pings
+      art.text_filter = current_user.default_text_filter
+    end
+
     load_resources
   end
 
   def create
-    article_factory = Article::Factory.new(this_blog, current_user)
-    @article = article_factory.get_or_build_from(params[:article][:id])
+    @article = Article.new.tap do |art|
+      art.allow_comments = this_blog.default_allow_comments
+      art.allow_pings = this_blog.default_allow_pings
+      art.text_filter = current_user.default_text_filter
+    end
 
     update_article_attributes
     @article.author = current_user
