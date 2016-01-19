@@ -28,7 +28,6 @@ describe Note, type: :model do
       end
 
       it { expect(note.permalink).to eq("#{note.id}-ae") }
-      it { expect(note.permalink_url).to eq("#{blog.base_url}/note/#{note.id}-ae") }
 
       context 'with a particular blog' do
         before(:each) do
