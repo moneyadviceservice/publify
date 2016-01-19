@@ -57,8 +57,6 @@ nb-NO:
   helper:
     at: "kl."
   articles:
-    password_form:
-      submit: "Send"
     index:
       next_page: "Neste side"
       previous_page: "Forrige side"

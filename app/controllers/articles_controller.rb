@@ -82,16 +82,6 @@ class ArticlesController < ContentController
     render 'read'
   end
 
-  def check_password
-    return unless request.xhr?
-    @article = Article.find(params[:article][:id])
-    if @article.password == params[:article][:password]
-      render partial: 'articles/full_article_content', locals: { article: @article }
-    else
-      render partial: 'articles/password_form', locals: { article: @article }
-    end
-  end
-
   def redirect
     from = extract_feed_format(params[:from])
     factory = Article::Factory.new(this_blog, current_user)
