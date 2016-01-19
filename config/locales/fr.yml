@@ -266,8 +266,6 @@ fr:
         feed_articles: "Article excerpts"
         feed_settings: "RSS Feed Settings"
         feed_excerpts_only: "Tronquer les articles dans le flux RSS"
-        feedburner_help: "Enter your FeedBurner ID if you wish to use your Google FeedBurner account instead of using the Publify feed URL."
-        feedburner_id: "Identifiant Feedburner"
         publishing_options: "Options de publication"
         status_main_feed: "Display statuses in the main feed"
         statuses: "Notes"

@@ -26,16 +26,22 @@ class ArticlesController < ContentController
     @lead_campaign = Campaign.lead.last
 
     respond_to do |format|
-      format.html { render_paginated_index }
+      format.html do
+        if @articles.present?
+          auto_discovery_feed(only_path: false)
+        else
+          error!
+        end
+      end
       format.atom do
-        render_articles_feed('atom')
+        render "index_atom_feed", layout: false
       end
       format.rss do
         auto_discovery_feed(only_path: false)
-        render_articles_feed('rss')
+        render "index_rss_feed", layout: false
       end
       format.json do
-        render_articles_feed('json')
+        render "index_json_feed", layout: false
       end
     end
   end
@@ -129,28 +135,9 @@ class ArticlesController < ContentController
     error!
   end
 
-  def render_articles_feed format
-    if this_blog.feedburner_url.empty? or request.env['HTTP_USER_AGENT'] =~ /FeedBurner/i
-      render "index_#{format}_feed", layout: false
-    else
-      redirect_to "http://feeds2.feedburner.com/#{this_blog.feedburner_url}"
-    end
-  end
-
   def render_feedback_feed format
     @feedback = @article.published_feedback
     render "feedback_#{format}_feed", layout: false
-  end
-
-  def render_paginated_index
-    return error! if @articles.empty?
-    if this_blog.feedburner_url.empty?
-      auto_discovery_feed(only_path: false)
-    else
-      @auto_discovery_url_rss = "http://feeds2.feedburner.com/#{this_blog.feedburner_url}"
-      @auto_discovery_url_atom = "http://feeds2.feedburner.com/#{this_blog.feedburner_url}"
-    end
-    render 'index'
   end
 
   def extract_feed_format(from)
