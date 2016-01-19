@@ -115,7 +115,6 @@ ro:
       your_blog: "blog-ul tău"
       your_email: "Email"
       your_message: "Comentariu"
-      comment_markup_help: "Ajutor la marcare"
       preview_comment: "Previzualizare"
     article_links:
       comments:

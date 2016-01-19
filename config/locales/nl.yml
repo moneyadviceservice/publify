@@ -115,7 +115,6 @@ nl:
       your_blog: "your blog"
       your_email: "Jouw e-mail"
       your_message: "Jouw bericht"
-      comment_markup_help: "Comment Markup Help"
       preview_comment: "Bekijk reactie"
     article_links:
       comments:

@@ -62,14 +62,6 @@ module ApplicationHelper
     tag :meta, property: name, content: value unless value.blank?
   end
 
-  def markup_help_popup(markup, text)
-    if markup and markup.commenthelp.size > 1
-      "<a href=\"#{url_for controller: 'articles', action: 'markup_help', id: markup.id}\" onclick=\"return popup(this, 'Publify Markup Help')\">#{text}</a>"
-    else
-      ''
-    end
-  end
-
   def onhover_show_admin_tools(type, id = nil)
     admin_id = "#admin_#{[type, id].compact.join('_')}"
     tag = []

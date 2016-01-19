@@ -115,7 +115,6 @@ it:
       your_blog: "il tuo blog"
       your_email: "Tua email"
       your_message: "Tuo messaggio"
-      comment_markup_help: "Aiuto sul markup dei comemnti"
       preview_comment: "Anteprima commento"
     article_links:
       comments:

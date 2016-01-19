@@ -55,7 +55,6 @@ Rails.application.routes.draw do
     get 'previews(/:id)', action: 'preview'
     get 'previews_pages(/:id)', action: 'preview_page'
     get 'check_password', action: 'check_password'
-    get 'articles/markup_help/:id', action: 'markup_help'
     get 'articles/tag', action: 'tag'
   end
 
