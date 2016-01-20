@@ -103,6 +103,16 @@ Rails.application.routes.draw do
       end
     end
 
+    resources :feedbacks, except: [:new, :create], path: :feedback do
+      collection do
+        post :bulkops
+      end
+      member do
+        get :remove
+        get :change_state
+      end
+    end
+
     resource :profile, only: [:edit, :update]
   end
 
@@ -114,12 +124,10 @@ Rails.application.routes.draw do
   post '/accounts/recover-password', to: 'accounts#recover_password'
 
   # Admin/XController
-  %w(feedback resources sidebar textfilters users settings redirects seo post_types).each do |i|
+  %w(resources sidebar textfilters users settings redirects seo post_types).each do |i|
     match "/admin/#{i}", to: "admin/#{i}#index", format: false, via: [:get, :post, :put, :delete]
     match "/admin/#{i}(/:action(/:id))", controller: "admin/#{i}", action: nil, id: nil, format: false, via: [:get, :post, :put, :delete]
   end
-
-  match "/admin/articles/:article_id/feedback", to: "admin/feedback#index", format: false, via: :get, as: :article_feedback
 
   root to: 'articles#index', format: false
 

@@ -1,4 +1,4 @@
-describe Admin::FeedbackController, type: :controller do
+describe Admin::FeedbacksController, type: :controller do
 
   shared_examples_for 'destroy feedback with feedback from own article' do
     it 'should destroy feedback' do
@@ -13,7 +13,7 @@ describe Admin::FeedbackController, type: :controller do
 
     it 'should redirect to feedback from article' do
       post 'destroy', id: feedback_from_own_article.id
-      expect(response).to redirect_to(controller: 'admin/feedback', action: 'article', id: feedback_from_own_article.article.id)
+      expect(response).to redirect_to(admin_feedbacks_path(article_id: feedback_from_own_article.article))
     end
 
     it 'should not destroy feedback in get request' do
@@ -57,7 +57,7 @@ describe Admin::FeedbackController, type: :controller do
         expect do
           Feedback.find(feedback_from_not_own_article.id)
         end.to raise_error(ActiveRecord::RecordNotFound)
-        expect(response).to redirect_to(controller: 'admin/feedback', action: 'article', id: feedback_from_not_own_article.article.id)
+        expect(response).to redirect_to(admin_feedbacks_path(article_id: feedback_from_not_own_article.article))
       end
     end
 
@@ -101,57 +101,6 @@ describe Admin::FeedbackController, type: :controller do
         let(:params) { { page: '' } }
         it { expect(assigns(:feedback).size).to eq(4) }
       end
-
-    end
-
-    describe 'create action' do
-
-      def base_comment(options = {})
-        { 'body' => 'a new comment', 'author' => 'Me', 'url' => 'http://publify.co', 'email' => 'dev@publify.co' }.merge(options)
-      end
-
-      describe 'by get access' do
-        it "should raise ActiveRecordNotFound if article doesn't exist" do
-          expect {
-            get 'create', article_id: 120431, comment: base_comment
-          }.to raise_error(ActiveRecord::RecordNotFound)
-        end
-
-        it 'should not create comment' do
-          article = FactoryGirl.create(:article)
-          expect do
-            get 'create', article_id: article.id, comment: base_comment
-            expect(response).to redirect_to(action: 'article', id: article.id)
-          end.not_to change(Comment, :count)
-        end
-
-      end
-
-      describe 'by post access' do
-        it "should raise ActiveRecord::RecordNotFound if article doesn't exist" do
-          expect {
-            post 'create', article_id: 123104, comment: base_comment
-          }.to raise_error(ActiveRecord::RecordNotFound)
-        end
-
-        it 'should create comment' do
-          article = FactoryGirl.create(:article)
-          expect do
-            post 'create', article_id: article.id, comment: base_comment
-            expect(response).to redirect_to(action: 'article', id: article.id)
-          end.to change(Comment, :count)
-        end
-
-        it 'should create comment mark as ham' do
-          article = FactoryGirl.create(:article)
-          expect do
-            post 'create', article_id: article.id, comment: base_comment
-            expect(response).to redirect_to(action: 'article', id: article.id)
-          end.to change { Comment.count(conditions: { state: 'ham' }) }
-        end
-
-      end
-
     end
 
     describe 'edit action' do
@@ -220,7 +169,7 @@ describe Admin::FeedbackController, type: :controller do
       it "should not destroy feedback doesn't own" do
         id = feedback_from_not_own_article.id
         post 'destroy', id: id
-        expect(response).to redirect_to(controller: 'admin/feedback', action: 'index')
+        expect(response).to redirect_to(admin_feedbacks_path)
         expect do
           Feedback.find(id)
         end.not_to raise_error
@@ -335,30 +284,6 @@ describe Admin::FeedbackController, type: :controller do
       it 'mark ham comments as ham' do
         comment = FactoryGirl.create(:comment, state: :ham)
         post :bulkops, bulkop_top: 'Mark Checked Items as Ham', feedback_check: { comment.id.to_s => 'on' }
-        expect(Feedback.find(comment.id)).to be_ham
-      end
-
-      it 'confirms presumed spam comments as spam' do
-        comment = FactoryGirl.create(:comment, state: :presumed_spam)
-        post :bulkops, bulkop_top: 'Confirm Classification of Checked Items', feedback_check: { comment.id.to_s => 'on' }
-        expect(Feedback.find(comment.id)).to be_spam
-      end
-
-      it 'confirms confirmed spam comments as spam' do
-        comment = FactoryGirl.create(:comment, state: :spam)
-        post :bulkops, bulkop_top: 'Confirm Classification of Checked Items', feedback_check: { comment.id.to_s => 'on' }
-        expect(Feedback.find(comment.id)).to be_spam
-      end
-
-      it 'confirms presumed ham comments as ham' do
-        comment = FactoryGirl.create(:comment, state: :presumed_ham)
-        post :bulkops, bulkop_top: 'Confirm Classification of Checked Items', feedback_check: { comment.id.to_s => 'on' }
-        expect(Feedback.find(comment.id)).to be_ham
-      end
-
-      it 'confirms ham comments as ham' do
-        comment = FactoryGirl.create(:comment, state: :ham)
-        post :bulkops, bulkop_top: 'Confirm Classification of Checked Items', feedback_check: { comment.id.to_s => 'on' }
         expect(Feedback.find(comment.id)).to be_ham
       end
 

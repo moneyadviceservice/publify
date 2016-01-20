@@ -26,7 +26,7 @@
     <small><%= l(article.published_at) %></small>
   </td>
   <td class="comments">
-    <%= (article.allow_comments?) ? link_to("#{article.comments.ham.size.to_s} <i class='glyphicon glyphicon-comment'></i>".html_safe, :controller => '/admin/feedback', :id => article.id, :action => 'article') : '-' %> </td>
+    <%= (article.allow_comments?) ? link_to("#{article.comments.ham.size.to_s} <i class='glyphicon glyphicon-comment'></i>".html_safe, admin_feedbacks_path(article_id: article)) : '-' %> </td>
 </tr>
 <% end %>
 <%= display_pagination(@articles, 5, 'first', 'last')%>
