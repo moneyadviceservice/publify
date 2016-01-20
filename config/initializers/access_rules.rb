@@ -57,8 +57,8 @@ AccessControl.map require: [ :admin, :publisher, :contributor ]  do |map|
   end
 
   map.project_module :settings, nil do |project|
-    project.menu    "Settings",         { controller: "admin/settings",    action: "index" }
-    project.submenu "General settings", { controller: "admin/settings",    action: "index" }
+    project.menu    "Settings",         { controller: "admin/settings",    action: "general" }
+    project.submenu "General settings", { controller: "admin/settings",    action: "general" }
     project.submenu "Write",            { controller: "admin/settings",    action: "write" }
     project.submenu "Display",          { controller: "admin/settings",    action: "display" }
     project.submenu "Feedback",         { controller: "admin/settings",    action: "feedback" }
