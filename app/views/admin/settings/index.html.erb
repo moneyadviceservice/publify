@@ -37,18 +37,6 @@
       </div>
     </div>
     <div class='form-group'>
-      <label class='control-label col-sm-2'><%= t(".users") %></label>
-      <div class="col-sm-5">
-        <div class='checkbox'>
-          <label for="setting_allow_signup">
-            <%= check_box(:setting, :allow_signup) %>
-            <%= t(".allow_users_to_register")%>
-          </label>
-        </div>
-        <small class='help-block'><%= t(".explain_allow_users_to_register") %></small>
-      </div>
-    </div>
-    <div class='form-group'>
       <label class='control-label col-sm-2' for="setting_email_from"><%= t(".source_email")%></label>
       <div class='col-sm-5'>
         <%= text_field(:setting, :email_from, { :class => 'form-control'}) %>

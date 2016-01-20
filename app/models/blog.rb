@@ -54,7 +54,6 @@ class Blog < ActiveRecord::Base
   setting :ping_urls,                  :string, "http://blogsearch.google.com/ping/RPC2\nhttp://rpc.technorati.com/rpc/ping\nhttp://ping.blo.gs/\nhttp://rpc.weblogs.com/RPC2"
   setting :send_outbound_pings,        :boolean, true
   setting :email_from,                 :string, 'notmonitored@notify.moneyadviceservice.org.uk'
-  setting :allow_signup,               :integer, 0
   setting :date_format,                :string, '%B %d %Y'
   setting :time_format,                :string, '%Hh%M'
   setting :image_avatar_size,          :integer, 48
@@ -184,10 +183,6 @@ class Blog < ActiveRecord::Base
     return false if twitter_consumer_key.nil? or twitter_consumer_secret.nil?
     return false if twitter_consumer_key.empty? or twitter_consumer_secret.empty?
     true
-  end
-
-  def allow_signup?
-    allow_signup == 1
   end
 
   private
