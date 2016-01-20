@@ -103,6 +103,8 @@ module Admin::BaseHelper
       edit_admin_content_path(item)
     when Page
       edit_admin_page_path(item)
+    when User
+      edit_admin_user_path(item)
     else
       url_for(action: :edit, id: item)
     end
@@ -115,6 +117,8 @@ module Admin::BaseHelper
       remove_admin_content_path(item)
     when Page
       remove_admin_page_path(item)
+    when User
+      remove_admin_user_path(item)
     else
       url_for(action: :destroy, id: item)
     end
