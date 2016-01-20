@@ -10,7 +10,13 @@ module LoginSystem
     end
 
     def current_user=(new_user)
-      session[:user] = (new_user.nil? || new_user.is_a?(Symbol)) ? nil : new_user.id
+      if new_user.nil? || new_user.is_a?(Symbol)
+        session[:user] = nil
+        session[:user_id] = nil
+      else
+        session[:user] = new_user.id
+        session[:user_id] = new_user.id
+      end
       @current_user = new_user
     end
 

@@ -182,18 +182,6 @@ http://anotherurl.net/other_line")
     it { expect(blog.per_page('atom')).to eq(4) }
   end
 
-  describe '#allow_signup?' do
-    context 'with a blog that allow signup' do
-      let(:blog) { build(:blog, allow_signup: 1) }
-      it { expect(blog.allow_signup?).to be_truthy }
-    end
-
-    context 'with a blog that not allow signup' do
-      let(:blog) { build(:blog, allow_signup: 0) }
-      it { expect(blog.allow_signup?).to be_falsey }
-    end
-  end
-
   describe '#humans' do
     context 'default value with publify txt' do
       let(:blog) { create :blog }
