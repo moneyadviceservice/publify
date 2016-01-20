@@ -47,7 +47,7 @@ Rails.application.routes.draw do
   controller 'articles', format: false do
     # Initial search goes to /search?q=foo, subsequent pages go to /search/foo/pages/2
     get '/search(/:q/page/:page)', action: 'search', as: 'search'
-    get '/archives/', action: 'archives'
+    get '/archives/', action: 'archives', as: 'archives'
     get '/pages/*name', action: 'view_page', as: 'page'
     get 'previews/:id', action: 'preview'
   end
