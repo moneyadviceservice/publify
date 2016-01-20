@@ -96,13 +96,6 @@ Rails.application.routes.draw do
   get '/accounts/recover-password', to: 'accounts#recover_password', as: :recover_password
   post '/accounts/recover-password', to: 'accounts#recover_password'
 
-  # Work around the Bad URI bug
-  %w(files sidebar).each do |i|
-    get "#{i}", to: "#{i}#index", format: false
-    match "#{i}(/:action)", controller: i, format: false, via: [:get, :post, :put, :delete] # TODO: convert this magic catchers to resources item to close un-needed HTTP method
-    match "#{i}(/:action(/:id))", controller: i, id: nil, format: false, via: [:get, :post, :put, :delete] # TODO: convert this magic catchers to resources item to close un-needed HTTP method
-  end
-
   # Admin/XController
   %w(content profiles pages feedback resources sidebar textfilters users settings redirects seo post_types).each do |i|
     match "/admin/#{i}", to: "admin/#{i}#index", format: false, via: [:get, :post, :put, :delete] # TODO: convert this magic catchers to resources item to close un-needed HTTP method
