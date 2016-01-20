@@ -41,7 +41,7 @@ AccessControl.map require: [ :admin, :publisher, :contributor ]  do |map|
     project.menu    "Articles",       { controller: "admin/contents", action: "index" }
     project.submenu "All Articles",   { controller: "admin/contents", action: "index" }
     project.submenu "New Article",    { controller: "admin/contents", action: "new" }
-    project.submenu "Feedback",       { controller: "admin/feedback", action: "index" }
+    project.submenu "Feedback",       { controller: "admin/feedbacks", action: "index" }
     project.submenu "Article Types",  { controller: "admin/post_types", action: "new" }
     project.submenu "Redirects",      { controller: "admin/redirects", action: "new" }
   end

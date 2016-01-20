@@ -1,4 +1,4 @@
-class Admin::FeedbackController < Admin::BaseController
+class Admin::FeedbacksController < Admin::BaseController
   cache_sweeper :blog_sweeper
 
   def index
@@ -22,72 +22,44 @@ class Admin::FeedbackController < Admin::BaseController
     @feedback = scoped_feedback.paginated(params[:page], this_blog.admin_display_elements)
   end
 
-  def destroy
-    @record = Feedback.find params[:id]
-
-    unless @record.article.user_id == current_user.id
-      unless current_user.admin?
-        return redirect_to controller: 'admin/feedback', action: :index
-      end
-    end
-
-    return(render 'admin/shared/destroy') unless request.post?
-
-    begin
-      @record.destroy
-      flash[:success] = I18n.t('admin.feedback.destroy.success')
-    rescue ActiveRecord::RecordNotFound
-      flash[:error] = I18n.t('admin.feedback.destroy.error')
-    end
-    redirect_to action: 'article', id: @record.article.id
-  end
-
-  def create
-    @article = Article.find(params[:article_id])
-    @comment = @article.comments.build(params[:comment].permit!)
-    @comment.user_id = current_user.id
-
-    if request.post? and @comment.save
-      # We should probably wave a spam filter over this, but for now, just mark it as published.
-      @comment.mark_as_ham
-      @comment.save!
-      flash[:success] = I18n.t('admin.feedback.create.success')
-    end
-    redirect_to action: 'article', id: @article.id
-  end
-
   def edit
     @comment = Comment.find(params[:id])
-    @article = @comment.article
-    unless @article.access_by? current_user
-      redirect_to action: 'index'
-      return
-    end
+    redirect_to admin_feedbacks_path if !@comment.article.access_by?(current_user)
   end
 
   def update
-    comment = Comment.find(params[:id])
-    unless comment.article.access_by? current_user
-      redirect_to action: 'index'
-      return
-    end
-    comment.attributes = params[:comment].permit!
-    if request.post? and comment.save
-      flash[:success] = I18n.t('admin.feedback.update.success')
-      redirect_to action: 'article', id: comment.article.id
+    @comment = Comment.find(params[:id])
+    redirect_to admin_feedbacks_path if !@comment.article.access_by?(current_user)
+
+    if @comment.update_attributes(params[:comment].permit!)
+      flash[:success] = I18n.t('admin.feedbacks.update.success')
+      redirect_to admin_feedbacks_path(article_id: @comment.article)
     else
-      redirect_to action: 'edit', id: comment.id
+      render action: :edit
     end
   end
 
+  def destroy
+    @comment = Comment.find(params[:id])
+    return if @comment.article.user != current_user && !current_user.admin?
+
+    @comment.destroy
+    flash[:notice] = I18n.t('admin.feedbacks.destroy.successfully_deleted')
+    redirect_to admin_feedbacks_path(article_id: @comment.article)
+  end
+
+  def remove
+    @comment = Comment.find(params[:id])
+    return if @comment.article.user != current_user && !current_user.admin?
+  end
+
   def change_state
-    return unless request.xhr?
+    return if !request.xhr?
 
     @feedback = Feedback.find(params[:id])
     template = @feedback.change_state!
 
     respond_to do |format|
-
       if params[:context] != 'listing'
         @comments = Comment.last_published
         page.replace_html('commentList', partial: 'admin/dashboard/comment')
@@ -114,7 +86,7 @@ class Admin::FeedbackController < Admin::BaseController
       ids.each do |id|
         count += Feedback.delete(id)
       end
-      flash[:success] = I18n.t('admin.feedback.bulkops.success_deleted', count: count)
+      flash[:success] = I18n.t('admin.feedbacks.bulkops.success_deleted', count: count)
 
       items.each do |i|
         i.invalidates_cache? or next
@@ -123,26 +95,21 @@ class Admin::FeedbackController < Admin::BaseController
       end
     when 'Mark Checked Items as Ham'
       update_feedback(items, :mark_as_ham!)
-      flash[:success] =  I18n.t('admin.feedback.bulkops.success_mark_as_ham', count: ids.size)
+      flash[:success] =  I18n.t('admin.feedbacks.bulkops.success_mark_as_ham', count: ids.size)
     when 'Mark Checked Items as Spam'
       update_feedback(items, :mark_as_spam!)
-      flash[:success] =  I18n.t('admin.feedback.bulkops.success_mark_as_spam', count: ids.size)
-    when 'Confirm Classification of Checked Items'
-      update_feedback(items, :confirm_classification!)
-      flash[:success] = I18n.t('admin.feedback.bulkops.success_classification', count: ids.size)
+      flash[:success] =  I18n.t('admin.feedbacks.bulkops.success_mark_as_spam', count: ids.size)
     when 'Delete all spam'
-      if request.post?
-        Feedback.delete_all(['state = ?', 'spam'])
-        flash[:success] = I18n.t('admin.feedback.bulkops.success')
-      end
+      Feedback.delete_all(['state = ?', 'spam'])
+      flash[:success] = I18n.t('admin.feedbacks.bulkops.success_deleted_spam')
     else
-      flash[:error] = I18n.t('admin.feedback.bulkops.error')
+      flash[:error] = I18n.t('admin.feedbacks.bulkops.error')
     end
 
     if params[:article_id]
       redirect_to action: 'article', id: params[:article_id], confirmed: params[:confirmed], published: params[:published]
     else
-      redirect_to action: 'index', page: params[:page], search: params[:search], confirmed: params[:confirmed], published: params[:published]
+      redirect_to admin_feedbacks_path, page: params[:page], search: params[:search], confirmed: params[:confirmed], published: params[:published]
     end
   end
 
