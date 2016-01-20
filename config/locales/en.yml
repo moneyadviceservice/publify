@@ -241,12 +241,14 @@ en:
         cancel: "Cancel"
         or: "or"
         publish: "Publish"
-      show:
+      remove:
         destroy_confirmation: "Destroy confirmation"
         are_you_sure: "Are you sure you want to delete this note"
         action_or_other: "%{first_action} or %{second_action}"
         cancel: "Cancel"
         delete: "Delete"
+      destroy:
+        successfully_deleted: "The note was deleted successfully"
     redirects:
       destroy:
         success: 'Redirection was successfully deleted.'
@@ -462,13 +464,6 @@ en:
         explain_tag_index: "Checking this box will add <code>noindex, follow</code> meta tags in every tags page, removing them from search engines and preventing duplicate content issues"
         explain_moderate_feedback: "You may want to moderate feedback when turning this on"
         explain_rss_description: "You can use the following tags: %author% (author name), %blog_url% (this blog URL), %blog_name% (this blog title) and %permalink_url% (a link to the article you want to protect)"
-    shared:
-      destroy:
-        destroy_confirmation: "Destroy confirmation"
-        are_you_sure: "Are you sure you want to delete this %{element}"
-        action_or_other: "%{first_action} or %{second_action}"
-        cancel: "Cancel"
-        delete: "Delete"
     tags:
       edit:
         success: "Tag was successfully updated"
@@ -514,9 +509,9 @@ en:
         publify_default_post_type: "Publify default post type"
         explain: "The template name is the filename Publify will look for when calling an article of that type. It should be in your theme under views/articles/template name.html.erb"
     pages:
-      new:
+      create:
         success: "New page created"
-      edit:
+      update:
         success: "Page has been updated"
       index:
         manage_pages: "Manage pages"
@@ -542,6 +537,14 @@ en:
         offline: "offline"
       pages:
         no_pages: "There are no pages yet. Why don't you start and create one?"
+      remove:
+        destroy_confirmation: "Destroy confirmation"
+        are_you_sure: "Are you sure you want to delete this page"
+        action_or_other: "%{first_action} or %{second_action}"
+        cancel: "Cancel"
+        delete: "Delete"
+      destroy:
+        successfully_deleted: "The page was deleted successfully"
     campaigns:
       index:
         new_campaign: "New Campaign"
