@@ -84,8 +84,15 @@ Rails.application.routes.draw do
     resources :campaigns, except: [:show]
   end
 
+  get '/accounts', to: redirect('/accounts/login')
+  get '/accounts/login', to: 'accounts#login', as: :login
+  post '/accounts/login', to: 'accounts#login'
+  get '/accounts/logout', to: 'accounts#logout', as: :logout
+  get '/accounts/recover-password', to: 'accounts#recover_password', as: :recover_password
+  post '/accounts/recover-password', to: 'accounts#recover_password'
+
   # Work around the Bad URI bug
-  %w(accounts files sidebar).each do |i|
+  %w(files sidebar).each do |i|
     get "#{i}", to: "#{i}#index", format: false
     match "#{i}(/:action)", controller: i, format: false, via: [:get, :post, :put, :delete] # TODO: convert this magic catchers to resources item to close un-needed HTTP method
     match "#{i}(/:action(/:id))", controller: i, id: nil, format: false, via: [:get, :post, :put, :delete] # TODO: convert this magic catchers to resources item to close un-needed HTTP method
