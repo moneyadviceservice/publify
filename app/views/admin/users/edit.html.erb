@@ -3,6 +3,6 @@
 <h2 class="page-title"><%= t(".edit_user") %></h2>
 <%- end %>
 
-<%= form_tag :action=>"edit", :id => @user.id do %>
-  <%= render :partial => "form" %>
+<%= form_tag admin_user_path(@user), method: :put do %>
+  <%= render "form" %>
 <% end %>
