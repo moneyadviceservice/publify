@@ -2,7 +2,7 @@ require 'base64'
 
 module Admin; end
 
-class Admin::ContentController < Admin::BaseController
+class Admin::ContentsController < Admin::BaseController
   layout 'administration'
 
   cache_sweeper :blog_sweeper
@@ -49,9 +49,9 @@ class Admin::ContentController < Admin::BaseController
 
     if @article.save
       if @article.draft?
-        flash[:success] = I18n.t('admin.content.create.success.draft')
+        flash[:success] = I18n.t('admin.contents.create.success.draft')
       else
-        flash[:success] = I18n.t('admin.content.create.success.published')
+        flash[:success] = I18n.t('admin.contents.create.success.published')
       end
       redirect_to action: 'edit', id: @article
     else
@@ -102,16 +102,16 @@ class Admin::ContentController < Admin::BaseController
       end
 
       if @article.draft?
-        flash[:success] = I18n.t('admin.content.update.success.draft')
+        flash[:success] = I18n.t('admin.contents.update.success.draft')
       elsif @article.withdrawn?
-        flash[:success] = I18n.t('admin.content.update.success.withdrawn')
+        flash[:success] = I18n.t('admin.contents.update.success.withdrawn')
       else
         if (@article.previous_changes['state'] || []).include?('draft')
-          flash[:success] = I18n.t('admin.content.update.success.published')
+          flash[:success] = I18n.t('admin.contents.update.success.published')
         elsif (@article.previous_changes['state'] || []).include?('withdrawn')
-          flash[:success] = I18n.t('admin.content.update.success.published_withdrawn')
+          flash[:success] = I18n.t('admin.contents.update.success.published_withdrawn')
         else
-          flash[:success] = I18n.t('admin.content.update.success.published_updated')
+          flash[:success] = I18n.t('admin.contents.update.success.published_updated')
         end
       end
       redirect_to action: 'edit', id: @article
@@ -123,7 +123,15 @@ class Admin::ContentController < Admin::BaseController
   end
 
   def destroy
-    destroy_a(Article)
+    return unless access_granted?(params[:id])
+    Article.find(params[:id]).destroy
+    flash[:notice] = I18n.t('admin.contents.destroy.successfully_deleted')
+    redirect_to action: 'index'
+  end
+
+  def remove
+    return unless access_granted?(params[:id])
+    @article = Article.find(params[:id])
   end
 
   protected

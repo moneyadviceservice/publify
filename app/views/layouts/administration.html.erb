@@ -89,7 +89,7 @@
             </a>
           <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
             <li><%= link_to(t("admin.menu.new_campaign"), {controller: 'admin/campaigns', action: 'new'}) %></li>
-            <li><%= link_to(t("admin.menu.new_article"), {controller: 'content', action: 'new'}) %></li>
+            <li><%= link_to(t("admin.menu.new_article"), new_admin_content_path) %></li>
             <li><%= link_to(t("admin.menu.new_page"), {controller: 'pages', actions: 'new'}) %></li>
             <li><%= link_to(t("admin.menu.new_media"), {controller: 'resources', action: 'index'}) %></li>
             <li><%= link_to(t("admin.menu.new_note"), {controller: 'notes'}) %></li>

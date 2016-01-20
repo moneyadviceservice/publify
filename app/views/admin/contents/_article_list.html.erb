@@ -17,7 +17,7 @@
       <%- elsif article.withdrawn? %>
         <strong class="label label-danger">Withdrawn</strong>
       <%- end %>
-      <%= link_to(article.title, {controller: '/articles', action: "preview", id: article.id}, {class: 'unpublished', target: '_new'}) %>
+      <%= link_to(article.title, preview_path(article), class: 'unpublished', target: '_new') %>
     <%- end %>
     <%= show_actions article %>
   </td>

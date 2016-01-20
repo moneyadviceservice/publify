@@ -686,7 +686,7 @@ en:
         by: "By"
       comments:
         latest_comments: "Latest Comments"
-    content:
+    contents:
       create:
         success:
           draft: "Draft article successfully created"
@@ -762,6 +762,14 @@ en:
         close_modal: "Close"
       categories:
         new_category: "New Category"
+      remove:
+        destroy_confirmation: "Destroy confirmation"
+        are_you_sure: "Are you sure you want to delete this article"
+        action_or_other: "%{first_action} or %{second_action}"
+        cancel: "Cancel"
+        delete: "Delete"
+      destroy:
+        successfully_deleted: "The article was deleted successfully"
     categories:
       new:
         cancel: "Cancel"
