@@ -73,12 +73,6 @@ Rails.application.routes.draw do
 
     resources :popular_articles, only: [:new, :create]
 
-    resources :sidebar, only: [:index, :update, :destroy] do
-      collection do
-        put :sortable
-      end
-    end
-
     resources :notes, except: [:new]
     resource :cache, controller: 'cache', only: [:show, :destroy]
     resources :campaigns, except: [:show]
@@ -125,7 +119,7 @@ Rails.application.routes.draw do
   post '/accounts/recover-password', to: 'accounts#recover_password'
 
   # Admin/XController
-  %w(sidebar textfilters users settings redirects seo post_types).each do |i|
+  %w(textfilters users settings redirects seo post_types).each do |i|
     match "/admin/#{i}", to: "admin/#{i}#index", format: false, via: [:get, :post, :put, :delete]
     match "/admin/#{i}(/:action(/:id))", controller: "admin/#{i}", action: nil, id: nil, format: false, via: [:get, :post, :put, :delete]
   end
