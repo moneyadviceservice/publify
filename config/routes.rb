@@ -92,6 +92,12 @@ Rails.application.routes.draw do
       end
     end
 
+    resources :pages do
+      member do
+        get :remove
+      end
+    end
+
     resource :profile, only: [:edit, :update]
   end
 
@@ -103,7 +109,7 @@ Rails.application.routes.draw do
   post '/accounts/recover-password', to: 'accounts#recover_password'
 
   # Admin/XController
-  %w(pages feedback resources sidebar textfilters users settings redirects seo post_types).each do |i|
+  %w(feedback resources sidebar textfilters users settings redirects seo post_types).each do |i|
     match "/admin/#{i}", to: "admin/#{i}#index", format: false, via: [:get, :post, :put, :delete]
     match "/admin/#{i}(/:action(/:id))", controller: "admin/#{i}", action: nil, id: nil, format: false, via: [:get, :post, :put, :delete]
   end

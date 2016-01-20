@@ -55,16 +55,6 @@ module Admin::BaseHelper
     output
   end
 
-  def link_to_edit(label, record, controller = controller.controller_name)
-    link_to label, { controller: controller, action: 'edit', id: record.id }, class: 'edit'
-  end
-
-  def link_to_edit_with_profiles(label, record, controller = controller.controller_name)
-    if current_user.admin? || current_user.id == record.user_id
-      link_to label, { controller: controller, action: 'edit', id: record.id }, class: 'edit'
-    end
-  end
-
   def text_filter_options
     TextFilter.all.collect do |filter|
       [filter.description, filter]
@@ -111,6 +101,8 @@ module Admin::BaseHelper
     url = case item
     when Article
       edit_admin_content_path(item)
+    when Page
+      edit_admin_page_path(item)
     else
       url_for(action: :edit, id: item)
     end
@@ -121,6 +113,8 @@ module Admin::BaseHelper
     url = case item
     when Article
       remove_admin_content_path(item)
+    when Page
+      remove_admin_page_path(item)
     else
       url_for(action: :destroy, id: item)
     end

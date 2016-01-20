@@ -9,7 +9,10 @@
 <% for page in @pages %>
 <tr>
   <td>
-    <%= link_to_edit_with_profiles page.title, page %>
+    <% if current_user.admin? || current_user.id == record.user_id %>
+      <%= link_to page.title, edit_admin_page_path(page), class: 'edit' %>
+    <% end %>
+
     <%= show_actions page %>
   </td>
   <td><%= page.name%></td>
