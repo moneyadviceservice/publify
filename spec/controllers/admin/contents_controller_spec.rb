@@ -1,4 +1,4 @@
-describe Admin::ContentController, type: :controller do
+describe Admin::ContentsController, type: :controller do
   let!(:blog) { create(:blog) }
   let!(:article) { create(:article) }
 

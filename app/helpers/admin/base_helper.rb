@@ -7,7 +7,7 @@ module Admin::BaseHelper
 
   def dashboard_action_links
     links = []
-    links << link_to(t('.write_a_post'), controller: 'content', action: 'new') if current_user.can_access_to_articles?
+    links << link_to(t('.write_a_post'), new_admin_content_path) if current_user.can_access_to_articles?
     links << link_to(t('.write_a_page'), controller: 'pages', action: 'new') if current_user.can_access_to_pages?
     links << link_to(t('.update_your_profile_or_change_your_password'), controller: 'profiles', action: 'index')
     links.join(', ')
@@ -108,11 +108,23 @@ module Admin::BaseHelper
   end
 
   def button_to_edit(item)
-    link_to(content_tag(:span, '', class: 'glyphicon glyphicon-pencil'), { action: 'edit', id: item.id }, class: 'btn btn-primary btn-xs btn-action')
+    url = case item
+    when Article
+      edit_admin_content_path(item)
+    else
+      url_for(action: :edit, id: item)
+    end
+    link_to(content_tag(:span, '', class: 'glyphicon glyphicon-pencil'), url, class: 'btn btn-primary btn-xs btn-action')
   end
 
   def button_to_delete(item)
-    link_to(content_tag(:span, '', class: 'glyphicon glyphicon-trash'), { action: 'destroy', id: item.id }, class: 'btn btn-danger btn-xs btn-action')
+    url = case item
+    when Article
+      remove_admin_content_path(item)
+    else
+      url_for(action: :destroy, id: item)
+    end
+    link_to(content_tag(:span, '', class: 'glyphicon glyphicon-trash'), url, class: 'btn btn-danger btn-xs btn-action')
   end
 
   def button_to_short_url(item)

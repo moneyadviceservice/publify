@@ -49,7 +49,7 @@ Rails.application.routes.draw do
     get '/search(/:q/page/:page)', action: 'search', as: 'search'
     get '/archives/', action: 'archives', as: 'archives'
     get '/pages/*name', action: 'view_page', as: 'page'
-    get 'previews/:id', action: 'preview'
+    get 'previews/:id', action: 'preview', as: 'preview'
   end
 
   get '/news', to: 'tags#show', defaults: { id: 'news' }
@@ -87,6 +87,15 @@ Rails.application.routes.draw do
     resources :notes, except: [:new]
     resource :cache, controller: 'cache', only: [:show, :destroy]
     resources :campaigns, except: [:show]
+    
+    resources :contents, path: :articles do
+      collection do
+        get :auto_complete_for_article_keywords
+      end
+      member do
+        get :remove
+      end
+    end
   end
 
   get '/accounts', to: redirect('/accounts/login')
@@ -97,9 +106,9 @@ Rails.application.routes.draw do
   post '/accounts/recover-password', to: 'accounts#recover_password'
 
   # Admin/XController
-  %w(content profiles pages feedback resources sidebar textfilters users settings redirects seo post_types).each do |i|
-    match "/admin/#{i}", to: "admin/#{i}#index", format: false, via: [:get, :post, :put, :delete] # TODO: convert this magic catchers to resources item to close un-needed HTTP method
-    match "/admin/#{i}(/:action(/:id))", controller: "admin/#{i}", action: nil, id: nil, format: false, via: [:get, :post, :put, :delete] # TODO: convert this magic catchers to resources item to close un-needed HTTP method
+  %w(profiles pages feedback resources sidebar textfilters users settings redirects seo post_types).each do |i|
+    match "/admin/#{i}", to: "admin/#{i}#index", format: false, via: [:get, :post, :put, :delete]
+    match "/admin/#{i}(/:action(/:id))", controller: "admin/#{i}", action: nil, id: nil, format: false, via: [:get, :post, :put, :delete]
   end
 
   match "/admin/articles/:article_id/feedback", to: "admin/feedback#index", format: false, via: :get, as: :article_feedback
