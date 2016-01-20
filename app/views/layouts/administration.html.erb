@@ -77,11 +77,6 @@
           <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
             <li><%= link_to t("admin.menu.profile"), { :controller => 'admin/profiles', :action => 'index'}  %></li>
             <li role="presentation" class="divider"></li>
-            <li><%= link_to t("admin.menu.documentation"), "https://github.com/fdv/publify/wiki" %></li>
-            <li><%= link_to t("admin.menu.report_a_bug"), "https://github.com/fdv/publify/issues" %></li>
-            <li><%= link_to t("admin.menu.in_page_plugins"), "https://github.com/fdv/publify/wiki/In-Page-Plugins" %></li>
-            <li><%= link_to t("admin.menu.sidebar_plugins"), "https://github.com/fdv/publify/wiki/Sidebar-plugins" %></li>
-            <li role="presentation" class="divider"></li>
             <li><%= link_to t("admin.menu.logout").html_safe, {:controller => "/accounts", :action=>"logout"} %></li>
           </ul>
         </li>
