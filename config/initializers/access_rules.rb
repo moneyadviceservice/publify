@@ -38,9 +38,9 @@ AccessControl.map require: [ :admin, :publisher, :contributor ]  do |map|
   map.permission "ckeditor/attachment_files"
 
   map.project_module :articles, nil do |project|
-    project.menu    "Articles",       { controller: "admin/content", action: "index" }
-    project.submenu "All Articles",   { controller: "admin/content", action: "index" }
-    project.submenu "New Article",    { controller: "admin/content", action: "new" }
+    project.menu    "Articles",       { controller: "admin/contents", action: "index" }
+    project.submenu "All Articles",   { controller: "admin/contents", action: "index" }
+    project.submenu "New Article",    { controller: "admin/contents", action: "new" }
     project.submenu "Feedback",       { controller: "admin/feedback", action: "index" }
     project.submenu "Article Types",  { controller: "admin/post_types", action: "new" }
     project.submenu "Redirects",      { controller: "admin/redirects", action: "new" }
