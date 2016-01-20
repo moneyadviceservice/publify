@@ -61,14 +61,15 @@ class ArticlesController < ContentController
       @page_title  = @article.title_meta_tag.present? ? @article.title_meta_tag : @article.title
       @description = @article.description_meta_tag
       @keywords    = @article.tags.map { |g| g.name }.join(', ')
+      @feedback    = @article.published_feedback
 
       auto_discovery_feed
       
       respond_to do |format|
         format.html { render "articles/#{@article.post_type}" }
-        format.atom { render_feedback_feed('atom') }
-        format.rss  { render_feedback_feed('rss') }
-        format.xml  { render_feedback_feed('atom') }
+        format.atom { render "feedback_atom_feed", layout: false }
+        format.rss  { render "feedback_rss_feed", layout: false }
+        format.xml  { render "feedback_xml_feed", layout: false }
       end
     else
       render 'errors/404', status: 404
@@ -108,11 +109,6 @@ class ArticlesController < ContentController
     else
       return true
     end
-  end
-
-  def render_feedback_feed format
-    @feedback = @article.published_feedback
-    render "feedback_#{format}_feed", layout: false
   end
 
   def use_custom_header?
