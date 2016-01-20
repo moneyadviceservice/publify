@@ -366,7 +366,7 @@ en:
         publish_on_twitter: "Publish on Twitter"
         twitter_consumer_key: "Twitter consumer key"
         twitter_consumer_secret: "Twitter consumer secret"
-      index:
+      general:
         cancel: "Cancel"
         or: "or"
         update_settings: "Update settings"

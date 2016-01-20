@@ -121,6 +121,12 @@ Rails.application.routes.draw do
 
     # Looks like removal has been omitted from the interface
     resources :users, except: :destroy
+    
+    get '/settings/general', to: 'settings#general', as: :general_settings
+    get '/settings/write', to: 'settings#write', as: :write_settings
+    get '/settings/feedback', to: 'settings#feedback', as: :feedback_settings
+    get '/settings/display', to: 'settings#display', as: :display_settings
+    post '/settings/update', to: 'settings#update', as: :update_settings
 
     resource :profile, only: [:edit, :update]
   end
@@ -133,7 +139,7 @@ Rails.application.routes.draw do
   post '/accounts/recover-password', to: 'accounts#recover_password'
 
   # Admin/XController
-  %w(settings redirects seo post_types).each do |i|
+  %w(redirects seo post_types).each do |i|
     match "/admin/#{i}", to: "admin/#{i}#index", format: false, via: [:get, :post, :put, :delete]
     match "/admin/#{i}(/:action(/:id))", controller: "admin/#{i}", action: nil, id: nil, format: false, via: [:get, :post, :put, :delete]
   end

@@ -5,7 +5,7 @@
 </h2>
 <% end %>
 
-<%= form_tag action: 'update' do %>
+<%= form_tag admin_update_settings_path do %>
 
 <fieldset class='form-horizontal'>
   <legend><%= t(".publish")%></legend>
@@ -62,7 +62,7 @@
   <legend><%= t(".publish_on_twitter")%></legend>
   <%- unless twitter_available?(this_blog, current_user) %>
     <p class='alert alert-warning'>
-      <%= t(".how_to_setup_twitter", twitter_settings_link: link_to(t(".fill_the_twitter_credentials"), controller: 'admin/settings', action: 'write'), twitter_registration_link: link_to(t(".registered_your_application"), "https://dev.twitter.com/apps/new")) %>
+      <%= t(".how_to_setup_twitter", twitter_settings_link: link_to(t(".fill_the_twitter_credentials"), admin_write_settings_path), twitter_registration_link: link_to(t(".registered_your_application"), "https://dev.twitter.com/apps/new")) %>
     </p>
   <%- end %>
   <div class='form-group'>
@@ -79,10 +79,9 @@
   </div>
 </fieldset>
 
-<%= hidden_field_tag 'from', 'write' %>
 <div class='form-group'>
-  <hr>
-  <%= link_to(t(".cancel"), {action: 'index'}) %>
+  <hr />
+  <%= link_to(t(".cancel"), admin_dashboard_path) %>
   <%= t(".or") %>
   <%= submit_tag(t(".update_settings"), class: 'btn btn-success') %>
 </div>
