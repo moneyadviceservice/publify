@@ -4,8 +4,7 @@ class Admin::BaseController < ApplicationController
   layout 'administration'
 
   before_filter :login_required, except: [:login, :signup]
-  before_filter :look_for_needed_db_updates, except: [:login, :signup, :update_database, :migrate]
-  before_filter :check_and_generate_secret_token, except: [:login, :signup, :update_database, :migrate]
+  before_filter :check_and_generate_secret_token, except: [:login, :signup, :migrate]
 
   private
 
@@ -33,13 +32,6 @@ class Admin::BaseController < ApplicationController
       flash[:error] = I18n.t('admin.base.unsuccessfully_saved', element: title)
     end
     redirect_to action: 'index'
-  end
-
-  def look_for_needed_db_updates
-    migrator = Migrator.new
-    if migrator.migrations_pending?
-      redirect_to controller: '/admin/settings', action: 'update_database'
-    end
   end
 
   def check_and_generate_secret_token

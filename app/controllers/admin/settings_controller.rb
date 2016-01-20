@@ -21,24 +21,4 @@ class Admin::SettingsController < Admin::BaseController
     render params[:from]
   end
 
-  def update_database
-    @current_version = migrator.current_schema_version
-    @needed_migrations = migrator.pending_migrations
-  end
-
-  def migrate
-    if request.post?
-      migrator.migrate
-      redirect_to action: 'update_database'
-    end
-  end
-
-  private
-  def load_settings
-    @setting = this_blog
-  end
-
-  def migrator
-    @migrator ||= Migrator.new
-  end
 end
