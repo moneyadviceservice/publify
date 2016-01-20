@@ -75,7 +75,7 @@
             <b class="caret"></b>
           </a>
           <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-            <li><%= link_to t("admin.menu.profile"), { :controller => 'admin/profiles', :action => 'index'}  %></li>
+            <li><%= link_to t("admin.menu.profile"), edit_admin_profile_path %></li>
             <li role="presentation" class="divider"></li>
             <li><%= link_to t("admin.menu.logout").html_safe, {:controller => "/accounts", :action=>"logout"} %></li>
           </ul>

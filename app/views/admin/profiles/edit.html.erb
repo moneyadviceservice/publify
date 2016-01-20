@@ -5,5 +5,5 @@
 </h2>
 <% end %>
 
-<%= form_tag({action: 'index', id: @user.id}, {enctype: "multipart/form-data"}) %>
+<%= form_tag(admin_profile_path, method: :put, multipart: true) %>
 <%= render partial: "admin/users/form" %>

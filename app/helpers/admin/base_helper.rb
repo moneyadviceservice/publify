@@ -9,7 +9,7 @@ module Admin::BaseHelper
     links = []
     links << link_to(t('.write_a_post'), new_admin_content_path) if current_user.can_access_to_articles?
     links << link_to(t('.write_a_page'), controller: 'pages', action: 'new') if current_user.can_access_to_pages?
-    links << link_to(t('.update_your_profile_or_change_your_password'), controller: 'profiles', action: 'index')
+    links << link_to(t('.update_your_profile_or_change_your_password'), edit_admin_profile_path)
     links.join(', ')
   end
 
