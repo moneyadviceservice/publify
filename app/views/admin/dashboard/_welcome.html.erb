@@ -11,7 +11,7 @@
         <p><%= link_to(t(".articles_count", count: @statposts), admin_contents_path) %></p>
         <p><%= link_to(t(".your_articles_count", count: @statuserposts), admin_contents_path(search: { user_id: current_user.id })) %></p>
         <p><%= link_to(t(".drafts_count", count: @statsdrafts), admin_contents_path(search: { state: :drafts })) %></p>
-        <p><%= link_to(t(".pages_count", count: @statspages), controller: 'admin/pages') %></p>
+        <p><%= link_to(t(".pages_count", count: @statspages), admin_pages_path) %></p>
         <p><%= link_to(t(".notes_count", count: @statuses), controller: 'admin/notes') %></p>
       <% end %>
     </div>
