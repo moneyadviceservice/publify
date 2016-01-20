@@ -477,11 +477,17 @@ en:
         save: "Save"
         or: "or"
     resources:
-      upload:
+      create:
         success: "File uploaded"
         warning: "No file selected"
+      remove:
+        destroy_confirmation: "Destroy confirmation"
+        are_you_sure: "Are you sure you want to delete this Item"
+        action_or_other: "%{first_action} or %{second_action}"
+        cancel: "Cancel"
+        delete: "Delete"
       destroy:
-        notice: "File has been deleted"
+        successfully_deleted: "The item was deleted successfully"
       index:
         no_resources: "There are no resources yet. Why don't you start and create one?"
         media_library: "Media Library"
@@ -491,6 +497,7 @@ en:
         right_click_for_link: "right-click for link"
         content_type: "Content Type"
         file_size: "File Size"
+        delete: "Delete"
         date: "Date"
         are_you_sure: "Are you sure?"
         thumbnail: "Thumbnail"

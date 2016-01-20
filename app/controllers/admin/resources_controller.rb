@@ -3,7 +3,12 @@ require 'fog'
 class Admin::ResourcesController < Admin::BaseController
   cache_sweeper :blog_sweeper
 
-  def upload
+  def index
+    @r = Resource.new
+    @resources = Resource.order('created_at DESC').page(params[:page]).per(this_blog.admin_display_elements)
+  end
+
+  def create
     if !params[:upload].blank?
       file = params[:upload][:filename]
 
@@ -13,35 +18,24 @@ class Admin::ResourcesController < Admin::BaseController
         mime = file.content_type.chomp
       end
       @up = Resource.create(upload: file, mime: mime, created_at: Time.now)
-      flash[:success] = I18n.t('admin.resources.upload.success')
+      flash[:success] = I18n.t('admin.resources.create.success')
     else
-      flash[:warning] = I18n.t('admin.resources.upload.warning')
+      flash[:warning] = I18n.t('admin.resources.create.warning')
     end
 
-    redirect_to action: 'index'
+    redirect_to admin_resources_path
   end
 
-  def index
-    @r = Resource.new
-    @resources = Resource.order('created_at DESC').page(params[:page]).per(this_blog.admin_display_elements)
-  end
-
-  def get_thumbnails
-    position = params[:position].to_i
-    @resources = Resource.without_images.by_created_at.limit(10).offset(position)
-
-    render 'get_thumbnails', layout: false
+  def remove
+    @resource = Resource.find(params[:id])
   end
 
   def destroy
-    @record = Resource.find(params[:id])
-    mime = @record.mime
-    return(render 'admin/shared/destroy') unless request.post?
+    @resource = Resource.find(params[:id])
+    @resource.destroy
 
-    @record.destroy
     flash[:notice] = I18n.t('admin.resources.destroy.notice')
-    redirect_to action: 'index'
-  rescue
-    raise
+    redirect_to admin_resources_path
   end
+
 end
