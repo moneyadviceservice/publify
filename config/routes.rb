@@ -135,12 +135,6 @@ Rails.application.routes.draw do
   get '/accounts/recover-password', to: 'accounts#recover_password', as: :recover_password
   post '/accounts/recover-password', to: 'accounts#recover_password'
 
-  # Admin/XController
-  %w(post_types).each do |i|
-    match "/admin/#{i}", to: "admin/#{i}#index", format: false, via: [:get, :post, :put, :delete]
-    match "/admin/#{i}(/:action(/:id))", controller: "admin/#{i}", action: nil, id: nil, format: false, via: [:get, :post, :put, :delete]
-  end
-
   root to: 'articles#index', format: false
 
   get '*from', to: 'articles#show', as: :article, format: false
