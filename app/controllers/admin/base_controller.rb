@@ -25,15 +25,6 @@ class Admin::BaseController < ApplicationController
     end
   end
 
-  def save_a(object, title)
-    if object.save
-      flash[:notice] = I18n.t('admin.base.successfully_saved', element: title)
-    else
-      flash[:error] = I18n.t('admin.base.unsuccessfully_saved', element: title)
-    end
-    redirect_to action: 'index'
-  end
-
   def check_and_generate_secret_token
     return if defined? $TESTING
 

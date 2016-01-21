@@ -1,0 +1,25 @@
+<table class="table table-hover">
+  <thead>
+    <tr class='noborder'>
+      <th><%= t(".from") %></th>
+      <th><%= t(".to") %></th>
+    </tr>
+  </thead>
+  <%- if redirects.empty? %>
+  <tr>
+    <td colspan="2">
+      <%= t(".no_redirects") %>
+    </td>
+  </tr>
+  <%- end %>
+  <% redirects.each do |redirect| %>
+  <tr>
+    <td>
+      <%= link_to("#{redirect.to_url}", "#{redirect.to_url}") %>
+      <%= show_redirect_actions redirect %>
+    </td>
+    <td><%= link_to(redirect.to_path, redirect.to_path) %></td>
+  </tr>
+  <% end %>
+  <%= display_pagination(redirects, 2)%>
+</table>

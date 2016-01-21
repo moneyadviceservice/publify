@@ -250,17 +250,36 @@ en:
       destroy:
         successfully_deleted: "The note was deleted successfully"
     redirects:
-      destroy:
-        success: 'Redirection was successfully deleted.'
       new:
         no_redirects: "There are no redirects yet. Why don't you start and create one?"
+        redirects: "Redirects"
+      create:
+        successfully_saved: "Redirect was successfully saved."
+        unsuccessfully_saved: "Redirect could not be saved."
+      edit:
+        no_redirects: "There are no redirects yet. Why don't you start and create one?"
+        redirects: "Redirects"
+      update:
+        successfully_saved: "Redirect was successfully saved."
+        unsuccessfully_saved: "Redirect could not be saved."
+      form:
+        leave_empty_to_shorten_a_link: "Leave empty to shorten a link"
         cancel: "Cancel"
         save: "Save"
         or: "or"
-        redirects: "Redirects"
         from: "From"
         to: "To"
-        leave_empty_to_shorten_a_link: "Leave empty to shorten a link"
+      redirects:
+        from: "From"
+        to: "To"
+      remove:
+        destroy_confirmation: "Destroy confirmation"
+        are_you_sure: "Are you sure you want to delete this redirect"
+        action_or_other: "%{first_action} or %{second_action}"
+        cancel: "Cancel"
+        delete: "Delete"
+      destroy:
+        successfully_deleted: "The note was deleted successfully"
     themes:
       siwtchto:
         success: "Theme selection updated"
