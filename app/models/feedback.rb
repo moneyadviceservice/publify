@@ -59,10 +59,6 @@ class Feedback < ActiveRecord::Base
     article
   end
 
-  def permalink_url(_anchor = :ignored, only_path = false)
-    article.permalink_url("#{self.class.to_s.downcase}-#{id}", only_path)
-  end
-
   def html_postprocess(_field, html)
     helper = ContentTextHelpers.new
     helper.sanitize(helper.auto_link(html)).nofollowify

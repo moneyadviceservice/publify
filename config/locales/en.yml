@@ -68,8 +68,6 @@ en:
   helper:
     at: "at"
   articles:
-    password_form:
-      submit: "Submit"
     index:
       next_page: "Next page"
       previous_page: "Previous page"
@@ -142,7 +140,6 @@ en:
       your_blog: "your blog"
       your_email: "Your email"
       your_message: "Your message"
-      comment_markup_help: "Comment Markup Help"
       preview_comment: "Preview comment"
       by_clicking_on: "By clicking on 'Post Comment', you're agreeing to our "
       commenting_policy: "Commenting Policy"
@@ -244,12 +241,14 @@ en:
         cancel: "Cancel"
         or: "or"
         publish: "Publish"
-      show:
+      remove:
         destroy_confirmation: "Destroy confirmation"
         are_you_sure: "Are you sure you want to delete this note"
         action_or_other: "%{first_action} or %{second_action}"
         cancel: "Cancel"
         delete: "Delete"
+      destroy:
+        successfully_deleted: "The note was deleted successfully"
     redirects:
       destroy:
         success: 'Redirection was successfully deleted.'
@@ -306,8 +305,6 @@ en:
         feed_articles: "Article excerpts"
         feed_settings: "RSS Feed Settings"
         feed_excerpts_only: "Show only article excerpts in feed"
-        feedburner_help: "Enter your FeedBurner ID if you wish to use your Google FeedBurner account instead of using the Publify feed URL."
-        feedburner_id: "FeedBurner ID"
         publishing_options: "Publishing Options"
         status_main_feed: "Display statuses in the main feed"
         statuses: "Statuses"
@@ -318,7 +315,7 @@ en:
         or: "or"
         update_settings: "Update settings"
         feedback_settings: "Feedback settings"
-        feedback: "Feedback"
+        feedbacks: "Feedback"
         comments: "Comments"
         enable_comments_by_default: "Enable comments by default"
         enable_feedback_moderation: "Enable feedback moderation"
@@ -369,19 +366,7 @@ en:
         publish_on_twitter: "Publish on Twitter"
         twitter_consumer_key: "Twitter consumer key"
         twitter_consumer_secret: "Twitter consumer secret"
-      update_database:
-        database_migration: "Database migration"
-        information: "Information"
-        current_database_version: "Current database version"
-        you_are_up_to_date: "You are up to date!"
-        migrations: "Migrations"
-        migration_pending:
-          one: "There is one migration pending."
-          other: "There are %{count} migrations pending."
-        needed_migrations: "Needed migrations"
-        update_database_now: "Update database now"
-        may_take_a_moment: "may take a moment"
-      index:
+      general:
         cancel: "Cancel"
         or: "or"
         update_settings: "Update settings"
@@ -434,24 +419,6 @@ en:
         replaced_with_the_current_page_number: "Replaced with the current page number"
         replaced_by_the_archive_date: "Replaced by the archive date"
         replaced_by_the_content_body: "Replaced by the content body"
-      permalinks:
-        cancel: "Cancel"
-        or: "or"
-        update_settings: "Update settings"
-        explain: "Publify offers you the ability to create a custom URL structure for your permalinks and archives. This can improve the aesthetics, usability, and forward-compatibility of your links."
-        permalinks: "Permalinks"
-        permalink_format: "Permalink format"
-        date_and_title: "Date and title"
-        month_and_title: "Month and title"
-        title_only: "Title only"
-        custom: "Custom"
-        sample: "Here are some examples to get you started."
-        you_can_custom_your_url_structure: "You can customize your URL structure using the following tags:"
-        your_article_slug: "your article slug. <strong>Using this slug is mandatory</strong>."
-        your_article_year: "your article year of publication."
-        your_article_month: "your article month of publication."
-        your_article_day: "your article day of publication."
-        help_on_permalink_settings: "Help on permalink settings"
       index:
         human: "Human"
         humans_txt: "Human"
@@ -485,13 +452,6 @@ en:
         explain_tag_index: "Checking this box will add <code>noindex, follow</code> meta tags in every tags page, removing them from search engines and preventing duplicate content issues"
         explain_moderate_feedback: "You may want to moderate feedback when turning this on"
         explain_rss_description: "You can use the following tags: %author% (author name), %blog_url% (this blog URL), %blog_name% (this blog title) and %permalink_url% (a link to the article you want to protect)"
-    shared:
-      destroy:
-        destroy_confirmation: "Destroy confirmation"
-        are_you_sure: "Are you sure you want to delete this %{element}"
-        action_or_other: "%{first_action} or %{second_action}"
-        cancel: "Cancel"
-        delete: "Delete"
     tags:
       edit:
         success: "Tag was successfully updated"
@@ -505,11 +465,17 @@ en:
         save: "Save"
         or: "or"
     resources:
-      upload:
+      create:
         success: "File uploaded"
         warning: "No file selected"
+      remove:
+        destroy_confirmation: "Destroy confirmation"
+        are_you_sure: "Are you sure you want to delete this Item"
+        action_or_other: "%{first_action} or %{second_action}"
+        cancel: "Cancel"
+        delete: "Delete"
       destroy:
-        notice: "File has been deleted"
+        successfully_deleted: "The item was deleted successfully"
       index:
         no_resources: "There are no resources yet. Why don't you start and create one?"
         media_library: "Media Library"
@@ -519,6 +485,7 @@ en:
         right_click_for_link: "right-click for link"
         content_type: "Content Type"
         file_size: "File Size"
+        delete: "Delete"
         date: "Date"
         are_you_sure: "Are you sure?"
         thumbnail: "Thumbnail"
@@ -537,9 +504,9 @@ en:
         publify_default_post_type: "Publify default post type"
         explain: "The template name is the filename Publify will look for when calling an article of that type. It should be in your theme under views/articles/template name.html.erb"
     pages:
-      new:
+      create:
         success: "New page created"
-      edit:
+      update:
         success: "Page has been updated"
       index:
         manage_pages: "Manage pages"
@@ -565,6 +532,14 @@ en:
         offline: "offline"
       pages:
         no_pages: "There are no pages yet. Why don't you start and create one?"
+      remove:
+        destroy_confirmation: "Destroy confirmation"
+        are_you_sure: "Are you sure you want to delete this page"
+        action_or_other: "%{first_action} or %{second_action}"
+        cancel: "Cancel"
+        delete: "Delete"
+      destroy:
+        successfully_deleted: "The page was deleted successfully"
     campaigns:
       index:
         new_campaign: "New Campaign"
@@ -575,7 +550,7 @@ en:
         created_on: "Created On"
       campaigns:
         no_campaigns: "There are no campaigns yet. Why don't you start and create one?"
-    feedback:
+    feedbacks:
       state:
         unclassified: "Unclassified"
         ham: "Ham"
@@ -587,11 +562,14 @@ en:
         spam: "Spam"
       update:
         success: "Comment was successfully updated."
-      create:
-        success: "Comment was successfully created."
+      remove:
+        destroy_confirmation: "Destroy confirmation"
+        are_you_sure: "Are you sure you want to delete this comment"
+        action_or_other: "%{first_action} or %{second_action}"
+        cancel: "Cancel"
+        delete: "Delete"
       destroy:
-        success: "Deleted"
-        error: "Not found"
+        successfully_deleted: "The comment was deleted successfully"
       bulkops:
         error: "Not implemented"
         success_deleted_spam: "All spam have been deleted"
@@ -603,7 +581,6 @@ en:
           zero: "No item selected to mark as Spam"
           one: "Marked 1 item as Spam"
           other: "Marked %{count} items as Spam"
-        success_classification: "Confirmed classification of %{count} item(s)"
         success_deleted: "Deleted %{count} item(s)"
       index:
         no_feedback: "There are no feedback yet. Why don't you start and create one?"
@@ -709,7 +686,7 @@ en:
         by: "By"
       comments:
         latest_comments: "Latest Comments"
-    content:
+    contents:
       create:
         success:
           draft: "Draft article successfully created"
@@ -785,6 +762,14 @@ en:
         close_modal: "Close"
       categories:
         new_category: "New Category"
+      remove:
+        destroy_confirmation: "Destroy confirmation"
+        are_you_sure: "Are you sure you want to delete this article"
+        action_or_other: "%{first_action} or %{second_action}"
+        cancel: "Cancel"
+        delete: "Delete"
+      destroy:
+        successfully_deleted: "The article was deleted successfully"
     categories:
       new:
         cancel: "Cancel"
@@ -828,9 +813,11 @@ en:
     users:
       edit:
         edit_user: "Edit User"
+      update:
         success: "User was successfully updated"
       new:
         add_user: "Add User"
+      create:
         success: "User was successfully created"
       index:
         login: "login"
@@ -887,6 +874,14 @@ en:
         jabber: "Jabber ID"
         aim: "AIM screen name"
         twitter: "Twitter username"
+      remove:
+        destroy_confirmation: "Destroy confirmation"
+        are_you_sure: "Are you sure you want to delete this user"
+        action_or_other: "%{first_action} or %{second_action}"
+        cancel: "Cancel"
+        delete: "Delete"
+      destroy:
+        successfully_deleted: "The user was deleted successfully"
   accounts:
     back_to: "&larr; Back to %{place}"
     back_to_login: "Back to login"

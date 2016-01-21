@@ -41,11 +41,6 @@ describe Tag, type: :model do
     expect(tags.last.article_counter).to eq(2)
   end
 
-  describe 'permalink_url' do
-    let(:tag) { create(:tag, name: 'foo', display_name: 'foo') }
-    it { expect(tag.permalink_url).to eq('http://myblog.net/tag/foo') }
-  end
-
   describe '#published_articles' do
     it 'should return only published articles' do
       published_art = FactoryGirl.create(:article)

@@ -12,7 +12,7 @@ xm.item do
   xm.author "blog@moneyadviceservice.org.uk (#{item.user.name})"
 
   if item.is_a?(Article)
-    xm.comments(item.permalink_url("comments"))
+    xm.comments(item_url(item, anchor: :comments))
 
     for tag in item.tags
       xm.category tag.display_name
@@ -30,8 +30,8 @@ xm.item do
   end
 
   if item.allow_pings?
-    xm.trackback :ping, item.trackback_url
+    xm.trackback :ping, trackbacks_path(article_id: item)
   end
 
-  xm.link item.permalink_url
+  xm.link article_url(item.permalink)
 end

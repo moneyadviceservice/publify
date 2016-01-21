@@ -1,5 +1,4 @@
 class CommentsController < FeedbackController
-  before_filter :get_article, only: [:create, :preview]
 
   layout 'default.html.erb'
 
@@ -19,7 +18,7 @@ class CommentsController < FeedbackController
     session[:email] = @comment.email if @comment.email.present?
 
     if recaptcha_ok_for?(@comment)  && @comment.save
-      redirect_to @article.permalink_url + "#comment-#{@comment.id}"
+      redirect_to article_path(@article.permalink, anchor: "comment-#{@comment.id}")
     else
       @page_title = @article.title_meta_tag.present? ? @article.title_meta_tag : @article.title
       @description = @article.description_meta_tag
@@ -28,27 +27,6 @@ class CommentsController < FeedbackController
       render "articles/#{@article.post_type}"
     end
 
-  end
-
-  def preview
-    if !session
-      session session: new
-    end
-
-    comment_params = params[:comment]
-    if (params_comment[:body].blank? rescue true)
-      render nothing: true
-      return
-    end
-
-    set_headers
-    @comment = Comment.new(params_comment)
-
-    unless @article.comments_closed?
-      render 'articles/comment_preview', locals: { comment: @comment }
-    else
-      render text: 'Comment are closed'
-    end
   end
 
   protected
@@ -65,7 +43,7 @@ class CommentsController < FeedbackController
       user: @current_user,
       user_agent: request.env['HTTP_USER_AGENT'],
       referrer: request.env['HTTP_REFERER'],
-      permalink: @article.permalink_url }.stringify_keys
+      permalink: article_url(@article.permalink) }.stringify_keys
   end
 
   def set_headers

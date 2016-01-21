@@ -75,12 +75,7 @@
             <b class="caret"></b>
           </a>
           <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-            <li><%= link_to t("admin.menu.profile"), { :controller => 'admin/profiles', :action => 'index'}  %></li>
-            <li role="presentation" class="divider"></li>
-            <li><%= link_to t("admin.menu.documentation"), "https://github.com/fdv/publify/wiki" %></li>
-            <li><%= link_to t("admin.menu.report_a_bug"), "https://github.com/fdv/publify/issues" %></li>
-            <li><%= link_to t("admin.menu.in_page_plugins"), "https://github.com/fdv/publify/wiki/In-Page-Plugins" %></li>
-            <li><%= link_to t("admin.menu.sidebar_plugins"), "https://github.com/fdv/publify/wiki/Sidebar-plugins" %></li>
+            <li><%= link_to t("admin.menu.profile"), edit_admin_profile_path %></li>
             <li role="presentation" class="divider"></li>
             <li><%= link_to t("admin.menu.logout").html_safe, {:controller => "/accounts", :action=>"logout"} %></li>
           </ul>
@@ -94,19 +89,11 @@
             </a>
           <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
             <li><%= link_to(t("admin.menu.new_campaign"), {controller: 'admin/campaigns', action: 'new'}) %></li>
-            <li><%= link_to(t("admin.menu.new_article"), {controller: 'content', action: 'new'}) %></li>
+            <li><%= link_to(t("admin.menu.new_article"), new_admin_content_path) %></li>
             <li><%= link_to(t("admin.menu.new_page"), {controller: 'pages', actions: 'new'}) %></li>
             <li><%= link_to(t("admin.menu.new_media"), {controller: 'resources', action: 'index'}) %></li>
             <li><%= link_to(t("admin.menu.new_note"), {controller: 'notes'}) %></li>
           </ul>
-        </li>
-      </ul>
-      <ul class='nav navbar-nav pull-right'>
-        <li class='dropdown'>
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-              <%= t(".footer_management") %>
-              <b class="caret"></b>
-            </a>
         </li>
       </ul>
     </div>

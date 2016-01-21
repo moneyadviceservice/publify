@@ -1,0 +1,70 @@
+<%- content_for :page_heading do %>
+<h2>
+  <i class="glyphicon glyphicon-large glyphicon-comment"></i>
+  <% if @article %>
+      <%= t(".comments_for", title: @article.title) %>
+  <% else %>
+    <%= t(".feedback") %>
+  <% end %>
+</h2>
+<% end %>
+
+<%= form_tag(admin_feedbacks_path, method: :get, class: 'form-inline') do %>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <div class='pull-right'>
+        <div class='form-group'>
+          <%= select_tag('sort_by', options_for_select([['Sort by comment time', 'commented_at'], ['Sort by commenter name', 'commenter']], sort_by), {:class => 'form-control'}) %>
+        </div>
+        <div class='form-group'>
+          <%= select_tag('sort_order', options_for_select([['Ascending', 'asc'], ['Descending', 'desc']], sort_order), {:class => 'form-control'}) %>
+        </div>
+        <div class='form-group'>
+          <%= select_tag('only', options_for_select([['Presumed Ham', 'presumed_ham'], ['Ham', 'ham'], ['Presumed Spam', 'presumed_spam'], ['Spam', 'spam']], params[:only]), {prompt: 'All', :class => 'form-control'}) %>
+        </div>
+        <div class='form-group'>
+          <%= submit_tag('Update', {:class => 'btn btn-success'}) %>
+        </div>
+      </div>
+      <br style='clear: both'>
+    </div>
+  </div>
+<% end %>
+
+<%= form_tag({:action => 'bulkops'}, {class: 'form-inline'}) do %>
+
+  <%= hidden_field_tag "page", params[:page]%>
+
+  <table class='table hover feedback-list'>
+    <thead>
+      <tr class="check-all">
+        <th>
+          <input type="checkbox" name="checkall" id="checkall" onclick="check_all(this);">
+        </th>
+        <th class="label-column" colspan="3">
+          <label for="checkall"><%= t(".select_all") %></label>
+        </th>
+        <th class="help-column">
+          <a data-toggle='modal' data-target='#about-spam-filtering'>Presumed ham / spam?</a>
+        </th>
+      </tr>
+    </thead>
+    <%- if @feedback.empty? %>
+      <tr>
+        <td colspan="5">
+          <%= t(".no_feedback") %>
+        </td>
+      </tr>
+    <%- end %>
+    <% @feedback.each do |comment| %>
+      <%= render 'feedback', {:comment => comment} %>
+    <% end %>
+  </table>
+
+  <%= render 'button', { position: 'bottom' } %>
+
+  <%= display_pagination(@feedback, this_blog.admin_display_elements) %>
+
+<% end %>
+
+<%= render 'help' %>

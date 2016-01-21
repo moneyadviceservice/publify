@@ -16,8 +16,8 @@ else
         rackspace_region:   :lon
       }
 
-      config.fog_directory = ENV['FOG_DIRECTORY']
-      config.asset_host = ENV['RACKSPACE_CDN_HOST']
+      config.fog_directory = ENV['BLOG_FOG_DIRECTORY']
+      config.asset_host = ENV['BLOG_RACKSPACE_CDN_HOST']
     else
       config.storage = :file
       config.permissions = 0666

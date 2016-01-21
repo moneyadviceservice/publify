@@ -26,11 +26,6 @@ describe Admin::SettingsController, type: :controller do
     it { expect(response).to render_template('feedback') }
   end
 
-  describe 'update database action' do
-    before(:each) { get :update_database }
-    it { expect(response).to render_template('update_database') }
-  end
-
   describe 'update action' do
     def good_update(options = {})
       post :update, { 'from' => 'seo',
