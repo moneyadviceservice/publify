@@ -17,6 +17,14 @@ class Admin::SettingsController < Admin::BaseController
     @setting = this_blog
   end
 
+  def seo
+    @setting = this_blog
+  end
+
+  def titles
+    @setting = this_blog
+  end
+
   def update
     update_settings_with!(params[:setting])
     redirect_to :back

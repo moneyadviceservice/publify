@@ -59,6 +59,8 @@ AccessControl.map require: [ :admin, :publisher, :contributor ]  do |map|
   map.project_module :settings, nil do |project|
     project.menu    "Settings",         { controller: "admin/settings",    action: "general" }
     project.submenu "General settings", { controller: "admin/settings",    action: "general" }
+    project.submenu "SEO settings",     { controller: "admin/settings",    action: "seo" }    
+    project.submenu "Titles",           { controller: "admin/settings",    action: "titles" }
     project.submenu "Write",            { controller: "admin/settings",    action: "write" }
     project.submenu "Display",          { controller: "admin/settings",    action: "display" }
     project.submenu "Feedback",         { controller: "admin/settings",    action: "feedback" }
@@ -68,11 +70,5 @@ AccessControl.map require: [ :admin, :publisher, :contributor ]  do |map|
 
   map.project_module :notes, nil do |project|
     project.menu "Notes", { controller: "admin/notes", action: "index" }
-  end
-
-  map.project_module :seo, nil do |project|
-    project.menu    "SEO",  { controller: "admin/seo", action: "index" }
-    project.submenu "Global SEO settings",  { controller: "admin/seo", action: "index" }    
-    project.submenu "Titles",               { controller: "admin/seo", action: "titles" }
   end
 end

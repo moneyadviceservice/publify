@@ -121,6 +121,8 @@ Rails.application.routes.draw do
     get '/settings/write', to: 'settings#write', as: :write_settings
     get '/settings/feedback', to: 'settings#feedback', as: :feedback_settings
     get '/settings/display', to: 'settings#display', as: :display_settings
+    get '/settings/seo', to: 'settings#seo', as: :seo_settings
+    get '/settings/titles', to: 'settings#titles', as: :title_settings
     post '/settings/update', to: 'settings#update', as: :update_settings
 
     resource :profile, only: [:edit, :update]
@@ -134,7 +136,7 @@ Rails.application.routes.draw do
   post '/accounts/recover-password', to: 'accounts#recover_password'
 
   # Admin/XController
-  %w(seo post_types).each do |i|
+  %w(post_types).each do |i|
     match "/admin/#{i}", to: "admin/#{i}#index", format: false, via: [:get, :post, :put, :delete]
     match "/admin/#{i}(/:action(/:id))", controller: "admin/#{i}", action: nil, id: nil, format: false, via: [:get, :post, :put, :delete]
   end

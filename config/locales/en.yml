@@ -401,7 +401,6 @@ en:
         source_email: "Source Email"
         email_address_used_to_notify: "Email address used by Publify to send notifications"
         items_to_display_in_admin_lists: "Items to display in admin lists"
-    seo:
       titles:
         cancel: "Cancel"
         or: "or"
@@ -438,7 +437,7 @@ en:
         replaced_with_the_current_page_number: "Replaced with the current page number"
         replaced_by_the_archive_date: "Replaced by the archive date"
         replaced_by_the_content_body: "Replaced by the content body"
-      index:
+      seo:
         human: "Human"
         humans_txt: "Human"
         explain_humans_txt: "It's an initiative for knowing the people behind a website. It's a TXT file that contains information about the different people who have contributed to building the website. http://humanstxt.org/"

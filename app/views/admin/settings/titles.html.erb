@@ -5,8 +5,7 @@
 
 <%= error_messages_for 'blog' %>
 
-<%= form_tag :action => 'update' do %>
-
+<%= form_tag admin_update_settings_path do %>
   <fieldset class='form-horizontal'>
     <legend><%= t(".articles") %></legend>
     <div class='col-sm-12'>
@@ -211,13 +210,10 @@
   </table>
   
   <div class='form-group'>
-  <div class='form-group'>
-    <hr>
-    <%= link_to(t(".cancel"), {action: 'index'}) %>
+    <hr />
+    <%= link_to(t(".cancel"), admin_dashboard_path) %>
     <%= t(".or") %>
     <%= submit_tag(t(".update_settings"), class: 'btn btn-success') %>
   </div>
-  </div>
-  <%= hidden_field_tag 'from', 'titles' %>
 <% end %>
 
