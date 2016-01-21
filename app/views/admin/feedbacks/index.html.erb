@@ -31,7 +31,7 @@
   </div>
 <% end %>
 
-<%= form_tag({:action => 'bulkops'}, {class: 'form-inline'}) do %>
+<%= form_tag(bulkops_admin_feedbacks_path, class: 'form-inline') do %>
 
   <%= hidden_field_tag "page", params[:page]%>
 

@@ -14,7 +14,7 @@ class Admin::RedirectsController < Admin::BaseController
     
     if @redirect.save
       flash[:notice] = I18n.t('admin.redirects.create.successfully_saved')
-      redirect_to action: 'index'
+      redirect_to admin_redirects_path
     else
       @redirects = find_redirects
       flash.now[:error] = I18n.t('admin.redirects.create.unsuccessfully_saved')

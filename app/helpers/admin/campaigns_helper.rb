@@ -1,6 +1,6 @@
 module Admin::CampaignsHelper
   def button_to_edit_campaign(item)
-    link_to(content_tag(:span, '', class: 'glyphicon glyphicon-pencil'), { controller: 'admin/campaigns', action: 'edit', id: item.id }, class: 'btn btn-primary btn-xs btn-action')
+    link_to(content_tag(:span, '', class: 'glyphicon glyphicon-pencil'), edit_admin_campaign_path(item), class: 'btn btn-primary btn-xs btn-action')
   end
 
   def button_to_delete_campaign(item)

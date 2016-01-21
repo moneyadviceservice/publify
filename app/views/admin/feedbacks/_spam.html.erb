@@ -13,7 +13,7 @@
   </p>
   <p>
     <small>
-      <%= t(".this_comment_by_was_flagged_as_spam", author: comment.author, cancel_link: link_to(t('.cancel'), { action: 'change_state', id: comment.id, context: :listing }, remote: true)) %>
+      <%= t(".this_comment_by_was_flagged_as_spam", author: comment.author, cancel_link: link_to(t('.cancel'), change_state_admin_feedback_path(comment, context: :listing), remote: true)) %>
     </small>
   </p>
 </td>

@@ -18,7 +18,7 @@ class XmlController < ApplicationController
     # TODO: Move redirects into config/routes.rb, if possible
     case params[:type]
     when 'feed'
-      redirect_to controller: 'articles', action: 'index', format: @format, status: :moved_permanently
+      redirect_to admin_articles_path(format: @format), status: :moved_permanently
     when 'comments'
       redirect_to comments_url(format: @format), status: :moved_permanently
     when 'article'

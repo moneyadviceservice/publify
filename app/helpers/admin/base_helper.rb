@@ -8,7 +8,7 @@ module Admin::BaseHelper
   def dashboard_action_links
     links = []
     links << link_to(t('.write_a_post'), new_admin_content_path) if current_user.can_access_to_articles?
-    links << link_to(t('.write_a_page'), controller: 'pages', action: 'new') if current_user.can_access_to_pages?
+    links << link_to(t('.write_a_page'), new_admin_page_path) if current_user.can_access_to_pages?
     links << link_to(t('.update_your_profile_or_change_your_password'), edit_admin_profile_path)
     links.join(', ')
   end
@@ -114,8 +114,6 @@ module Admin::BaseHelper
       edit_admin_user_path(item)
     when Redirect
       edit_admin_redirect_path(item)
-    else
-      url_for(action: :edit, id: item)
     end
     link_to(content_tag(:span, '', class: 'glyphicon glyphicon-pencil'), url, class: 'btn btn-primary btn-xs btn-action')
   end
@@ -130,8 +128,6 @@ module Admin::BaseHelper
       remove_admin_user_path(item)
     when Redirect
       remove_admin_redirect_path(item)
-    else
-      url_for(action: :destroy, id: item)
     end
     link_to(content_tag(:span, '', class: 'glyphicon glyphicon-trash'), url, class: 'btn btn-danger btn-xs btn-action')
   end
