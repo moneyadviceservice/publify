@@ -91,7 +91,7 @@ module Admin::BaseHelper
   def display_pagination(collection, cols, _first = '', _last = '')
     return if collection.count == 0
     content_tag(:tr) do
-      content_tag(:td, paginate(collection), class: 'paginate', colspan: cols)
+      content_tag(:td, paginate(collection, views_prefix: 'admin'), class: 'paginate', colspan: cols)
     end
   end
 

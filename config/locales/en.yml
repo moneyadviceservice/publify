@@ -169,6 +169,13 @@ en:
       previous: "Previous"
       next: "Next"
       last: "Last"
+    admin:
+      pagination:
+        first: "&laquo; First"
+        last: "Last &raquo;"
+        previous: "&lsaquo; Prev"
+        next: "Next &rsaquo;"
+        truncate: "&hellip;"
   layouts:
     default:
       html:
