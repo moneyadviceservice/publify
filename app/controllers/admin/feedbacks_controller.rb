@@ -107,9 +107,9 @@ class Admin::FeedbacksController < Admin::BaseController
     end
 
     if params[:article_id]
-      redirect_to action: 'article', id: params[:article_id], confirmed: params[:confirmed], published: params[:published]
+      redirect_to admin_feedbacks_path(article_id: params[:article_id], confirmed: params[:confirmed], published: params[:published])
     else
-      redirect_to admin_feedbacks_path, page: params[:page], search: params[:search], confirmed: params[:confirmed], published: params[:published]
+      redirect_to admin_feedbacks_path(page: params[:page], search: params[:search], confirmed: params[:confirmed], published: params[:published])
     end
   end
 

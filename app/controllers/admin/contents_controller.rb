@@ -53,7 +53,7 @@ class Admin::ContentsController < Admin::BaseController
       else
         flash[:success] = I18n.t('admin.contents.create.success.published')
       end
-      redirect_to action: 'edit', id: @article
+      redirect_to edit_admin_content_path(@article)
     else
       @article.keywords = Tag.collection_to_string @article.tags
       load_resources
@@ -114,7 +114,7 @@ class Admin::ContentsController < Admin::BaseController
           flash[:success] = I18n.t('admin.contents.update.success.published_updated')
         end
       end
-      redirect_to action: 'edit', id: @article
+      redirect_to edit_admin_content_path(@article)
     else
       @article.keywords = Tag.collection_to_string @article.tags
       load_resources
@@ -126,7 +126,7 @@ class Admin::ContentsController < Admin::BaseController
     return unless access_granted?(params[:id])
     Article.find(params[:id]).destroy
     flash[:notice] = I18n.t('admin.contents.destroy.successfully_deleted')
-    redirect_to action: 'index'
+    redirect_to admin_contents_path
   end
 
   def remove
@@ -152,7 +152,7 @@ class Admin::ContentsController < Admin::BaseController
       return true
     else
       flash[:error] = I18n.t('admin.content.access_granted.error')
-      redirect_to action: 'index'
+      redirect_to admin_contents_path
       return false
     end
   end

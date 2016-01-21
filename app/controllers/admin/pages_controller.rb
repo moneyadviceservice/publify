@@ -29,7 +29,7 @@ class Admin::PagesController < Admin::BaseController
 
     if @page.save
       flash[:success] = I18n.t('admin.pages.create.success')
-      redirect_to action: 'index'
+      redirect_to admin_pages_path
     else
       render action: :new
     end

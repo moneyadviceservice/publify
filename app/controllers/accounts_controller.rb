@@ -34,7 +34,7 @@ class AccountsController < ApplicationController
       @user.generate_password!
       @user.save
       flash[:notice] = t('accounts.recover_password.notice')
-      redirect_to action: 'login'
+      redirect_to login_path
     else
       flash[:error] = t('accounts.recover_password.error')
     end
@@ -47,7 +47,7 @@ class AccountsController < ApplicationController
     session[:user_id] = nil
     cookies.delete :auth_token
     cookies.delete :publify_user_profile
-    redirect_to action: 'login'
+    redirect_to login_path
   end
 
   private
@@ -59,7 +59,7 @@ class AccountsController < ApplicationController
   end
 
   def redirect_back_or_default
-    redirect_to(session[:return_to] || { controller: 'admin/dashboard', action: 'index' })
+    redirect_to(session[:return_to] || admin_dashboard_path)
     session[:return_to] = nil
   end
 end
