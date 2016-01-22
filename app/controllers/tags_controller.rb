@@ -1,7 +1,5 @@
 class TagsController < ContentController
 
-  before_filter :auto_discovery_feed, :only => [:show, :index]
-
   layout :pick_layout
 
   cache_sweeper :blog_sweeper

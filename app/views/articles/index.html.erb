@@ -1,3 +1,8 @@
+<% content_for :feeds do %>
+  <%= auto_discovery_link_tag :rss, rss_url(format: :rss) %>
+  <%= auto_discovery_link_tag :atom, atom_url(format: :atom) %>
+<% end %>
+
 <main role="main" tabindex="-1" id="main">
   <%= render 'shared/campaigns' if @lead_campaign %>
 

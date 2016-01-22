@@ -30,12 +30,9 @@
 
 <%= tag :link, :href => request.url, :rel => :canonical %>
 
-<%- if feed_atom %>
-<link rel="alternate" type="application/atom+xml" title="Atom" href="<%= feed_atom %>">
-<%- end %>
-<%- if feed_rss %>
-<link rel="alternate" type="application/rss+xml" title="RSS" href="<%= feed_rss %>">
-<%- end %>
+<% if content_for?(:feeds) %>
+  <%= yield :feeds %>
+<% end %>
 
 <%# Basic styles for all devices, doesn't contain anything that could cause rendering issues such as positional info %>
 <%= stylesheet_link_tag 'dough/assets/stylesheets/basic' %>
