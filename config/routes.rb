@@ -9,13 +9,8 @@ Rails.application.routes.draw do
 
   resources :comments, only: [:index, :create]
 
-  resources :trackbacks
-
   get 'sitemap', to: 'sitemaps#show', constraints: { format: 'xml' }
   get 'news-sitemap', to: 'sitemaps#show', constraints: { format: 'xml' }, news: true
-
-  # I thinks it's useless. More investigating
-  post 'trackbacks/:id/:day/:month/:year', to: 'trackbacks#create', format: false
 
   get 'articles.:format', to: 'articles#index', constraints: { format: 'rss' }, as: 'rss'
   get 'articles.:format', to: 'articles#index', constraints: { format: 'atom' }, as: 'atom'

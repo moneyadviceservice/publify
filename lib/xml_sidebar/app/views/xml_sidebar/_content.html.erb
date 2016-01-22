@@ -14,13 +14,6 @@
     </a>
     </li>
   <% end %>
-  <%- if sidebar.trackbacks -%>
-    <li>
-    <a href="<%= url_for controller: 'xml', action: 'feed', format: sidebar.format_strip, type: 'trackbacks' %>" title="Trackbacks feed">
-      <%= t(".trackbacks")%>
-    </a>
-    </li>
-  <% end %>
   <%- if sidebar.tag_feeds and controller.controller_name == 'tags' and controller.action_name == 'show' %>
     <% format = (sidebar.format_strip == 'rss') ? @auto_discovery_url_rss : @auto_discovery_url_atom  %>
     <%= content_tag(:li, t(".tag",  link: link_to(@grouping.display_name, format))) %>

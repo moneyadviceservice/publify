@@ -2,6 +2,4 @@
   <%= t(".tags") + " " + article.tags.map { |tag| link_to tag.display_name, tag_path(tag.permalink), rel: "tag"}.sort.join(", ") if article.tags.any? %>
 
   <%= link_to(t('.comments', count: article.published_comments.size), article_path(article.permalink, anchor: :comments)) if article.allow_comments? %> 
-  
-  <%= link_to(t('.trackbacks', count: article.published_trackbacks.size), article_path(article.permalink, anchor: :trackbacks )) if article.allow_pings? %> 
 </p>
