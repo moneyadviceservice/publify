@@ -7,10 +7,6 @@ Rails.application.routes.draw do
     get 'home_page', action: 'home_page'
   end
 
-  get 'articles.:format', to: 'articles#index', constraints: { format: 'rss' }, as: 'rss'
-  get 'articles.:format', to: 'articles#index', constraints: { format: 'atom' }, as: 'atom'
-  get 'articles.:format', to: 'articles#index', constraints: { format: 'json' }, as: 'json'
-
   resources :comments
 
   resources :trackbacks
@@ -20,6 +16,9 @@ Rails.application.routes.draw do
 
   # I thinks it's useless. More investigating
   post 'trackbacks/:id/:day/:month/:year', to: 'trackbacks#create', format: false
+
+  get 'articles.:format', to: 'articles#index', constraints: { format: 'rss' }, as: 'rss'
+  get 'articles.:format', to: 'articles#index', constraints: { format: 'atom' }, as: 'atom'
 
   controller 'articles', format: false do
     # Initial search goes to /search?q=foo, subsequent pages go to /search/foo/pages/2
@@ -116,5 +115,5 @@ Rails.application.routes.draw do
 
   root to: 'articles#index', format: false
 
-  get '*from', to: 'articles#show', as: :article, format: false
+  get '*from', to: 'articles#show', as: :article
 end
