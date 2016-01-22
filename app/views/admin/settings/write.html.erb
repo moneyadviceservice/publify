@@ -10,24 +10,6 @@
 <fieldset class='form-horizontal'>
   <legend><%= t(".publish")%></legend>
   <div class='form-group'>
-    <label class='control-label col-sm-2'><%= t(".trackbacks") %></label>
-    <div class="col-sm-5">
-      <div class='checkbox'>
-        <label for="setting_send_outbound_pings">
-          <%= check_box(:setting, :send_outbound_pings) %>
-          <%= t(".send_trackbacks")%>
-        </label>
-        <small class='help-block'><%= t(".explain") %></small>
-      </div>
-    </div>
-  </div>
-  <div class='form-group'>
-    <label class='control-label col-sm-2' for="setting_ping_urls"><%= t(".urls_to_ping")%></label>
-    <div class='col-sm-5'>
-      <%= text_area(:setting, :ping_urls, :rows => 4, :class => 'form-control') %>
-    </div>
-  </div>
-  <div class='form-group'>
     <label class='control-label col-sm-2' for="setting_geourl_location"><%= t(".latitude_longitude")%></label>
     <div class='col-sm-5'>
       <%= text_field(:setting, :geourl_location, { :class => 'form-control'})%>
