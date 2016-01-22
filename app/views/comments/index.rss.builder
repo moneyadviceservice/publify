@@ -13,7 +13,13 @@ xml.rss "version" => "2.0", "xmlns:dc" => "http://purl.org/dc/elements/1.1/",
     xml.description this_blog.blog_subtitle
 
     @comments.each do |comment|
-      render "shared/rss_item_comment", {feed: xml, item: comment}
+      xml.item do
+        xml.title comment.feed_title
+        xml.description html(comment)
+        xml.pubDate comment.created_at.rfc822
+        xml.guid "urn:uuid:#{comment.guid}", "isPermaLink" => "false"
+        xml.link item_url(comment)
+      end
     end
   end
 end

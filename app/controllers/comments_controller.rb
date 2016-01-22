@@ -1,8 +1,18 @@
-class CommentsController < FeedbackController
+class CommentsController < ApplicationController
 
-  layout 'default.html.erb'
+  layout :pick_layout
+
+  def index
+    @comments = Feedback.limit(this_blog.per_page(params[:format]))
+
+    respond_to do |format|
+      format.atom
+      format.rss
+    end
+  end
 
   def create
+    @article = Article.find(params[:article_id])
     @comment = @article.with_options(new_comment_defaults) do |art|
       art.add_comment(params[:comment].slice(:body, :author, :email, :url))
     end
@@ -52,5 +62,9 @@ class CommentsController < FeedbackController
 
   def get_article
     @article = Article.find(params[:article_id])
+  end
+
+  def pick_layout
+    request.format.html? ? 'default': false
   end
 end

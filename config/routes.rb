@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     get 'home_page', action: 'home_page'
   end
 
-  resources :comments
+  resources :comments, only: [:index, :create]
 
   resources :trackbacks
 
