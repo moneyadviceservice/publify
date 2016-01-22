@@ -50,9 +50,6 @@ Rails.application.routes.draw do
   get '/news', to: 'tags#show', defaults: { id: 'news' }
   get '/news/:id', to: 'news#show_article'
 
-  # SetupController
-  match '/setup', to: 'setup#index', via: [:get, :post], format: false
-
   # Tags - note that the tags index has been forgotten about and is unstyled
   get '/tag/:id(/page/:page)', to: 'tags#show', as: :tag
 
