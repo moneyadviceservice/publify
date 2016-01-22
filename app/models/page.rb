@@ -10,7 +10,8 @@ class Page < Content
   after_save :shorten_url
 
   def set_permalink
-    self.name = title.to_permalink if name.blank?
+    self.name ||= title.to_permalink
+    self.permalink ||= title.to_permalink
   end
 
   content_fields :body
