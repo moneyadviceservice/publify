@@ -13,9 +13,13 @@ xml.rss "version" => "2.0", "xmlns:dc" => "http://purl.org/dc/elements/1.1/",
     xml.description this_blog.blog_subtitle
 
     @feedback.each do |item|
-      render "shared/rss_item_#{item.type.downcase}", {:feed => xml, :item => item}
+      xml.item do
+        xml.title item.feed_title
+        xml.description html(item)
+        xml.pubDate item.created_at.rfc822
+        xml.guid "urn:uuid:#{item.guid}", "isPermaLink" => "false"
+        xml.link item_url(item)
+      end
     end
   end
 end
-
-

@@ -3,7 +3,7 @@ class ArticlesController < ContentController
   before_filter :login_required, only: :preview
   before_filter :auto_discovery_feed, only: [:show, :index]
 
-  layout 'default.html.erb', except: :trackback
+  layout :pick_layout
 
   cache_sweeper :blog_sweeper
   caches_page :index, :archives, :view_page, :redirect, if: Proc.new { |c| c.request.query_string == '' }
@@ -23,16 +23,8 @@ class ArticlesController < ContentController
       format.html do
         auto_discovery_feed(only_path: false)
       end
-      format.atom do
-        render "index_atom_feed", layout: false
-      end
-      format.rss do
-        auto_discovery_feed(only_path: false)
-        render "index_rss_feed", layout: false
-      end
-      format.json do
-        render "index_json_feed", layout: false
-      end
+      format.atom
+      format.rss
     end
   end
 
@@ -62,13 +54,17 @@ class ArticlesController < ContentController
       @keywords    = @article.tags.map { |g| g.name }.join(', ')
       @feedback    = @article.published_feedback
 
-      auto_discovery_feed
-      
       respond_to do |format|
-        format.html { render "articles/#{@article.post_type}" }
-        format.atom { render "feedback_atom_feed", layout: false }
-        format.rss  { render "feedback_rss_feed", layout: false }
-        format.xml  { render "feedback_xml_feed", layout: false }
+        format.html do
+          auto_discovery_feed
+          render 'articles/read'
+        end
+        format.atom do
+          render 'articles/read'
+        end
+        format.rss do
+          render 'articles/read'
+        end
       end
     else
       render 'errors/404', status: 404
@@ -93,6 +89,10 @@ class ArticlesController < ContentController
   end
 
   private
+
+  def pick_layout
+    request.format.html? ? 'default' : false
+  end
 
   def check_for_redirect
     if (redirect = Redirect.find_by_from_path(params[:from])).present?
