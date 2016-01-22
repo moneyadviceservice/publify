@@ -2,7 +2,6 @@ class ArticlesController < ContentController
   before_filter :check_for_redirect, only: :show
   before_filter :login_required, only: :preview
   before_filter :auto_discovery_feed, only: [:show, :index]
-  before_filter :verify_config
 
   layout 'default.html.erb', except: :trackback
 
@@ -98,16 +97,6 @@ class ArticlesController < ContentController
   def check_for_redirect
     if (redirect = Redirect.find_by_from_path(params[:from])).present?
       redirect_to redirect.full_to_path, status: 301
-    end
-  end
-
-  def verify_config
-    if  !this_blog.configured?
-      redirect_to controller: 'setup', action: 'index'
-    elsif User.count == 0
-      redirect_to controller: 'accounts', action: 'signup'
-    else
-      return true
     end
   end
 
