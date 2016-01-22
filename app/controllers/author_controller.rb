@@ -11,8 +11,6 @@ class AuthorController < ContentController
           @page_title = this_blog.author_title_template.to_title(@author, this_blog, params)
           @keywords = this_blog.meta_keywords
           @description = this_blog.author_desc_template.to_title(@author, this_blog, params)
-
-          auto_discovery_feed(only_path: false)
         end
         format.rss
         format.atom

@@ -1,7 +1,6 @@
 class ArticlesController < ContentController
   before_filter :check_for_redirect, only: :show
   before_filter :login_required, only: :preview
-  before_filter :auto_discovery_feed, only: [:show, :index]
 
   layout :pick_layout
 
@@ -20,9 +19,7 @@ class ArticlesController < ContentController
     @articles = @articles.limit(this_blog.per_page(params[:format]))
 
     respond_to do |format|
-      format.html do
-        auto_discovery_feed(only_path: false)
-      end
+      format.html
       format.atom
       format.rss
     end
@@ -56,7 +53,6 @@ class ArticlesController < ContentController
 
       respond_to do |format|
         format.html do
-          auto_discovery_feed
           render 'articles/read'
         end
         format.atom do

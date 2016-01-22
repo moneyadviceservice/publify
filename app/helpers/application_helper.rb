@@ -141,14 +141,6 @@ module ApplicationHelper
     end.flatten.uniq.join("\n")
   end
 
-  def feed_atom
-    feed_for('atom')
-  end
-
-  def feed_rss
-    feed_for('rss')
-  end
-
   def content_array
     if @articles
       @articles
@@ -220,16 +212,6 @@ module ApplicationHelper
   end
 
   private
-
-  def feed_for(type)
-    if params[:action] == 'search'
-      url_for(only_path: false, format: type, q: params[:q])
-    elsif not @article.nil?
-      article_path(@article.permalink, format: type)
-    elsif not @auto_discovery_url_atom.nil?
-      instance_variable_get("@auto_discovery_url_#{type}")
-    end
-  end
 
   # fetches appropriate html content for RSS and ATOM feeds. Checks for:
   # - article being password protected

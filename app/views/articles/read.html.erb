@@ -1,3 +1,8 @@
+<% content_for :feeds do %>
+  <%= auto_discovery_link_tag :rss, article_url(@article, format: :rss) %>
+  <%= auto_discovery_link_tag :atom, article_url(@article, format: :atom) %>
+<% end %>
+
 <div class="l-banner">
   <% if @article.hero_image.present? %>
     <%= image_tag(@article.hero_image.url(:resized), class: 'l-banner__image', alt: @article.hero_image_alt_text) %>
