@@ -73,7 +73,7 @@ describe Admin::ContentsController, type: :controller do
         before(:each) { post :create, params }
 
         it { expect(response).to redirect_to(action: :edit, id: created_article.id) }
-        it { expect(flash[:success]).to eq(I18n.t('admin.content.create.success.published')) }
+        it { expect(flash[:success]).to eq(I18n.t('admin.contents.create.success.published')) }
 
         it { expect(assigns(:article)).to be_published }
         it { expect(assigns(:article).user).to eq(user) }
@@ -344,39 +344,36 @@ describe Admin::ContentsController, type: :controller do
       end
     end
 
-    describe '#destroy' do
-      context 'with post method' do
-        context 'with an article from other user' do
-          let(:article) { create(:article, user: create(:user, login: 'other_user')) }
+    describe '#remove' do
+      context 'with an article from other user' do
+        let(:article) { create(:article, user: create(:user, login: 'other_user')) }
 
-          before(:each) { post :destroy, id: article.id }
-          it { expect(response).to redirect_to(action: 'index') }
-          it { expect(Article.count).to eq(1) }
-        end
-
-        context 'with an article from user' do
-          let(:article) { create(:article, user: user) }
-          before(:each) { post :destroy, id: article.id }
-          it { expect(response).to redirect_to(action: 'index') }
-          it { expect(Article.count).to eq(0) }
-        end
+        before(:each) { get :remove, id: article.id }
+        it { expect(response).to redirect_to(action: 'index') }
+        it { expect(Article.count).to eq(1) }
       end
 
-      context 'with get method' do
-        context 'with an article from other user' do
-          let(:article) { create(:article, user: create(:user, login: 'other_user')) }
+      context 'with an article from user' do
+        let(:article) { create(:article, user: user) }
+        before(:each) { get :remove, id: article.id }
+        it { expect(Article.count).to eq(1) }
+      end
+    end
+    
+    describe '#destroy' do
+      context 'with an article from other user' do
+        let(:article) { create(:article, user: create(:user, login: 'other_user')) }
 
-          before(:each) { get :destroy, id: article.id }
-          it { expect(response).to redirect_to(action: 'index') }
-          it { expect(Article.count).to eq(1) }
-        end
+        before(:each) { post :destroy, id: article.id }
+        it { expect(response).to redirect_to(action: 'index') }
+        it { expect(Article.count).to eq(1) }
+      end
 
-        context 'with an article from user' do
-          let(:article) { create(:article, user: user) }
-          before(:each) { get :destroy, id: article.id }
-          it { expect(response).to render_template('admin/shared/destroy') }
-          it { expect(Article.count).to eq(1) }
-        end
+      context 'with an article from user' do
+        let(:article) { create(:article, user: user) }
+        before(:each) { post :destroy, id: article.id }
+        it { expect(response).to redirect_to(action: 'index') }
+        it { expect(Article.count).to eq(0) }
       end
     end
   end

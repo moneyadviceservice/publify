@@ -16,28 +16,28 @@ describe ArticlesController, type: :routing do
   describe 'routing for #redirect action' do
     it 'picks up any previously undefined path' do
       expect(get: '/foobar').to route_to(controller: 'articles',
-                                                action: 'redirect',
+                                                action: 'show',
                                                 from: 'foobar')
     end
 
     it 'matches paths with multiple components' do
       expect(get: 'foo/bar/baz').to route_to(controller: 'articles',
-                                                    action: 'redirect',
+                                                    action: 'show',
                                                     from: 'foo/bar/baz')
     end
 
     it 'should route URLs under /articles' do
       expect(get: '/articles').to route_to(controller: 'articles',
-                                                  action: 'redirect',
+                                                  action: 'show',
                                                   from: 'articles')
       expect(get: '/articles/foo').to route_to(controller: 'articles',
-                                                      action: 'redirect',
+                                                      action: 'show',
                                                       from: 'articles/foo')
       expect(get: '/articles/foo/bar').to route_to(controller: 'articles',
-                                                          action: 'redirect',
+                                                          action: 'show',
                                                           from: 'articles/foo/bar')
       expect(get: '/articles/foo/bar/baz').to route_to(controller: 'articles',
-                                                              action: 'redirect',
+                                                              action: 'show',
                                                               from: 'articles/foo/bar/baz')
     end
   end

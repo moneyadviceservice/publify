@@ -49,7 +49,7 @@ describe Note, type: :model do
 
     describe 'redirects' do
       let(:note) { create(:note) }
-      it { expect(note.redirects.map(&:to_path)).to eq([note.permalink_url]) }
+      it { expect(note.redirects.map(&:to_path)).to eq(["#{blog.base_url}/#{note.permalink}"]) }
     end
 
     describe 'scopes' do

@@ -6,7 +6,7 @@ feature 'Uploaded files access' do
   scenario 'when user is not an admin' do
     visit admin_ckeditor.attachment_files_path
 
-    expect(current_path).to eq('/accounts/signup')
+    expect(current_path).to eq('/accounts/login')
   end
 
   scenario 'when user is an admin' do

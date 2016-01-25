@@ -1,5 +1,5 @@
 # coding: utf-8
-describe 'articles/index_rss_feed.rss.builder', type: :view do
+describe 'articles/index.rss.builder', type: :view do
   let!(:blog) { build_stubbed :blog }
 
   describe 'rendering articles (with some funny characters)' do
@@ -36,7 +36,7 @@ describe 'articles/index_rss_feed.rss.builder', type: :view do
 
     it "has a link to the article's comment section" do
       render
-      expect(rendered_entry.css('comments').first.content).to eq(@article.permalink_url + '#comments')
+      expect(rendered_entry.css('comments').first.content).to eq("http://test.host/#{@article.permalink}#comments")
     end
 
     describe 'with an author without email set' do
@@ -119,50 +119,6 @@ describe 'articles/index_rss_feed.rss.builder', type: :view do
       end
     end
 
-  end
-
-  describe 'rendering a password protected article' do
-    before(:each) do
-      @article = stub_full_article
-      @article.body = "shh .. it's a secret!"
-      @article.extended = 'even more secret!'
-      allow(@article).to receive(:password) { 'password' }
-      assign(:articles, [@article])
-    end
-
-    describe 'on a blog that shows extended content in feeds' do
-      before(:each) do
-        Blog.default.hide_extended_on_rss = false
-        render
-      end
-
-      it 'shows only a link to the article' do
-        expect(rendered_entry.css('description').first.content).to eq(
-          "<p>This article is password protected. Please <a href='#{@article.permalink_url}'>fill in your password</a> to read it</p>"
-        )
-      end
-
-      it 'does not show any secret bits anywhere' do
-        expect(rendered).not_to match(/secret/)
-      end
-    end
-
-    describe 'on a blog that hides extended content in feeds' do
-      before(:each) do
-        Blog.default.hide_extended_on_rss = true
-        render
-      end
-
-      it 'shows only a link to the article' do
-        expect(rendered_entry.css('description').first.content).to eq(
-          "<p>This article is password protected. Please <a href='#{@article.permalink_url}'>fill in your password</a> to read it</p>"
-        )
-      end
-
-      it 'does not show any secret bits anywhere' do
-        expect(rendered).not_to match(/secret/)
-      end
-    end
   end
 
   describe 'rendering an article with a UTF-8 permalink' do

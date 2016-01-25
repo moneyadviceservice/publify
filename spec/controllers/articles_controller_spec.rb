@@ -4,11 +4,6 @@ describe ArticlesController, 'base', type: :controller do
   let!(:campaign) { create(:campaign) }
   let!(:user) { create :user }
 
-  describe 'tag' do
-    before(:each) { get :tag }
-    it { expect(response).to redirect_to(tags_path) }
-  end
-
   describe 'index' do
     let!(:article) { create(:article) }
 
@@ -36,52 +31,9 @@ describe ArticlesController, 'base', type: :controller do
       it { expect(assigns[:articles]).to_not be_nil }
     end
 
-    it 'should render feed rss by search' do
-      get 'search', q: 'a', format: 'rss'
-      expect(response).to be_success
-      expect(response).to render_template('index_rss_feed', layout: false)
-    end
-
-    it 'should render feed atom by search' do
-      get 'search', q: 'a', format: 'atom'
-      expect(response).to be_success
-      expect(response).to render_template('index_atom_feed', layout: false)
-    end
-
     it 'search with empty result' do
       get 'search', q: 'abcdefghijklmnopqrstuvwxyz'
       expect(response).to render_template('articles/search', layout: true)
-    end
-
-  end
-
-  describe '#livesearch action' do
-
-    describe 'with a query with several words' do
-
-      before(:each) do
-        create(:article, body: 'hello world and im herer')
-        create(:article, title: 'hello', body: 'worldwide')
-        create(:article)
-        get :live_search, q: 'hello world'
-      end
-
-      it 'should be valid' do
-        expect(assigns(:articles).size).to eq(2)
-      end
-
-      it 'should render without layout' do
-        expect(response).to render_template(layout: nil)
-      end
-
-      it 'should render template live_search' do
-        expect(response).to render_template('live_search')
-      end
-
-      it 'should assign @search the search string' do
-        expect(assigns[:search]).to be_equal(controller.params[:q])
-      end
-
     end
   end
 
@@ -94,44 +46,6 @@ describe ArticlesController, 'base', type: :controller do
       expect(assigns[:articles]).not_to be_empty
     end
   end
-
-  describe 'index for a month' do
-
-    before(:each) do
-      create(:article, published_at: Time.utc(2004, 4, 23))
-      allow(Campaign).to receive(:lead).and_return([campaign])
-      get 'index', year: 2004, month: 4
-    end
-
-    it 'should render template index' do
-      expect(response).to render_template(:index)
-    end
-
-    it 'should contain some articles' do
-      expect(assigns[:articles]).not_to be_nil
-      expect(assigns[:articles]).not_to be_empty
-    end
-  end
-
-end
-
-describe ArticlesController, 'nosettings', type: :controller do
-  let!(:blog) { create(:blog, settings: {}) }
-
-  it 'redirects to setup' do
-    get 'index'
-    expect(response).to redirect_to(controller: 'setup', action: 'index')
-  end
-end
-
-describe ArticlesController, 'nousers', type: :controller do
-
-  let!(:blog) { create(:blog) }
-
-  it 'redirects to signup' do
-    get 'index'
-    expect(response).to redirect_to(controller: 'accounts', action: 'signup')
-  end
 end
 
 describe ArticlesController, 'feeds', type: :controller do
@@ -140,39 +54,18 @@ describe ArticlesController, 'feeds', type: :controller do
   let!(:article1) { create(:article, created_at: Time.now - 1.day) }
   let!(:article2) { create(:article, created_at: '2004-04-01 12:00:00', published_at: '2004-04-01 12:00:00', updated_at: '2004-04-01 12:00:00') }
 
-  let(:trackback) { create(:trackback, article: article1, published_at: Time.now - 1.day, published: true) }
-
   specify '/articles.atom => an atom feed' do
     get 'index', format: 'atom'
     expect(response).to be_success
-    expect(response).to render_template('index_atom_feed', layout: false)
+    expect(response).to render_template('articles/index', layout: false)
     expect(assigns(:articles)).to eq([article1, article2])
   end
 
   specify '/articles.rss => an RSS 2.0 feed' do
     get 'index', format: 'rss'
     expect(response).to be_success
-    expect(response).to render_template('index_rss_feed', layout: false)
+    expect(response).to render_template('articles/index', layout: false)
     expect(assigns(:articles)).to eq([article1, article2])
-  end
-
-  specify '/articles.json => a JSON serialized object' do
-    get 'index', format: 'json'
-    expect(response).to be_success
-    expect(response).to render_template('index_json_feed', layout: false)
-    expect(assigns(:articles)).to eq([article1, article2])
-  end
-
-  specify 'atom feed for archive should be valid' do
-    get 'index', year: 2004, month: 4, format: 'atom'
-    expect(response).to render_template('index_atom_feed', layout: false)
-    expect(assigns(:articles)).to eq([article2])
-  end
-
-  specify 'RSS feed for archive should be valid' do
-    get 'index', year: 2004, month: 4, format: 'rss'
-    expect(response).to render_template('index_rss_feed', layout: false)
-    expect(assigns(:articles)).to eq([article2])
   end
 end
 
@@ -231,7 +124,7 @@ describe ArticlesController, 'redirecting', type: :controller do
       build_stubbed(:blog)
       create(:user)
       create(:redirect)
-      get :redirect, from: 'foo/bar'
+      get :show, from: 'foo/bar'
       assert_response 301
       expect(response).to redirect_to('http://test.host/someplace/else')
     end
@@ -240,7 +133,7 @@ describe ArticlesController, 'redirecting', type: :controller do
       build_stubbed(:blog)
       create(:user)
       create(:redirect)
-      get :redirect, from: 'something/that/isnt/there'
+      get :show, from: 'something/that/isnt/there'
       assert_response 404
     end
 
@@ -257,21 +150,21 @@ describe ArticlesController, 'redirecting', type: :controller do
 
       it 'should redirect' do
         create(:redirect, from_path: 'foo/bar', to_path: '/someplace/else')
-        get :redirect, from: 'foo/bar'
+        get :show, from: 'foo/bar'
         assert_response 301
         expect(response).to redirect_to('http://test.host/blog/someplace/else')
       end
 
       it 'should redirect if to_path includes relative_url_root' do
         create(:redirect, from_path: 'bar/foo', to_path: '/blog/someplace/else')
-        get :redirect, from: 'bar/foo'
+        get :show, from: 'bar/foo'
         assert_response 301
         expect(response).to redirect_to('http://test.host/blog/someplace/else')
       end
 
       it 'should ignore the blog base_url if the to_path is a full uri' do
         create(:redirect, from_path: 'foo', to_path: 'http://some.where/else')
-        get :redirect, from: 'foo'
+        get :show, from: 'foo'
         assert_response 301
         expect(response).to redirect_to('http://some.where/else')
       end
@@ -280,47 +173,13 @@ describe ArticlesController, 'redirecting', type: :controller do
 
   it 'should get good article with utf8 slug' do
     build_stubbed(:blog)
-    utf8article = create(:utf8article, permalink: 'ルビー', published_at: Time.utc(2004, 6, 2))
-    get :redirect, from: '2004/06/02/ルビー'
+    utf8article = create(:utf8article, permalink: 'ルビー')
+    get :show, from: 'ルビー'
     expect(assigns(:article)).to eq(utf8article)
   end
 
-  # NOTE: This is needed because Rails over-unescapes glob parameters.
-  it 'should get good article with pre-escaped utf8 slug using unescaped slug' do
-    build_stubbed(:blog)
-    utf8article = create(:utf8article, permalink: '%E3%83%AB%E3%83%93%E3%83%BC', published_at: Time.utc(2004, 6, 2))
-    get :redirect, from: '2004/06/02/ルビー'
-    expect(assigns(:article)).to eq(utf8article)
-  end
-
-  describe 'accessing old-style URL with "articles" as the first part' do
-    it 'should redirect to article' do
-      create(:blog)
-      article = create(:article, permalink: 'second-blog-article', published_at: '2004-04-01 02:00:00', updated_at: '2004-04-01 02:00:00', created_at: '2004-04-01 02:00:00')
-      get :redirect, from: 'articles/2004/04/01/second-blog-article'
-      assert_response 301
-      expect(response).to redirect_to('http://myblog.net/2004/04/01/second-blog-article')
-    end
-
-    it 'should redirect to article with url_root' do
-      b = build_stubbed(:blog, base_url: 'http://test.host/blog')
-      article = create(:article, permalink: 'second-blog-article', published_at: '2004-04-01 02:00:00', updated_at: '2004-04-01 02:00:00', created_at: '2004-04-01 02:00:00')
-      get :redirect, from: 'articles/2004/04/01/second-blog-article'
-      assert_response 301
-      expect(response).to redirect_to('http://test.host/blog/2004/04/01/second-blog-article')
-    end
-
-    it 'should redirect to article with articles in url_root' do
-      b = build_stubbed(:blog, base_url: 'http://test.host/aaa/articles/bbb')
-      article = create(:article, permalink: 'second-blog-article', published_at: '2004-04-01 02:00:00', updated_at: '2004-04-01 02:00:00', created_at: '2004-04-01 02:00:00')
-      get :redirect, from: 'articles/2004/04/01/second-blog-article'
-      assert_response 301
-      expect(response).to redirect_to('http://test.host/aaa/articles/bbb/2004/04/01/second-blog-article')
-    end
-  end
-
-  describe 'with permalink_format like %title%.html' do
-    let!(:blog) { create(:blog, permalink_format: '/%title%.html') }
+  describe 'with at the permalink url' do
+    let!(:blog) { create(:blog) }
     let!(:admin) { create(:user, :as_admin) }
 
     before(:each) do
@@ -331,28 +190,15 @@ describe ArticlesController, 'redirecting', type: :controller do
       let!(:article) { create(:article, permalink: 'second-blog-article', published_at: '2004-04-01 02:00:00', updated_at: '2004-04-01 02:00:00', created_at: '2004-04-01 02:00:00') }
 
       context 'try redirect to an unknow location' do
-        before(:each) { get :redirect, from: "#{article.permalink}/foo/bar" }
+        before(:each) { get :show, from: "#{article.permalink}/foo/bar" }
         it { expect(response.code).to eq('404') }
-      end
-
-      describe 'accessing legacy URLs' do
-        it 'should redirect from default URL format' do
-          get :redirect, from: '2004/04/01/second-blog-article'
-          expect(response).to redirect_to('http://myblog.net/second-blog-article.html')
-        end
-
-        it 'should redirect from old-style URL format with "articles" part' do
-          get :redirect, from: 'articles/2004/04/01/second-blog-article'
-          expect(response).to redirect_to('http://myblog.net/second-blog-article.html')
-        end
       end
     end
 
     describe 'accessing an article' do
-
       let!(:article) { create(:article, permalink: 'second-blog-article', published_at: '2004-04-01 02:00:00', updated_at: '2004-04-01 02:00:00', created_at: '2004-04-01 02:00:00') }
       before(:each) do
-        get :redirect, from: "#{article.permalink}.html"
+        get :show, from: "#{article.permalink}"
       end
 
       it 'should render template read to article' do
@@ -366,62 +212,25 @@ describe ArticlesController, 'redirecting', type: :controller do
 
     describe 'rendering as atom feed' do
       let!(:article) { create(:article, permalink: 'second-blog-article', published_at: '2004-04-01 02:00:00', updated_at: '2004-04-01 02:00:00', created_at: '2004-04-01 02:00:00') }
-      let!(:trackback1) { create(:trackback, article: article, published_at: Time.now - 1.day, published: true) }
 
       before(:each) do
-        get :redirect, from: "#{article.permalink}.html.atom"
+        get :show, from: "#{article.permalink}", format: "atom"
       end
 
       it 'should render feedback atom feed' do
-        expect(assigns(:feedback)).to eq([trackback1])
-        expect(response).to render_template('feedback_atom_feed', layout: false)
+        expect(response).to render_template('articles/read', layout: false)
       end
     end
 
     describe 'rendering as rss feed' do
       let!(:article) { create(:article, permalink: 'second-blog-article', published_at: '2004-04-01 02:00:00', updated_at: '2004-04-01 02:00:00', created_at: '2004-04-01 02:00:00') }
-      let!(:trackback1) { create(:trackback, article: article, published_at: Time.now - 1.day, published: true) }
 
       before(:each) do
-        get :redirect, from: "#{article.permalink}.html.rss"
+        get :show, from: "#{article.permalink}", format: "rss"
       end
 
       it 'should render rss20 partial' do
-        expect(assigns(:feedback)).to eq([trackback1])
-        expect(response).to render_template('feedback_rss_feed', layout: false)
-      end
-    end
-  end
-
-  describe 'with a format containing a fixed component' do
-    let!(:blog) { create(:blog, permalink_format: '/foo/%title%') }
-    let!(:article) { create(:article) }
-
-    it 'should find the article if the url matches all components' do
-      get :redirect, from: "foo/#{article.permalink}"
-      expect(response).to be_success
-    end
-
-    it 'should not find the article if the url does not match the fixed component' do
-      get :redirect, from: "bar/#{article.permalink}"
-      assert_response 404
-    end
-  end
-
-  describe 'with a custom format with several fixed parts and several variables' do
-    let!(:blog) { create(:blog, permalink_format: '/foo/bar/%year%/%month%/%title%') }
-    let!(:article) { create(:article) }
-
-    # TODO: Think about allowing this, and changing find_by_params_hash to match.
-    if false
-      it 'should find the article if the url matches all fixed parts and no variable components' do
-        get :redirect, from: 'foo/bar'
-        expect(response).to be_success
-      end
-
-      it 'should not find the article if the url does not match all fixed component' do
-        get :redirect, from: 'foo'
-        assert_response 404
+        expect(response).to render_template('articles/read', layout: false)
       end
     end
   end
@@ -445,16 +254,6 @@ describe ArticlesController, 'assigned keywords', type: :controller do
     it 'index without option but with blog keywords should have meta keywords' do
       get 'index'
       expect(assigns(:keywords)).to eq('publify, is, amazing')
-    end
-  end
-
-  context 'with blog permalin to /%title%.html' do
-    let!(:blog) { create(:blog, permalink_format: '/%title%.html') }
-
-    it 'article without tags should not have meta keywords' do
-      article = create(:article)
-      get :redirect, from: "#{article.permalink}.html"
-      expect(assigns(:keywords)).to eq('')
     end
   end
 end
