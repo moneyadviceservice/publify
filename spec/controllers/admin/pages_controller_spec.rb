@@ -22,72 +22,68 @@ describe Admin::PagesController, type: :controller do
   end
 
   describe '#new' do
-    context 'using get' do
-      before(:each) { get :new }
+    before(:each) { get :new }
 
-      it { expect(response).to be_success }
-      it { expect(response).to render_template('new') }
-      it { expect(assigns(:page)).to_not be_nil }
-      it { expect(assigns(:page).user).to eq(user) }
-      it { expect(assigns(:page).text_filter.name).to eq('textile') }
-      it { expect(assigns(:page).published).to be_truthy }
+    it { expect(response).to be_success }
+    it { expect(response).to render_template('new') }
+    it { expect(assigns(:page)).to_not be_nil }
+    it { expect(assigns(:page).user).to eq(user) }
+    it { expect(assigns(:page).text_filter.name).to eq('textile') }
+    it { expect(assigns(:page).published).to be_truthy }
     end
 
-    context 'using post' do
+  describe '#create' do
+    def base_page(options = {})
+      { title: 'posted via tests!',
+        body: 'A good body',
+        name: 'posted-via-tests',
+        published: true }.merge(options)
+    end
 
-      def base_page(options = {})
-        { title: 'posted via tests!',
-          body: 'A good body',
-          name: 'posted-via-tests',
-          published: true }.merge(options)
+    context 'simple' do
+      before(:each) do
+        post :create, page: { name: 'new_page', title: 'New Page Title', body: 'Emphasis _mine_, arguments *strong*' }
       end
 
-      context 'simple' do
-        before(:each) do
-          post :new, page: { name: 'new_page', title: 'New Page Title', body: 'Emphasis _mine_, arguments *strong*' }
-        end
+      it { expect(Page.first.name).to eq('new_page') }
+      it { expect(response).to redirect_to(action: :index) }
+      it { expect(flash[:success]).to eq(I18n.t('admin.pages.create.success')) }
+    end
 
-        it { expect(Page.first.name).to eq('new_page') }
-        it { expect(response).to redirect_to(action: :index) }
-        it { expect(flash[:success]).to eq(I18n.t('admin.pages.new.success')) }
-      end
+    it 'should create a published page with a redirect' do
+      post(:create, 'page' => base_page)
+      expect(assigns(:page).redirects.count).to eq(1)
+    end
 
-      it 'should create a published page with a redirect' do
-        post(:new, 'page' => base_page)
-        expect(assigns(:page).redirects.count).to eq(1)
-      end
-
-      it 'should create an unpublished page without a redirect' do
-        post(:new, 'page' => base_page(state: :unpublished, published: false))
-        expect(assigns(:page).redirects.count).to eq(0)
-      end
-
+    it 'should create an unpublished page without a redirect' do
+      post(:create, 'page' => base_page(state: :unpublished, published: false))
+      expect(assigns(:page).redirects.count).to eq(0)
     end
   end
 
   describe '#edit' do
     let!(:page) { create(:page) }
 
-    context 'using get' do
-      before(:each) { get :edit, id: page.id }
-      it { expect(response).to be_success }
-      it { expect(response).to render_template('edit') }
-      it { expect(assigns(:page)).to eq(page) }
+    before(:each) { get :edit, id: page.id }
+    it { expect(response).to be_success }
+    it { expect(response).to render_template('edit') }
+    it { expect(assigns(:page)).to eq(page) }
+  end
+  
+  describe '#update' do
+    let!(:page) { create(:page) }
+
+    before(:each) do
+      post :update, id: page.id, page: { name: 'markdown-page', title: 'Markdown Page', body: 'Adding a [link](http://www.publify.co/) here' }
     end
 
-    context 'using post' do
-      before(:each) do
-        post :edit, id: page.id, page: { name: 'markdown-page', title: 'Markdown Page', body: 'Adding a [link](http://www.publify.co/) here' }
-      end
-
-      it { expect(response).to redirect_to(action: :index) }
-    end
+    it { expect(response).to redirect_to(action: :index) }
   end
 
   describe 'destroy' do
     let!(:page) { create(:page) }
 
-    before(:each) { post :destroy, id: page.id }
+    before(:each) { delete :destroy, id: page.id }
 
     it { expect(response).to redirect_to(action: :index) }
     it { expect(Page.count).to eq(0) }

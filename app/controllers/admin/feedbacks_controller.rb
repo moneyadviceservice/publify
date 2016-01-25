@@ -29,7 +29,7 @@ class Admin::FeedbacksController < Admin::BaseController
 
   def update
     @comment = Comment.find(params[:id])
-    redirect_to admin_feedbacks_path if !@comment.article.access_by?(current_user)
+    return redirect_to admin_feedbacks_path if !@comment.article.access_by?(current_user)
 
     if @comment.update_attributes(params[:comment].permit!)
       flash[:success] = I18n.t('admin.feedbacks.update.success')

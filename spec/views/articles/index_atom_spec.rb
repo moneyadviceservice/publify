@@ -1,4 +1,4 @@
-describe 'articles/index_atom_feed.atom.builder', type: :view do
+describe 'articles/index.atom.builder', type: :view do
   let!(:blog) { build_stubbed :blog }
 
   describe 'with no items' do
@@ -28,8 +28,7 @@ describe 'articles/index_atom_feed.atom.builder', type: :view do
     end
 
     it 'renders the article atom partial twice' do
-      expect(view).to render_template(partial: 'shared/_atom_item_article',
-                                      count: 2)
+      expect(view).to render_template(partial: 'shared/_atom_item_article', count: 2)
     end
   end
 
@@ -103,58 +102,6 @@ describe 'articles/index_atom_feed.atom.builder', type: :view do
       end
     end
 
-  end
-
-  describe 'rendering a password protected article' do
-    before do
-      @article = stub_full_article
-      @article.body = "shh .. it's a secret!"
-      @article.extended = 'even more secret!'
-      allow(@article).to receive(:password) { 'password' }
-      assign(:articles, [@article])
-    end
-
-    describe 'on a blog that shows extended content in feeds' do
-      before do
-        Blog.default.hide_extended_on_rss = false
-        render
-      end
-
-      it 'shows only a link to the article' do
-        expect(rendered_entry.css('content').first.content).to eq(
-          "<p>This article is password protected. Please <a href='#{@article.permalink_url}'>fill in your password</a> to read it</p>"
-        )
-      end
-
-      it 'does not have a summary element in addition to the content element' do
-        expect(rendered_entry.css('summary')).to be_empty
-      end
-
-      it 'does not show any secret bits anywhere' do
-        expect(rendered).not_to match(/secret/)
-      end
-    end
-
-    describe 'on a blog that hides extended content in feeds' do
-      before do
-        Blog.default.hide_extended_on_rss = true
-        render
-      end
-
-      it 'shows only a link to the article' do
-        expect(rendered_entry.css('content').first.content).to eq(
-          "<p>This article is password protected. Please <a href='#{@article.permalink_url}'>fill in your password</a> to read it</p>"
-        )
-      end
-
-      it 'does not have a summary element in addition to the content element' do
-        expect(rendered_entry.css('summary')).to be_empty
-      end
-
-      it 'does not show any secret bits anywhere' do
-        expect(rendered).not_to match(/secret/)
-      end
-    end
   end
 
   def rendered_entry

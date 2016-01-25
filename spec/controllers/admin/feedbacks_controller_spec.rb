@@ -1,10 +1,21 @@
 describe Admin::FeedbacksController, type: :controller do
 
   shared_examples_for 'destroy feedback with feedback from own article' do
-    it 'should destroy feedback' do
+    it 'should not destroy feedback in get request' do
       id = feedback_from_own_article.id
       expect do
-        post 'destroy', id: id
+        get 'remove', id: id
+      end.not_to change(Feedback, :count)
+      expect do
+        Feedback.find(feedback_from_own_article.id)
+      end.not_to raise_error
+      expect(response).to render_template 'remove'
+    end
+
+    it 'should destroy the feedback on the destroy action' do
+      id = feedback_from_own_article.id
+      expect do
+        delete 'destroy', id: id
       end.to change(Feedback, :count)
       expect do
         Feedback.find(feedback_from_own_article.id)
@@ -12,19 +23,8 @@ describe Admin::FeedbacksController, type: :controller do
     end
 
     it 'should redirect to feedback from article' do
-      post 'destroy', id: feedback_from_own_article.id
+      delete 'destroy', id: feedback_from_own_article.id
       expect(response).to redirect_to(admin_feedbacks_path(article_id: feedback_from_own_article.article))
-    end
-
-    it 'should not destroy feedback in get request' do
-      id = feedback_from_own_article.id
-      expect do
-        get 'destroy', id: id
-      end.not_to change(Feedback, :count)
-      expect do
-        Feedback.find(feedback_from_own_article.id)
-      end.not_to raise_error
-      expect(response).to render_template 'destroy'
     end
   end
 
@@ -45,14 +45,14 @@ describe Admin::FeedbacksController, type: :controller do
       @spam_comment_not_own ||= FactoryGirl.create(:spam_comment)
     end
 
-    describe 'destroy action' do
+    describe 'remove and destroy actions' do
 
       it_should_behave_like 'destroy feedback with feedback from own article'
 
       it "should destroy feedback from article doesn't own" do
         id = feedback_from_not_own_article.id
         expect do
-          post 'destroy', id: id
+          delete 'destroy', id: id
         end.to change(Feedback, :count)
         expect do
           Feedback.find(feedback_from_not_own_article.id)
@@ -108,8 +108,6 @@ describe Admin::FeedbacksController, type: :controller do
         article = FactoryGirl.create(:article)
         comment = FactoryGirl.create(:comment, article: article)
         get 'edit', id: comment.id
-        expect(assigns(:comment)).to eq(comment)
-        expect(assigns(:article)).to eq(article)
         expect(response).to be_success
         expect(response).to render_template('edit')
       end
@@ -124,22 +122,10 @@ describe Admin::FeedbacksController, type: :controller do
                        comment: { author: 'Bob Foo2',
                                     url: 'http://fakeurl.com',
                                     body: 'updated comment' }
-        expect(response).to redirect_to(action: 'article', id: article.id)
+        expect(response).to redirect_to(admin_feedbacks_path(article_id: article))
         comment.reload
         expect(comment.body).to eq('updated comment')
       end
-
-      it 'should not  update comment if get request' do
-        comment = FactoryGirl.create(:comment)
-        get 'update', id: comment.id,
-                      comment: { author: 'Bob Foo2',
-                                   url: 'http://fakeurl.com',
-                                   body: 'updated comment' }
-        expect(response).to redirect_to(action: 'edit', id: comment.id)
-        comment.reload
-        expect(comment.body).not_to eq('updated comment')
-      end
-
     end
   end
 
@@ -165,54 +151,26 @@ describe Admin::FeedbacksController, type: :controller do
 
     describe 'destroy action' do
       it_should_behave_like 'destroy feedback with feedback from own article'
-
-      it "should not destroy feedback doesn't own" do
-        id = feedback_from_not_own_article.id
-        post 'destroy', id: id
-        expect(response).to redirect_to(admin_feedbacks_path)
-        expect do
-          Feedback.find(id)
-        end.not_to raise_error
-      end
     end
 
     describe 'edit action' do
-
-      it 'should not edit comment no own article' do
-        get 'edit', id: feedback_from_not_own_article.id
-        expect(response).to redirect_to(action: 'index')
-      end
-
-      it 'should edit comment if own article' do
+      it 'should show the edit form' do
         get 'edit', id: feedback_from_own_article.id
         expect(response).to be_success
         expect(response).to render_template('edit')
-        expect(assigns(:comment)).to eq(feedback_from_own_article)
-        expect(assigns(:article)).to eq(feedback_from_own_article.article)
       end
-
     end
 
     describe 'update action' do
-
       it 'should update comment if own article' do
-        post 'update', id: feedback_from_own_article.id,
+        feedback = feedback_from_own_article
+        put 'update', id: feedback.id,
                        comment: { author: 'Bob Foo2',
                                     url: 'http://fakeurl.com',
                                     body: 'updated comment' }
-        expect(response).to redirect_to(action: 'article', id: feedback_from_own_article.article.id)
-        feedback_from_own_article.reload
-        expect(feedback_from_own_article.body).to eq('updated comment')
-      end
-
-      it 'should not update comment if not own article' do
-        post 'update', id: feedback_from_not_own_article.id,
-                       comment: { author: 'Bob Foo2',
-                                    url: 'http://fakeurl.com',
-                                    body: 'updated comment' }
-        expect(response).to redirect_to(action: 'index')
-        feedback_from_not_own_article.reload
-        expect(feedback_from_not_own_article.body).not_to eq('updated comment')
+        expect(response).to redirect_to(admin_feedbacks_path(article_id: feedback.article))
+        feedback.reload
+        expect(feedback.body).to eq('updated comment')
       end
     end
 

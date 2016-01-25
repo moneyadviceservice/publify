@@ -1,21 +1,3 @@
-describe TagsController, '/index', type: :controller do
-  before do
-    create(:blog)
-    @tag = create(:tag)
-    @tag.articles << create(:article)
-  end
-
-  describe 'normally' do
-    before do
-      get 'index'
-    end
-
-    specify { expect(response).to be_success }
-    specify { expect(response).to render_template('tags/index') }
-    specify { expect(assigns(:tags)).to match_array([@tag]) }
-  end
-end
-
 describe TagsController, 'showing a single tag', type: :controller do
   before do
     FactoryGirl.create(:blog)
@@ -42,11 +24,9 @@ describe TagsController, 'showing a single tag', type: :controller do
       expect(assigns[:articles].map(&:id).sort).to eq(@articles.map(&:id).sort)
     end
 
-    it 'should fall back to rendering articles/index' do
-      allow(controller).to receive(:template_exists?) \
-        .and_return(false)
+    it 'should render tags/show' do
       do_get
-      expect(response).to render_template('articles/index')
+      expect(response).to render_template('tags/show')
     end
 
     it 'should set the page title to "Tag foo"' do
@@ -56,12 +36,12 @@ describe TagsController, 'showing a single tag', type: :controller do
 
     it 'should render the atom feed for /articles/tag/foo.atom' do
       get 'show', id: 'foo', format: 'atom'
-      expect(response).to render_template('articles/index_atom_feed', layout: false)
+      expect(response).to render_template('articles/index', layout: false)
     end
 
     it 'should render the rss feed for /articles/tag/foo.rss' do
       get 'show', id: 'foo', format: 'rss'
-      expect(response).to render_template('articles/index_rss_feed', layout: false)
+      expect(response).to render_template('articles/index', layout: false)
     end
   end
 
@@ -77,13 +57,11 @@ describe TagsController, 'showing a single tag', type: :controller do
 end
 
 describe TagsController, 'showing a non-existant tag', type: :controller do
-  # TODO: Perhaps we can show something like 'Nothing tagged with this tag'?
-  it 'should redirect to main page' do
+  it 'should raise a recordnotfound' do
     FactoryGirl.create(:blog)
-    get 'show', id: 'thistagdoesnotexist'
-
-    expect(response.status).to eq(301)
-    expect(response).to redirect_to(Blog.default.base_url)
+    expect {
+      get 'show', id: 'thistagdoesnotexist'
+    }.to raise_error(ActiveRecord::RecordNotFound)
   end
 end
 

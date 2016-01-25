@@ -6,7 +6,7 @@ feature 'Pictures page access' do
   scenario 'when user is not logged in' do
     visit admin_ckeditor.pictures_path
 
-    expect(current_path).to eq('/accounts/signup')
+    expect(current_path).to eq('/accounts/login')
   end
 
   scenario 'when user is an admin' do

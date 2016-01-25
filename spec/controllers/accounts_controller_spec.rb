@@ -129,41 +129,12 @@ describe AccountsController, type: :controller do
     end
   end
 
-  describe 'GET /index' do
-    let!(:blog) { create(:blog) }
-
-    it 'should redirect to login' do
-      get 'index'
-      expect(response).to redirect_to(action: 'login')
-    end
-  end
-
   describe 'GET /login' do
     it 'should render action :login' do
       create(:blog)
       get 'login'
       expect(response).to render_template(:login)
       expect(assigns[:login]).to be_nil
-    end
-  end
-
-  describe 'GET signup' do
-    before(:each) do
-      create(:blog)
-      allow(User).to receive(:count).and_return(0)
-      @user = double('user')
-      allow(@user).to receive(:reload).and_return(@user)
-      allow(User).to receive(:new).and_return(@user)
-    end
-
-    it 'sets @user' do
-      get 'signup'
-      expect(assigns[:user]).to eq(@user)
-    end
-
-    it 'renders action signup' do
-      get 'signup'
-      expect(response).to render_template(:signup)
     end
   end
 

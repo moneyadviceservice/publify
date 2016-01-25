@@ -1,4 +1,4 @@
-describe 'author/show_rss_feed.rss.builder', type: :view do
+describe 'author/show.rss.builder', type: :view do
   let!(:blog) { create(:blog) }
 
   describe 'rendering articles (with some funny characters)' do
