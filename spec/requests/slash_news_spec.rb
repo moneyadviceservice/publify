@@ -1,12 +1,13 @@
 describe "/news" do
   before :each do
+    @news_tag = Tag.create!(name: 'news')
     Blog.create!(base_url: "http://localhost:3000")
     TextFilter.create!(name: 'none', description: 'None', markup: 'none', filters: [], params: {})
   end
 
   context 'when there are news articles' do
     it 'returns news articles' do
-      Article.create!(title: 'my news article', keywords: "News,General", published_at: Time.now)
+      Article.create!(title: 'my news article', keywords: "News,General", published_at: Time.now, tags: [@news_tag])
       get "/news"
       expect(response.body).to include("my news article")
     end

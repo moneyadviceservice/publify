@@ -6,6 +6,8 @@ class Content < ActiveRecord::Base
 
   include ContentBase
 
+  include Rails.application.routes.url_helpers
+
   # TODO: Move these calls to ContentBase
   after_save :invalidates_cache?
   after_destroy lambda { |c|  c.invalidates_cache?(true) }
@@ -80,11 +82,11 @@ class Content < ActiveRecord::Base
 
     r = Redirect.new
     r.from_path = r.shorten
-    r.to_path = permalink_url
+    r.to_path = article_url(permalink, host: blog.base_url)
 
     # This because updating self.redirects.first raises ActiveRecord::ReadOnlyRecord
     unless (red = redirects.first).nil?
-      return if red.to_path == permalink_url
+      return if red.to_path == r.to_path
       r.from_path = red.from_path
       red.destroy
       redirects.clear # not sure we need this one
@@ -145,7 +147,7 @@ class Content < ActiveRecord::Base
     rss_desc.gsub!('%author%', user.name)
     rss_desc.gsub!('%blog_url%', blog.base_url)
     rss_desc.gsub!('%blog_name%', blog.blog_name)
-    rss_desc.gsub!('%permalink_url%', permalink_url)
+    rss_desc.gsub!('%permalink_url%', article_url(permalink, host: blog.base_url))
     rss_desc
   end
 

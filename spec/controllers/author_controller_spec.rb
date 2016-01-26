@@ -17,12 +17,12 @@ describe AuthorController, type: :controller do
 
       describe 'atom feed' do
         before(:each) { get 'show', id: no_profile_user.login, format: 'atom' }
-        it { expect(response).to render_template(:show_atom_feed, false) }
+        it { expect(response).to render_template(:show, false) }
       end
 
       describe 'rss feed' do
         before(:each) { get 'show', id: no_profile_user.login, format: 'rss' }
-        it { expect(response).to render_template(:show_rss_feed, false) }
+        it { expect(response).to render_template(:show, false) }
       end
 
       describe 'with pagination' do

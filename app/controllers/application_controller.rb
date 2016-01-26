@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   include ::LoginSystem
   protect_from_forgery only: [:edit, :update, :delete]
 
-  before_filter :reset_local_cache, :fire_triggers, :load_lang, :set_paths
+  before_filter :reset_local_cache, :fire_triggers, :set_paths
   before_filter :generate_popular_articles
   after_filter :reset_local_cache
 
@@ -32,28 +32,11 @@ class ApplicationController < ActionController::Base
     Trigger.fire
   end
 
-  def load_lang
-    if I18n.available_locales.include?(this_blog.lang.to_sym)
-      I18n.locale = this_blog.lang
-    elsif I18n.available_locales.include?(this_blog.lang[0..1].to_sym)
-      I18n.locale = this_blog.lang[0..1]
-    # for the same language used in different areas, e.g. zh_CN, zh_TW
-    elsif I18n.available_locales.include?(this_blog.lang.sub('_', '-').to_sym)
-      I18n.locale = this_blog.lang.sub('_', '-')
-    end
-  end
-
   def reset_local_cache
     if !session
       session session: new
     end
     @current_user = nil
-  end
-
-  # The base URL for this request, calculated by looking up the URL for the main
-  # blog index page.
-  def blog_base_url
-    url_for(controller: '/articles').gsub(%r{/$}, '')
   end
 
   def add_to_cookies(name, value, path = nil, _expires = nil)

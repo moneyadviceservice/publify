@@ -1,3 +1,8 @@
+<% content_for :feeds do %>
+  <%= auto_discovery_link_tag :rss, rss_url(format: :rss) %>
+  <%= auto_discovery_link_tag :atom, atom_url(format: :atom) %>
+<% end %>
+
 <main role="main" tabindex="-1" id="main">
   <%= render 'shared/campaigns' if @lead_campaign %>
 
@@ -9,7 +14,14 @@
             <%= render 'popular_tags' if index === 2 %>
             <%= render partial: 'article', object: article, locals: { index: index } %>
           <% end %>
-          <%= paginate @articles, views_prefix: 'archives' %>
+          <div class="l-tile l-tile--archive">
+            <a href="<%= archives_path %>" class="l-index-archive__link">
+              All Articles
+              <svg class="l-index-archive__link-arrow">
+                <use xlink:href="#svg-arrow-right"></use>
+              </svg>
+            </a>
+          </div>
         </div>
       </div>
     </div>

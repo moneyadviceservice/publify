@@ -9,18 +9,6 @@ describe Comment, type: :model do
     Comment.new({ author: 'Bob', email: 'bob@foo.com', article: published_article, body: 'nice post', ip: '1.2.3.4' }.merge(options))
   end
 
-  describe '#permalink_url' do
-    before(:each) do
-      @c = build_stubbed(:comment)
-    end
-
-    subject { @c.permalink_url }
-
-    it 'should render permalink to comment in public part' do
-      is_expected.to eq("#{@c.article.permalink_url}#comment-#{@c.id}")
-    end
-  end
-
   describe '#save' do
     before(:each) {
       allow(blog).to receive(:sp_article_auto_close) { 300 }

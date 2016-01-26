@@ -1,10 +1,10 @@
 <div class="l-tile">
   <div class="article-tile">
-    <h2><%= link_to truncate(article.title, length: 53), article.permalink_url, { :class => 'article-tile__heading', :title => article.title } %></h2>
+    <h2><%= link_to truncate(article.title, length: 53), article_path(article.permalink), { :class => 'article-tile__heading', :title => article.title } %></h2>
 
     <time class="article-tile__date"><%= display_article_date(article) %></time>
     <% if article.published_comments.size > 0 %>
-      <a href="<%= article.permalink_url('comments', true) %>" class="article-tile__comments"><%= article.published_comments.size %><span class="visually-hidden"> <%= t(".comments", count: article.published_comments.size) %></span></a>
+      <a href="<%= article_path(article.permalink, anchor: :comments) %>" class="article-tile__comments"><%= article.published_comments.size %><span class="visually-hidden"> <%= t(".comments", count: article.published_comments.size) %></span></a>
     <% end %>
   </div>
 </div>

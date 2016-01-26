@@ -1,4 +1,4 @@
-describe 'author/show_atom_feed.atom.builder', type: :view do
+describe 'author/show.atom.builder', type: :view do
   let!(:blog) { create(:blog) }
 
   describe 'with no items' do

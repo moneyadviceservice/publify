@@ -1,0 +1,16 @@
+<%= error_messages_for 'redirect' %>
+<div class='form-group'>
+  <%= text_field :redirect, :from_path, class: 'form-control', placeholder: "#{t(".from")} #{this_blog.base_url}/" %>
+</div>
+<p class='help-block'>
+  <small><%= t(".leave_empty_to_shorten_a_link") %></small>
+</p>
+<div class='form-group'>
+  <%= text_field :redirect, :to_path, :class => 'form-control', placeholder: t(".to") %>
+</div>
+<div class='form-group'>
+  <hr>
+  <%= link_to(t(".cancel"), admin_redirects_path) %>
+  <%= t(".or") %>
+  <%= submit_tag(t(".save"), class: 'btn btn-success') %>
+</div>

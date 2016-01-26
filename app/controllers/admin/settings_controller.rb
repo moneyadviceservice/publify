@@ -1,44 +1,33 @@
 class Admin::SettingsController < Admin::BaseController
   cache_sweeper :blog_sweeper
 
-  def index
-    if this_blog.base_url.blank?
-      this_blog.base_url = blog_base_url
-    end
-    load_settings
-  end
-
-  def write; load_settings end
-  def feedback; load_settings end
-  def display; load_settings end
-
-  def update
-    if request.post?
-      update_settings_with!(params[:setting])
-      redirect_to action: params[:from]
-    end
-  rescue ActiveRecord::RecordInvalid
-    render params[:from]
-  end
-
-  def update_database
-    @current_version = migrator.current_schema_version
-    @needed_migrations = migrator.pending_migrations
-  end
-
-  def migrate
-    if request.post?
-      migrator.migrate
-      redirect_to action: 'update_database'
-    end
-  end
-
-  private
-  def load_settings
+  def general
     @setting = this_blog
   end
 
-  def migrator
-    @migrator ||= Migrator.new
+  def write
+    @setting = this_blog
   end
+
+  def feedback
+    @setting = this_blog
+  end
+
+  def display
+    @setting = this_blog
+  end
+
+  def seo
+    @setting = this_blog
+  end
+
+  def titles
+    @setting = this_blog
+  end
+
+  def update
+    update_settings_with!(params[:setting])
+    redirect_to :back
+  end
+
 end

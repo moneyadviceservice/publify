@@ -1,0 +1,18 @@
+<%- content_for :page_heading do %>
+<h2>
+  <i class="glyphicon glyphicon-large glyphicon-share-alt"></i>
+  <%= t(".redirects") %>
+</h2>
+<% end %>
+
+<div class='row'>
+  <div class='col-md-4'>
+    <%= form_for @redirect, url: admin_redirect_path(@redirect) do |f| %>
+      <%= render partial: 'form', locals: { f: f } %>
+    <% end %>
+  </div>
+
+  <div class='col-md-8'>
+    <%= render partial: 'redirects', locals: { redirects: @redirects } %>
+  </div>
+</div>

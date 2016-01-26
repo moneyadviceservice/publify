@@ -111,17 +111,9 @@ describe 'Given a new blog', type: :model do
     expect(blog.google_verification).to eq('')
   end
 
-  it '#feedburner should be empty' do
-    expect(blog.feedburner_url).to eq('')
-  end
-
   it 'RSS description should be disable but not empty' do
     expect(blog).not_to be_rss_description
     expect(blog.rss_description_text).to eq("<hr /><p><small>Original article written by %author% and published on <a href='%blog_url%'>%blog_name%</a> | <a href='%permalink_url%'>direct link to this article</a> | If you are reading this article anywhere other than on <a href='%blog_url%'>%blog_name%</a>, it has been illegally reproduced and without proper authorization.</small></p>")
-  end
-
-  it 'Permalink format should be /year/month/day/title' do
-    expect(blog.permalink_format).to eq('/%year%/%month%/%day%/%title%')
   end
 
   it 'Robots.txt should be empty' do
@@ -234,10 +226,6 @@ describe 'Given a new blog', type: :model do
   it 'should have an empty custom url shortener' do
     expect(blog.custom_url_shortener).to eq('')
   end
-
-  it 'a new blog should display statuses in the main feed' do
-    expect(blog.statuses_in_timeline).to eq(true)
-  end
 end
 
 describe 'Given a new user', type: :model do
@@ -303,26 +291,6 @@ describe 'Given a new user', type: :model do
 
   it 'Twitter profile image should be empty' do
     expect(@user.twitter_profile_image).to eq('')
-  end
-end
-
-describe 'Given a new article', type: :model do
-  before(:each) do
-    @article = Article.new
-  end
-
-  it 'A new article should get an empty password' do
-    expect(@article.password).to eq('')
-  end
-end
-
-describe 'Given a new page', type: :model do
-  before(:each) do
-    @page = Page.new
-  end
-
-  it 'A new page should get an empty password' do
-    expect(@page.password).to eq('')
   end
 end
 
