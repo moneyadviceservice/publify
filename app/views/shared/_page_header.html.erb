@@ -2,7 +2,7 @@
 <%= meta_tag 'og:title', @article ? @article.title : @page_title, true %>
 <% if @article %>
   <%= meta_tag 'og:description', @description %>
-  <%= meta_tag 'og:url', @article.permalink_url, true %>
+  <%= meta_tag 'og:url', article_path(@article.permalink), true %>
   <% if @article.hero_image.present? %>
     <%= meta_tag 'og:image', @article.hero_image.url(:resized), true %>
   <% end %>
@@ -12,7 +12,7 @@
 <%= meta_tag 'twitter:card', 'summary_large_image' %>
 <% if @article %>
   <%= meta_tag 'twitter:description', @description %>
-  <%= meta_tag 'twitter:url', @article.permalink_url %>
+  <%= meta_tag 'twitter:url', article_path(@article.permalink) %>
   <% if @article.hero_image.present? %>
     <%= meta_tag 'twitter:image:src', @article.hero_image.url(:resized) %>
   <% end %>
@@ -30,13 +30,9 @@
 
 <%= tag :link, :href => request.url, :rel => :canonical %>
 
-<link rel="EditURI" type="application/rsd+xml" title="RSD" href="<%= url_for :controller => '/xml', :action => 'rsd' %>">
-<%- if feed_atom %>
-<link rel="alternate" type="application/atom+xml" title="Atom" href="<%= feed_atom %>">
-<%- end %>
-<%- if feed_rss %>
-<link rel="alternate" type="application/rss+xml" title="RSS" href="<%= feed_rss %>">
-<%- end %>
+<% if content_for?(:feeds) %>
+  <%= yield :feeds %>
+<% end %>
 
 <%# Basic styles for all devices, doesn't contain anything that could cause rendering issues such as positional info %>
 <%= stylesheet_link_tag 'dough/assets/stylesheets/basic' %>

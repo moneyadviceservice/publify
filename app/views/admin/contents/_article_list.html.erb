@@ -1,0 +1,32 @@
+<%- if @articles.empty? %>
+<tr>
+  <td colspan="7">
+    <%= t(".no_articles") %>
+  </td>
+</tr>
+<%- end %>
+
+<% for article in @articles %>
+<tr>
+  <td>
+    <%- if article.published %>
+      <%= link_to(article.title, article_path(article.permalink), class: :published) %>
+    <%- else %>
+      <%- if article.draft? %>
+        <strong class="label label-info">Draft</strong>
+      <%- elsif article.withdrawn? %>
+        <strong class="label label-danger">Withdrawn</strong>
+      <%- end %>
+      <%= link_to(article.title, preview_path(article), class: 'unpublished', target: '_new') %>
+    <%- end %>
+    <%= show_actions article %>
+  </td>
+  <td class="author">
+    <%= author_link(article)%><br>
+    <small><%= l(article.published_at) %></small>
+  </td>
+  <td class="comments">
+    <%= (article.allow_comments?) ? link_to("#{article.comments.ham.size.to_s} <i class='glyphicon glyphicon-comment'></i>".html_safe, admin_feedbacks_path(article_id: article)) : '-' %> </td>
+</tr>
+<% end %>
+<%= display_pagination(@articles, 5, 'first', 'last')%>

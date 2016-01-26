@@ -1,4 +1,3 @@
-config/database.yml
 config/mail.yml
 config/timezone.yml
 config/secret.token
@@ -34,6 +33,7 @@ public/cache/*
 !/themes/bootstrap-2
 gems/
 /.env
+/db/*.sqlite3
 
 # dough related files
 vendor/assets/bower_components

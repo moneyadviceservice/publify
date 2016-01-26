@@ -57,10 +57,10 @@ describe Ping, type: :model do
       article = create(:article, title: "Associations aren't :dependent => true anymore", excerpt: 'A content with several data')
       post = "title=#{CGI.escape(article.title)}"
       post << "&excerpt=#{CGI.escape('A content with several data')}" # not original text see if normal ?
-      post << "&url=#{article.permalink_url}"
+      post << "&url=#{blog.base_url}/#{article.permalink}"
       post << "&blog_name=#{CGI.escape('test blog')}"
 
-      make_and_send_ping(post, article, article.permalink_url)
+      make_and_send_ping(post, article, "#{blog.base_url}/#{article.permalink}")
     end
 
     it 'sends a trackback without markdown tag in excerpt' do
@@ -70,13 +70,13 @@ describe Ping, type: :model do
       article = create(:article, title: 'How made link with markdown', excerpt: 'A content with several data')
       post = "title=#{CGI.escape(article.title)}"
       post << "&excerpt=#{CGI.escape('A content with several data')}" # not original text see if normal ?
-      post << "&url=#{article.permalink_url}"
+      post << "&url=#{blog.base_url}/#{article.permalink}"
       post << "&blog_name=#{CGI.escape('test blog')}"
 
-      make_and_send_ping(post, article, article.permalink_url)
+      make_and_send_ping(post, article, "#{blog.base_url}/#{article.permalink}")
     end
 
-    def make_and_send_ping(post, article, article_url)
+    def make_and_send_ping(post, article, permalink)
       mock = double('html_response')
       expect(Net::HTTP).to receive(:get_response).with(URI.parse(referenced_url)).and_return(mock)
       expect(mock).to receive(:[]).with('X-Pingback').at_least(:once)
@@ -86,7 +86,7 @@ describe Ping, type: :model do
       expect(mock).to receive(:post).with('/a-post/trackback', post, 'Content-type' => 'application/x-www-form-urlencoded; charset=utf-8').and_return(mock)
 
       ping = article.pings.create(url: referenced_url)
-      ping.send_pingback_or_trackback(article_url).join
+      ping.send_pingback_or_trackback("#{permalink}").join
     end
 
     def referenced_body

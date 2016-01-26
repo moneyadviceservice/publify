@@ -38,11 +38,10 @@ AccessControl.map require: [ :admin, :publisher, :contributor ]  do |map|
   map.permission "ckeditor/attachment_files"
 
   map.project_module :articles, nil do |project|
-    project.menu    "Articles",       { controller: "admin/content", action: "index" }
-    project.submenu "All Articles",   { controller: "admin/content", action: "index" }
-    project.submenu "New Article",    { controller: "admin/content", action: "new" }
-    project.submenu "Feedback",       { controller: "admin/feedback", action: "index" }
-    project.submenu "Article Types",  { controller: "admin/post_types", action: "new" }
+    project.menu    "Articles",       { controller: "admin/contents", action: "index" }
+    project.submenu "All Articles",   { controller: "admin/contents", action: "index" }
+    project.submenu "New Article",    { controller: "admin/contents", action: "new" }
+    project.submenu "Feedback",       { controller: "admin/feedbacks", action: "index" }
     project.submenu "Redirects",      { controller: "admin/redirects", action: "new" }
   end
 
@@ -56,19 +55,11 @@ AccessControl.map require: [ :admin, :publisher, :contributor ]  do |map|
     project.menu "Media Library", { controller: "admin/resources", action: "index" }
   end
 
-  map.project_module :customizesidebar, nil do |project|
-    project.menu    "Design",             { controller: "admin/sidebar", action: "index"  }
-    project.submenu "Customize sidebar",  { controller: "admin/sidebar", action: "index" }
-
-    AccessControl.search_plugins_directory.each do |plugin|
-      project.submenu AccessControl.get_plugin_litteral_name(plugin),
-        { controller: "admin/#{AccessControl.get_plugin_controller_name(plugin)}", action: "index" }
-    end
-  end
-
   map.project_module :settings, nil do |project|
-    project.menu    "Settings",         { controller: "admin/settings",    action: "index" }
-    project.submenu "General settings", { controller: "admin/settings",    action: "index" }
+    project.menu    "Settings",         { controller: "admin/settings",    action: "general" }
+    project.submenu "General settings", { controller: "admin/settings",    action: "general" }
+    project.submenu "SEO settings",     { controller: "admin/settings",    action: "seo" }    
+    project.submenu "Titles",           { controller: "admin/settings",    action: "titles" }
     project.submenu "Write",            { controller: "admin/settings",    action: "write" }
     project.submenu "Display",          { controller: "admin/settings",    action: "display" }
     project.submenu "Feedback",         { controller: "admin/settings",    action: "feedback" }
@@ -78,12 +69,5 @@ AccessControl.map require: [ :admin, :publisher, :contributor ]  do |map|
 
   map.project_module :notes, nil do |project|
     project.menu "Notes", { controller: "admin/notes", action: "index" }
-  end
-
-  map.project_module :seo, nil do |project|
-    project.menu    "SEO",  { controller: "admin/seo", action: "index" }
-    project.submenu "Global SEO settings",  { controller: "admin/seo", action: "index" }    
-    project.submenu "Permalinks",           { controller: "admin/seo", action: "permalinks" }
-    project.submenu "Titles",               { controller: "admin/seo", action: "titles" }
   end
 end

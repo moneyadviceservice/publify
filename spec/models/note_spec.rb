@@ -28,7 +28,6 @@ describe Note, type: :model do
       end
 
       it { expect(note.permalink).to eq("#{note.id}-ae") }
-      it { expect(note.permalink_url).to eq("#{blog.base_url}/note/#{note.id}-ae") }
 
       context 'with a particular blog' do
         before(:each) do
@@ -50,7 +49,7 @@ describe Note, type: :model do
 
     describe 'redirects' do
       let(:note) { create(:note) }
-      it { expect(note.redirects.map(&:to_path)).to eq([note.permalink_url]) }
+      it { expect(note.redirects.map(&:to_path)).to eq(["#{blog.base_url}/#{note.permalink}"]) }
     end
 
     describe 'scopes' do

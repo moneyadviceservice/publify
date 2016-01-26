@@ -46,12 +46,6 @@ describe AccountsController, type: :controller do
       make_request
       expect(response).to redirect_to(controller: 'admin/dashboard')
     end
-
-    it 'should redirect to signup if no users' do
-      allow(User).to receive(:count).and_return(0)
-      make_request
-      expect(response).to redirect_to('/accounts/signup')
-    end
   end
 
   describe 'User is inactive' do
@@ -135,186 +129,12 @@ describe AccountsController, type: :controller do
     end
   end
 
-  describe 'GET /index' do
-    let!(:blog) { create(:blog) }
-
-    it 'should redirect to login' do
-      allow(User).to receive(:count).and_return(1)
-      get 'index'
-      expect(response).to redirect_to(action: 'login')
-    end
-
-    it 'should redirect to signup' do
-      allow(User).to receive(:count).and_return(0)
-      get 'index'
-      expect(response).to redirect_to(action: 'signup')
-    end
-  end
-
   describe 'GET /login' do
     it 'should render action :login' do
       create(:blog)
-      allow(User).to receive(:count).and_return(1)
       get 'login'
       expect(response).to render_template(:login)
       expect(assigns[:login]).to be_nil
-    end
-  end
-
-  describe 'GET /login with 0 existing users' do
-    before(:each) do
-      create(:blog)
-      allow(User).to receive(:count).and_return(0)
-    end
-
-    it 'should render action :signup' do
-      get 'login'
-      expect(response).to redirect_to(action: 'signup')
-      expect(assigns[:login]).to be_nil
-    end
-
-    it 'should render :signup' do
-      get 'recover_password'
-      expect(response).to redirect_to(action: 'signup')
-    end
-  end
-
-  describe 'with >0 existing user and allow_signup = 0' do
-    before(:each) do
-      @blog = create(:blog)
-      allow(User).to receive(:count).and_return(1)
-    end
-
-    describe 'GET signup' do
-      it 'should redirect to login' do
-        get 'signup'
-        expect(response).to redirect_to(action: 'login')
-      end
-    end
-
-    describe 'POST signup without allow_signup' do
-      it 'should redirect to login' do
-        post 'signup', 'user' =>  { 'login' => 'newbob' }
-        expect(response).to redirect_to(action: 'login')
-      end
-    end
-  end
-
-  describe 'with > 0 existing user and allow_signup = 1' do
-    before(:each) do
-      @blog = create(:blog, allow_signup: 1)
-      allow(User).to receive(:count).and_return(1)
-    end
-
-    describe 'GET signup with allow_signup' do
-      it 'should redirect to login' do
-        get 'signup'
-        expect(response).to render_template('signup')
-      end
-    end
-
-    describe 'POST signup with allow_signup' do
-      it 'should redirect to login' do
-        post 'signup', 'user' =>  { 'login' => 'newbob', 'email' => 'newbob@mail.com' }
-        expect(response).to redirect_to(action: 'confirm')
-      end
-    end
-
-  end
-  describe 'GET signup with 0 existing users' do
-    before(:each) do
-      create(:blog)
-      allow(User).to receive(:count).and_return(0)
-      @user = double('user')
-      allow(@user).to receive(:reload).and_return(@user)
-      allow(User).to receive(:new).and_return(@user)
-    end
-
-    it 'sets @user' do
-      get 'signup'
-      expect(assigns[:user]).to eq(@user)
-    end
-
-    it 'renders action signup' do
-      get 'signup'
-      expect(response).to render_template(:signup)
-    end
-  end
-
-  describe 'with 0 existing users and unconfigured blog' do
-    before(:each) do
-      Blog.delete_all
-      @blog = Blog.new.save
-      User.delete_all
-    end
-
-    describe 'when GET signup' do
-      before { get 'signup' }
-      it 'redirects to setup' do
-        expect(response).to redirect_to(controller: 'setup', action: 'index')
-      end
-    end
-
-    describe 'when POST signup' do
-      before do
-        post 'signup', 'user' =>  { 'login' => 'newbob', 'password' => 'newpassword',
-          'password_confirmation' => 'newpassword' }
-      end
-      it 'redirects to setup' do
-        expect(response).to redirect_to(controller: 'setup', action: 'index')
-      end
-    end
-
-    describe 'when GET login' do
-      before { get 'login' }
-      it 'redirects to setup' do
-        expect(response).to redirect_to(controller: 'setup', action: 'index')
-      end
-    end
-
-    describe 'when POST login' do
-      before do
-        post 'login', 'user' =>  { 'login' => 'newbob', 'password' => 'newpassword' }
-      end
-      it 'redirects to setup' do
-        expect(response).to redirect_to(controller: 'setup', action: 'index')
-      end
-    end
-  end
-
-  describe 'POST signup with 0 existing users' do
-    before(:each) do
-      create(:blog)
-      allow(User).to receive(:count).and_return(0)
-      @user = build_stubbed(User)
-      allow(@user).to receive(:login).and_return('newbob')
-      allow(@user).to receive(:generate_password!).and_return(true)
-      allow(@user).to receive(:name=).and_return(true)
-      allow(User).to receive(:new).and_return(@user)
-      allow(User).to receive(:authenticate).and_return(@user)
-      allow(@user).to receive(:save).and_return(@user)
-    end
-
-    it 'creates and saves a user' do
-      expect(User).to receive(:new).and_return(@user)
-      expect(@user).to receive(:save).and_return(@user)
-      post 'signup', params
-      expect(assigns[:user]).to eq(@user)
-    end
-
-    it 'redirects to /account/confirm' do
-      post 'signup', params
-      expect(response).to redirect_to(action: 'confirm')
-    end
-
-    it 'session gets a user' do
-      post 'signup', params
-      expect(request.session[:user_id]).to eq(@user.id)
-    end
-
-    def params
-      { 'user' =>  { 'login' => 'newbob', 'password' => 'newpassword',
-  'password_confirmation' => 'newpassword' } }
     end
   end
 

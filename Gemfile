@@ -1,11 +1,14 @@
 source 'https://rubygems.org'
+source 'http://gems.test.mas'
 ruby '2.2.0'
 
-gem 'dough-ruby', '~> 4.0', git: 'https://github.com/moneyadviceservice/dough.git', require: 'dough'
-gem 'bowndler', git: 'https://github.com/moneyadviceservice/bowndler.git'
+# Forked to include a fix to make RAILS_RELATIVE_URL_ROOT work 
+# - https://github.com/rails/rails/pull/17724
+gem 'rails', '~> 4.2.1', git: 'git@github.com:moneyadviceservice/rails.git', branch: 'mas-marketing-blog'
 
-gem 'mysql2'
-gem 'rails', '~> 4.2.1'
+gem 'dough-ruby', '~> 4.0', git: 'https://github.com/moneyadviceservice/dough.git', require: 'dough'
+
+gem 'pg'
 gem 'htmlentities'
 gem 'bluecloth', '~> 2.1'
 gem 'coderay', '~> 1.1.0'
@@ -56,6 +59,10 @@ gem 'compass-rails'
 gem 'coffee-rails', ' ~> 4.0.1'
 gem 'uglifier'
 
+group :build, :test, :development do
+  gem 'bowndler', '~> 1.0'
+end
+
 group :development, :test do
   gem 'factory_girl', '~> 4.5.0'
   gem 'dotenv-rails'
@@ -73,15 +80,17 @@ group :development, :test do
   gem 'foreman'
   gem 'letter_opener'
   gem 'database_cleaner'
+  gem 'rspec-rails', '~> 3.1.0'
+  gem 'byebug'
 end
 
 group :test do
   gem 'site_prism'
   gem 'capybara'
-  gem 'rspec-rails', '~> 3.1.0'
+  gem 'rspec_junit_formatter'
+  gem 'sqlite3'
 end
 
-group :staging, :production do
-  gem 'pg'
-  gem 'rails_12factor'
+group :production do
+  gem 'syslog-logger'
 end

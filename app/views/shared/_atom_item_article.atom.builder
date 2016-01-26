@@ -1,4 +1,4 @@
-feed.entry item, :id => "urn:uuid:#{item.guid}", :url => item.permalink_url do |entry|
+feed.entry item, :id => "urn:uuid:#{item.guid}", :url => article_url(item.permalink) do |entry|
   entry.author do
     name = item.user.name rescue item.author
     email = item.user.email rescue nil
@@ -15,7 +15,7 @@ feed.entry item, :id => "urn:uuid:#{item.guid}", :url => item.permalink_url do |
   if item.is_a?(Article)
 
     item.tags.each do |tag|
-      entry.category "term" => tag.display_name, "scheme" => tag.permalink_url
+      entry.category "term" => tag.display_name, "scheme" => tag_path(tag.permalink)
     end
 
     item.resources.each do |resource|
@@ -23,13 +23,13 @@ feed.entry item, :id => "urn:uuid:#{item.guid}", :url => item.permalink_url do |
         entry.tag! :link, "rel" => "enclosure",
               :type => resource.mime,
               :title => item.title,
-              :href => this_blog.file_url(resource.upload_url),
+              :href => resource.upload.thumb.url,
               :length => resource.size
       else
         entry.tag! :link, "rel" => "enclosure",
               :type => resource.mime,
               :title => item.title,
-              :href => this_blog.file_url(resource.upload_url)
+              :href => resource.upload.thumb.url
       end
     end
   end

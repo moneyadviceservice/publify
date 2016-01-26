@@ -9,14 +9,6 @@ describe Page, type: :model do
     end
   end
 
-  describe 'permalink' do
-    context 'with an existing page' do
-      before(:each) { Rails.cache.clear }
-      let(:page) { create(:page, name: 'page_one') }
-      it { expect(page.permalink_url).to eq('http://myblog.net/pages/page_one') }
-    end
-  end
-
   describe 'validations' do
     context 'with an existing page name' do
       let!(:page) { create(:page, name: 'page_one') }
@@ -69,7 +61,7 @@ describe Page, type: :model do
   describe 'redirects' do
     context 'with a simple page' do
       let(:page) { create(:page) }
-      it { expect(page.redirects.first.to_path).to eq(page.permalink_url) }
+      it { expect(page.redirects.first.to_path).to match(/#{page.permalink}$/) }
     end
 
     context 'with an unpublished page' do

@@ -18,7 +18,7 @@ class NotesController < ContentController
 
   def show
     if @note = Note.published.find_by_permalink(CGI.escape(params[:permalink]))
-      @canonical_url = @note.permalink_url
+      @canonical_url = note_path(@note.permalink)
 
       if @note.in_reply_to_message.present?
         @reply = JSON.parse(@note.in_reply_to_message)
