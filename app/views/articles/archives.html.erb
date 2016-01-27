@@ -31,7 +31,7 @@
           </div>
         <%- end %>
       <%- end %>
-      <%= paginate @articles, :window => 1, next_label: "#{t(".next_page")} &raquo;", previous_label: "&laquo; #{t('.previous_page')}" %>
+      <%= paginate @articles, :params => { :script_name => ENV['RAILS_RELATIVE_URL_ROOT'] }, :window => 1, next_label: "#{t(".next_page")} &raquo;", previous_label: "&laquo; #{t('.previous_page')}" %>
     </div>
   </div>
 </main>

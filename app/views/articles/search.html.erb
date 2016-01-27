@@ -45,7 +45,7 @@
         <%- end %>
       <%- end %>
 
-      <%= paginate @articles, :window => 1, next_label: "#{t(".next_page")} &raquo;", previous_label: "&laquo; #{t('.previous_page')}" if @articles.length > 0 %>
+      <%= paginate @articles, :params => { :script_name => ENV['RAILS_RELATIVE_URL_ROOT'] }, :window => 1, next_label: "#{t(".next_page")} &raquo;", previous_label: "&laquo; #{t('.previous_page')}" if @articles.length > 0 %>
     </div>
   </div>
 </main>
