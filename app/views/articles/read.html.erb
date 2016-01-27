@@ -32,7 +32,7 @@
         <%= render 'articles/meta', article: @article %>
       </aside>
 
-      <%= render 'shared/sharing_buttons' %>
+      <%= render 'shared/sharing_buttons', url: article_url(@article.permalink) %>
 
       <div class="comments l-constrained">
         <a id="comments"></a>
