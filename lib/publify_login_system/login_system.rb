@@ -36,8 +36,6 @@ module LoginSystem
     def access_denied
       respond_to do |accepts|
         accepts.html do
-          #store_location
-          session[:return_to] = request.fullpath
           if logged_in?
             flash[:error] = "You're not allowed to perform this action"
             redirect_to admin_dashboard_path
