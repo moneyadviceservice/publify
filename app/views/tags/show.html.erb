@@ -14,7 +14,7 @@
         <% @articles.each_with_index do |article, index| %>
           <%= render partial: '/articles/article', object: article, locals: { index: index } %>
         <% end %>
-        <%= paginate @articles, views_prefix: 'tags' %>
+        <%= paginate @articles, :params => { :script_name => ENV['RAILS_RELATIVE_URL_ROOT'] }, views_prefix: 'tags' %>
       </div>
     </div>
   </div>
