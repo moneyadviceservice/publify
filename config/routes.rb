@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
 
   scope controller: 'styleguide', path: 'styleguide', as: 'styleguide'  do
-    get '/', action: 'index'
-    get 'show', action: 'show'
-    get 'article_page', action: 'article_page'
-    get 'home_page', action: 'home_page'
+    get '/', action: 'index', as: :index
+    get 'show', action: 'show', as: :show
+    get 'article_page', action: 'article_page', as: :article_page
+    get 'home_page', action: 'home_page', as: :home_page
   end
 
   resources :comments, only: [:index, :create]
