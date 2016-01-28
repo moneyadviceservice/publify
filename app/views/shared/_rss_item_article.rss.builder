@@ -29,5 +29,5 @@ xm.item do
     end
   end
 
-  xm.link item_url(item.permalink)
+  xm.link item_url(item)
 end
