@@ -15,7 +15,7 @@ feed.entry item, :id => "urn:uuid:#{item.guid}", :url => article_url(item.permal
   if item.is_a?(Article)
 
     item.tags.each do |tag|
-      entry.category "term" => tag.display_name, "scheme" => tag_path(tag.permalink)
+      entry.category "term" => tag.display_name, "scheme" => tag_url(tag.permalink)
     end
 
     item.resources.each do |resource|
