@@ -3,7 +3,7 @@ class CommentsController < ApplicationController
   layout :pick_layout
 
   def index
-    @comments = Feedback.limit(this_blog.per_page(params[:format]))
+    @comments = Feedback.where(published: true).order('created_at ASC').limit(this_blog.per_page(params[:format]))
 
     respond_to do |format|
       format.atom
