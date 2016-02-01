@@ -28,9 +28,15 @@
   <%
     base_path = ''
     base_path << (Rails.application.config.action_controller.asset_host || '')
-    base_path << Rails.application.config.assets.prefix
-    base_path << '/ckeditor/'
-    base_path << ENV['RAILS_RELATIVE_URL_ROOT'].to_s + '/ckeditor/'
+
+    if Rails.env.development? || Rails.env.test?
+      base_path << Rails.application.config.assets.prefix
+      base_path << '/ckeditor/'
+    else
+      base_path << ENV['RAILS_RELATIVE_URL_ROOT']
+      base_path << Rails.application.config.assets.prefix
+      base_path << '/ckeditor/'
+    end
   %>
   <script>
     var CKEDITOR_BASEPATH = '<%= base_path %>';
