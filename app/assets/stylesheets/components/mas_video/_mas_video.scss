@@ -1,0 +1,20 @@
+.mas-video-container {
+  @include respond-to($mq-l) {
+    max-width: 550px;
+  }
+}
+
+.mas-video {
+  position: relative;
+  padding-bottom: 56.25%;
+  margin-bottom: $baseline-unit*2;
+  height: 0;
+
+  iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
