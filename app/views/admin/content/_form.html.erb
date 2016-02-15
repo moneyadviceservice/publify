@@ -51,6 +51,9 @@
         <div class="article-callout">
           <button class="btn btn-success" data-toggle="modal" data-target="#brightcoveVideo">Brightcove Video</button>
         </div>
+        <div class="article-callout">
+          <button class="btn btn-success" data-toggle="modal" data-target="#youtubeVideo">YouTube Video</button>
+        </div>
       </div>
     </div>
   </div>
@@ -360,14 +363,41 @@
       <div class="modal-body">
         <p>Copy the snippet below and paste it to the desired place by clicking on the 'Source' button. <b>Note:</b> Replace [BRIGHT_ID] with the ID of video you wish to embed.</p>
         <textarea disabled="true" class="modal-body__code">
-          <iframe src='//players.brightcove.net/3608769895001/b15c0e6a-51da-4bb1-b717-bccae778670d_default/index.html?videoId=[BRIGHT_ID]'
-          frameBorder="0"
-          allowfullscreen=""
-          webkitallowfullscreen=""
-          mozallowfullscreen=""
-          height="315"
-          width="560">
-          </iframe>
+          <div class="mas-video-container">
+            <div class="mas-video">
+              <iframe src='//players.brightcove.net/3608769895001/b15c0e6a-51da-4bb1-b717-bccae778670d_default/index.html?videoId=[BRIGHT_ID]'
+              frameBorder="0"
+              allowfullscreen=""
+              webkitallowfullscreen=""
+              mozallowfullscreen=""
+              height="315"
+              width="560">
+              </iframe>
+            </div>
+          </div>
+        </textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal"><%= t('.close_modal') %></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="youtubeVideo" tabindex="-1" role="dialog" aria-labelledby="youtubeVideo" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Embed YouTube video</h2>
+      </div>
+      <div class="modal-body">
+        <p>Copy the snippet below and paste it to the desired place by clicking on the 'Source' button. <b>Note:</b> Replace [YOUTUBE_EMBED_CODE] with the embed code of the YouTube Video.</p>
+        <textarea disabled="true" class="modal-body__code">
+          <div class="mas-video-container">
+            <div class="mas-video">
+              [YOUTUBE_EMBED_CODE]
+            </div>
+          </div>
         </textarea>
       </div>
       <div class="modal-footer">
