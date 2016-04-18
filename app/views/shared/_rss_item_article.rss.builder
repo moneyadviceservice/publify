@@ -19,7 +19,7 @@ xm.item do
     end
 
     if (image = item.hero_image) && (image.file)
-      if (image.versions[:resized].file.exists?)
+      if (image.versions[:resized].file.present?)
         file = image.versions[:resized].file
         xm.enclosure(
           url: image.url(:resized),
