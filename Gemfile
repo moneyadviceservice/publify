@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
-source 'http://gems.test.mas'
+source 'http://gems.dev.mas.local'
 ruby '2.2.0'
 
-# Forked to include a fix to make RAILS_RELATIVE_URL_ROOT work 
+# Forked to include a fix to make RAILS_RELATIVE_URL_ROOT work
 # - https://github.com/rails/rails/pull/17724
 gem 'rails', '~> 4.2.1', git: 'git@github.com:moneyadviceservice/rails.git', branch: 'mas-marketing-blog'
 

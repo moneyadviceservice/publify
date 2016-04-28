@@ -74,7 +74,7 @@ GIT
 
 GEM
   remote: https://rubygems.org/
-  remote: http://gems.test.mas/
+  remote: http://gems.dev.mas.local/
   specs:
     CFPropertyList (2.3.1)
     RedCloth (4.2.9)
