@@ -1,0 +1,25 @@
+login: &login
+  adapter: postgresql
+  host: localhost
+  pool: 5
+  timeout: 5000
+  encoding: utf8
+
+
+development:
+  database: blog_development
+  <<: *login
+
+test:
+  adapter: sqlite3
+  database: db/test.sqlite3
+  pool: 5
+  timeout: 5000
+
+production:
+  adapter: postgresql
+  pool: 5
+  timeout: 5000
+  encoding: utf8
+  reconnect: true
+  url: <%= ENV["MAS_BLOG_DATABASE_URL"] %>

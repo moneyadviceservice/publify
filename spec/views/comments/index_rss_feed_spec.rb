@@ -1,4 +1,4 @@
-describe 'comments/index_rss_feed.rss.builder', type: :view do
+describe 'comments/index.rss.builder', type: :view do
   let!(:blog) { build_stubbed :blog }
 
   describe 'rendering comments' do
@@ -24,7 +24,7 @@ describe 'comments/index_rss_feed.rss.builder', type: :view do
         )
         expect(entry_xml.css('guid').first.content).to eq('urn:uuid:12313123123123123')
         expect(entry_xml.css('description').first.content).to eq('<p>Comment body</p>')
-        expect(entry_xml.css('link').first.content).to eq("#{article.permalink_url}#comment-#{comment.id}")
+        expect(entry_xml.css('link').first.content).to eq("http://test.host/#{article.permalink}#comment-#{comment.id}")
       end
     end
   end

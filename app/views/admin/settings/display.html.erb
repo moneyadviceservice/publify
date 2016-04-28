@@ -5,7 +5,7 @@
 </h2>
 <% end %>
 
-<%= form_tag :action => 'update' do %>
+<%= form_tag admin_update_settings_path do %>
 
 <fieldset class='form-horizontal'>
   <legend><%= t('.publishing_options')%></legend>
@@ -16,17 +16,6 @@
     </div>
     <div class='pull-left'>
       <span class='help-block'><%= t('.default_article_show')%></span>
-    </div>
-  </div>
-  <div class='form-group'>
-    <label class='control-label col-sm-2'><%= t('.statuses') %></label>
-    <div class='col-sm-5'>
-      <div class='checkbox'>
-        <label>
-          <%= check_box(:setting, :statuses_in_timeline) %>
-          <%= t('.status_main_feed')%>            
-        </label>
-      </div>
     </div>
   </div>
   <div class='form-group'>
@@ -139,18 +128,11 @@
         </div>        
       </div>
     </div>
-    <div class='form-group'>
-      <label class='control-label col-sm-2' for="setting_feedburner_url"><%= t('.feedburner_id')%></label>
-      <div class='col-sm-5'>
-        <%= text_field(:setting, :feedburner_url, :class => 'form-control')%>
-        <small class='help-block'><%= t('.feedburner_help') %></small>
-      </div>
-    </div>
   </fieldset>
-  <%= hidden_field_tag 'from', 'display' %>
+
   <div class='form-group'>
-    <hr>
-    <%= link_to(t(".cancel"), {action: 'index'}) %>
+    <hr />
+    <%= link_to(t(".cancel"), admin_dashboard_path) %>
     <%= t(".or") %>
     <%= submit_tag(t(".update_settings"), class: 'btn btn-success') %>
   </div>

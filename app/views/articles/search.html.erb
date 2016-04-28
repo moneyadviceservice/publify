@@ -6,7 +6,7 @@
   <div class="l-constrained">
     <div class="results-list">
       <h1 class="results-list__title"><%= t('.search_results_for')%> <% if params[:q] %>'<%= h(params[:q]) %>'<% end %></h1>
-      <form class="search-form" action="/search">
+      <form class="search-form" action="<%= search_path %>">
         <div class="form__row">
           <label for="q" class="form__label-heading">Search term</label>
           <input class="search-form__input" type="text" name="q" id="q" value="<%= h(params[:q]) %>" />
@@ -24,7 +24,7 @@
         <% end %>
         <%- @articles.each do |article| %>
           <div class="results-list-item">
-            <h2 class="results-list-item__header"><%= link_to_permalink(article,h(article.title)) %></h2>
+            <h2 class="results-list-item__header"><%= link_to(article.title, article_path(article.permalink)) %></h2>
             <div class="results-list-item__author">
               <% if article.author %>
                 <span class="visually-hidden"><%= t("articles.archives.published_by") %></span> <a href="<%= author_path(id: article.author) %>"><%= article.user.nickname %></a> -
@@ -34,18 +34,18 @@
             <% if article.description_meta_tag.present? %>
               <p><%= article.description_meta_tag %></p>
             <% end %>
-            <a class="results-list-item__comments comments-count" href="<%= article.permalink_url('comments') %>">
+            <a class="results-list-item__comments comments-count" href="<%= article_path(article.permalink, anchor: :comments) %>">
               <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 22 21" enable-background="new 0 0 22 21" xml:space="preserve" class="comments-count__icon">
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M19.5 0h-17C1.1 0 0 1.1 0 2.5v12C0 15.9 1.1 17 2.5 17h17 c1.4 0 2.5-1.1 2.5-2.5v-12C22 1.1 20.9 0 19.5 0z"/>
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M2.5 8.5c0 0 8 4 3 12.5c0 0 9.7-1.8 10-12L2.5 8.5z"/>
               </svg>
-              <%= t('articles.archives.comments', count: article.comments.count) %>
+              <%= t('articles.archives.comments', count: article.published_comments.count) %>
             </a>
           </div>
         <%- end %>
       <%- end %>
 
-      <%= paginate @articles, :window => 1, next_label: "#{t(".next_page")} &raquo;", previous_label: "&laquo; #{t('.previous_page')}" if @articles.length > 0 %>
+      <%= paginate @articles, :params => { :script_name => ENV['RAILS_RELATIVE_URL_ROOT'] }, :window => 1, next_label: "#{t(".next_page")} &raquo;", previous_label: "&laquo; #{t('.previous_page')}" if @articles.length > 0 %>
     </div>
   </div>
 </main>

@@ -66,8 +66,6 @@ class Article < Content
     joins(:tags).where(tags: {name: 'news'})
   }
 
-  setting :password, :string, ''
-
   attr_accessor :keywords
 
   include Article::States
@@ -112,11 +110,6 @@ class Article < Content
     scoped.order('created_at DESC')
   end
 
-  def permalink_url(anchor = nil, only_path = false)
-    @cached_permalink_url ||= {}
-    @cached_permalink_url["#{anchor}#{only_path}"] ||= blog.url_for(permalink_url_options, anchor: anchor, only_path: only_path)
-  end
-
   def save_attachments!(files)
     files ||= {}
     files.values.each { |f| self.save_attachment!(f) }
@@ -126,22 +119,6 @@ class Article < Content
     resources << Resource.create_and_upload(file)
   rescue => e
     logger.info(e.message)
-  end
-
-  def trackback_url
-    blog.url_for("trackbacks?article_id=#{id}", only_path: false)
-  end
-
-  def comment_url
-    blog.url_for("comments?article_id=#{id}", only_path: true)
-  end
-
-  def preview_comment_url
-    blog.url_for("comments/preview?article_id=#{id}", only_path: true)
-  end
-
-  def feed_url(format)
-    "#{permalink_url}.#{format.gsub(/\d/, '')}"
   end
 
   def really_send_pings
@@ -179,28 +156,6 @@ class Article < Content
   def self.find_by_published_at
     result = select('published_at').where('published_at is not NULL').where(type: 'Article')
     result.map { |d| [d.published_at.strftime('%Y-%m')] }.uniq
-  end
-
-  # Finds one article which was posted on a certain date and matches the supplied dashed-title
-  # params is a Hash
-  def self.find_by_permalink(params)
-    date_range = PublifyTime.delta(params[:year], params[:month], params[:day])
-
-    req_params = {}
-    req_params[:permalink] = params[:title] if params[:title]
-    req_params[:published_at] = date_range if date_range
-
-    return nil if req_params.empty? # no search if no params send
-    article = published.where(req_params).first
-    return article if article
-
-    if params[:title]
-      req_params[:permalink] = CGI.escape(params[:title])
-      article = published.where(req_params).first
-      return article if article
-    end
-
-    raise ActiveRecord::RecordNotFound
   end
 
   # Fulltext searches the body of published articles
@@ -276,10 +231,6 @@ class Article < Content
     self.extended = parts[1] || ''
   end
 
-  def password_protected?
-    not password.blank?
-  end
-
   def add_comment(params)
     comments.build(params)
   end
@@ -311,19 +262,6 @@ class Article < Content
   end
 
   private
-
-  def permalink_url_options
-    format_url = blog.permalink_format.dup
-    format_url.gsub!('%year%', published_at.year.to_s)
-    format_url.gsub!('%month%', sprintf('%.2d', published_at.month))
-    format_url.gsub!('%day%', sprintf('%.2d', published_at.day))
-    format_url.gsub!('%title%', URI.encode(permalink.to_s))
-    if format_url[0, 1] == '/'
-      format_url[1..-1]
-    else
-      format_url
-    end
-  end
 
   def html_urls_to_ping
     urls_to_ping = []

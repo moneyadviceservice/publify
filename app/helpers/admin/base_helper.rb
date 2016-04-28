@@ -7,9 +7,9 @@ module Admin::BaseHelper
 
   def dashboard_action_links
     links = []
-    links << link_to(t('.write_a_post'), controller: 'content', action: 'new') if current_user.can_access_to_articles?
-    links << link_to(t('.write_a_page'), controller: 'pages', action: 'new') if current_user.can_access_to_pages?
-    links << link_to(t('.update_your_profile_or_change_your_password'), controller: 'profiles', action: 'index')
+    links << link_to(t('.write_a_post'), new_admin_content_path) if current_user.can_access_to_articles?
+    links << link_to(t('.write_a_page'), new_admin_page_path) if current_user.can_access_to_pages?
+    links << link_to(t('.update_your_profile_or_change_your_password'), edit_admin_profile_path)
     links.join(', ')
   end
 
@@ -22,15 +22,6 @@ module Admin::BaseHelper
 
   def show_rss_description
     Article.first.get_rss_description rescue ''
-  end
-
-  def show_tag_actions item
-    content_tag(:div, class: 'action') do
-      [button_to_edit(item),
-        button_to_delete(item),
-        link_to_permalink(item, "#{item.articles.size} <span class='glyphicon glyphicon-link'></span>".html_safe, nil, 'btn btn-success btn-xs').html_safe
-      ].join(' ').html_safe
-    end
   end
 
   def class_for_admin_state(sidebar, this_position)
@@ -58,20 +49,17 @@ module Admin::BaseHelper
       if m.current_url?(params[:controller], params[:action])
         output << content_tag(:li, link_to(m.name, '#'), class: 'active')
       else
-        output << content_tag(:li, link_to(m.name, m.url))
+        # url_for doesn't respect RAILS_RELATIVE_URL_ROOT, so we hack it in using script_name instead
+        url = if ENV['RAILS_RELATIVE_URL_ROOT']
+          url_for(m.url.merge(script_name: ENV['RAILS_RELATIVE_URL_ROOT']))
+        else
+          url_for(m.url)
+        end
+
+        output << content_tag(:li, link_to(m.name, url))
       end
     end
     output
-  end
-
-  def link_to_edit(label, record, controller = controller.controller_name)
-    link_to label, { controller: controller, action: 'edit', id: record.id }, class: 'edit'
-  end
-
-  def link_to_edit_with_profiles(label, record, controller = controller.controller_name)
-    if current_user.admin? || current_user.id == record.user_id
-      link_to label, { controller: controller, action: 'edit', id: record.id }, class: 'edit'
-    end
   end
 
   def text_filter_options
@@ -103,7 +91,7 @@ module Admin::BaseHelper
   def display_pagination(collection, cols, _first = '', _last = '')
     return if collection.count == 0
     content_tag(:tr) do
-      content_tag(:td, paginate(collection), class: 'paginate', colspan: cols)
+      content_tag(:td, paginate(collection, params: { script_name: ENV['RAILS_RELATIVE_URL_ROOT'] }, views_prefix: 'admin'), class: 'paginate', colspan: cols)
     end
   end
 
@@ -117,11 +105,31 @@ module Admin::BaseHelper
   end
 
   def button_to_edit(item)
-    link_to(content_tag(:span, '', class: 'glyphicon glyphicon-pencil'), { action: 'edit', id: item.id }, class: 'btn btn-primary btn-xs btn-action')
+    url = case item
+    when Article
+      edit_admin_content_path(item)
+    when Page
+      edit_admin_page_path(item)
+    when User
+      edit_admin_user_path(item)
+    when Redirect
+      edit_admin_redirect_path(item)
+    end
+    link_to(content_tag(:span, '', class: 'glyphicon glyphicon-pencil'), url, class: 'btn btn-primary btn-xs btn-action')
   end
 
   def button_to_delete(item)
-    link_to(content_tag(:span, '', class: 'glyphicon glyphicon-trash'), { action: 'destroy', id: item.id }, class: 'btn btn-danger btn-xs btn-action')
+    url = case item
+    when Article
+      remove_admin_content_path(item)
+    when Page
+      remove_admin_page_path(item)
+    when User
+      remove_admin_user_path(item)
+    when Redirect
+      remove_admin_redirect_path(item)
+    end
+    link_to(content_tag(:span, '', class: 'glyphicon glyphicon-trash'), url, class: 'btn btn-danger btn-xs btn-action')
   end
 
   def button_to_short_url(item)

@@ -4,7 +4,7 @@
     <article>
       <p class='p-name entry-title e-content entry-content article'><%= note.html(:body) %></p>
       <footer>
-        <small><%= link_to_permalink(note, display_date_and_time(note.published_at)) %></small>
+        <small><%= link_to(display_date_and_time(note.published_at), note.permalink) %></small>
       </footer>
     </article>
         <hr>
@@ -12,4 +12,4 @@
   <% end -%>
 </div>
 
-<%= paginate @notes, :next_label => "#{t(".next_page")} &raquo;", :previous_label => "&laquo; #{t('.previous_page')}" %>
+<%= paginate @notes, :params => { :script_name => ENV['RAILS_RELATIVE_URL_ROOT'] }, :next_label => "#{t(".next_page")} &raquo;", :previous_label => "&laquo; #{t('.previous_page')}" %>

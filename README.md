@@ -63,8 +63,3 @@ First you need to make sure you have the production and stagin git remotes. If y
 
     $ git remote add staging git@heroku.com:mas-marketing-blog-staging.git
     $ git remote add production git@heroku.com:mas-marketing-blog.git
-
-You can deploy to staging and production with:
-
-    $ ./bin/deploy staging
-    $ ./bin/deploy production

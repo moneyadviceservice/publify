@@ -2,7 +2,7 @@
 <h2>
   <i class="glyphicon glyphicon-large glyphicon-folder-open"></i>
   <%= t(".manage_campaigns") %>
-  <%= link_to(t(".new_campaign"), {controller: 'campaigns', action: 'new'}, id: 'dialog-link', class: 'btn btn-info pull-right') %>
+  <%= link_to(t(".new_campaign"), new_admin_campaign_path, id: 'dialog-link', class: 'btn btn-info pull-right') %>
 </h2>
 <% end %>
 

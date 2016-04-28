@@ -19,21 +19,15 @@ describe CommentsController, type: :controller do
     it 'should redirect to the article' do
       article = create(:article, created_at: '2005-01-01 02:00:00')
       post :create, comment: { body: 'content', author: 'bob', email: 'bob@foo.com' }, article_id: article.id
-      expect(response).to redirect_to("#{blog.base_url}/#{article.created_at.year}/#{sprintf('%.2d', article.created_at.month)}/#{sprintf('%.2d', article.created_at.day)}/#{article.permalink}#comment-#{article.comments.last.id}")
+      expect(response).to redirect_to("http://test.host/#{article.permalink}#comment-#{article.comments.last.id}")
     end
   end
 
   describe 'index' do
-    context 'scoped index' do
-      let(:article) { create(:article) }
-      before(:each) { get 'index', article_id: article.id }
-      it { expect(response).to redirect_to("#{article.permalink_url}#comments") }
-    end
-
     context 'without format' do
-      before(:each) { get :index }
-      it { expect(response).to be_success }
-      it { expect(assigns(:comments)).to be_nil }
+      it 'throws a 406' do
+        expect { get :index }.to raise_error(ActionController::UnknownFormat)
+      end
     end
 
     context 'with atom format' do
@@ -45,14 +39,14 @@ describe CommentsController, type: :controller do
 
         it { expect(response).to be_success }
         it { expect(assigns(:comments)).to eq([some, items]) }
-        it { expect(response).to render_template('index_atom_feed') }
+        it { expect(response).to render_template('comments/index') }
       end
 
       context 'with an article' do
         let!(:article) { create(:article) }
         before(:each) { get :index, format: 'atom', article_id: article.id }
         it { expect(response).to be_success }
-        it { expect(response).to render_template('index_atom_feed') }
+        it { expect(response).to render_template('comments/index') }
       end
     end
 
@@ -64,7 +58,7 @@ describe CommentsController, type: :controller do
         before { get 'index', format: 'rss' }
         it { expect(response).to be_success }
         it { expect(assigns(:comments)).to eq([some, items]) }
-        it { expect(response).to render_template('index_rss_feed') }
+        it { expect(response).to render_template('comments/index') }
       end
 
       context 'with article' do
@@ -72,7 +66,7 @@ describe CommentsController, type: :controller do
         before(:each) { get :index, format: 'rss', article_id: article.id }
 
         it { expect(response).to be_success }
-        it { expect(response).to render_template('index_rss_feed') }
+        it { expect(response).to render_template('comments/index') }
       end
     end
   end

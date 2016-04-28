@@ -17,30 +17,6 @@ describe Blog, type: :model do
         expect(@blog.sp_global).to eq(expected)
       end
     end
-
-    ['', '/sub-uri'].each do |sub_url|
-      describe "when running in with http://myblog.net#{sub_url}" do
-
-        before :each do
-          @base_url = "http://myblog.net#{sub_url}"
-          @blog.base_url = @base_url
-        end
-
-        [true, false].each do |only_path|
-          describe 'blog.url_for' do
-            describe "with a hash argument and only_path = #{only_path}" do
-              subject { @blog.url_for(controller: 'tags', action: 'show', id: 1, only_path: only_path) }
-              it { is_expected.to eq("#{only_path ? sub_url : @base_url}/tag/1") }
-            end
-
-            describe "with a string argument and only_path = #{only_path}" do
-              subject { @blog.url_for('tag/1', only_path: only_path) }
-              it { is_expected.to eq("#{only_path ? sub_url : @base_url}/tag/1") }
-            end
-          end
-        end
-      end
-    end
   end
 
   describe 'The first blog' do
@@ -83,38 +59,6 @@ describe Blog, type: :model do
       @blog.blog_name = ''
       expect(@blog).not_to be_valid
     end
-  end
-
-  describe 'Valid permalink in blog' do
-
-    before :each do
-      @blog = Blog.new
-    end
-
-    def set_permalink permalink
-      @blog.permalink_format = permalink
-    end
-
-    ['foo', 'year', 'day', 'month', 'title', '%title', 'title%', '/year/month/day/title',
-     '%year%', '%day%', '%month%', '%title%.html.atom', '%title%.html.rss'].each do |permalink_type|
-      it "not valid with #{permalink_type}" do
-        set_permalink permalink_type
-        expect(@blog).not_to be_valid
-      end
-    end
-
-    ['%title%', '%title%.html', '/hello/all/%year%/%title%', 'atom/%title%.html', 'ok/rss/%title%.html'].each do |permalink_type|
-      it "should be valid with only #{permalink_type}" do
-        set_permalink permalink_type
-        expect(@blog).to be_valid
-      end
-    end
-
-    it 'should not be valid without %title% in' do
-      @blog.permalink_format = '/toto/%year%/%month/%day%'
-      expect(@blog).not_to be_valid
-    end
-
   end
 
   describe '.meta_keywords' do
@@ -204,18 +148,6 @@ http://anotherurl.net/other_line")
     it { expect(blog.per_page('html')).to eq(3) }
     it { expect(blog.per_page('rss')).to eq(4) }
     it { expect(blog.per_page('atom')).to eq(4) }
-  end
-
-  describe '#allow_signup?' do
-    context 'with a blog that allow signup' do
-      let(:blog) { build(:blog, allow_signup: 1) }
-      it { expect(blog.allow_signup?).to be_truthy }
-    end
-
-    context 'with a blog that not allow signup' do
-      let(:blog) { build(:blog, allow_signup: 0) }
-      it { expect(blog.allow_signup?).to be_falsey }
-    end
   end
 
   describe '#humans' do

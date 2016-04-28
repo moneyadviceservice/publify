@@ -43,22 +43,23 @@ Rails.application.configure do
   # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for nginx
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
-  config.force_ssl = true
+  #config.force_ssl = true
 
   # Set to :debug to see everything in the log.
-  config.log_level = :debug
+  config.log_level = :info
 
   # Prepend all log lines with the following tags.
   # config.log_tags = [ :subdomain, :uuid ]
 
   # Use a different logger for distributed setups.
   # config.logger = ActiveSupport::TaggedLogging.new(SyslogLogger.new)
+  config.logger = ActiveSupport::TaggedLogging.new(Logger::Syslog.new("blog", Syslog::LOG_LOCAL6).tap {|log| log.level = Logger::INFO})
 
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
-  #config.action_controller.asset_host = ENV['RACKSPACE_CDN_HOST']
+  config.action_controller.asset_host = ENV['BLOG_RACKSPACE_CDN_HOST']
 
   # Precompile additional assets.
   # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
@@ -86,10 +87,4 @@ Rails.application.configure do
 
   config.action_mailer.default_url_options = { host: 'moneyadviceservice.org.uk' }
   config.action_mailer.delivery_method = :mailjet
-
-  if ENV['BASIC_AUTH_ENABLED']
-    config.middleware.use '::Rack::Auth::Basic' do |u, p|
-      [u,p] == [ENV['BASIC_AUTH_USER'], ENV['BASIC_AUTH_PASSWORD']]
-    end
-  end
 end

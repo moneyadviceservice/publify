@@ -40,11 +40,24 @@ module ApplicationHelper
     controller.send(:render_to_string, *args, &block)
   end
 
-  def link_to_permalink(item, title, anchor = nil, style = nil, nofollow = nil, only_path = false)
-    options = {}
-    options[:class] = style if style
-    options[:rel] = 'nofollow' if nofollow
-    link_to title, item.permalink_url(anchor, only_path), options
+  def item_path(item, options = {})
+    case item
+    when Article
+      article_path(item.permalink, options)
+    when Comment
+      options.merge!(anchor: "comment-#{item.id}")
+      article_path(item.article.permalink, options)
+    end
+  end
+
+  def item_url(item, options = {})
+    case item
+    when Article
+      article_url(item.permalink, options)
+    when Comment
+      options.merge!(anchor: "comment-#{item.id}")
+      article_url(item.article.permalink, options)
+    end
   end
 
   def avatar_tag(options = {})
@@ -60,14 +73,6 @@ module ApplicationHelper
   def meta_tag(name, value, property = false)
     return tag :meta, name: name, content: value unless property || value.blank?
     tag :meta, property: name, content: value unless value.blank?
-  end
-
-  def markup_help_popup(markup, text)
-    if markup and markup.commenthelp.size > 1
-      "<a href=\"#{url_for controller: 'articles', action: 'markup_help', id: markup.id}\" onclick=\"return popup(this, 'Publify Markup Help')\">#{text}</a>"
-    else
-      ''
-    end
   end
 
   def onhover_show_admin_tools(type, id = nil)
@@ -134,14 +139,6 @@ module ApplicationHelper
         v.gsub!(/^#{spaces}/, '  ') # add 2 spaces to line up with the assumed position of the surrounding tags
       end
     end.flatten.uniq.join("\n")
-  end
-
-  def feed_atom
-    feed_for('atom')
-  end
-
-  def feed_rss
-    feed_for('rss')
   end
 
   def content_array
@@ -216,23 +213,11 @@ module ApplicationHelper
 
   private
 
-  def feed_for(type)
-    if params[:action] == 'search'
-      url_for(only_path: false, format: type, q: params[:q])
-    elsif not @article.nil?
-      @article.feed_url(type)
-    elsif not @auto_discovery_url_atom.nil?
-      instance_variable_get("@auto_discovery_url_#{type}")
-    end
-  end
-
   # fetches appropriate html content for RSS and ATOM feeds. Checks for:
   # - article being password protected
   # - hiding extended content on RSS. In this case if there is an excerpt we show the excerpt, or else we show the body
   def fetch_html_content_for_feeds(item, this_blog)
-    if item.password_protected?
-      "<p>This article is password protected. Please <a href='#{item.permalink_url}'>fill in your password</a> to read it</p>"
-    elsif this_blog.hide_extended_on_rss
+    if this_blog.hide_extended_on_rss
       if item.excerpt? and item.excerpt.length > 0 then
         item.excerpt
       else

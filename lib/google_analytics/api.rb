@@ -17,7 +17,7 @@ module GoogleAnalytics
         application_name:    'MAS-Blog',
         application_version: '1.0.0'
       )
-      key = Google::APIClient::PKCS12.load_key(ENV['GA_PRIVATE_KEY_FILENAME'], 'notasecret')
+      key = Google::APIClient::PKCS12.load_key(ENV['GA_PRIVATE_KEY_PATH'], 'notasecret')
       service_account = Google::APIClient::JWTAsserter.new(ENV['GA_API_EMAIL_ADDRESS'], scope, key)
       client.authorization = service_account.authorize
       OAuth2::AccessToken.new(oauth_client, client.authorization.access_token, expires_in: 1.hour)

@@ -17,7 +17,7 @@ if [ ! -f .env ]; then
 fi
 
 #Copy over the database details
-cp config/database.yml.mysql config/database.yml
+cp config/database.yml.postgres config/database.yml
 
 # Set up database and add any development seed data
 bundle exec rake db:create db:migrate db:seed db:test:prepare

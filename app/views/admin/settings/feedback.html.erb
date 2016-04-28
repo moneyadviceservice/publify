@@ -5,7 +5,7 @@
 </h2>
 <% end %>
 
-<%= form_tag action: 'update' do %>
+<%= form_tag admin_update_settings_path do %>
   <fieldset class='form-horizontal'>
     <legend><%= t(".feedback")%></legend>
     <div class='form-group'>
@@ -22,24 +22,6 @@
           <%= check_box(:setting, :default_moderate_comments)%>
           </label>
           <small class='help-block'><%= t(".explain_feedback_moderation")%></small>
-        </div>
-      </div>
-    </div>
-    <div class='form-group'>
-      <label class='control-label col-sm-2'><%= t(".trackbacks") %></label>
-      <div class='col-sm-5'>
-        <div class='checkbox'>
-          <label for="setting_default_allow_pings">
-            <%= check_box(:setting, :default_allow_pings)%>
-            <%= t(".enable_trackbacks_by_default")%>
-          </label>
-        </div>
-        <div class='checkbox'>
-          <label for="setting_global_pings_disable">
-            <%= check_box(:setting, :global_pings_disable)%>
-            <%= t(".disable_trackbacks_sitewide")%>
-          </label>
-          <small class='help-block'><%= t(".explain_disable_trackbacks")%></small>
         </div>
       </div>
     </div>
@@ -116,10 +98,9 @@
     </div>
   </fieldset>
 
-  <%= hidden_field_tag 'from', 'feedback' %>
   <div class='form-group'>
-    <hr>
-    <%= link_to(t(".cancel"), {action: 'index'}) %>
+    <hr />
+    <%= link_to(t(".cancel"), admin_dashboard_path) %>
     <%= t(".or") %>
     <%= submit_tag(t(".update_settings"), class: 'btn btn-success') %>
   </div>

@@ -1,15 +1,20 @@
+<% content_for :feeds do %>
+  <%= auto_discovery_link_tag :rss, tag_url(params[:id], format: :rss) %>
+  <%= auto_discovery_link_tag :atom, tag_url(params[:id], format: :atom) %>
+<% end %>
+
 <main id="main" tabindex="-1" class="l-index">
   <div class="l-tiles">
     <div class="l-tiles-title">
       <%= tagged_as_heading %>
-      <h1 class="l-tiles-title__header"><%= @grouping.display_name %></h1>
+      <h1 class="l-tiles-title__header"><%= @tag.display_name %></h1>
     </div>
     <div class="l-constrained">
       <div class="l-tiles__inner">
         <% @articles.each_with_index do |article, index| %>
           <%= render partial: '/articles/article', object: article, locals: { index: index } %>
         <% end %>
-        <%= paginate @articles, views_prefix: 'tags' %>
+        <%= paginate @articles, :params => { :script_name => ENV['RAILS_RELATIVE_URL_ROOT'] }, views_prefix: 'tags' %>
       </div>
     </div>
   </div>
