@@ -5,19 +5,13 @@ if Rails.env.in?(%(development test cucumber))
   end
 else
   CarrierWave.configure do |config|
-    if ENV['FOG_PROVIDER'] == 'Rackspace'
-      config.storage = :fog
-
-      config.fog_credentials = {
-        provider:           ENV['FOG_PROVIDER'],
-        rackspace_username: ENV['RACKSPACE_USERNAME'],
-        rackspace_api_key:  ENV['RACKSPACE_API_KEY'],
-        rackspace_auth_url: Fog::Rackspace::UK_AUTH_ENDPOINT,
-        rackspace_region:   :lon
-      }
-
-      config.fog_directory = ENV['BLOG_FOG_DIRECTORY']
-      config.asset_host = ENV['BLOG_RACKSPACE_CDN_HOST']
+    if ENV['FOG_PROVIDER'] == 'Azure'
+      require 'azure/blob/blob_service'
+      config.storage = :azure
+      config.azure_storage_account_name = ENV['AZURE_ASSETS_STORAGE_BLOG_ACCOUNT_NAME']
+      config.azure_storage_access_key = ENV['AZURE_ASSETS_STORAGE_BLOG_ACCOUNT_KEY']
+      config.azure_container = ENV['AZURE_ASSETS_STORAGE_BLOG_CONTAINER']
+      config.asset_host = ENV['AZURE_ASSETS_STORAGE_HOST']
     else
       config.storage = :file
       config.permissions = 0666

@@ -51,6 +51,9 @@
         <div class="article-callout">
           <button class="btn btn-success" data-toggle="modal" data-target="#brightcoveVideo">Brightcove Video</button>
         </div>
+        <div class="article-callout">
+          <button class="btn btn-success" data-toggle="modal" data-target="#youtubeVideo">YouTube Video</button>
+        </div>
       </div>
     </div>
   </div>
@@ -303,7 +306,7 @@
                 <div class="news-signup-inpage__image"></div>
                 <div class="news-signup-inpage__text-container">
                   <h3 class="news-signup-inpage__title">
-                    <span class="news-signup-inpage__title-text">200,000 people are taking care of their money with our FREE money advice newsletter.</span>
+                    <span class="news-signup-inpage__title-text">270,000+ people are taking care of their money with our FREE money advice newsletter.</span>
                   </h3>
                   <p class="news-signup-inpage__supplementary-text">Sign up today!</p>
                   <input class="button--newsletter" type="submit" value="Send me money advice">
@@ -337,7 +340,7 @@
             class="calculator-preview__iframe"
             src="https://www.moneyadviceservice.org.uk/en/cost-calculator-builder/embed/calculators/[CALC_ID]">
           </iframe>
-          <script src="https://6716c801720b2d014ddd-90dd74bb468e514261468bbc28ae4817.ssl.cf3.rackcdn.com/a/cost_calculator_builder/embed-06ce0df8c79534fead5871af5a3875bd.js"></script>
+          <script src="https://masjumpprdstorage.blob.core.windows.net/responsive-assets/a/cost_calculator_builder/embed-06ce0df8c79534fead5871af5a3875bd.js"></script>
         </textarea>
       </div>
       <div class="modal-footer">
@@ -356,14 +359,41 @@
       <div class="modal-body">
         <p>Copy the snippet below and paste it to the desired place by clicking on the 'Source' button. <b>Note:</b> Replace [BRIGHT_ID] with the ID of video you wish to embed.</p>
         <textarea disabled="true" class="modal-body__code">
-          <iframe src='//players.brightcove.net/3608769895001/b15c0e6a-51da-4bb1-b717-bccae778670d_default/index.html?videoId=[BRIGHT_ID]'
-          frameBorder="0"
-          allowfullscreen=""
-          webkitallowfullscreen=""
-          mozallowfullscreen=""
-          height="315"
-          width="560">
-          </iframe>
+          <div class="mas-video-container">
+            <div class="mas-video">
+              <iframe src='//players.brightcove.net/3608769895001/b15c0e6a-51da-4bb1-b717-bccae778670d_default/index.html?videoId=[BRIGHT_ID]'
+              frameBorder="0"
+              allowfullscreen=""
+              webkitallowfullscreen=""
+              mozallowfullscreen=""
+              height="315"
+              width="560">
+              </iframe>
+            </div>
+          </div>
+        </textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal"><%= t('.close_modal') %></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="youtubeVideo" tabindex="-1" role="dialog" aria-labelledby="youtubeVideo" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Embed YouTube video</h2>
+      </div>
+      <div class="modal-body">
+        <p>Copy the snippet below and paste it to the desired place by clicking on the 'Source' button. <b>Note:</b> Replace [YOUTUBE_EMBED_CODE] with the embed code of the YouTube Video.</p>
+        <textarea disabled="true" class="modal-body__code">
+          <div class="mas-video-container">
+            <div class="mas-video">
+              [YOUTUBE_EMBED_CODE]
+            </div>
+          </div>
         </textarea>
       </div>
       <div class="modal-footer">
