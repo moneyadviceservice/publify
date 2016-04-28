@@ -39,10 +39,8 @@ module LoginSystem
           if logged_in?
             flash[:error] = "You're not allowed to perform this action"
             redirect_to admin_dashboard_path
-          elsif User.first
-            redirect_to login_path
           else
-            redirect_to signup_path
+            redirect_to login_path
           end
         end
         accepts.xml do
