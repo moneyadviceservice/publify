@@ -16,6 +16,6 @@ bundle install --jobs $BUNDLE_JOBS
 bower cache clean
 rm -rf vendor/assets/bower_components
 bowndler update --production --config.interactive=false
-bundle exec rake db:schema:load
+RAILS_ENV=test bundle exec rake db:schema:load
 
 bundle exec rspec spec --format html --out tmp/spec.html --format RspecJunitFormatter --profile --format progress --deprecation-out log/rspec_deprecations.txt
