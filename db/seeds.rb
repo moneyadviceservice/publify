@@ -6,19 +6,19 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Daley', city: cities.first)
 
-def correct_url(env)
+def host(env)
   if env == 'production'
-    'www.'
+    'www.moneyadviceservice.org.uk'
   elsif env == 'staging'
-    'wwwstaging.'
+    'www.staging.dev.mas.local'
   else
-    "#{env}.test."
+    'dev.mas.local'
   end
 end
 
 Blog.create
 b = Blog.first
-b.base_url = "#{correct_url(ENV['MAS_ENVIRONMENT'])}moneyadviceservice.org.uk/blog"
+b.base_url = "#{host(ENV['MAS_ENVIRONMENT'])}/blog"
 b.save
 
 %w(
