@@ -15,7 +15,15 @@ CI_EXECUTOR_NUMBER=${EXECUTOR_NUMBER-0}
 bundle install --jobs $BUNDLE_JOBS
 bower cache clean
 rm -rf vendor/assets/bower_components
+
+echo "Running bowndler"
+echo "----"
 bowndler update --production --config.interactive=false
+
+echo "Running Database Schema Load"
+echo "----"
 RAILS_ENV=test bundle exec rake db:schema:load
 
+echo "Running RSpec tests"
+echo "----"
 bundle exec rspec spec --format html --out tmp/spec.html --format RspecJunitFormatter --profile --format progress --deprecation-out log/rspec_deprecations.txt
