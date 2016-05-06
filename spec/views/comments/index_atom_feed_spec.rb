@@ -32,7 +32,7 @@ describe 'comments/index.atom.builder', type: :view do
         expect(entry_xml.css('id').first.content).to eq('urn:uuid:12313123123123123')
         expect(entry_xml.css('content').first.content).to eq('<p>Comment body</p>')
         link_xml = entry_xml.css('link').first
-        expect(link_xml['href']).to eq("http://test.host/#{article.permalink}#comment-#{comment.id}")
+        expect(link_xml['href']).to eq("#{article_url(article.permalink)}#comment-#{comment.id}")
       end
     end
   end

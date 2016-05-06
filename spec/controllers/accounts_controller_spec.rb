@@ -38,13 +38,13 @@ describe AccountsController, type: :controller do
 
     it 'redirects to /admin if no return' do
       make_request
-      expect(response).to redirect_to(controller: 'admin/dashboard')
+      expect(response).to redirect_to(admin_dashboard_path)
     end
 
     it 'redirects to /admin if no return and you are logged in' do
       session[:user_id] = session[:user] = @henri.id
       make_request
-      expect(response).to redirect_to(controller: 'admin/dashboard')
+      expect(response).to redirect_to(admin_dashboard_path)
     end
   end
 
@@ -154,7 +154,7 @@ describe AccountsController, type: :controller do
 
     it 'trying to log in once again redirects to admin/dashboard/index' do
       get 'login'
-      expect(response).to redirect_to(controller: 'admin/dashboard')
+      expect(response).to redirect_to(admin_dashboard_path)
     end
 
     describe 'when logging out' do
@@ -171,7 +171,7 @@ describe AccountsController, type: :controller do
       end
 
       it 'redirects to the login action' do
-        expect(response).to redirect_to(action: 'login')
+        expect(response).to redirect_to(login_path)
       end
 
       it 'deletes cookies containing credentials' do
@@ -192,7 +192,7 @@ describe AccountsController, type: :controller do
 
     context 'post' do
       before(:each) { post :recover_password, user: { login: user.login } }
-      it { expect(response).to redirect_to(action: 'login') }
+      it { expect(response).to redirect_to(login_path) }
     end
 
     context 'post with an unknown login' do

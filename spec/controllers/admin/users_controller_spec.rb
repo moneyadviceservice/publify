@@ -12,7 +12,7 @@ describe Admin::UsersController, 'rough port of the old functional test', type: 
         assert_template 'new'
 
         post :create, user: { login: 'errand', email: 'corey@test.com', password: 'testpass', password_confirmation: 'testpass', profile_id: 1, nickname: 'fooo', firstname: 'bar' }
-        expect(response).to redirect_to(action: 'index')
+        expect(response).to redirect_to(admin_users_path)
       end
     end
 
@@ -38,7 +38,7 @@ describe Admin::UsersController, 'rough port of the old functional test', type: 
         post :update, id: @admin.id, user: { login: 'errand',
                                                  email: 'corey@test.com', password: 'testpass',
                                                  password_confirmation: 'testpass' }
-        expect(response).to redirect_to(action: 'index')
+        expect(response).to redirect_to(admin_users_path)
       end
     end
   end
@@ -52,7 +52,7 @@ describe Admin::UsersController, 'rough port of the old functional test', type: 
 
     it "don't see the list of user" do
       get :index
-      expect(response).to redirect_to(controller: '/admin/dashboard', action: 'index')
+      expect(response).to redirect_to(admin_dashboard_path)
     end
 
     describe '#update' do
@@ -67,7 +67,7 @@ describe Admin::UsersController, 'rough port of the old functional test', type: 
         end
 
         it 'should redirect to login' do
-          expect(response).to redirect_to(controller: '/admin/dashboard', action: 'index')
+          expect(response).to redirect_to(admin_dashboard_path)
         end
 
         it 'should not change user profile' do

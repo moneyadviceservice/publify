@@ -72,7 +72,7 @@ describe Admin::ContentsController, type: :controller do
 
         before(:each) { post :create, params }
 
-        it { expect(response).to redirect_to(action: :edit, id: created_article.id) }
+        it { expect(response).to redirect_to(edit_admin_content_path(created_article)) }
         it { expect(flash[:success]).to eq(I18n.t('admin.contents.create.success.published')) }
 
         it { expect(assigns(:article)).to be_published }
@@ -320,7 +320,7 @@ describe Admin::ContentsController, type: :controller do
         let!(:article) { create(:article, user: create(:user, login: 'another_user')) }
 
         before(:each) { get :edit, id: article.id }
-        it { expect(response).to redirect_to(action: 'index') }
+        it { expect(response).to redirect_to(admin_contents_path) }
       end
 
       context 'with an article from current user' do
@@ -338,7 +338,7 @@ describe Admin::ContentsController, type: :controller do
         let!(:article) { create(:article, body: 'another *textile* test', user: user) }
         let!(:body) { 'not the *same* text' }
         before(:each) { put :update, id: article.id, article: { body: body, text_filter: 'textile' } }
-        it { expect(response).to redirect_to(action: 'edit', id: article.id) }
+        it { expect(response).to redirect_to(edit_admin_content_path(article)) }
         it { expect(article.reload.text_filter.name).to eq('textile') }
         it { expect(article.reload.body).to eq(body) }
       end
@@ -349,7 +349,7 @@ describe Admin::ContentsController, type: :controller do
         let(:article) { create(:article, user: create(:user, login: 'other_user')) }
 
         before(:each) { get :remove, id: article.id }
-        it { expect(response).to redirect_to(action: 'index') }
+        it { expect(response).to redirect_to(admin_contents_path) }
         it { expect(Article.count).to eq(1) }
       end
 
@@ -365,14 +365,14 @@ describe Admin::ContentsController, type: :controller do
         let(:article) { create(:article, user: create(:user, login: 'other_user')) }
 
         before(:each) { post :destroy, id: article.id }
-        it { expect(response).to redirect_to(action: 'index') }
+        it { expect(response).to redirect_to(admin_contents_path) }
         it { expect(Article.count).to eq(1) }
       end
 
       context 'with an article from user' do
         let(:article) { create(:article, user: user) }
         before(:each) { post :destroy, id: article.id }
-        it { expect(response).to redirect_to(action: 'index') }
+        it { expect(response).to redirect_to(admin_contents_path) }
         it { expect(Article.count).to eq(0) }
       end
     end

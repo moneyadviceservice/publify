@@ -36,7 +36,7 @@ describe 'articles/index.rss.builder', type: :view do
 
     it "has a link to the article's comment section" do
       render
-      expect(rendered_entry.css('comments').first.content).to eq("http://test.host/#{@article.permalink}#comments")
+      expect(rendered_entry.css('comments').first.content).to eq("#{article_url(@article.permalink)}#comments")
     end
 
     describe 'with an author without email set' do

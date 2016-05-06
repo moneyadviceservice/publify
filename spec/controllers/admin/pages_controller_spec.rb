@@ -46,7 +46,7 @@ describe Admin::PagesController, type: :controller do
       end
 
       it { expect(Page.first.name).to eq('new_page') }
-      it { expect(response).to redirect_to(action: :index) }
+      it { expect(response).to redirect_to(admin_pages_path) }
       it { expect(flash[:success]).to eq(I18n.t('admin.pages.create.success')) }
     end
 
@@ -77,7 +77,7 @@ describe Admin::PagesController, type: :controller do
       post :update, id: page.id, page: { name: 'markdown-page', title: 'Markdown Page', body: 'Adding a [link](http://www.publify.co/) here' }
     end
 
-    it { expect(response).to redirect_to(action: :index) }
+    it { expect(response).to redirect_to(admin_pages_path) }
   end
 
   describe 'destroy' do
@@ -85,7 +85,7 @@ describe Admin::PagesController, type: :controller do
 
     before(:each) { delete :destroy, id: page.id }
 
-    it { expect(response).to redirect_to(action: :index) }
+    it { expect(response).to redirect_to(admin_pages_path) }
     it { expect(Page.count).to eq(0) }
   end
 end

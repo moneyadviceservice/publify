@@ -19,7 +19,7 @@ describe CommentsController, type: :controller do
     it 'should redirect to the article' do
       article = create(:article, created_at: '2005-01-01 02:00:00')
       post :create, comment: { body: 'content', author: 'bob', email: 'bob@foo.com' }, article_id: article.id
-      expect(response).to redirect_to("http://test.host/#{article.permalink}#comment-#{article.comments.last.id}")
+      expect(response).to redirect_to("#{article_url(article.permalink)}#comment-#{article.comments.last.id}")
     end
   end
 

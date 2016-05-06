@@ -40,6 +40,6 @@ describe Admin::ResourcesController, type: :controller do
     res_id = FactoryGirl.create(:resource).id
 
     delete :destroy, id: res_id
-    expect(response).to redirect_to(action: 'index')
+    expect(response).to redirect_to(admin_resources_path)
   end
 end

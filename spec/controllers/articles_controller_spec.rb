@@ -94,7 +94,7 @@ describe ArticlesController, 'previewing', type: :controller do
     end
 
     it 'should redirect to login' do
-      expect(response).to redirect_to(controller: 'accounts', action: 'login')
+      expect(response).to redirect_to(login_path)
     end
   end
 
