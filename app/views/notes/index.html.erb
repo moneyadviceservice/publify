@@ -12,4 +12,4 @@
   <% end -%>
 </div>
 
-<%= paginate @notes, :params => { :script_name => ENV['RAILS_RELATIVE_URL_ROOT'] }, :next_label => "#{t(".next_page")} &raquo;", :previous_label => "&laquo; #{t('.previous_page')}" %>
+<%= paginate @notes, :next_label => "#{t(".next_page")} &raquo;", :previous_label => "&laquo; #{t('.previous_page')}" %>
