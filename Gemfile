@@ -5,6 +5,7 @@ ruby '2.2.0'
 gem 'dough-ruby', '~> 4.0', git: 'https://github.com/moneyadviceservice/dough.git', require: 'dough'
 
 gem 'pg'
+gem 'rails', '~> 4.2'
 gem 'htmlentities'
 gem 'bluecloth', '~> 2.1'
 gem 'coderay', '~> 1.1.0'
