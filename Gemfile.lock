@@ -7,11 +7,20 @@ GIT
       orm_adapter (~> 0.5.0)
 
 GIT
+  remote: https://github.com/moneyadviceservice/dough.git
+  revision: bc5f79550769ec436a1398bd378a8af78185651a
   specs:
+    dough-ruby (4.0.0)
+      activesupport
+      rails (>= 3.2)
+      sass-rails
+
 GEM
   remote: https://rubygems.org/
   remote: http://gems.dev.mas.local/
   specs:
+    CFPropertyList (2.3.1)
+    RedCloth (4.2.9)
     actionmailer (4.2.6)
       actionpack (= 4.2.6)
       actionview (= 4.2.6)
@@ -49,18 +58,6 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
-
-GIT
-  remote: https://github.com/moneyadviceservice/dough.git
-  revision: bc5f79550769ec436a1398bd378a8af78185651a
-  specs:
-    dough-ruby (4.0.0)
-      activesupport
-      rails (>= 3.2)
-      sass-rails
-
-    CFPropertyList (2.3.1)
-    RedCloth (4.2.9)
     addressable (2.3.8)
     akismet (1.0.0)
     arel (6.0.3)
