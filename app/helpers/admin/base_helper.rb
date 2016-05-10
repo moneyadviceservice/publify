@@ -49,14 +49,7 @@ module Admin::BaseHelper
       if m.current_url?(params[:controller], params[:action])
         output << content_tag(:li, link_to(m.name, '#'), class: 'active')
       else
-        # url_for doesn't respect RAILS_RELATIVE_URL_ROOT, so we hack it in using script_name instead
-        url = if ENV['RAILS_RELATIVE_URL_ROOT']
-          url_for(m.url.merge(script_name: ENV['RAILS_RELATIVE_URL_ROOT']))
-        else
-          url_for(m.url)
-        end
-
-        output << content_tag(:li, link_to(m.name, url))
+        output << content_tag(:li, link_to(m.name, m.url))
       end
     end
     output
