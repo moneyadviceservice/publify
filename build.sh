@@ -33,4 +33,4 @@ echo '----'
 echo 'Creating RPM'
 echo '----'
 cd ..
-/usr/local/rpm_builder/create-rails-rpm $artifact_name $artifact_name $version
+/usr/local/rpm_builder/create-rails-rpm $artifact_name $artifact_name $version_number
