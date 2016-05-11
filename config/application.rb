@@ -7,7 +7,7 @@ require 'rails/all'
 Bundler.require(*Rails.groups)
 
 unless Rails.env.development? || Rails.env.test?
-  ENV['RAILS_RELATIVE_URL_ROOT']='/blog'
+  ENV['RAILS_RELATIVE_URL_ROOT'] = '/blog'
 end
 
 module Publify
