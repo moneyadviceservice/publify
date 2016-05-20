@@ -4,7 +4,6 @@ set -e
 
 unset RUBYOPT
 export PATH=./bin:$PATH
-export BUNDLE_WITHOUT='test:development'
 
 echo 'Cleaning temporary files'
 echo '-----------------------'
