@@ -4,7 +4,6 @@ set -e
 
 unset RUBYOPT
 export PATH=./bin:$PATH
-export BUNDLE_WITHOUT='test:development'
 
 version_number=${GO_PIPELINE_LABEL-0}
 revision=`git rev-parse HEAD`

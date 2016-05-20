@@ -4,7 +4,6 @@ set -e
 
 export PATH=./bin:$PATH
 export RAILS_ENV=test
-export BUNDLE_WITHOUT=development
 
 echo 'Running Database Schema Load'
 echo '-------------------'
