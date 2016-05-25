@@ -1,17 +1,12 @@
 CKEDITOR.editorConfig = function (config) {
-  config.filebrowserImageBrowseLinkUrl = '/blog/admin/ckeditor/pictures';
-  config.filebrowserImageBrowseUrl = '/blog/admin/ckeditor/pictures';
-  config.filebrowserImageUploadUrl = '/blog/admin/ckeditor/pictures';
-  config.filebrowserBrowseUrl = '/blog/admin/ckeditor/attachment_files';
-  config.filebrowserUploadUrl = '/blog/admin/ckeditor/attachment_files';
+  config.filebrowserImageBrowseLinkUrl = <%= "'#{Rails.application.config.relative_url_root}/admin/ckeditor/pictures';" %>
+  config.filebrowserImageBrowseUrl = <%= "'#{Rails.application.config.relative_url_root}/admin/ckeditor/pictures';" %>
+  config.filebrowserImageUploadUrl = <%= "'#{Rails.application.config.relative_url_root}/admin/ckeditor/pictures';" %>
+  config.filebrowserBrowseUrl = <%= "'#{Rails.application.config.relative_url_root}/admin/ckeditor/attachment_files';" %>
+  config.filebrowserUploadUrl = <%= "'#{Rails.application.config.relative_url_root}/admin/ckeditor/attachment_files';" %>
   config.extraPlugins = 'sourcedialog';
   config.allowedContent = true;
-
-  <% if ENV['RAILS_RELATIVE_URL_ROOT'] %>
-    config.contentsCss = '/blog/assets/ckeditor/editor.css';
-  <% else %>
-    config.contentsCss = '/assets/ckeditor/editor.css';
-  <% end %>
+  config.contentsCss = <%= "'#{Rails.application.config.relative_url_root}/assets/ckeditor/editor.css';" %>
 
   config.toolbar =
   [
