@@ -6,7 +6,13 @@ CKEDITOR.editorConfig = function (config) {
   config.filebrowserUploadUrl = '/blog/admin/ckeditor/attachment_files';
   config.extraPlugins = 'sourcedialog';
   config.allowedContent = true;
-  config.contentsCss = '/blog/assets/ckeditor/editor.css';
+
+  <% if ENV['RAILS_RELATIVE_URL_ROOT'] %>
+    config.contentsCss = '/blog/assets/ckeditor/editor.css';
+  <% else %>
+    config.contentsCss = '/assets/ckeditor/editor.css';
+  <% end %>
+
   config.toolbar =
   [
     {

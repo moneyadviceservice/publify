@@ -16,7 +16,7 @@ function set_widerea(element) {
 }
 
 function tag_manager() {
-  var tagUrl = "/admin/contents/auto_complete_for_article_keywords";
+  var tagUrl = "/blog/admin/articles/auto_complete_for_article_keywords";
 
   $.getJSON(tagUrl, function (tags) {
 
