@@ -11,4 +11,5 @@ Ckeditor.setup do |config|
   config.authorize_with do
     redirect_to main_app.accounts_path unless authorized?
   end
+  config.relative_url_root = ''
 end
