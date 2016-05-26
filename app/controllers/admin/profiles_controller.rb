@@ -1,19 +1,24 @@
 require 'fog'
 
 class Admin::ProfilesController < Admin::BaseController
-  def index
+  def edit
     @user = current_user
     @profiles = Profile.order('id')
-    @user.attributes = params[:user].permit! if params[:user]
-    if request.post?
-      if params[:user][:filename]
-        @user.resource = upload_avatar
-      end
+  end
 
-      if @user.save
-        current_user = @user
-        flash[:success] = I18n.t('admin.profiles.index.success')
-      end
+  def update
+    @user = current_user
+    @user.attributes = params[:user].permit! if params[:user]
+
+    if params[:user][:filename]
+      @user.resource = upload_avatar
+    end
+
+    if @user.save
+      flash[:success] = I18n.t('admin.profiles.index.success')
+      redirect_to admin_dashboard_path
+    else
+      render action: :edit
     end
   end
 

@@ -47,59 +47,6 @@ describe Article, type: :model do
     end
   end
 
-  describe '#permalink_url' do
-    describe 'with hostname' do
-      subject { Article.new(permalink: 'article-3', published_at: Time.utc(2004, 6, 1)).permalink_url(anchor = nil, only_path = false) }
-      it { is_expected.to eq('http://myblog.net/2004/06/01/article-3') }
-    end
-
-    describe 'without hostname' do
-      subject { Article.new(permalink: 'article-3', published_at: Time.utc(2004, 6, 1)).permalink_url(anchor = nil, only_path = true) }
-      it { is_expected.to eq('/2004/06/01/article-3') }
-    end
-
-    # NOTE: URLs must not have any multibyte characters in them. The
-    # browser may display them differently, though.
-    describe 'with a multibyte permalink' do
-      subject { Article.new(permalink: 'ルビー', published_at: Time.utc(2004, 6, 1)) }
-      it 'escapes the multibyte characters' do
-        expect(subject.permalink_url(anchor = nil, only_path = true)).to eq('/2004/06/01/%E3%83%AB%E3%83%93%E3%83%BC')
-      end
-    end
-
-    describe 'with a permalink containing a space' do
-      subject { Article.new(permalink: 'hello there', published_at: Time.utc(2004, 6, 1)) }
-      it "escapes the space as '%20', not as '+'" do
-        expect(subject.permalink_url(anchor = nil, only_path = true)).to eq('/2004/06/01/hello%20there')
-      end
-    end
-
-    describe 'with a permalink containing a plus' do
-      subject { Article.new(permalink: 'one+two', published_at: Time.utc(2004, 6, 1)) }
-      it 'does not escape the plus' do
-        expect(subject.permalink_url(anchor = nil, only_path = true)).to eq('/2004/06/01/one+two')
-      end
-    end
-  end
-
-  describe '#initialize' do
-    it 'accepts a settings field in its parameter hash' do
-      Article.new('password' => 'foo')
-    end
-  end
-
-  describe '.feed_url' do
-    let(:article) { build(:article, permalink: 'article-3', published_at: Time.utc(2004, 6, 1)) }
-
-    it 'returns url for atom feed for a Atom 1.0 asked' do
-      expect(article.feed_url('atom10')).to eq 'http://myblog.net/2004/06/01/article-3.atom'
-    end
-
-    it 'returns url for rss feed for a RSS 2 asked' do
-      expect(article.feed_url('rss20')).to eq 'http://myblog.net/2004/06/01/article-3.rss'
-    end
-  end
-
   it 'test_create' do
     a = Article.new
     a.user_id = 1
@@ -116,10 +63,8 @@ describe Article, type: :model do
 
   it 'test_permalink_with_title' do
     article = create(:article, permalink: 'article-3', published_at: Time.utc(2004, 6, 1))
-    assert_equal(article, Article.find_by_permalink(year: 2004, month: 06, day: 01, title: 'article-3'))
-    assert_raises(ActiveRecord::RecordNotFound) do
-      Article.find_by_permalink year: 2005, month: '06', day: '01', title: 'article-5'
-    end
+    assert_equal(article, Article.find_by_permalink('article-3'))
+    assert_nil(Article.find_by_permalink('article-5'))
   end
 
   it 'test_strip_title' do
@@ -193,40 +138,11 @@ describe Article, type: :model do
     end
   end
 
-  describe 'saving an Article' do
-    context 'with a blog that sends outbound pings' do
-      let(:referenced_url) { 'http://anotherblog.org/a-post' }
-      let!(:blog) { create(:blog, send_outbound_pings: 1) }
-
-      it 'sends a pingback to urls linked in the body' do
-        expect(ActiveRecord::Base.observers).to include(:email_notifier)
-        expect(ActiveRecord::Base.observers).to include(:web_notifier)
-        a = Article.new(:body => %{<a href="#{referenced_url}">},
-                        :title => 'Test the pinging',
-                        :published => true)
-
-        mock_pinger = instance_double('Ping::Pinger')
-        allow(Ping::Pinger).to receive(:new).
-          with(%r{http://myblog.net/\d{4}/\d{2}/\d{2}/test-the-pinging}, Ping).
-          and_return mock_pinger
-        expect(mock_pinger).to receive(:send_pingback_or_trackback)
-
-        expect(a.html_urls.size).to eq(1)
-        a.save!
-        expect(a).to be_just_published
-        a = Article.find(a.id)
-        expect(a).not_to be_just_published
-        # Saving again will not resend the pings
-        a.save
-      end
-    end
-  end
-
   describe 'Testing redirects' do
     it 'a new published article gets a redirect' do
       a = Article.create(title: 'Some title', body: 'some text', published: true)
       expect(a.redirects.first).not_to be_nil
-      expect(a.redirects.first.to_path).to eq(a.permalink_url)
+      expect(a.redirects.first.to_path).to match(/#{a.permalink}$/)
     end
 
     it 'a new unpublished article should not get a redirect' do
@@ -237,13 +153,13 @@ describe Article, type: :model do
     it 'Changin a published article permalink url should only change the to redirection' do
       a = Article.create(title: 'Some title', body: 'some text', published: true)
       expect(a.redirects.first).not_to be_nil
-      expect(a.redirects.first.to_path).to eq(a.permalink_url)
+      expect(a.redirects.first.to_path).to match(/#{a.permalink}$/)
       r  = a.redirects.first.from_path
 
       a.permalink = 'some-new-permalink'
       a.save
       expect(a.redirects.first).not_to be_nil
-      expect(a.redirects.first.to_path).to eq(a.permalink_url)
+      expect(a.redirects.first.to_path).to match(/#{a.permalink}$/)
       expect(a.redirects.first.from_path).to eq(r)
     end
   end
@@ -420,20 +336,6 @@ describe Article, type: :model do
     end
   end
 
-  describe '#comment_url' do
-    it 'should render complete url of comment' do
-      article = build_stubbed(:article, id: 123)
-      expect(article.comment_url).to eq("/comments?article_id=#{article.id}")
-    end
-  end
-
-  describe '#preview_comment_url' do
-    it 'should render complete url of comment' do
-      article = build_stubbed(:article, id: 123)
-      expect(article.preview_comment_url).to eq("/comments/preview?article_id=#{article.id}")
-    end
-  end
-
   it 'test_can_ping_fresh_article_iff_it_allows_pings' do
     a = create(:article, allow_pings: true)
     assert_equal(false, a.pings_closed?)
@@ -500,114 +402,6 @@ describe Article, type: :model do
       parent = create(:article)
       draft = create(:article, parent_id: parent.id, state: 'draft')
       expect(Article.last_draft(draft.id)).to eq(draft)
-    end
-  end
-
-  describe 'an article published just before midnight UTC' do
-    before do
-      @timezone = Time.zone
-      Time.zone = 'UTC'
-      @a = build(:article, permalink: 'a-big-article')
-      @a.published_at = '21 Feb 2011 23:30 UTC'
-    end
-
-    after do
-      Time.zone = @timezone
-    end
-
-    describe '#permalink_url' do
-      it 'uses UTC to determine correct day' do
-        expect(@a.permalink_url).to eq('http://myblog.net/2011/02/21/a-big-article')
-      end
-    end
-
-    describe '#find_by_permalink' do
-      it 'uses UTC to determine correct day' do
-        @a.save
-        a = Article.find_by_permalink year: 2011, month: 2, day: 21, permalink: 'a-big-article'
-        expect(a).to eq(@a)
-      end
-    end
-  end
-
-  describe 'an article published just after midnight UTC' do
-    before do
-      @timezone = Time.zone
-      Time.zone = 'UTC'
-      @a = build(:article, permalink: 'a-big-article')
-      @a.published_at = '22 Feb 2011 00:30 UTC'
-    end
-
-    after do
-      Time.zone = @timezone
-    end
-
-    describe '#permalink_url' do
-      it 'uses UTC to determine correct day' do
-        expect(@a.permalink_url).to eq('http://myblog.net/2011/02/22/a-big-article')
-      end
-    end
-
-    describe '#find_by_permalink' do
-      it 'uses UTC to determine correct day' do
-        @a.save
-        a = Article.find_by_permalink year: 2011, month: 2, day: 22, permalink: 'a-big-article'
-        expect(a).to eq(@a)
-      end
-    end
-  end
-
-  describe 'an article published just before midnight JST (+0900)' do
-    before do
-      @time_zone = Time.zone
-      Time.zone = 'Tokyo'
-      @a = build(:article, permalink: 'a-big-article')
-      @a.published_at = '31 Dec 2012 23:30 +0900'
-    end
-
-    after do
-      Time.zone = @time_zone
-    end
-
-    describe '#permalink_url' do
-      it 'uses JST to determine correct day' do
-        expect(@a.permalink_url).to eq('http://myblog.net/2012/12/31/a-big-article')
-      end
-    end
-
-    describe '#find_by_permalink' do
-      it 'uses JST to determine correct day' do
-        @a.save
-        a = Article.find_by_permalink year: 2012, month: 12, day: 31, permalink: 'a-big-article'
-        expect(a).to eq(@a)
-      end
-    end
-  end
-
-  describe 'an article published just after midnight  JST (+0900)' do
-    before do
-      @time_zone = Time.zone
-      Time.zone = 'Tokyo'
-      @a = build(:article, permalink: 'a-big-article')
-      @a.published_at = '1 Jan 2013 00:30 +0900'
-    end
-
-    after do
-      Time.zone = @time_zone
-    end
-
-    describe '#permalink_url' do
-      it 'uses JST to determine correct day' do
-        expect(@a.permalink_url).to eq('http://myblog.net/2013/01/01/a-big-article')
-      end
-    end
-
-    describe '#find_by_permalink' do
-      it 'uses JST to determine correct day' do
-        @a.save
-        a = Article.find_by_permalink year: 2013, month: 1, day: 1, permalink: 'a-big-article'
-        expect(a).to eq(@a)
-      end
     end
   end
 

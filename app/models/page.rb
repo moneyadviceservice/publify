@@ -5,13 +5,13 @@ class Page < Content
   include ConfigManager
 
   serialize :settings, Hash
-  setting :password, :string, ''
 
   before_save :set_permalink
   after_save :shorten_url
 
   def set_permalink
-    self.name = title.to_permalink if name.blank?
+    self.name ||= title.to_permalink
+    self.permalink ||= title.to_permalink
   end
 
   content_fields :body
@@ -22,16 +22,6 @@ class Page < Content
 
   def self.search_with(search_hash)
     super(search_hash).order('title ASC')
-  end
-
-  def permalink_url(anchor = nil, only_path = false)
-    blog.url_for(
-      controller: '/articles',
-      action: 'view_page',
-      name: name,
-      anchor: anchor,
-      only_path: only_path
-    )
   end
 
 end

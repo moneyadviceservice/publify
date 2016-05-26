@@ -54,7 +54,6 @@ class Blog < ActiveRecord::Base
   setting :ping_urls,                  :string, "http://blogsearch.google.com/ping/RPC2\nhttp://rpc.technorati.com/rpc/ping\nhttp://ping.blo.gs/\nhttp://rpc.weblogs.com/RPC2"
   setting :send_outbound_pings,        :boolean, true
   setting :email_from,                 :string, 'notmonitored@notify.moneyadviceservice.org.uk'
-  setting :allow_signup,               :integer, 0
   setting :date_format,                :string, '%B %d %Y'
   setting :time_format,                :string, '%Hh%M'
   setting :image_avatar_size,          :integer, 48
@@ -64,10 +63,8 @@ class Blog < ActiveRecord::Base
   # SEO
   setting :meta_description,           :string, ''
   setting :meta_keywords,              :string, ''
-  setting :feedburner_url,             :string, ''
   setting :rss_description,            :boolean, false
   setting :rss_description_text,       :string, "<hr /><p><small>Original article written by %author% and published on <a href='%blog_url%'>%blog_name%</a> | <a href='%permalink_url%'>direct link to this article</a> | If you are reading this article anywhere other than on <a href='%blog_url%'>%blog_name%</a>, it has been illegally reproduced and without proper authorization.</small></p>"
-  setting :permalink_format,           :string, '/%year%/%month%/%day%/%title%'
   setting :robots,                     :string, 'User-agent: *\nAllow: /\nDisallow: /admin\n'
   setting :humans,                     :string, "/* TEAM */\nYour title: Your name.\nSite: email, link to a contact form, etc.\nTwitter: your Twitter username.\n\n/* SITE */\nSoftware: Publify [http://publify.co] #{PUBLIFY_VERSION}"
 
@@ -106,9 +103,6 @@ class Blog < ActiveRecord::Base
   setting :twitter_consumer_key,      :string, ''
   setting :twitter_consumer_secret,   :string, ''
   setting :custom_url_shortener,      :string, ''
-  setting :statuses_in_timeline,      :boolean, true
-
-  validate :permalink_has_identifier
 
   # The default Blog. This is the lowest-numbered blog, almost always
   # id==1. This should be the only blog as well.
@@ -141,40 +135,6 @@ class Blog < ActiveRecord::Base
     settings.key?('blog_name')
   end
 
-  # Generate a URL based on the +base_url+.  This allows us to generate URLs
-  # without needing a controller handy, so we can produce URLs from within models
-  # where appropriate.
-  #
-  # It also caches the result in the RouteCache, so repeated URL generation
-  # requests should be fast, as they bypass all of Rails' route logic.
-  def url_for_with_base_url(options = {}, extra_params = {})
-    case options
-    when String
-      if extra_params[:only_path]
-        url_generated = root_path
-      else
-        url_generated = base_url
-      end
-      url_generated += "/#{options}" # They asked for 'url_for "/some/path"', so return it unedited.
-      url_generated += "##{extra_params[:anchor]}" if extra_params[:anchor]
-      url_generated
-    when Hash
-      merged_opts = options.reverse_merge!(only_path: false, controller: '',
-                                           action: 'permalink',
-                                           host: host_with_port,
-                                           script_name: root_path)
-      cache_key = merged_opts.values.prepend('blog-urlfor-withbaseurl').join('-')
-      unless Rails.cache.exist?(cache_key)
-        Rails.cache.write(cache_key, url_for_without_base_url(merged_opts))
-      end
-      Rails.cache.read(cache_key)
-    else
-      raise "Invalid URL in url_for: #{options.inspect}"
-    end
-  end
-
-  alias_method_chain :url_for, :base_url
-
   # The URL for a static file.
   def file_url(filename)
     if CarrierWave.configure { |config| config.storage == CarrierWave::Storage::Fog }
@@ -189,8 +149,11 @@ class Blog < ActiveRecord::Base
   end
 
   def per_page(format)
-    return limit_article_display if format.nil? || format == 'html'
-    limit_rss_display
+    if format.nil? || format == 'html'
+      limit_article_display
+    else
+      limit_rss_display
+    end
   end
 
   def rss_limit_params
@@ -198,16 +161,6 @@ class Blog < ActiveRecord::Base
     limit.zero? \
       ? {} \
       : { limit: limit }
-  end
-
-  def permalink_has_identifier
-    unless permalink_format =~ /(%title%)/
-      errors.add(:base, I18n.t('errors.permalink_need_a_title'))
-    end
-
-    if permalink_format =~ /\.(atom|rss)$/
-      errors.add(:permalink_format, I18n.t('errors.cant_end_with_rss_or_atom'))
-    end
   end
 
   def root_path
@@ -230,10 +183,6 @@ class Blog < ActiveRecord::Base
     return false if twitter_consumer_key.nil? or twitter_consumer_secret.nil?
     return false if twitter_consumer_key.empty? or twitter_consumer_secret.empty?
     true
-  end
-
-  def allow_signup?
-    allow_signup == 1
   end
 
   private

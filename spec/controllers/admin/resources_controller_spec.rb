@@ -19,31 +19,27 @@ describe Admin::ResourcesController, type: :controller do
     end
   end
 
-  describe 'test_destroy_image with get' do
+  describe '#remove' do
     before(:each) do
       @res_id = FactoryGirl.create(:resource).id
-      get :destroy, id: @res_id
+      get :remove, id: @res_id
     end
 
     it 'should render template destroy' do
       assert_response :success
-      assert_template 'destroy'
+      assert_template 'remove'
     end
 
     it 'should have a valid file' do
       expect(Resource.find(@res_id)).not_to be_nil
-      expect(assigns(:record)).not_to be_nil
+      expect(assigns(:resource)).not_to be_nil
     end
   end
 
-  it 'test_destroy_image with POST' do
+  it '#destroy' do
     res_id = FactoryGirl.create(:resource).id
 
-    post :destroy, id: res_id
-    expect(response).to redirect_to(action: 'index')
-  end
-
-  it 'test_upload' do
-    # unsure how to test upload constructs :'(
+    delete :destroy, id: res_id
+    expect(response).to redirect_to(admin_resources_path)
   end
 end

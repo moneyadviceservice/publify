@@ -1,4 +1,4 @@
-describe 'comments/index_atom_feed.atom.builder', type: :view do
+describe 'comments/index.atom.builder', type: :view do
   let!(:blog) { build_stubbed :blog }
 
   describe 'rendering comments with one comment' do
@@ -32,7 +32,7 @@ describe 'comments/index_atom_feed.atom.builder', type: :view do
         expect(entry_xml.css('id').first.content).to eq('urn:uuid:12313123123123123')
         expect(entry_xml.css('content').first.content).to eq('<p>Comment body</p>')
         link_xml = entry_xml.css('link').first
-        expect(link_xml['href']).to eq("#{article.permalink_url}#comment-#{comment.id}")
+        expect(link_xml['href']).to eq("#{article_url(article.permalink)}#comment-#{comment.id}")
       end
     end
   end

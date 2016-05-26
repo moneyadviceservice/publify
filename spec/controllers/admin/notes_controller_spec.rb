@@ -41,7 +41,7 @@ describe Admin::NotesController, type: :controller do
 
       describe 'update' do
         before(:each) { post :update, id: note.id, note: { body: 'new body' } }
-        it { expect(response).to redirect_to(action: :index) }
+        it { expect(response).to redirect_to(admin_notes_path) }
         it { expect(note.reload.body).to eq('new body') }
       end
 

@@ -25,6 +25,16 @@
   <meta name="msapplication-wide310x150logo" content="/mstile-310x150.png" />
   <meta name="msapplication-square310x310logo" content="/mstile-310x310.png" />
   <meta http-equiv="imagetoolbar" content="no">
+  <%
+     base_path = ''
+     base_path << (Rails.application.config.action_controller.asset_host || '')
+     base_path << (Rails.application.config.relative_url_root || '')
+     base_path << Rails.application.config.assets.prefix
+     base_path << '/ckeditor/'
+  %>
+  <script>
+      var CKEDITOR_BASEPATH = '<%= base_path %>';
+  </script>
   <%= stylesheet_link_tag 'publify_admin' %>
   <%= javascript_include_tag 'publify_admin' %>
   <%= csrf_meta_tags %>
@@ -32,7 +42,7 @@
 <body>
   <nav class='navbar navbar-default navbar-fixed-top' role="navigation">
     <div class="navbar-header">
-      <%= link_to content_tag(:span, '', class: 'glyphicon glyphicon-home'), {controller: 'admin/dashboard'}, {class: "navbar-brand"} %>
+      <%= link_to content_tag(:span, '', class: 'glyphicon glyphicon-home'), admin_dashboard_path, {class: "navbar-brand"} %>
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#sidebar-top">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
@@ -48,8 +58,8 @@
             <b class="caret"></b>
           </a>
           <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-            <li><%= link_to(t("admin.menu.all_campaigns"), {controller: 'admin/campaigns', action: 'index'}) %></li>
-            <li><%= link_to(t("admin.menu.new_campaign"), {controller: 'admin/campaigns', action: 'new'}) %></li>
+            <li><%= link_to(t("admin.menu.all_campaigns"), admin_campaigns_path) %></li>
+            <li><%= link_to(t("admin.menu.new_campaign"), new_admin_campaign_path) %></li>
           </ul>
         </li>
         <% for pm in current_user.project_modules %>
@@ -75,14 +85,9 @@
             <b class="caret"></b>
           </a>
           <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-            <li><%= link_to t("admin.menu.profile"), { :controller => 'admin/profiles', :action => 'index'}  %></li>
+            <li><%= link_to t("admin.menu.profile"), edit_admin_profile_path %></li>
             <li role="presentation" class="divider"></li>
-            <li><%= link_to t("admin.menu.documentation"), "https://github.com/fdv/publify/wiki" %></li>
-            <li><%= link_to t("admin.menu.report_a_bug"), "https://github.com/fdv/publify/issues" %></li>
-            <li><%= link_to t("admin.menu.in_page_plugins"), "https://github.com/fdv/publify/wiki/In-Page-Plugins" %></li>
-            <li><%= link_to t("admin.menu.sidebar_plugins"), "https://github.com/fdv/publify/wiki/Sidebar-plugins" %></li>
-            <li role="presentation" class="divider"></li>
-            <li><%= link_to t("admin.menu.logout").html_safe, {:controller => "/accounts", :action=>"logout"} %></li>
+            <li><%= link_to t("admin.menu.logout").html_safe, logout_path %></li>
           </ul>
         </li>
       </ul>
@@ -93,20 +98,12 @@
               <b class="caret"></b>
             </a>
           <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-            <li><%= link_to(t("admin.menu.new_campaign"), {controller: 'admin/campaigns', action: 'new'}) %></li>
-            <li><%= link_to(t("admin.menu.new_article"), {controller: 'content', action: 'new'}) %></li>
-            <li><%= link_to(t("admin.menu.new_page"), {controller: 'pages', actions: 'new'}) %></li>
-            <li><%= link_to(t("admin.menu.new_media"), {controller: 'resources', action: 'index'}) %></li>
-            <li><%= link_to(t("admin.menu.new_note"), {controller: 'notes'}) %></li>
+            <li><%= link_to(t("admin.menu.new_campaign"), new_admin_campaign_path) %></li>
+            <li><%= link_to(t("admin.menu.new_article"), new_admin_content_path) %></li>
+            <li><%= link_to(t("admin.menu.new_page"), new_admin_page_path) %></li>
+            <li><%= link_to(t("admin.menu.new_media"), admin_resources_path) %></li>
+            <li><%= link_to(t("admin.menu.new_note"), admin_notes_path) %></li>
           </ul>
-        </li>
-      </ul>
-      <ul class='nav navbar-nav pull-right'>
-        <li class='dropdown'>
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-              <%= t(".footer_management") %>
-              <b class="caret"></b>
-            </a>
         </li>
       </ul>
     </div>

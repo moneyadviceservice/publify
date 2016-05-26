@@ -69,11 +69,6 @@ class Tag < ActiveRecord::Base
     name
   end
 
-  def permalink_url(_anchor = nil, only_path = false)
-    blog = Blog.default # remove me...
-    blog.url_for(controller: 'tags', action: 'show', id: permalink, only_path: only_path)
-  end
-
   def self.with_counts(limit = 10)
     self.select('tags.id, tags.name, COUNT(articles_tags.tag_id) AS tag_count').
          joins('INNER JOIN articles_tags ON tags.id = articles_tags.tag_id').

@@ -1,12 +1,13 @@
 CKEDITOR.editorConfig = function (config) {
-  config.filebrowserImageBrowseLinkUrl = '/admin/ckeditor/pictures';
-  config.filebrowserImageBrowseUrl = '/admin/ckeditor/pictures';
-  config.filebrowserImageUploadUrl = '/admin/ckeditor/pictures';
-  config.filebrowserBrowseUrl = 'admin/ckeditor/attachment_files';
-  config.filebrowserUploadUrl = 'admin/ckeditor/attachment_files';
+  config.filebrowserImageBrowseLinkUrl = <%= "'#{Rails.application.config.relative_url_root}/admin/ckeditor/pictures';" %>
+  config.filebrowserImageBrowseUrl = <%= "'#{Rails.application.config.relative_url_root}/admin/ckeditor/pictures';" %>
+  config.filebrowserImageUploadUrl = <%= "'#{Rails.application.config.relative_url_root}/admin/ckeditor/pictures';" %>
+  config.filebrowserBrowseUrl = <%= "'#{Rails.application.config.relative_url_root}/admin/ckeditor/attachment_files';" %>
+  config.filebrowserUploadUrl = <%= "'#{Rails.application.config.relative_url_root}/admin/ckeditor/attachment_files';" %>
   config.extraPlugins = 'sourcedialog';
   config.allowedContent = true;
-  config.contentsCss = '/assets/ckeditor/editor.css';
+  config.contentsCss = <%= "'#{Rails.application.config.relative_url_root}/assets/ckeditor/editor.css';" %>
+
   config.toolbar =
   [
     {

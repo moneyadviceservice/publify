@@ -1,0 +1,16 @@
+  <td class="action"><input class= "feedback_check" type="checkbox" name="feedback_check[<%= comment.id %>]"></td>
+  <td class="state">
+    <%= avatar_tag(:email => comment.email, :url => comment.url, :size => 80, :class => 'img-circle') %>
+    <p class='action'><span class='label <%= comment_class comment.state.to_s.downcase %>'><%= t("admin.feedback.state.#{comment.state}") %></span></p>
+  </td>
+  <td colspan='4'>
+    <%= link_to comment.article.title, admin_feedbacks_path(article_id: comment.article) %>
+    <p>
+      <small>
+        <%= t('.by:')%> <%= comment.author %> - <%= mail_to comment.email %>
+        <%= t('.on') %> <%= l(comment.created_at) %>
+      </small>
+    </p>
+    <%= simple_format(comment.html(:all)) %>
+    <%= show_feedback_actions comment %>
+  </td>

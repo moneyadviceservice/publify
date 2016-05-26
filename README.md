@@ -38,7 +38,36 @@ $ ./bin/setup
 $ rails s
 ```
 ##### `pg` gem issues on Mac OSx
+
 When running the setup script you may run into an install issue with the *pg* (PostgreSQL) gem. If this occurs, you'll need to install it first via Homebrew `brew install postgresql` and then run the setup again.
+
+##### `eventmachine` gem installation on OSX
+
+As of OSX 10.11 (El Capitan) installing the `eventmachine` gem throws an error:
+
+    In file included from binder.cpp:20:
+    ./project.h:116:10: fatal error: 'openssl/ssl.h' file not found
+    #include <openssl/ssl.h>
+             ^
+    1 error generated.
+    make: *** [binder.o] Error 1
+
+    make failed, exit code 2
+
+This is caused by OSX deprecating the use of `openssl` in favour of
+it's own TLS and crypto libraries (see
+[Issue 102 for eventmachine](https://github.com/eventmachine/eventmachine/issues/602)). `openssl`
+can be installed with brew:
+
+    $ brew install openssl
+
+And then you can force brew to symlink the `openssl` headers and libraries somewhere where they'll be found:
+
+    $ brew link openssl --force
+
+Or see the issue mentioned above for alternative solutions.
+
+#### Enviroment File Setup
 
 You'll need to set the environment keys this repo requires in `.env` (which is auto generated when you run the setup script). If you're a MAS dev, you can grab these over at the [company wiki](https://moneyadviceserviceuk.atlassian.net/wiki/display/DEV/Marketing+Blog+Repo+Credentials).
 
@@ -64,7 +93,3 @@ First you need to make sure you have the production and stagin git remotes. If y
     $ git remote add staging git@heroku.com:mas-marketing-blog-staging.git
     $ git remote add production git@heroku.com:mas-marketing-blog.git
 
-You can deploy to staging and production with:
-
-    $ ./bin/deploy staging
-    $ ./bin/deploy production

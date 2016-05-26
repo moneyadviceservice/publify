@@ -17,20 +17,17 @@ describe Admin::RedirectsController, type: :controller do
     end
   end
 
-  it 'test_create' do
-    expect do
-      post :edit, 'redirect' => { from_path: 'some/place',
-                                  to_path: 'somewhere/else' }
+  describe '#create' do
+    it 'redirects after creation' do
+      post :create, 'redirect' => { from_path: 'some/place', to_path: 'somewhere/else' }
       assert_response :redirect, action: 'index'
-    end.to change(Redirect, :count)
-  end
+    end
 
-  it 'test_create with empty from path' do
-    expect do
-      post :edit, 'redirect' => { from_path: '',
-                                  to_path: 'somewhere/else/else' }
-      assert_response :redirect, action: 'index'
-    end.to change(Redirect, :count)
+    it 'creates a redirect' do
+      expect do
+        post :create, 'redirect' => { from_path: '', to_path: 'somewhere/else/else' }
+      end.to change(Redirect, :count)
+    end
   end
 
   describe '#edit' do
@@ -39,37 +36,41 @@ describe Admin::RedirectsController, type: :controller do
     end
 
     it 'should render new template with valid redirect' do
-      assert_template 'new'
+      assert_template 'edit'
       expect(assigns(:redirect)).not_to be_nil
       assert assigns(:redirect).valid?
     end
   end
 
-  it 'test_update' do
-    post :edit, id: FactoryGirl.create(:redirect).id
-    assert_response :redirect, action: 'index'
+  describe '#update' do
+    it 'redirects afterwards' do
+      post :update, id: FactoryGirl.create(:redirect).id, redirect: {}
+      assert_response :redirect, action: 'index'
+    end
   end
 
-  describe 'test_destroy' do
+  describe '#remove' do
+    before(:each) do
+      @test_id = FactoryGirl.create(:redirect).id
+      get :remove, id: @test_id
+    end
+
+    it 'should render remove template' do
+      assert_response :success
+      assert_template 'remove'
+    end
+  end
+
+  describe '#destroy' do
     before(:each) do
       @test_id = FactoryGirl.create(:redirect).id
       expect(Redirect.find(@test_id)).not_to be_nil
     end
 
-    describe 'with GET' do
-      before(:each) do
-        get :destroy, id: @test_id
-      end
-
-      it 'should render destroy template' do
-        assert_response :success
-        assert_template 'destroy'
-      end
-    end
 
     describe 'with POST' do
       before(:each) do
-        post :destroy, id: @test_id
+        delete :destroy, id: @test_id
       end
 
       it 'should redirect to index' do

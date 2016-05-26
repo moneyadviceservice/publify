@@ -21,21 +21,21 @@ shared_examples_for 'CommentSanitization' do
       @blog.comment_text_filter = value
       build_stubbed(value.empty? ? 'none' : value)
 
-      render file: 'comments/show'
-      expect(rendered).to have_selector('.content')
-      expect(rendered).to have_selector('.author')
+      render partial: 'articles/comment', object: @comment
+      expect(rendered).to have_selector('.t-comment-content')
+      expect(rendered).to have_selector('.t-comment-author')
 
-      expect(rendered).not_to have_selector('.content script')
-      expect(rendered).not_to have_selector('.content a:not([rel=nofollow])')
+      expect(rendered).not_to have_selector('.t-comment-content script')
+      expect(rendered).not_to have_selector('.t-comment-content a:not([rel=nofollow])')
       # No links with javascript
-      expect(rendered).not_to have_selector('.content a[onclick]')
-      expect(rendered).not_to have_selector(".content a[href^=\"javascript:\"]")
+      expect(rendered).not_to have_selector('.t-comment-content a[onclick]')
+      expect(rendered).not_to have_selector(".t-comment-content a[href^=\"javascript:\"]")
 
-      expect(rendered).not_to have_selector('.author script')
-      expect(rendered).not_to have_selector('.author a:not([rel=nofollow])')
+      expect(rendered).not_to have_selector('.t-comment-author script')
+      expect(rendered).not_to have_selector('.t-comment-author a:not([rel=nofollow])')
       # No links with javascript
-      expect(rendered).not_to have_selector('.author a[onclick]')
-      expect(rendered).not_to have_selector(".author a[href^=\"javascript:\"]")
+      expect(rendered).not_to have_selector('.t-comment-author a[onclick]')
+      expect(rendered).not_to have_selector(".t-comment-author a[href^=\"javascript:\"]")
     end
   end
 end
@@ -138,21 +138,21 @@ shared_examples_for 'CommentSanitizationWithDofollow' do
       @blog.comment_text_filter = value
       @blog.save
 
-      render file: 'comments/show'
-      expect(rendered).to have_selector('.content')
-      expect(rendered).to have_selector('.author')
+      render partial: 'articles/comment', object: @comment
+      expect(rendered).to have_selector('.comment-list-item')
+      expect(rendered).to have_selector('.comment-list-item .t-comment-author')
 
-      expect(rendered).not_to have_selector('.content script')
-      expect(rendered).not_to have_selector('.content a[rel=nofollow]')
+      expect(rendered).not_to have_selector('.t-comment-content script')
+      expect(rendered).not_to have_selector('.t-comment-content a[rel=nofollow]')
       # No links with javascript
-      expect(rendered).not_to have_selector('.content a[onclick]')
-      expect(rendered).not_to have_selector(".content a[href^=\"javascript:\"]")
+      expect(rendered).not_to have_selector('.t-comment-content a[onclick]')
+      expect(rendered).not_to have_selector(".t-comment-content a[href^=\"javascript:\"]")
 
-      expect(rendered).not_to have_selector('.author script')
-      expect(rendered).not_to have_selector('.author a[rel=nofollow]')
+      expect(rendered).not_to have_selector('.t-comment-author script')
+      expect(rendered).not_to have_selector('.t-comment-author a[rel=nofollow]')
       # No links with javascript
-      expect(rendered).not_to have_selector('.author a[onclick]')
-      expect(rendered).not_to have_selector(".author a[href^=\"javascript:\"]")
+      expect(rendered).not_to have_selector('.t-comment-author a[onclick]')
+      expect(rendered).not_to have_selector(".t-comment-author a[href^=\"javascript:\"]")
     end
   end
 end

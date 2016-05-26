@@ -1,1 +1,3 @@
-<%= render "admin/shared/edit", { :form_type => "page", :form_action => { :action => "new" } } %>
+<%= form_tag(admin_pages_path, multipart: true, id: :page_form) do %>
+  <%= render partial: "form" %>
+<% end %>

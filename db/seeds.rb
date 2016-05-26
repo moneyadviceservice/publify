@@ -6,7 +6,20 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Daley', city: cities.first)
 
+def host(env)
+  if env == 'production'
+    'www.moneyadviceservice.org.uk'
+  elsif env == 'staging'
+    'www.staging.dev.mas.local'
+  else
+    'dev.mas.local'
+  end
+end
+
 Blog.create
+b = Blog.first
+b.base_url = "#{host(ENV['MAS_ENVIRONMENT'])}/blog"
+b.save
 
 %w(
   debt
@@ -105,7 +118,6 @@ Blog.create
 
 PageSidebar.create(active_position: 0, staged_position: 0)
 TagSidebar.create(active_position: 1)
-ArchivesSidebar.create(active_position: 2)
 StaticSidebar.create(active_position: 3)
 MetaSidebar.create(active_position: 4)
 

@@ -1,11 +1,11 @@
 source 'https://rubygems.org'
+source 'http://gems.dev.mas.local'
 ruby '2.2.0'
 
 gem 'dough-ruby', '~> 4.0', git: 'https://github.com/moneyadviceservice/dough.git', require: 'dough'
-gem 'bowndler', git: 'https://github.com/moneyadviceservice/bowndler.git'
 
-gem 'mysql2'
-gem 'rails', '~> 4.2.1'
+gem 'pg'
+gem 'rails', '~> 4.2'
 gem 'htmlentities'
 gem 'bluecloth', '~> 2.1'
 gem 'coderay', '~> 1.1.0'
@@ -57,6 +57,10 @@ gem 'compass-rails'
 gem 'coffee-rails', ' ~> 4.0.1'
 gem 'uglifier'
 
+group :build, :test, :development do
+  gem 'bowndler', '~> 1.0'
+end
+
 group :development, :test do
   gem 'factory_girl', '~> 4.5.0'
   gem 'dotenv-rails'
@@ -74,15 +78,17 @@ group :development, :test do
   gem 'foreman'
   gem 'letter_opener'
   gem 'database_cleaner'
+  gem 'rspec-rails', '~> 3.1.0'
+  gem 'byebug'
 end
 
 group :test do
   gem 'site_prism'
   gem 'capybara'
-  gem 'rspec-rails', '~> 3.1.0'
+  gem 'rspec_junit_formatter'
+  gem 'sqlite3'
 end
 
-group :staging, :production do
-  gem 'pg'
-  gem 'rails_12factor'
+group :production do
+  gem 'syslog-logger'
 end
