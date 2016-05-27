@@ -16,7 +16,7 @@ class ArticlesController < ContentController
     @lead_campaign = Campaign.lead.last
 
     @articles = Content.published.where('type = ?', 'Article')
-    @articles = @articles.limit(this_blog.per_page(params[:format]))
+    @articles = @articles.page(params[:page]).per(this_blog.per_page(params[:format]))
 
     respond_to do |format|
       format.html
