@@ -29,3 +29,12 @@ bundle install
 echo 'Running bowndler'
 echo '-----------------------'
 bowndler update --production --config.interactive=false
+
+echo 'Running Bundle package'
+echo '----'
+bundle package --all
+
+echo 'Precompiling assets'
+echo '----'
+RAILS_ENV=production RAILS_GROUPS=assets rake assets:precompile
+

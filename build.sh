@@ -17,14 +17,6 @@ cat > public/version <<EOT
 }
 EOT
 
-echo 'Running Bundle package'
-echo '----'
-bundle package --all
-
-echo 'Precompiling assets'
-echo '----'
-RAILS_ENV=production RAILS_GROUPS=assets rake assets:precompile
-
 echo 'Uploading assets'
 echo '----'
 /usr/local/bin/upload-blog-assets.sh $(pwd)/public
