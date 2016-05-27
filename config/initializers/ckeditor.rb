@@ -13,8 +13,6 @@ Ckeditor.setup do |config|
   end
 end
 
-require 'ckeditor/asset_response'
-
 module Ckeditor
   class AssetResponse
     def success(relative_url_root = nil)
