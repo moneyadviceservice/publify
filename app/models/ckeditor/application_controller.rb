@@ -16,7 +16,7 @@ class Ckeditor::ApplicationController < ApplicationController
 
     if callback && asset.save
       body = params[:CKEditor].blank? ? asset.to_json(:only=>[:id, :type]) : %Q"<script type='text/javascript'>
-          window.parent.CKEDITOR.tools.callFunction(#{params[:CKEditorFuncNum]}, '#{asset_url(asset, config.relative_url_root)}');
+          window.parent.CKEDITOR.tools.callFunction(#{params[:CKEditorFuncNum]}, '#{asset_url(asset)}');
         </script>"
 
       render :text => body
@@ -33,11 +33,11 @@ class Ckeditor::ApplicationController < ApplicationController
 
   private
 
-  def asset_url(asset, relative_url_root)
+  def asset_url(asset)
     url = Ckeditor::Utils.escape_single_quotes(asset.url_content)
 
     if URI(url).relative?
-      "#{relative_url_root}#{url}"
+      "#{config.relative_url_root}#{url}"
     else
       url
     end
