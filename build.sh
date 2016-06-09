@@ -17,13 +17,13 @@ cat > public/version <<EOT
 }
 EOT
 
+echo 'Untar precompiled assets'
+echo '-------------------'
+tar -xzvf ../precompiled-assets.tgz
+
 echo 'Running Bundle package'
 echo '----'
 bundle package --all
-
-echo 'Precompiling assets'
-echo '----'
-RAILS_ENV=production RAILS_GROUPS=assets rake assets:precompile
 
 echo 'Uploading assets'
 echo '----'

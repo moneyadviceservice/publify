@@ -5,6 +5,10 @@ set -e
 export PATH=./bin:$PATH
 export RAILS_ENV=test
 
+echo 'Untar precompiled assets'
+echo '-------------------'
+tar -xzvf ../precompiled-assets.tgz
+
 echo 'Running Database Schema Load'
 echo '-------------------'
 RAILS_ENV=test bundle exec rake db:schema:load
