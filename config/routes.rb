@@ -14,6 +14,7 @@ Rails.application.routes.draw do
 
   get 'articles.:format', to: 'articles#index', constraints: { format: 'rss' }, as: 'rss'
   get 'articles.:format', to: 'articles#index', constraints: { format: 'atom' }, as: 'atom'
+  get 'articles.:format', to: 'articles#index', constraints: { format: 'json' }, as: 'json'
 
   controller 'articles', format: false do
     # Initial search goes to /search?q=foo, subsequent pages go to /search/foo/pages/2
