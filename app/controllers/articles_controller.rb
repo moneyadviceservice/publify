@@ -22,6 +22,7 @@ class ArticlesController < ContentController
       format.html
       format.atom
       format.rss
+      format.json
     end
   end
 
