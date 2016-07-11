@@ -1,0 +1,117 @@
+#!/usr/bin/env bash
+### BEGIN INIT INFO
+# Provides: Unicorn Service mas-blog
+# Required-Start: $local_fs $remote_fs
+# Required-Stop:
+# X-Start-Before:
+# Default-Start: 2 3 4 5
+# Default-Stop:
+### END INIT INFO
+#chkconfig: 2345 95 50
+#description: Starts Service mas-blog
+
+set -e
+
+APP_NAME=blog
+APP_PATH=/app/$APP_NAME
+SERVICE_NAME=mas-$APP_NAME
+
+. /etc/mas/environment
+. /etc/sysconfig/$SERVICE_NAME
+
+APP_PORT=${APP_PORT-3000}
+STATUS_URL=${STATUS_URL-http://localhost:$APP_PORT/blog}
+PID_FILE=${PID_FILE-/var/run/$SERVICE_NAME.pid}
+OLD_PID_FILE="$PID_FILE.oldbin"
+CONF_FILE=${CONF_FILE-/etc/mas/$APP_NAME/unicorn.conf}
+TIMEOUT=${TIMEOUT-60}
+
+sig () {
+  test -s "$PID_FILE" && kill -$1 `cat $PID_FILE`
+}
+
+oldsig () {
+  test -s $OLD_PID_FILE && kill -$1 `cat $OLD_PID_FILE`
+}
+
+start() {
+  cd $APP_PATH && /usr/local/rvm/wrappers/$SERVICE_NAME/unicorn -D -E production -c $CONF_FILE &
+  server_down=1
+  attempts=12
+  while [[ "$server_down" -eq "1" && $attempts -gt 0 ]] ; do
+    sleep 5
+    echo "Checking url "$STATUS_URL" after waiting 5 seconds: Attempts Left: $attempts"
+    (curl -sI -m 4 "$STATUS_URL" | grep "200 OK") && server_down=0
+    attempts=`expr $attempts - 1` || true # don't blow up when result is 0
+  done
+  if [ "$server_down" -eq "1" ]
+  then
+    echo "Service $SERVICE_NAME did not startup !!"
+    exit 1
+  else
+    echo "Service $SERVICE_NAME started"
+  fi
+}
+
+restart() {
+  echo "Upgrading $SERVICE_NAME"
+  if sig USR2 && sleep 2 && sig 0 && oldsig QUIT
+  then
+    n=$TIMEOUT
+    while test -s $OLD_PID_FILE && test $n -ge 0
+    do
+      printf '.' && sleep 1 && n=$(( $n - 1 ))
+    done
+    echo
+
+    if test $n -lt 0 && test -s $OLD_PID_FILE
+    then
+      echo "$OLD_PID_FILE still exists after $TIMEOUT seconds"
+      exit 1
+    fi
+    exit 0
+  fi
+  echo "Couldn't upgrade, stopping and starting instead"
+  stop
+  start
+}
+
+status() {
+  pgrep -f $CONF_FILE
+  if [ $? -eq 0 ]; then
+    echo "Service $SERVICE_NAME is running"
+  else
+    echo "Service $SERVICE_NAME is stopped"
+    exit 2
+  fi
+}
+
+stop() {
+  [ -s $PID_FILE ] && (kill -QUIT $(cat $PID_FILE) || true)
+  pgrep -f $CONF_FILE
+  if [ $? -eq 0 ]; then
+    echo "Service $SERVICE_NAME failed to stop, manually killing"
+    pgrep -f $CONF_FILE | xargs kill -9
+  else
+    echo "Service $SERVICE_NAME is stopped"
+  fi
+}
+
+
+case $1 in
+start)
+  start
+  ;;
+
+restart)
+  restart
+  ;;
+
+status)
+  status
+  ;;
+
+stop)
+  stop
+  ;;
+esac
