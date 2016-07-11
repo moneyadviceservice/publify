@@ -1,0 +1,28 @@
+#!/bin/bash
+
+set -x
+mkdir -p /var/log/mas
+exec > /var/log/mas/rpm_builder-after_install-mas-blog 2>&1
+
+. /etc/mas/environment
+
+APP_PATH=/app/blog
+
+GEMSET=`cat $APP_PATH/.ruby-gemset`
+RUBY_VERSION=`cat $APP_PATH/.ruby-version`
+
+RVM="/usr/local/rvm/bin/rvm"
+RVM_STRING="$RUBY_VERSION@$GEMSET"
+
+cd $APP_PATH
+
+$RVM in $APP_PATH do bundle install --without=test development assets --local --frozen --no-cache
+$RVM alias create mas-blog $RVM_STRING --create
+$RVM wrapper mas-blog unicorn_rails
+$RVM wrapper mas-blog unicorn
+
+RAKE="/usr/local/rvm/wrappers/mas-blog/rake"
+
+#Run migrations
+echo "Running $RAKE db:create & db:migrate if it exists"
+$RAKE -T db: | grep "db:" && $RAKE db:create --trace && $RAKE db:migrate --trace
