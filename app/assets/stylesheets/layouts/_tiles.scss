@@ -1,13 +1,13 @@
+.l-tiles {
+  @extend %clearfix;
+  margin-bottom: $baseline-unit*4;
+}
+
 .l-tiles__inner {
   @include column(12);
-  margin-top: baseline-unit(4);
 
   .homepage & {
     margin-top: 5px;
-  }
-
-  @include respond-to($mq-m) {
-    margin-top: baseline-unit(9);
   }
 
   .flexbox & {

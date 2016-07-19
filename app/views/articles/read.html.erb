@@ -34,6 +34,10 @@
 
       <%= render 'shared/sharing_buttons', url: article_url(@article.permalink) %>
 
+      <div class="l-also-like">
+        <%= render 'shared/also_like' %>
+      </div>
+
       <div class="comments l-constrained">
         <a id="comments"></a>
 
@@ -49,7 +53,3 @@
     </div>
   </div>
 </main>
-
-<div class="l-also-like">
-  <%= render 'shared/also_like' %>
-</div>
