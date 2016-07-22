@@ -52,7 +52,6 @@ feature 'Campaigns' do
     new_campaigns_page.active.set(true)
     new_campaigns_page.hero_image.set Rails.root + 'app/assets/images/campaigns-hero-placeholder.png'
     new_campaigns_page.full_bleed.set(true)
-    new_campaigns_page.hero_image_alt_text.set 'alt text'
     new_campaigns_page.primary_link_type.select 'ma says'
     new_campaigns_page.primary_link_title.set 'Smart shopping: simple tips and tricks to save you money'
     new_campaigns_page.primary_link_url.set 'http//www.example.com'

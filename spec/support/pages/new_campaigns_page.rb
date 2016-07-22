@@ -8,7 +8,6 @@ class NewCampaignsPage < SitePrism::Page
 
   element :hero_image, "#campaign_hero_image"
   element :full_bleed, "#campaign_full_bleed"
-  element :hero_image_alt_text, "#campaign_hero_image_alt_text"
 
   element :primary_link_type, "#campaign_primary_link_attributes_link_type"
   element :primary_link_title, "#campaign_primary_link_attributes_title"
