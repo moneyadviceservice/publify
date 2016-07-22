@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150212170710) do
+ActiveRecord::Schema.define(version: 20160722103717) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,9 +42,8 @@ ActiveRecord::Schema.define(version: 20150212170710) do
   create_table "campaigns", force: :cascade do |t|
     t.string   "title"
     t.text     "description"
-    t.boolean  "active",              default: false
+    t.boolean  "active",            default: false
     t.string   "hero_image"
-    t.string   "hero_image_alt_text"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "primary_link_id"

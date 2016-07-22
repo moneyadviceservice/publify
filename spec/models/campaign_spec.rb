@@ -4,7 +4,6 @@ describe Campaign, type: :model do
     Campaign.new(title: 'Save money at the supermarket',
                  description: 'Going to university is all about having a good time, discovering yourself and making new friends, right? Well, yes but hopefully you will learn a lot and get a good qualification as well.',
                  hero_image:  File.new(Rails.root + 'app/assets/images/campaigns-hero-placeholder.png'),
-                 hero_image_alt_text: 'alt text',
                  active: true)
   end
 
@@ -16,7 +15,6 @@ describe Campaign, type: :model do
   it { is_expected.to respond_to(:primary_link) }
   it { is_expected.to respond_to(:secondary_link) }
   it { is_expected.to respond_to(:hero_image) }
-  it { is_expected.to respond_to(:hero_image_alt_text) }
   it { is_expected.to respond_to(:full_bleed) }
 
   it { is_expected.to be_valid }
@@ -51,12 +49,6 @@ describe Campaign, type: :model do
         campaign.remove_hero_image = true
         campaign.save!
       }
-
-      it { is_expected.not_to be_valid }
-    end
-
-    context 'when hero image alt is not present' do
-      before { campaign.hero_image_alt_text = ""  }
 
       it { is_expected.not_to be_valid }
     end
