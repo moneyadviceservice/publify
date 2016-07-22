@@ -12,6 +12,10 @@ $less-than-mq-l: ($mq-l) - .01;
   background-color: $article-tile-bg--blue;
 }
 
+@mixin article-tile--grey {
+  background-color: $article-tile-bg--grey;
+}
+
 @mixin article-tile--mas {
   background-color: $article-tile-bg--mas;
 }
@@ -161,7 +165,7 @@ $less-than-mq-l: ($mq-l) - .01;
   }
 
   .article-page & {
-    @include article-tile--white;
+    @include article-tile--grey;
   }
 
   .article-page .l-tile:nth-child(3) & {
