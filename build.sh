@@ -47,7 +47,7 @@ bundle package --all
 
 echo 'Uploading assets'
 echo '----'
-/usr/local/bin/upload-blog-assets.sh $(pwd)/public
+/usr/local/bin/upload-blog-assets.sh $(pwd)/public ${ASSET_CONTAINER}
 
 echo 'Creating RPM'
 echo '----'
