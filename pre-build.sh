@@ -29,11 +29,3 @@ bundle install
 echo 'Running bowndler'
 echo '-----------------------'
 bowndler update --production --config.interactive=false
-
-echo 'Precompiling assets'
-echo '----'
-RAILS_ENV=production RAILS_GROUPS=assets rake assets:precompile
-
-echo 'Tar precompile assets'
-echo '----'
-tar -czf precompiled-assets.tgz public/assets
