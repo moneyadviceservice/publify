@@ -7,7 +7,7 @@
   @include respond-to($mq-two-col) {
     margin: baseline-unit(2) 0;
     position: fixed;
-    top: 300px;
+    top: 256px;
     right: 0;
     z-index: $z-foreground;
   }
@@ -109,5 +109,18 @@
 
   .svg & {
     background-image: asset-url('sharing/print.svg');
+  }
+}
+
+.sharing__button--rss {
+  background-color: $rss-orange;
+  background-position: -264px 0;
+  &:hover,
+  &:focus {
+    background-color: $rss-orange--hover;
+  }
+
+  .svg & {
+    background-image: asset-url('sharing/rss.svg');
   }
 }
