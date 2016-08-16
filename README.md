@@ -87,8 +87,11 @@ $ ./node_modules/jshint/bin/jshint app/assets/javascripts/components/ --config .
 
 #### Deploying
 
-First you need to make sure you have the production and stagin git remotes. If you have previously run the `./bin/setup` script these will be added automatically, if not you can manually add them with:
+The Blog (previously on Heroku) is now deployed via Go.
 
-    $ git remote add staging git@heroku.com:mas-marketing-blog-staging.git
-    $ git remote add production git@heroku.com:mas-marketing-blog.git
+To deploy to a test environment:
 
+- Create a new local branch named <environment name> from the Publify remote repo
+- Merge the feature branch into this
+- Push the merged branch back to the remote branch on Publify remote. This will automatically trigger a build on blog_commit_<environment name>
+- Trigger a build on deploy_to_<environment name> on Go
