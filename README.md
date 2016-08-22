@@ -60,9 +60,17 @@ can be installed with brew:
 
     $ brew install openssl
 
-And then you can force brew to symlink the `openssl` headers and libraries somewhere where they'll be found:
+And then you can install the gem:
 
-    $ brew link openssl --force
+    $ gem install eventmachine -v 1.0.7 -- --with-cppflags=-I/usr/local/opt/openssl/include
+
+Forcing brew to symlink `openssl` like so  `brew link openssl --force` is not recommended anymore:
+
+    Warning: Refusing to link: openssl
+    Linking keg-only openssl means you may end up linking against the insecure,
+    deprecated system OpenSSL while using the headers from Homebrew's openssl.
+    Instead, pass the full include/library paths to your compiler e.g.:
+      -I/usr/local/opt/openssl/include -L/usr/local/opt/openssl/lib
 
 Or see the issue mentioned above for alternative solutions.
 
