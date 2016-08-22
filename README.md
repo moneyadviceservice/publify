@@ -40,39 +40,6 @@ $ rails s
 
 When running the setup script you may run into an install issue with the *pg* (PostgreSQL) gem. If this occurs, you'll need to install it first via Homebrew `brew install postgresql` and then run the setup again.
 
-##### `eventmachine` gem installation on OSX
-
-As of OSX 10.11 (El Capitan) installing the `eventmachine` gem throws an error:
-
-    In file included from binder.cpp:20:
-    ./project.h:116:10: fatal error: 'openssl/ssl.h' file not found
-    #include <openssl/ssl.h>
-             ^
-    1 error generated.
-    make: *** [binder.o] Error 1
-
-    make failed, exit code 2
-
-This is caused by OSX deprecating the use of `openssl` in favour of
-it's own TLS and crypto libraries (see
-[Issue 102 for eventmachine](https://github.com/eventmachine/eventmachine/issues/602)). `openssl`
-can be installed with brew:
-
-    $ brew install openssl
-
-And then you can install the gem:
-
-    $ gem install eventmachine -v 1.0.7 -- --with-cppflags=-I/usr/local/opt/openssl/include
-
-Forcing brew to symlink `openssl` like so  `brew link openssl --force` is not recommended anymore:
-
-    Warning: Refusing to link: openssl
-    Linking keg-only openssl means you may end up linking against the insecure,
-    deprecated system OpenSSL while using the headers from Homebrew's openssl.
-    Instead, pass the full include/library paths to your compiler e.g.:
-      -I/usr/local/opt/openssl/include -L/usr/local/opt/openssl/lib
-
-Or see the issue mentioned above for alternative solutions.
 
 #### Enviroment File Setup
 
