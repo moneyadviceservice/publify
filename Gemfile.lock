@@ -6,15 +6,6 @@ GIT
       cocaine
       orm_adapter (~> 0.5.0)
 
-GIT
-  remote: https://github.com/moneyadviceservice/dough.git
-  revision: 77358b79fef477f5f500006fd2e82f5da34d1487
-  specs:
-    dough-ruby (5.18.0)
-      activesupport
-      rails (>= 3.2)
-      sass-rails (~> 4.0.0)
-
 GEM
   remote: https://rubygems.org/
   remote: http://gems.dev.mas.local/
@@ -140,6 +131,10 @@ GEM
     dotenv (1.0.2)
     dotenv-rails (1.0.2)
       dotenv (= 1.0.2)
+    dough-ruby (5.18.0.280)
+      activesupport
+      rails (>= 3.2)
+      sass-rails (~> 4.0.0)
     dynamic_form (1.1.4)
     em-websocket (0.5.1)
       eventmachine (>= 0.12.9)
@@ -549,7 +544,7 @@ DEPENDENCIES
   csslint_ruby
   database_cleaner
   dotenv-rails
-  dough-ruby (~> 5.0)!
+  dough-ruby (~> 5.0)
   dynamic_form (~> 1.1.4)
   factory_girl (~> 4.5.0)
   flickraw-cached
