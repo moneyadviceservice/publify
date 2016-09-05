@@ -169,6 +169,10 @@
 
 .l-footer-contact__logo {
   display: inline-block;
+
+  &:focus {
+    background-color: transparent;
+  }
 }
 
 .l-footer-contact__logo-image {
