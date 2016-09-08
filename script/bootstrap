@@ -1,0 +1,14 @@
+# Set up Ruby dependencies via Bundler
+rbenv install -s
+gem install bundler
+bundle config build.eventmachine --with-cppflags=-I$(brew --prefix openssl)/include
+bundle install
+
+# Set up Bower depencencies via Bowndler
+npm install -g bower
+bowndler install
+
+# Set up configurable environment variables
+if [ ! -f .env ]; then
+  cp .sample.env .env
+fi
