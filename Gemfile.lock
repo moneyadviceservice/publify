@@ -131,7 +131,7 @@ GEM
     dotenv (1.0.2)
     dotenv-rails (1.0.2)
       dotenv (= 1.0.2)
-    dough-ruby (5.18.0.280)
+    dough-ruby (5.19.0.281)
       activesupport
       rails (>= 3.2)
       sass-rails (~> 4.0.0)
