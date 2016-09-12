@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 source 'http://gems.dev.mas.local'
 ruby '2.2.0'
 
-gem 'dough-ruby', '~> 5.0'
+gem 'dough-ruby', '~> 4.0', git: 'https://github.com/moneyadviceservice/dough.git', require: 'dough'
 
 gem 'pg'
 gem 'rails', '~> 4.2'
