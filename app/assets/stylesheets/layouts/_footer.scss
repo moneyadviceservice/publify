@@ -79,6 +79,15 @@
   width: 72px;
 }
 
+.l-footer-social__link {
+  display: block;
+
+  svg {
+    vertical-align: top;
+    height: 28px;
+  }
+}
+
 .l-footer-links-section--helpful {
   .l-footer-link__list-item {
     line-height: baseline-unit(2);

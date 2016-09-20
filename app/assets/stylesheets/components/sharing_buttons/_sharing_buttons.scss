@@ -29,6 +29,9 @@
   background-repeat: no-repeat;
   background-position: 0 0;
   background-image: asset-url('sharing/sharing-sprite.png');
+  &:focus {
+    outline: none;
+  }
 
   .svg & {
     background-position: 0 0;
@@ -37,8 +40,7 @@
 
 .sharing__button--facebook {
   background-color: $facebook-blue;
-  &:hover,
-  &:focus {
+  &:hover {
     background-color: $facebook-blue--hover;
   }
 
@@ -50,8 +52,7 @@
 .sharing__button--twitter {
   background-color: $twitter-blue;
   background-position: -44px 0px;
-  &:hover,
-  &:focus {
+  &:hover {
     background-color: $twitter-blue--hover;
   }
 
@@ -63,8 +64,7 @@
 .sharing__button--google {
   background-color: $google-plus-red;
   background-position: -132px 0;
-  &:hover,
-  &:focus {
+  &:hover {
     background-color: $google-plus-red--hover;
   }
 
@@ -76,8 +76,7 @@
 .sharing__button--pinterest {
   background-color: $pinterest-red;
   background-position: -88px 0;
-  &:hover,
-  &:focus {
+  &:hover {
     background-color: $pinterest-red--hover;
   }
 
@@ -89,8 +88,7 @@
 .sharing__button--email {
   background-color: $email-grey;
   background-position: -220px 0;
-  &:hover,
-  &:focus {
+  &:hover {
     background-color: $email-grey--hover;
   }
 
@@ -102,8 +100,7 @@
 .sharing__button--print {
   background-color: $print-grey;
   background-position: -176px 0;
-  &:hover,
-  &:focus {
+  &:hover {
     background-color: $print-grey--hover;
   }
 
@@ -115,8 +112,7 @@
 .sharing__button--rss {
   background-color: $rss-orange;
   background-position: -264px 0;
-  &:hover,
-  &:focus {
+  &:hover {
     background-color: $rss-orange--hover;
   }
 
