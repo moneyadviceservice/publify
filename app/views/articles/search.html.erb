@@ -15,6 +15,11 @@
           <input type="submit" class="button button--primary" />
         </div>
       </form>
+
+      <%- if params[:q].nil? || @articles.empty? %>
+        <h2 class="visually-hidden">Search Results</h2>
+      <% end %>
+
       <%- if params[:q] && @articles.empty? %>
           <p data-dough-search-noresults><%= t(".no_articles_found")%></p>
       <%- else %>
