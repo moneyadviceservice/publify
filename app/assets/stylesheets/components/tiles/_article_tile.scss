@@ -17,7 +17,7 @@ $less-than-mq-l: ($mq-l) - .01;
 }
 
 @mixin article-tile--mas {
-  background-color: $article-tile-bg--mas;
+  background-color: $article-tile-bg--mas-green;
 }
 
 @mixin article-tile--popular {
