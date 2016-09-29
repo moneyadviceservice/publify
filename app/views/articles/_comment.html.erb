@@ -7,8 +7,8 @@
   <div class="t-comment-content">
     <%= simple_format(comment.html).nofollowify %>
   </div>
-  <div class="comment-list-item__report-link"><%= report_comment_link(comment) %></div>
+  <p class="comment-list-item__report-link"><%= report_comment_link(comment) %></p>
   <%- unless comment.published %>
-    <div class="spamwarning"><%= t(".this_comment_has_been_flagged_for_moderator_approval") %></div>
+    <p class="spamwarning"><%= t(".this_comment_has_been_flagged_for_moderator_approval") %></p>
   <%- end %>
 </li>

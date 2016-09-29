@@ -2,7 +2,8 @@ a {
   text-decoration: none;
 
   .l-article__inner p &,
-  .l-footer-links & {
+  .l-footer-links &,
+  .l-footer-contact &:not([href^=tel]) {
     text-decoration: underline;
   }
 
@@ -11,7 +12,8 @@ a {
     text-decoration: underline;
 
     .l-article__inner p &,
-    .l-footer-links & {
+    .l-footer-links &,
+    .l-footer-contact &:not([href^=tel]) {
       text-decoration: none;
     }
   }
