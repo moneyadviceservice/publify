@@ -1,8 +1,18 @@
- a {
-  text-decoration: underline;
+a {
+  text-decoration: none;
+
+  .l-article__inner p &,
+  .l-footer-links & {
+    text-decoration: underline;
+  }
 
   &:hover,
   &:focus {
-    text-decoration: none;
+    text-decoration: underline;
+
+    .l-article__inner p &,
+    .l-footer-links & {
+      text-decoration: none;
+    }
   }
 }
