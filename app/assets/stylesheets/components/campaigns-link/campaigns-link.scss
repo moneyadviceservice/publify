@@ -2,7 +2,7 @@
   @include font-size(22);
   line-height: 1.2;
   font-weight: 700;
-  color: $eastern-blue;
+  color: $color-link-default;
   display: table;
   width: 100%;
   position: relative;
@@ -18,7 +18,7 @@
   width: 30px;
   height: 34px;
   position: relative;
-  fill: $eastern-blue;
+  fill: $color-link-default;
   display: table-cell;
   vertical-align: top;
 }
