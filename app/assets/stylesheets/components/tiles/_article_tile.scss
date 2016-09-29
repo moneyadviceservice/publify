@@ -38,12 +38,12 @@ $less-than-mq-l: ($mq-l) - .01;
 }
 
 @mixin article-tile__heading--white {
-  color: $article-tile-text--white;
+  color: $color-link-default;
 
   &:hover,
   &:focus,
   &:visited {
-    color: $article-tile-text--white;
+    color: $color-link-default;
   }
 }
 
