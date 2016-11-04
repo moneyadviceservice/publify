@@ -294,13 +294,15 @@
         <h2>Insert cost calculator</h2>
       </div>
       <div class="modal-body">
-        <p>Copy the snippet below and paste it to the desired place by clicking on the 'Source' button. <b>Note:</b> Replace [CALC_ID] with the ID of the cost calculator you wish to embed.</p>
+        <p>Copy the snippet below and paste it to the desired place by clicking on the 'Source' button.</p>
+        <p><b>Note:</b> Give this iframe a title by replacing [TITLE] and replace [CALC_ID] with the ID of the cost calculator you wish to embed.</p>
         <textarea disabled="true" class="modal-body__code">
           <iframe id="calculator_embed"
             frameborder="0"
             width="100%"
             height="1000px"
             class="calculator-preview__iframe"
+            title="[TITLE]"
             src="https://www.moneyadviceservice.org.uk/en/cost-calculator-builder/embed/calculators/[CALC_ID]">
           </iframe>
           <script src="https://masjumpprdstorage.blob.core.windows.net/responsive-assets/a/cost_calculator_builder/embed-06ce0df8c79534fead5871af5a3875bd.js"></script>
