@@ -85,13 +85,13 @@ $ ./node_modules/jshint/bin/jshint app/assets/javascripts/components/ --config .
 ```
 
 
-#### Deploying
+#### Deploying to a test environment
 
 The Blog (previously on Heroku) is now deployed via Go.
 
-To deploy to a test environment:
-
-- Create a new local branch named <environment name> from the Publify remote repo
-- Merge the feature branch into this
-- Push the merged branch back to the remote branch on Publify remote. This will automatically trigger a build on blog_commit_<environment name>
-- Trigger a build on deploy_to_<environment name> on Go
+To deploy:
+- Make a feature branch off of master and build the feature.
+- Once you are in a position to deploy this feature, make a new branch from your local feature branch. The name of the new branch should be the name of the environment you want to deploy to: uat/qa/preview.
+- git push -f origin <uat/qa/preview>
+- In GO the blog_commit_<uat/qa/preview> pipeline will automatically start building. Once successfully complete all you need to do is start the deploy_to_<uat/qa/preview> pipeline. This grabs the responsive_commit, blog_commit and cms_commit and deploys all three applications.
+- No version bumps are needed until you are deploying to staging
