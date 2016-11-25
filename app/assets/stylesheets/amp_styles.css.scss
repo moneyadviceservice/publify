@@ -1,6 +1,16 @@
 $responsive: true;
-@import 'yeast/assets/lib/_variables';
 @import 'lib/_colors';
+$inline-callout-link-color: $green-leaf;
+
+@import 'yeast/assets/lib/_variables';
+@import 'dough/assets/stylesheets/lib/_variables';
+@import 'dough/assets/stylesheets/helpers/_inline_block';
+@import '_settings';
+@import 'lib/_functions';
+@import 'lib/_mixins';
+@import 'components/article_body/_settings';
+@import 'components/article_body/_inline_callout';
+@import 'components/article_body/_next_steps';
 
 @font-face {
   font-family: Museo Sans;
