@@ -1,3 +1,68 @@
+$responsive: true;
+@import 'lib/_colors';
+@import 'yeast/assets/lib/_variables';
+
+@font-face {
+  font-family: Museo Sans;
+  src: asset-data-url('dough/assets/fonts/MuseoSans_300.woff');
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: Museo Sans;
+  src: asset-data-url('dough/assets/fonts/MuseoSans_700.woff');
+  font-weight: 700;
+}
+
+// AMP specific classes
+.amp-article {
+  color: $color-grey-primary;
+  font-weight: 300;
+  line-height: 1.5rem;
+  font-size: 1.125rem;
+  -webkit-font-smoothing: antialiased;
+  padding: 0 0.6rem 1rem 0.6rem;
+  background-color: white;
+  overflow: auto;
+}
+
+.amp-article__header {
+  background-color: $color-blue-cerulean;
+  min-height: 3.375rem;
+  padding: 0.8rem 0.4rem 0.5rem 0.4rem;
+}
+
+.amp-article__header-logo {
+  border-bottom: 1px solid #1f5d8e;
+}
+
+.amp-article__mas-logo {
+  width: 12rem;
+  background-size: cover;
+  margin: 0 0 1.5rem 0;
+}
+
+.amp-article__header-logo {
+  font-size: 1.125rem;
+  color: $white;
+  text-decoration: none;
+  font-weight: 700;
+  margin: 1.5rem 0 1rem 0;
+  display: inline-block;
+}
+
+.amp-body {
+  max-width: 36rem;
+  margin: 0 auto;
+  font-family: Museo Sans;
+}
+
+.amp-article p:first-of-type {
+  font-size: 1.375rem;
+  color: $astronaut-blue;
+  margin-top: 0;
+}
+
 .visually-hidden {
   border: 0;
   clip: rect(0 0 0 0);
