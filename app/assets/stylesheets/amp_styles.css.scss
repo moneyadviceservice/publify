@@ -1,16 +1,6 @@
 $responsive: true;
 @import 'lib/_colors';
-$inline-callout-link-color: $green-leaf;
-
 @import 'yeast/assets/lib/_variables';
-@import 'dough/assets/stylesheets/lib/_variables';
-@import 'dough/assets/stylesheets/helpers/_inline_block';
-@import '_settings';
-@import 'lib/_functions';
-@import 'lib/_mixins';
-@import 'components/article_body/_settings';
-@import 'components/article_body/_inline_callout';
-@import 'components/article_body/_next_steps';
 
 @font-face {
   font-family: Museo Sans;
@@ -49,7 +39,6 @@ $inline-callout-link-color: $green-leaf;
 
 .amp-article__mas-logo {
   width: 12rem;
-  display: block;
   background-size: cover;
   margin: 0 0 1.5rem 0;
 }
@@ -62,7 +51,6 @@ $inline-callout-link-color: $green-leaf;
 .amp-article__blog_header--link {
   &:link,
   &:focus,
-  &:hover,
   &:visited {
     color: $white;
     text-decoration: none;
@@ -164,41 +152,59 @@ strong {
   font-weight: 700;
 }
 
-.callout {
-  padding: 1.25rem 0 0.5rem 0;
-  margin: 1.5rem 0;
-  border-radius: 5px;
-  background-color: $color-green-pale;
-  clear: right;
-}
 
-.callout p {
-  margin: 0 1.125rem 1.125rem 1.125rem;
-}
-
-.callout h3 {
-  margin: 0 1.125rem 0.375rem;
-  text-transform: capitalize;
-}
-
-.add-action {
-  position: relative;
-  background-color: $color-blue-light;
-  padding: 0.375rem 0.75rem;
-  display: block;
-  margin: 1.875rem 0;
-  clear: both;
-  color: $color-grey-primary;
-  line-height: 1.5rem;
-}
-
-.visually-hidden {
-  border: 0;
-  clip: rect(0 0 0 0);
-  height: 1px;
-  width: 1px;
-  margin: -1px;
-  padding: 0;
+.inline-callout, .next-steps {
+  padding: 1rem;
   overflow: hidden;
+}
+
+.inline-callout {
+  background: repeating-linear-gradient(135deg,white,white 19px,#777 20px, white 21px);
+}
+
+.next-steps {
+  background-color: $green-leaf;
+  border-radius: 20px;
+  position: relative;
+}
+
+.inline-callout__text, .next-steps__text {
+  position: relative;
+  float: right;
+  text-align: right;
+  padding: 0.5rem 2.9rem 0.5rem 0.5rem;
+}
+
+.inline-callout__text {
+  background-color: white;
+  color: $green-leaf;
+}
+
+.next-steps__text {
+  color: white;
+  font-weight: 700;
+  font-size: 1.3rem;
+  line-height: 2rem;
+  text-decoration: none;
+}
+
+.inline-callout__arrow, .next-steps__arrow {
   position: absolute;
+  top: 30%;
+  right: 1rem;
+  width: 1rem;
+  height: 2rem;
+}
+
+.inline-callout__arrow {
+  fill: none;
+  stroke: $green-leaf;
+}
+
+.next-steps__arrow {
+  fill: white;
+}
+
+.display_none {
+  display: none;
 }
