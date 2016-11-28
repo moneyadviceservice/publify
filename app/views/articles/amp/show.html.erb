@@ -34,6 +34,16 @@
       </div>
       <a href="<%= root_path %>" class="amp-article__blog_header--link">Your Money Advice <span class="visually-hidden">home page</span></a>
     </header>
+
+    <% if @article.hero_image.present? %>
+      <amp-img src="<%= @article.hero_image.url(:resized) %>" alt="<%=@article.hero_image_alt_text %>" height="200" width="576" layout="responsive"></amp-img>
+    <% end %>
+
+    <div class="amp-article">
+      <h1><%= @article.title %></h1>
+        <%= @article.html(:body) %>
+        <%= @article.html(:extended) %>
+    </div>
   </div>
 
   <!-- This is an svg arrow that is used in next steps of an article -->
