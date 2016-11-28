@@ -5,7 +5,7 @@
   #   <use xlink:href="#svg-arrow-right"></use>
   # </svg>
 %>
-<svg style="display: none;">
+<svg <%= 'style="display: none;"' unless local_assigns[:no_styles] %>>
   <symbol id="svg-arrow-right" viewBox="0 0 22 34">
     <polygon points="0,5 5,0 22,17 5.1,34 0,29 12,17" />
   </symbol>
