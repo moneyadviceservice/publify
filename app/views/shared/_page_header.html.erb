@@ -16,6 +16,9 @@
   <% if @article.hero_image.present? %>
     <%= meta_tag 'twitter:image:src', @article.hero_image.url(:resized) %>
   <% end %>
+  <% if @article.supports_amp %>
+    <%= tag :link, :href => amp_article_url(@article.permalink), :rel => :amphtml %>
+  <% end %>
 <% end %>
 <%= meta_tag 'twitter:title', @article ? @article.title : @page_title %>
 <%= meta_tag 'twitter:site', '@YourMoneyAdvice' %>
