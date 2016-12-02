@@ -6,6 +6,7 @@
   <!-- AMP JS libs -->
   <script async src="https://cdn.ampproject.org/v0.js"></script>
   <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+  <script async custom-element="amp-iframe" src="https://cdn.ampproject.org/v0/amp-iframe-0.1.js"></script>
 
   <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
 
@@ -41,8 +42,7 @@
 
     <div class="amp-article">
       <h1><%= @article.title %></h1>
-        <%= @article.html(:body) %>
-        <%= @article.html(:extended) %>
+      <%= article_body(@article) %>
     </div>
   </div>
 

@@ -2,9 +2,9 @@
 describe AmpArticlesController, 'base', type: :controller do
   let!(:blog) { create(:blog) }
   let(:params) { {} }
+  let(:article) { create(:article, permalink: 'second-blog-article', published_at: '2004-04-01 02:00:00', updated_at: '2004-04-01 02:00:00', created_at: '2004-04-01 02:00:00', supports_amp: supports_amp) }
 
   describe '#show' do
-    let!(:article) { create(:article, permalink: 'second-blog-article', published_at: '2004-04-01 02:00:00', updated_at: '2004-04-01 02:00:00', created_at: '2004-04-01 02:00:00', supports_amp: supports_amp) }
     before(:each) do
       get :show, { from: "#{article.permalink}" }.merge(params)
     end
@@ -39,6 +39,20 @@ describe AmpArticlesController, 'base', type: :controller do
           expect(assigns(:article)).to eq(article)
         end
       end
+    end
+  end
+
+  describe '#article_body' do
+    let(:supports_amp) { true }
+    let(:processor) { double('AMPProcessor') }
+
+    before(:each) do
+      expect(AMPProcessor).to receive(:new).with(article).and_return(processor)
+      expect(processor).to receive(:call).and_return('body')
+    end
+
+    it 'returns some html' do
+      expect(subject.article_body(article)).to eq('body')
     end
   end
 end
