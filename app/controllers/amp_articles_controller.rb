@@ -10,4 +10,9 @@ class AmpArticlesController < ActionController::Base
       render 'errors/404', status: 404
     end
   end
+
+  def article_body(article)
+    AMPProcessor.new(article).call
+  end
+  helper_method :article_body
 end
