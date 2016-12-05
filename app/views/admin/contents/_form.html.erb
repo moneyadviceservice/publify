@@ -238,7 +238,7 @@
       </div>
       <div class="modal-body">
         <p>Copy the snippet below and paste it to the desired place by clicking on the 'Source' button.</p>
-        <textarea disabled="true" class="modal-body__code">
+        <textarea readonly="true" class="modal-body__code">
 <hr class="snippet" data-snippet-name="inlinecallout" data-snippet-text="[ENTER LINK TEXT HERE]" data-snippet-url="[ENTER LINK URL HERE]" />
         </textarea>
       </div>
@@ -257,7 +257,7 @@
       </div>
       <div class='modal-body'>
         <p>Copy the snippet below and paste it to the desired place by clicking on the 'Source' button.</p>
-        <textarea disabled="true" class="modal-body__code">
+        <textarea readonly="true" class="modal-body__code">
 <hr class="snippet" data-snippet-name="masays" data-snippet-text="[ENTER LINK TEXT HERE]" data-snippet-url="[ENTER LINK URL HERE]" />
         </textarea>
       </div>
@@ -276,7 +276,7 @@
       </div>
       <div class="modal-body">
         <p>Copy the snippet below and paste it to the desired place by clicking on the 'Source' button. <b>Note:</b> Add a \n to the answer to start a new paragraph.</p>
-        <textarea disabled="true" class="modal-body__code">
+        <textarea readonly="true" class="modal-body__code">
 <hr class="snippet" data-snippet-name="answerreveal" data-snippet-text-question="[ENTER QUESTION TEXT HERE]" data-snippet-text-answer="[ENTER ANSWER TEXT HERE]" data-snippet-text-callout="[ENTER CALLOUT TEXT HERE]" data-snippet-url-callout="[ENTER CALLOUT URL HERE]" />
         </textarea>
       </div>
@@ -294,13 +294,15 @@
         <h2>Insert cost calculator</h2>
       </div>
       <div class="modal-body">
-        <p>Copy the snippet below and paste it to the desired place by clicking on the 'Source' button. <b>Note:</b> Replace [CALC_ID] with the ID of the cost calculator you wish to embed.</p>
-        <textarea disabled="true" class="modal-body__code">
+        <p>Copy the snippet below and paste it to the desired place by clicking on the 'Source' button.</p>
+        <p><b>Note:</b> Give this iframe a title by replacing [TITLE] and replace [CALC_ID] with the ID of the cost calculator you wish to embed.</p>
+        <textarea readonly="true" class="modal-body__code">
           <iframe id="calculator_embed"
             frameborder="0"
             width="100%"
             height="1000px"
             class="calculator-preview__iframe"
+            title="[TITLE]"
             src="https://www.moneyadviceservice.org.uk/en/cost-calculator-builder/embed/calculators/[CALC_ID]">
           </iframe>
           <script src="https://masjumpprdstorage.blob.core.windows.net/responsive-assets/a/cost_calculator_builder/embed-06ce0df8c79534fead5871af5a3875bd.js"></script>
@@ -321,7 +323,7 @@
       </div>
       <div class="modal-body">
         <p>Copy the snippet below and paste it to the desired place by clicking on the 'Source' button. <b>Note:</b> Replace [BRIGHT_ID] with the ID of video you wish to embed.</p>
-        <textarea disabled="true" class="modal-body__code">
+        <textarea readonly="true" class="modal-body__code">
           <div class="mas-video-container">
             <div class="mas-video">
               <iframe src='//players.brightcove.net/3608769895001/b15c0e6a-51da-4bb1-b717-bccae778670d_default/index.html?videoId=[BRIGHT_ID]'
@@ -351,7 +353,7 @@
       </div>
       <div class="modal-body">
         <p>Copy the snippet below and paste it to the desired place by clicking on the 'Source' button. <b>Note:</b> Replace [YOUTUBE_EMBED_CODE] with the embed code of the YouTube Video.</p>
-        <textarea disabled="true" class="modal-body__code">
+        <textarea readonly="true" class="modal-body__code">
           <div class="mas-video-container">
             <div class="mas-video">
               [YOUTUBE_EMBED_CODE]

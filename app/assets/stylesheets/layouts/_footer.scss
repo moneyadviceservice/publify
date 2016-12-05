@@ -62,7 +62,7 @@
   &:active,
   &:focus {
     svg {
-      fill: $link-color;
+      fill: $color-link-default;
     }
   }
 }
@@ -77,6 +77,15 @@
 
 .l-footer-social__list-item.youtube {
   width: 72px;
+}
+
+.l-footer-social__link {
+  display: block;
+
+  svg {
+    vertical-align: top;
+    height: 28px;
+  }
 }
 
 .l-footer-links-section--helpful {
@@ -169,6 +178,10 @@
 
 .l-footer-contact__logo {
   display: inline-block;
+
+  &:focus {
+    background-color: transparent;
+  }
 }
 
 .l-footer-contact__logo-image {

@@ -2,21 +2,21 @@
   <%= rel_next_prev_link_tags @articles %>
 <% end %>
 
-<main id="main" tabindex="-1" class="l-results">
+<main id="main" tabindex="-1" class="l-results" data-dough-component="SearchFocus">
   <div class="l-constrained">
     <div class="results-list">
       <h1 class="results-list__title"><%= t('.search_results_for')%> <% if params[:q] %>'<%= h(params[:q]) %>'<% end %></h1>
       <form class="search-form" action="<%= search_path %>">
         <div class="form__row">
           <label for="q" class="form__label-heading">Search term</label>
-          <input class="search-form__input" type="text" name="q" id="q" value="<%= h(params[:q]) %>" />
+          <input class="search-form__input" type="text" name="q" id="q" value="<%= h(params[:q]) %>" data-dough-search-input />
         </div>
         <div class="form__row">
           <input type="submit" class="button button--primary" />
         </div>
       </form>
       <%- if params[:q] && @articles.empty? %>
-        <p><%= t(".no_articles_found")%></p>
+          <p data-dough-search-noresults><%= t(".no_articles_found")%></p>
       <%- else %>
         <a name="results" id="results"></a>
         <% if @articles.count > 0 %>
@@ -24,7 +24,9 @@
         <% end %>
         <%- @articles.each do |article| %>
           <div class="results-list-item">
-            <h2 class="results-list-item__header"><%= link_to(article.title, article_path(article.permalink)) %></h2>
+            <h2 class="results-list-item__header" data-dough-search-results-item>
+              <%= link_to(article.title, article_path(article.permalink)) %>
+            </h2>
             <div class="results-list-item__author">
               <% if article.author %>
                 <span class="visually-hidden"><%= t("articles.archives.published_by") %></span> <a href="<%= author_path(id: article.author) %>"><%= article.user.nickname %></a> -
