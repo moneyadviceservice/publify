@@ -21,7 +21,7 @@ $responsive: true;
   line-height: 1.5rem;
   font-size: 1.125rem;
   -webkit-font-smoothing: antialiased;
-  padding: 0 0.6rem 1px 0.6rem;
+  padding: 0 0.6rem 1rem 0.6rem;
   background-color: white;
   overflow: auto;
 }
@@ -98,47 +98,47 @@ h3 {
   color: $color-green-secondary;
 }
 
-table {
-  text-align: left;
-  margin: 1.5rem 0;
-  border-spacing: 0;
-}
+// table {
+//   text-align: left;
+//   margin: 1.5rem 0;
+//   border-spacing: 0;
+// }
 
-thead {
-  display: table-header-group;
-  vertical-align: middle;
-  border-color: inherit;
-}
+// thead {
+//   // display: table-header-group;
+//   vertical-align: middle;
+//   // border-color: inherit;
+// }
 
-tr {
-  display: table-row;
-  vertical-align: inherit;
-  border-color: inherit;
-}
+// tr {
+//   display: table-row;
+//   // vertical-align: inherit;
+//   // border-color: inherit;
+// }
 
-thead tr {
-  background-color: $color-grey-nine;
-}
+// thead tr {
+//   background-color: $color-grey-nine;
+// }
 
-th, th p {
-  font-weight: 700;
-}
+// th, th p {
+//   font-weight: 700;
+// }
 
-th, td {
-  vertical-align: top;
-  padding: 0.75rem;
-  border-right: 1px solid $color-green-one;
-  width: auto;
-  font-size: 14px;
-}
+// th, td {
+//   vertical-align: top;
+//   padding: 0.75rem;
+//   border-right: 1px solid $color-green-one;
+//   // width: auto;
+//   font-size: 14px;
+// }
 
-th:last-child, td:last-child {
-  border-right: 0;
-}
+// th:last-child, td:last-child {
+//   border-right: 0;
+// }
 
-tr:nth-child(even) {
-  background-color: $color-grey-ten;
-}
+// tr:nth-child(even) {
+//   background-color: $color-grey-ten;
+// }
 
 a {
   color: $color-blue-medium;
@@ -167,7 +167,7 @@ strong {
   position: relative;
   float: right;
   text-align: right;
-  padding: 0.5rem 2.9rem 0.5rem 0.5rem;
+  padding: 0.7rem 2.9rem 0.7rem 0.7rem;
 }
 
 .inline-callout__text {
@@ -185,7 +185,7 @@ strong {
 
 .inline-callout__arrow, .next-steps__arrow {
   position: absolute;
-  top: 30%;
+  top: 23%;
   right: 1rem;
   width: 1rem;
   height: 2rem;
