@@ -27,6 +27,8 @@ gem 'jbuilder'
 gem 'webpurify', require: 'web_purify'
 gem 'rack-trailing_slashes'
 gem 'newrelic_rpm'
+gem 'nokogiri'
+gem 'fastimage'
 
 gem 'jquery-rails', '~> 3.1.0'
 gem 'jquery-ui-rails', '~> 5.0.2'

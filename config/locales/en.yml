@@ -757,6 +757,7 @@ en:
         change: "Change"
         publish_at_note: "If left blank, populates automatically with the current time when publishing"
         allow_comments: "Allow comments"
+        supports_amp: "Supports AMP"
         ok: "OK"
         visibility: "Visibility"
         password: "Password"
