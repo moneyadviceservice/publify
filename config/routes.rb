@@ -110,5 +110,6 @@ Rails.application.routes.draw do
 
   root to: 'articles#index', format: false
 
+  get '*from/amp', to: 'amp_articles#show', as: :amp_article
   get '*from', to: 'articles#show', as: :article
 end
