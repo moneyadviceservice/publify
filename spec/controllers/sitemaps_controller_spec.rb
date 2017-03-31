@@ -5,7 +5,7 @@ describe SitemapsController, type: :controller do
   end
 
   describe '#show' do
-    context 'when the news param is set' do
+    context 'when the news param is not set' do
       before do
         FactoryGirl.create(:tag)
         get :show, format: 'xml'
@@ -20,7 +20,7 @@ describe SitemapsController, type: :controller do
       end
     end
 
-    context 'when the news param is not set' do
+    context 'when the news param is set' do
       before do
         FactoryGirl.create(:tag)
         get :show, format: 'xml', news: true
