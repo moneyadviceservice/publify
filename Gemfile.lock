@@ -342,7 +342,7 @@ GEM
       net-ssh (>= 2.6.5)
     net-ssh (2.9.2)
     netrc (0.10.3)
-    newrelic_rpm (3.13.0.299)
+    newrelic_rpm (4.0.0.332)
     nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
     non-stupid-digest-assets (1.0.4)
@@ -599,6 +599,9 @@ DEPENDENCIES
   unicorn
   uuidtools (~> 2.1.1)
   webpurify
+
+RUBY VERSION
+   ruby 2.2.0p0
 
 BUNDLED WITH
    1.13.6
