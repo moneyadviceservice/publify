@@ -1,6 +1,6 @@
 <% content_for :feeds do %>
-  <%= auto_discovery_link_tag :rss, article_url(@article, format: :rss) %>
-  <%= auto_discovery_link_tag :atom, article_url(@article, format: :atom) %>
+  <%= auto_discovery_link_tag :rss, rss_url( format: :rss) %>
+  <%= auto_discovery_link_tag :atom, atom_url( format: :atom) %>
 <% end %>
 
 <div class="l-banner">
