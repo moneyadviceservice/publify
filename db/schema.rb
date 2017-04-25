@@ -100,7 +100,7 @@ ActiveRecord::Schema.define(version: 20161129152334) do
     t.string   "description_meta_tag"
     t.integer  "primary_related_content_id"
     t.integer  "secondary_related_content_id"
-    t.boolean  "supports_amp",                             default: true
+    t.boolean  "supports_amp",                 default: true
   end
 
   add_index "contents", ["published"], name: "index_contents_on_published", using: :btree

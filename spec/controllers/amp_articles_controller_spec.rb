@@ -2,7 +2,7 @@
 describe AmpArticlesController, 'base', type: :controller do
   let!(:blog) { create(:blog) }
   let(:params) { {} }
-  let(:article) { create(:article, permalink: 'second-blog-article', published_at: '2004-04-01 02:00:00', updated_at: '2004-04-01 02:00:00', created_at: '2004-04-01 02:00:00', supports_amp: supports_amp) }
+  let(:article) { FactoryGirl.create(:article, permalink: 'second-blog-article', published_at: '2004-04-01 02:00:00', updated_at: '2004-04-01 02:00:00', created_at: '2004-04-01 02:00:00', supports_amp: supports_amp) }
 
   describe '#show' do
     before(:each) do
