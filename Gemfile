@@ -69,11 +69,6 @@ group :development, :test do
   gem 'simplecov', require: false
   gem 'pry-rails'
   gem 'rubocop', require: false
-  gem 'guard-rails'
-  gem 'guard-rspec', require: false
-  gem 'guard-livereload'
-  gem 'guard-bundler'
-  gem 'guard-rubocop'
   gem 'launchy'
   gem 'poltergeist'
   gem 'foreman'
