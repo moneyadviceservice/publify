@@ -26,6 +26,7 @@ Rails.application.configure do
     bootstrap.css
     user-styles.css
     coderay.css
+    lte-ie8.css
     dough/assets/stylesheets/basic.css
     dough/assets/stylesheets/font_files.css
     dough/assets/stylesheets/font_base64.css

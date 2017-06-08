@@ -1,0 +1,290 @@
+// Header
+
+.l-header {
+  background-color: #0076ab;
+  overflow: hidden;
+  width: 100%;
+  z-index: 1000;
+  padding: 20px 30px 30px;
+
+  .l-logo {
+    background: transparent image_url('logo-en-white.png') no-repeat;
+    width: 250px;
+    height: 37px;
+  }
+
+  .l-header__top {
+    border: none;
+  }
+
+  .l-header__search-button:after {
+    background: transparent image_url('magnify.png') no-repeat;
+  }
+
+  .l-constrained {
+    max-width: 100%;
+  }
+}
+
+.l-header__bottom {
+  text-align: center;
+}
+
+.l-campaign--fullbleed {
+  .l-constrained {
+    margin-top: -120px;
+  }
+}
+
+.l-campaigns__panel {
+  padding: 20px;
+}
+
+// Homepage Tiles
+
+.l-tile {
+  float: left;
+  width: 33%;
+  margin-left: 0.5%;
+
+  .article-tile--popular {
+    background-color: #f1d75f;
+
+    .article-tile__heading {
+      color: black;
+    }
+  }
+
+  &:first-child {
+    margin-left: 0;
+  }
+
+  // IE8 version of unsupported nth-child property
+  &:first-child,
+  &:first-child + div + div + div + div + div,
+  &:first-child + div + div + div + div + div + div {
+    .article-tile {
+      background-color: #0b8573;
+    }
+  }
+
+  &:first-child + div,
+  &:first-child + div + div + div {
+    
+    .article-tile {
+      background-color: white;
+    }
+
+    .article-tile__heading,
+    .article-tile__date {
+      color: #003d8e;
+    }
+  }
+
+  &:first-child + div + div + div {
+    margin-left: 0;
+  }
+
+  &:first-child + div + div + div + div + div + div {
+    margin-left: 0;
+  }
+}
+
+// Blog post contents
+
+.l-article__inner {
+  padding: 20px 0;
+  max-width: 60%;
+}
+
+.article-info__comments {
+  padding: 10px;
+
+  &:before {
+    display: none;
+  }
+}
+
+.article-tile {
+  padding: 20px;
+  min-height: 200px;
+
+  .article-tile__comments {
+    right: 10px;
+    bottom: 20px;
+  }
+}
+
+// Footer
+
+.l-footer-links-section {
+  border: none;
+  float: left;
+  width: 31%;
+  margin: 0 1%;
+  padding-top: 30px;
+
+  .l-footer-link__header {
+    margin: 10px 0;
+  }
+
+  .l-footer-link__list-item {
+    padding: 10px 0;
+  }
+
+  &.l-footer-links-section--helpful {
+    width: 15%;
+    float: right;
+  }
+}
+
+.l-index-archive__link {
+  padding: 10px;
+}
+
+.l-footer-contact__logo {
+  background: transparent image_url('logo_en.png') no-repeat;
+  width: 325px;
+  height: 51px;
+  margin-top: 20px;
+
+  .l-footer-contact__logo-image {
+    display: none;
+  }
+}
+
+.l-footer-contact__text {
+  padding: 10px;
+}
+
+.footer-secondary__list-item {
+  float: left;
+  padding: 10px;
+}
+
+.sharing {
+  position: fixed;
+  right: 0;
+  top: 30%;
+  z-index: 50;
+
+  .sharing__item {
+    float: none;
+  }
+}
+
+// Author details
+
+.l-article-info {
+  position: absolute;
+  top: 0;
+  left: -200px;
+}
+
+// Social sharing icons
+
+.l-footer-social__list-item {
+  margin: 10px;
+
+  &.twitter {
+    a {
+      background: transparent image_url('sharing/twitter.png') no-repeat;
+      width: 30px;
+      height: 30px;
+    }
+  }
+
+  &.facebook {
+    a {
+      background: transparent image_url('sharing/facebook.png') no-repeat;
+      width: 30px;
+      height: 30px;
+    }
+  }
+
+  &.youtube {
+    a {
+      background: transparent image_url('sharing/youtube.png') no-repeat;
+      width: 60px;
+      height: 30px;
+    }
+  }
+}
+
+// You may also like
+
+.also-like {
+  margin-top: 20px;
+  
+  .l-tile:first-child,
+  .l-tile:first-child + div {
+    .article-tile {
+      background-color: #f3f3f3;
+    }
+  }
+
+  .l-tile:first-child + div + div {
+    .article-tile {
+      background-color: #3e8406;
+
+      .article-tile__heading {
+        color: #ffffff;
+      }
+    }
+  }
+}
+
+
+// Tags
+
+.l-banner__tags {
+  height: auto;
+  font-size: inherit;
+}
+
+.tag-list {
+  float: right;
+  margin-top: -50px;
+
+  .tag-list__item {
+    margin-left: 5px;
+  }
+
+  .tag-list__item-inner,
+  .tag-list__link {
+    padding: 10px;
+  }
+}
+
+// Comments
+
+.comments {
+  padding: 20px;
+  margin-top: 20px;
+
+  .comment-form__group {
+    margin: 10px 1.66%;
+  }
+
+  .comment-list-item {
+    padding: 10px 0;
+  }
+}
+
+// Search
+
+.results-list {
+  padding: 20px;
+
+  .results-list-item {
+    padding: 10px 0;
+  }
+}
+
+// Inline callout
+
+.inline-callout__text {
+  float: none;
+  text-align: left;
+  font-size: 1.4em;
+}
