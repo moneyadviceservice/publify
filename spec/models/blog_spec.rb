@@ -150,15 +150,4 @@ http://anotherurl.net/other_line")
     it { expect(blog.per_page('atom')).to eq(4) }
   end
 
-  describe '#humans' do
-    context 'default value with publify txt' do
-      let(:blog) { create :blog }
-      it { expect(blog.humans).to_not be_nil }
-    end
-
-    context 'default value with publify txt' do
-      let(:blog) { create(:blog, humans: 'something to say') }
-      it { expect(blog.humans).to eq('something to say') }
-    end
-  end
 end

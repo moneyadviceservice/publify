@@ -1,4 +1,7 @@
 class AmpArticlesController < ActionController::Base
+
+  newrelic_ignore_enduser
+
   def show
     if (@article = Article.find_by_permalink(params[:from])).present?
       if @article.supports_amp? || params[:no_redirect]

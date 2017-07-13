@@ -3,7 +3,7 @@ describe AMPProcessor, type: :model do
   let!(:blog) { create(:blog) }
 
   let!(:blog) { create(:blog) }
-  let(:article) { create(:article, permalink: 'second-blog-article', published_at: '2004-04-01 02:00:00', updated_at: '2004-04-01 02:00:00', created_at: '2004-04-01 02:00:00', supports_amp: true) }
+  let(:article) { FactoryGirl.create(:article, permalink: 'second-blog-article', published_at: '2004-04-01 02:00:00', updated_at: '2004-04-01 02:00:00', created_at: '2004-04-01 02:00:00', supports_amp: true) }
   let(:processor) { AMPProcessor.new(article) }
 
   describe '#call' do

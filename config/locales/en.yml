@@ -429,9 +429,6 @@ en:
         replaced_by_the_archive_date: "Replaced by the archive date"
         replaced_by_the_content_body: "Replaced by the content body"
       seo:
-        human: "Human"
-        humans_txt: "Human"
-        explain_humans_txt: "It's an initiative for knowing the people behind a website. It's a TXT file that contains information about the different people who have contributed to building the website. http://humanstxt.org/"
         cancel: "Cancel"
         or: "or"
         update_settings: "Update settings"
