@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 source 'http://gems.dev.mas.local'
-ruby '2.2.0'
+ruby '2.2.5'
 
 gem 'dough-ruby', '~> 5.0', require: 'dough'
 
@@ -18,7 +18,7 @@ gem 'flickraw-cached'
 gem 'rubypants', '~> 0.2.0'
 gem 'rake', '~> 10.3.2'
 gem 'fog'
-gem 'recaptcha', require: 'recaptcha/rails', branch: 'rails3'
+gem 'recaptcha', require: 'recaptcha/rails'
 gem 'carrierwave', '~> 0.10.0'
 gem 'carrierwave-azure'
 gem 'akismet', '~> 1.0'
