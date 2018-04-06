@@ -12,6 +12,7 @@ require 'factory_bot'
 require 'rexml/document'
 require 'site_prism'
 FactoryBot.find_definitions
+FactoryBot.allow_class_lookup = false
 
 class EmailNotify
   class << self
@@ -129,10 +130,10 @@ def assert_json feed, count
 end
 
 def stub_full_article(time = Time.now)
-  author = FactoryBot.build_stubbed(User, name: 'User Name')
+  author = FactoryBot.build_stubbed(:user, name: 'User Name')
   text_filter = FactoryBot.build(:textile)
 
-  a = FactoryBot.build_stubbed(Article, published_at: time, user: author,
+  a = FactoryBot.build_stubbed(:article, published_at: time, user: author,
                  created_at: time, updated_at: time,
                  title: 'Foo Bar', permalink: 'foo-bar',
                  guid: time.hash)
