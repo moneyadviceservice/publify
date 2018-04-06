@@ -8,10 +8,10 @@ end
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 require 'rspec/rails'
-require 'factory_girl'
+require 'factory_bot'
 require 'rexml/document'
 require 'site_prism'
-FactoryGirl.find_definitions
+FactoryBot.find_definitions
 
 class EmailNotify
   class << self
@@ -54,7 +54,7 @@ RSpec.configure do |config|
   config.include SessionHelpers, type: :feature
 
   # shortcuts for factory_girl to use: create / build / build_stubbed
-  config.include FactoryGirl::Syntax::Methods
+  config.include FactoryBot::Syntax::Methods
 
   if config.files_to_run.one?
     config.default_formatter = 'doc'
@@ -129,16 +129,16 @@ def assert_json feed, count
 end
 
 def stub_full_article(time = Time.now)
-  author = FactoryGirl.build_stubbed(User, name: 'User Name')
-  text_filter = FactoryGirl.build(:textile)
+  author = FactoryBot.build_stubbed(User, name: 'User Name')
+  text_filter = FactoryBot.build(:textile)
 
-  a = FactoryGirl.build_stubbed(Article, published_at: time, user: author,
+  a = FactoryBot.build_stubbed(Article, published_at: time, user: author,
                  created_at: time, updated_at: time,
                  title: 'Foo Bar', permalink: 'foo-bar',
                  guid: time.hash)
   allow(a).to receive(:published_comments) { [] }
-  allow(a).to receive(:resources) { [FactoryGirl.build(:resource)] }
-  allow(a).to receive(:tags) { [FactoryGirl.build(:tag)] }
+  allow(a).to receive(:resources) { [FactoryBot.build(:resource)] }
+  allow(a).to receive(:tags) { [FactoryBot.build(:tag)] }
   allow(a).to receive(:text_filter) { text_filter }
   a
 end

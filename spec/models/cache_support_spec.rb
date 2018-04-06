@@ -1,7 +1,7 @@
 describe 'Given a published article', type: :model do
   before(:each) do
-    FactoryGirl.create(:blog)
-    FactoryGirl.create(:article)
+    FactoryBot.create(:blog)
+    FactoryBot.create(:article)
     @article = Article.first
   end
 
@@ -33,8 +33,8 @@ end
 
 describe 'Given an unpublished article', type: :model do
   before(:each) do
-    FactoryGirl.create(:blog)
-    FactoryGirl.create(:article, published: false, state: 'draft')
+    FactoryBot.create(:blog)
+    FactoryBot.create(:article, published: false, state: 'draft')
     @article = Article.first
   end
 
@@ -55,8 +55,8 @@ end
 
 describe 'Given an unpublished spammy comment', type: :model do
   before(:each) do
-    FactoryGirl.create(:blog)
-    @comment = FactoryGirl.create(:comment,
+    FactoryBot.create(:blog)
+    @comment = FactoryBot.create(:comment,
                                   published: false,
                                   state: 'presumed_spam',
                                   status_confirmed: false)
@@ -83,8 +83,8 @@ end
 
 describe 'Given a published comment', type: :model do
   before(:each) do
-    FactoryGirl.create(:blog)
-    @comment = FactoryGirl.create(:comment)
+    FactoryBot.create(:blog)
+    @comment = FactoryBot.create(:comment)
   end
 
   it 'changing it destroys the cache' do
@@ -106,8 +106,8 @@ end
 
 describe 'Given an unpublished spammy trackback', type: :model do
   before(:each) do
-    FactoryGirl.create(:blog)
-    @trackback = FactoryGirl.create(:trackback, published: false,
+    FactoryBot.create(:blog)
+    @trackback = FactoryBot.create(:trackback, published: false,
       state: 'presumed_spam', status_confirmed: false)
   end
 
@@ -132,8 +132,8 @@ end
 
 describe 'Given a published trackback', type: :model do
   before(:each) do
-    FactoryGirl.create(:blog)
-    @trackback = FactoryGirl.create(:comment)
+    FactoryBot.create(:blog)
+    @trackback = FactoryBot.create(:comment)
   end
 
   it 'changing it destroys the cache' do

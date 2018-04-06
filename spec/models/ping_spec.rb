@@ -31,7 +31,7 @@ describe Ping, type: :model do
       expect(Net::HTTP).to receive(:get_response).and_return(mock_response)
       expect(XMLRPC::Client).to receive(:new2).with(pingback_target).and_return(mock_xmlrpc_response)
 
-      ping = FactoryGirl.create(:article).pings.build('url' => referenced_url)
+      ping = FactoryBot.create(:article).pings.build('url' => referenced_url)
       expect(ping).to be_instance_of(Ping)
       expect(ping.url).to eq(referenced_url)
       ping.send_pingback_or_trackback(referrer_url).join

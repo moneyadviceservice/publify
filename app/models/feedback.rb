@@ -1,4 +1,5 @@
 require_dependency 'spam_protection'
+require_dependency 'dotenv'
 class Feedback < ActiveRecord::Base
   self.table_name = 'feedback'
 

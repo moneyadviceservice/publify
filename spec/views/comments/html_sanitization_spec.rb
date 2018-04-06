@@ -115,8 +115,8 @@ end
 
 shared_examples_for 'CommentSanitizationWithDofollow' do
   before do
-    @blog = FactoryGirl.create(:blog)
-    @article = FactoryGirl.create(:article, created_at: Time.now, published_at: Time.now)
+    @blog = FactoryBot.create(:blog)
+    @article = FactoryBot.create(:article, created_at: Time.now, published_at: Time.now)
     allow(Article).to receive(:find).and_return(@article)
     @blog.plugin_avatar = ''
     @blog.lang = 'en_US'
@@ -134,7 +134,7 @@ shared_examples_for 'CommentSanitizationWithDofollow' do
 
   ['', 'markdown', 'textile', 'smartypants', 'markdown smartypants'].each do |value|
     it "Should sanitize content rendered with the #{value} textfilter" do
-      value == '' ? FactoryGirl.create(:none) : FactoryGirl.create(value)
+      value == '' ? FactoryBot.create(:none) : FactoryBot.create(value)
       @blog.comment_text_filter = value
       @blog.save
 
