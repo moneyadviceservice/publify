@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 source 'http://gems.dev.mas.local'
-ruby '2.4.2'
 
 gem 'dough-ruby', '~> 5.0', require: 'dough'
 
