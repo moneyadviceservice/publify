@@ -1,6 +1,6 @@
 describe 'Ping::Pinger with Test::Unit', type: :model do
   before do
-    FactoryGirl.create(:blog)
+    FactoryBot.create(:blog)
     # avoid mocking constructor until we need it for something
     @pinger = Ping::Pinger.allocate
     class << @pinger

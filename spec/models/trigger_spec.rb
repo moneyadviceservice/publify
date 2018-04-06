@@ -1,7 +1,7 @@
 describe Trigger, type: :model do
   before(:each) do
-    FactoryGirl.create :blog
-    @page = FactoryGirl.create :page, published: false
+    FactoryBot.create :blog
+    @page = FactoryBot.create :page, published: false
   end
 
   it '.post_action should not fire immediately for future triggers' do

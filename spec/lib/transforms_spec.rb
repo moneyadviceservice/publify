@@ -15,7 +15,7 @@ describe String do
   describe 'nofollowify' do
     before(:each) {
       Blog.delete_all
-      @blog = FactoryGirl.create :blog
+      @blog = FactoryBot.create :blog
     }
 
     it 'with dofollowify disabled, links should be nofollowed' do

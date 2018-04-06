@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 source 'http://gems.dev.mas.local'
-ruby '2.2.0'
+ruby '2.4.2'
 
 gem 'dough-ruby', '~> 5.0', require: 'dough'
 
@@ -8,6 +8,7 @@ gem 'pg'
 gem 'rails', '~> 4.2'
 gem 'htmlentities'
 gem 'bluecloth', '~> 2.1'
+gem 'dotenv-rails'
 gem 'coderay', '~> 1.1.0'
 gem 'kaminari'
 gem 'RedCloth', '~> 4.2.8'
@@ -18,7 +19,7 @@ gem 'flickraw-cached'
 gem 'rubypants', '~> 0.2.0'
 gem 'rake', '~> 10.3.2'
 gem 'fog'
-gem 'recaptcha', require: 'recaptcha/rails', branch: 'rails3'
+gem 'recaptcha', require: 'recaptcha/rails'
 gem 'carrierwave', '~> 0.10.0'
 gem 'carrierwave-azure'
 gem 'akismet', '~> 1.0'
@@ -29,6 +30,7 @@ gem 'rack-trailing_slashes'
 gem 'newrelic_rpm'
 gem 'nokogiri'
 gem 'fastimage'
+gem 'xmlrpc'
 
 gem 'jquery-rails', '~> 3.1.0'
 gem 'jquery-ui-rails', '~> 5.0.2'
@@ -46,7 +48,7 @@ gem 'responders', '~> 2.0'
 # removed from Rails-core as Rails 4.0
 gem 'actionpack-page_caching', '~> 1.0.2'
 gem 'rails-observers', '~> 0.1.2'
-gem 'ckeditor', github: 'galetahub/ckeditor'
+gem 'ckeditor', git: 'https://github.com/galetahub/ckeditor'
 
 gem 'oauth2', '1.0.0'
 gem 'google-api-client', '0.7.1'
@@ -64,8 +66,7 @@ group :build, :test, :development do
 end
 
 group :development, :test do
-  gem 'factory_girl', '~> 4.5.0'
-  gem 'dotenv-rails'
+  gem 'factory_bot', '~> 4.8.0'
   gem 'simplecov', require: false
   gem 'pry-rails'
   gem 'rubocop', require: false
@@ -74,7 +75,7 @@ group :development, :test do
   gem 'foreman'
   gem 'letter_opener'
   gem 'database_cleaner'
-  gem 'rspec-rails', '~> 3.1.0'
+  gem 'rspec-rails'
   gem 'byebug'
 end
 

@@ -18,8 +18,8 @@ describe Tag, type: :model do
 
   it 'articles can be tagged' do
     a = Article.create(title: 'an article')
-    foo = FactoryGirl.create(:tag, name: 'foo')
-    bar = FactoryGirl.create(:tag, name: 'bar')
+    foo = FactoryBot.create(:tag, name: 'foo')
+    bar = FactoryBot.create(:tag, name: 'bar')
     a.tags << foo
     a.tags << bar
     a.reload
@@ -28,11 +28,11 @@ describe Tag, type: :model do
   end
 
   it 'find_all_with_article_counters finds 2 tags' do
-    a = FactoryGirl.create(:article, title: 'an article a')
-    b = FactoryGirl.create(:article, title: 'an article b')
-    c = FactoryGirl.create(:article, title: 'an article c')
-    foo = FactoryGirl.create(:tag, name: 'foo', articles: [a, b, c])
-    bar = FactoryGirl.create(:tag, name: 'bar', articles: [a, b])
+    a = FactoryBot.create(:article, title: 'an article a')
+    b = FactoryBot.create(:article, title: 'an article b')
+    c = FactoryBot.create(:article, title: 'an article c')
+    foo = FactoryBot.create(:tag, name: 'foo', articles: [a, b, c])
+    bar = FactoryBot.create(:tag, name: 'bar', articles: [a, b])
     tags = Tag.find_all_with_article_counters
     expect(tags.entries.size).to eq(2)
     expect(tags.first.name).to eq('foo')
@@ -43,9 +43,9 @@ describe Tag, type: :model do
 
   describe '#published_articles' do
     it 'should return only published articles' do
-      published_art = FactoryGirl.create(:article)
-      draft_art = FactoryGirl.create(:article, published_at: nil, published: false, state: 'draft')
-      art_tag = FactoryGirl.create(:tag, name: 'art', articles: [published_art, draft_art])
+      published_art = FactoryBot.create(:article)
+      draft_art = FactoryBot.create(:article, published_at: nil, published: false, state: 'draft')
+      art_tag = FactoryBot.create(:tag, name: 'art', articles: [published_art, draft_art])
       expect(art_tag.published_articles.size).to eq(1)
     end
   end
@@ -53,9 +53,9 @@ describe Tag, type: :model do
   context 'with tags foo, bar and bazz' do
 
     before do
-      @foo = FactoryGirl.create(:tag, name: 'foo')
-      @bar = FactoryGirl.create(:tag, name: 'bar')
-      @bazz = FactoryGirl.create(:tag, name: 'bazz')
+      @foo = FactoryBot.create(:tag, name: 'foo')
+      @bar = FactoryBot.create(:tag, name: 'bar')
+      @bazz = FactoryBot.create(:tag, name: 'bazz')
     end
 
     it "find_with_char('f') should be return foo" do
