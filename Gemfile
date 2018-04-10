@@ -4,7 +4,7 @@ source 'http://gems.dev.mas.local'
 gem 'dough-ruby', '~> 5.0', require: 'dough'
 
 gem 'pg'
-gem 'rails', '~> 4.2'
+gem 'rails', '~> 4.2.10'
 gem 'htmlentities'
 gem 'bluecloth', '~> 2.1'
 gem 'dotenv-rails'

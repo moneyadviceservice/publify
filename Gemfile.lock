@@ -111,7 +111,7 @@ GEM
     compass-rails (2.0.0)
       compass (>= 0.12.2)
     concurrent-ruby (1.0.5)
-    crass (1.0.3)
+    crass (1.0.4)
     csslint_ruby (0.0.2)
       execjs
     database_cleaner (1.6.2)
@@ -392,7 +392,7 @@ GEM
     parallel (1.12.1)
     parser (2.5.0.5)
       ast (~> 2.4.0)
-    pg (0.15.1)
+    pg (0.18.4)
     poltergeist (1.17.0)
       capybara (~> 2.1)
       cliver (~> 0.3.1)
@@ -607,7 +607,7 @@ DEPENDENCIES
   poltergeist
   pry-rails
   rack-trailing_slashes
-  rails (~> 4.2.7)
+  rails (~> 4.2.10)
   rails-observers (~> 0.1.2)
   rails-timeago (~> 2.0)
   rails_autolink (~> 1.1.0)
@@ -629,9 +629,6 @@ DEPENDENCIES
   uuidtools (~> 2.1.1)
   webpurify
   xmlrpc
-
-RUBY VERSION
-   ruby 2.4.2p198
 
 BUNDLED WITH
    1.16.1
