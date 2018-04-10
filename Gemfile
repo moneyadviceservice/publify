@@ -3,7 +3,7 @@ source 'http://gems.dev.mas.local'
 
 gem 'dough-ruby', '~> 5.0', require: 'dough'
 
-gem 'pg'
+gem 'pg', '~> 0.15.1'
 gem 'rails', '~> 4.2.10'
 gem 'htmlentities'
 gem 'bluecloth', '~> 2.1'
@@ -22,7 +22,7 @@ gem 'recaptcha', require: 'recaptcha/rails'
 gem 'carrierwave', '~> 0.10.0'
 gem 'carrierwave-azure'
 gem 'akismet', '~> 1.0'
-gem 'twitter', '~> 5.6.0'
+gem 'twitter', '~> 6.2.0'
 gem 'jbuilder'
 gem 'webpurify', require: 'web_purify'
 gem 'rack-trailing_slashes'
@@ -82,7 +82,6 @@ group :test do
   gem 'site_prism'
   gem 'capybara'
   gem 'rspec_junit_formatter'
-  gem 'sqlite3'
 end
 
 group :production do
