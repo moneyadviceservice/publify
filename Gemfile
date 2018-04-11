@@ -82,6 +82,7 @@ group :test do
   gem 'site_prism'
   gem 'capybara'
   gem 'rspec_junit_formatter'
+  gem 'sqlite3'
 end
 
 group :production do
