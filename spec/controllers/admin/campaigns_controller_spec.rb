@@ -2,8 +2,8 @@ describe Admin::CampaignsController, type: :controller do
 
   let!(:blog) { create(:blog) }
   let!(:user) { create(:user, :as_admin) }
-  let(:valid_campaign)   { FactoryGirl.attributes_for(:campaign) }
-  let(:invalid_campaign) { FactoryGirl.attributes_for(:campaign, title: 'Save money at the supermarket and this is a very long title that cannot be saved') }
+  let(:valid_campaign)   { FactoryBot.attributes_for(:campaign) }
+  let(:invalid_campaign) { FactoryBot.attributes_for(:campaign, title: 'Save money at the supermarket and this is a very long title that cannot be saved') }
 
   before(:each) { request.session = { user: user.id } }
 
@@ -65,7 +65,7 @@ describe Admin::CampaignsController, type: :controller do
 
       it "changes @campaign's attributes" do
         put :update, id: @campaign,
-          campaign: FactoryGirl.attributes_for(:campaign, title: 'New awesome campaign title')
+          campaign: FactoryBot.attributes_for(:campaign, title: 'New awesome campaign title')
         @campaign.reload
         expect(@campaign.title).to eq('New awesome campaign title')
       end

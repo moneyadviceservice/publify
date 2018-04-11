@@ -135,7 +135,7 @@ describe Comment, type: :model do
 
   describe 'change state' do
     it 'should become unpublished if withdrawn' do
-      c = build_stubbed :comment, published: true, published_at: Time.now
+      c = build(:comment, published: true, published_at: Time.now)
       assert c.withdraw!
       assert !c.published?
       assert c.spam?
@@ -143,7 +143,7 @@ describe Comment, type: :model do
     end
 
     it 'should becomes confirmed if withdrawn' do
-      unconfirmed = build_stubbed(:comment, state: 'presumed_ham')
+      unconfirmed = build(:comment, state: 'presumed_ham')
       expect(unconfirmed).not_to be_status_confirmed
       unconfirmed.withdraw!
       expect(unconfirmed).to be_status_confirmed

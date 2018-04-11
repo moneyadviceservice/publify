@@ -1,7 +1,7 @@
 # coding: utf-8
 describe PostType, type: :model do
   before(:each) do
-    FactoryGirl.create(:blog)
+    FactoryBot.create(:blog)
   end
 
   describe 'Given a new post type' do
