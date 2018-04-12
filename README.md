@@ -22,7 +22,7 @@ Publify has been around since 2004 and is the oldest Ruby on Rails open source p
 
 #### Prerequisites
 
-- Ruby 2.1.3
+- Ruby 2.4.2
 - Node.js
 - Bower
 - MYSQL
@@ -40,31 +40,6 @@ $ rails s
 
 When running the setup script you may run into an install issue with the *pg* (PostgreSQL) gem. If this occurs, you'll need to install it first via Homebrew `brew install postgresql` and then run the setup again.
 
-##### `eventmachine` gem installation on OSX
-
-As of OSX 10.11 (El Capitan) installing the `eventmachine` gem throws an error:
-
-    In file included from binder.cpp:20:
-    ./project.h:116:10: fatal error: 'openssl/ssl.h' file not found
-    #include <openssl/ssl.h>
-             ^
-    1 error generated.
-    make: *** [binder.o] Error 1
-
-    make failed, exit code 2
-
-This is caused by OSX deprecating the use of `openssl` in favour of
-it's own TLS and crypto libraries (see
-[Issue 102 for eventmachine](https://github.com/eventmachine/eventmachine/issues/602)). `openssl`
-can be installed with brew:
-
-    $ brew install openssl
-
-And then you can force brew to symlink the `openssl` headers and libraries somewhere where they'll be found:
-
-    $ brew link openssl --force
-
-Or see the issue mentioned above for alternative solutions.
 
 #### Enviroment File Setup
 

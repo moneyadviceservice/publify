@@ -1,9 +1,9 @@
 describe Admin::ResourcesController, type: :controller do
   before do
-    FactoryGirl.create(:blog)
+    FactoryBot.create(:blog)
     #TODO Delete after removing fixtures
     Profile.delete_all
-    henri = FactoryGirl.create(:user, login: 'henri', profile: FactoryGirl.create(:profile_admin, label: Profile::ADMIN))
+    henri = FactoryBot.create(:user, login: 'henri', profile: FactoryBot.create(:profile_admin, label: Profile::ADMIN))
     @request.session = { user: henri.id }
   end
 
@@ -21,7 +21,7 @@ describe Admin::ResourcesController, type: :controller do
 
   describe '#remove' do
     before(:each) do
-      @res_id = FactoryGirl.create(:resource).id
+      @res_id = FactoryBot.create(:resource).id
       get :remove, id: @res_id
     end
 
@@ -37,7 +37,7 @@ describe Admin::ResourcesController, type: :controller do
   end
 
   it '#destroy' do
-    res_id = FactoryGirl.create(:resource).id
+    res_id = FactoryBot.create(:resource).id
 
     delete :destroy, id: res_id
     expect(response).to redirect_to(admin_resources_path)

@@ -2,8 +2,8 @@ describe 'comments/index.rss.builder', type: :view do
   let!(:blog) { build_stubbed :blog }
 
   describe 'rendering comments' do
-    let(:article) { FactoryGirl.build_stubbed :article }
-    let(:comment) { FactoryGirl.build_stubbed(:comment, article: article, body: 'Comment body', guid: '12313123123123123') }
+    let(:article) { FactoryBot.build_stubbed :article }
+    let(:comment) { FactoryBot.build_stubbed(:comment, article: article, body: 'Comment body', guid: '12313123123123123') }
 
     before(:each) do
       assign(:comments, [comment])

@@ -1,9 +1,9 @@
 describe Admin::RedirectsController, type: :controller do
   before do
-    FactoryGirl.create(:blog)
+    FactoryBot.create(:blog)
     #TODO Delete after removing fixtures
     Profile.delete_all
-    henri = FactoryGirl.create(:user, login: 'henri', profile: FactoryGirl.create(:profile_admin, label: Profile::ADMIN))
+    henri = FactoryBot.create(:user, login: 'henri', profile: FactoryBot.create(:profile_admin, label: Profile::ADMIN))
     request.session = { user: henri.id }
   end
 
@@ -32,7 +32,7 @@ describe Admin::RedirectsController, type: :controller do
 
   describe '#edit' do
     before(:each) do
-      get :edit, id: FactoryGirl.create(:redirect).id
+      get :edit, id: FactoryBot.create(:redirect).id
     end
 
     it 'should render new template with valid redirect' do
@@ -44,14 +44,14 @@ describe Admin::RedirectsController, type: :controller do
 
   describe '#update' do
     it 'redirects afterwards' do
-      post :update, id: FactoryGirl.create(:redirect).id, redirect: {}
+      post :update, id: FactoryBot.create(:redirect).id, redirect: {}
       assert_response :redirect, action: 'index'
     end
   end
 
   describe '#remove' do
     before(:each) do
-      @test_id = FactoryGirl.create(:redirect).id
+      @test_id = FactoryBot.create(:redirect).id
       get :remove, id: @test_id
     end
 
@@ -63,7 +63,7 @@ describe Admin::RedirectsController, type: :controller do
 
   describe '#destroy' do
     before(:each) do
-      @test_id = FactoryGirl.create(:redirect).id
+      @test_id = FactoryBot.create(:redirect).id
       expect(Redirect.find(@test_id)).not_to be_nil
     end
 

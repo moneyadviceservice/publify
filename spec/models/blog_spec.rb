@@ -21,7 +21,7 @@ describe Blog, type: :model do
 
   describe 'The first blog' do
     before(:each) {
-      @blog = FactoryGirl.create :blog
+      @blog = FactoryBot.create :blog
     }
 
     it 'should be the only blog allowed' do
@@ -31,7 +31,7 @@ describe Blog, type: :model do
 
   describe 'The default blog' do
     it 'should pick up updates after a cache clear' do
-      FactoryGirl.create(:blog)
+      FactoryBot.create(:blog)
       b = Blog.default
       b.blog_name = 'some other name'
       b.save
@@ -88,13 +88,13 @@ describe Blog, type: :model do
   describe '.urls_to_ping_for' do
     it 'format ping_urls to an array' do
       article = Article.new
-      blog = FactoryGirl.build(:blog, ping_urls: 'http://ping.example.com/ping')
+      blog = FactoryBot.build(:blog, ping_urls: 'http://ping.example.com/ping')
       expect(blog.urls_to_ping_for(article).map(&:url)).to eq ['http://ping.example.com/ping']
     end
 
     it 'format ping_urls to an array even when multiple urls' do
       article = Article.new
-      blog = FactoryGirl.build(:blog, ping_urls: "http://ping.example.com/ping
+      blog = FactoryBot.build(:blog, ping_urls: "http://ping.example.com/ping
 http://anotherurl.net/other_line")
       expect(blog.urls_to_ping_for(article).map(&:url)).to eq ['http://ping.example.com/ping', 'http://anotherurl.net/other_line']
     end
@@ -102,42 +102,42 @@ http://anotherurl.net/other_line")
 
   describe 'Blog Twitter configuration' do
     it 'A blog without :twitter_consumer_key or twitter_consumer_secret should not have Twitter configured' do
-      blog = FactoryGirl.build(:blog)
+      blog = FactoryBot.build(:blog)
       expect(blog.has_twitter_configured?).to eq(false)
     end
 
     it 'A blog with an empty :twitter_consumer_key and no twitter_consumer_secret should not have Twitter configured' do
-      blog = FactoryGirl.build(:blog, twitter_consumer_key: '')
+      blog = FactoryBot.build(:blog, twitter_consumer_key: '')
       expect(blog.has_twitter_configured?).to eq(false)
     end
 
     it 'A blog with an empty twitter_consumer_key and an empty twitter_consumer_secret should not have Twitter configured' do
-      blog = FactoryGirl.build(:blog, twitter_consumer_key: '', twitter_consumer_secret: '')
+      blog = FactoryBot.build(:blog, twitter_consumer_key: '', twitter_consumer_secret: '')
       expect(blog.has_twitter_configured?).to eq(false)
     end
 
     it 'A blog with a twitter_consumer_key and no twitter_consumer_secret should not have Twitter configured' do
-      blog = FactoryGirl.build(:blog, twitter_consumer_key: '12345')
+      blog = FactoryBot.build(:blog, twitter_consumer_key: '12345')
       expect(blog.has_twitter_configured?).to eq(false)
     end
 
     it 'A blog with a twitter_consumer_key and an empty twitter_consumer_secret should not have Twitter configured' do
-      blog = FactoryGirl.build(:blog, twitter_consumer_key: '12345', twitter_consumer_secret: '')
+      blog = FactoryBot.build(:blog, twitter_consumer_key: '12345', twitter_consumer_secret: '')
       expect(blog.has_twitter_configured?).to eq(false)
     end
 
     it 'A blog with a twitter_consumer_secret and no twitter_consumer_key should not have Twitter configured' do
-      blog = FactoryGirl.build(:blog, twitter_consumer_secret: '67890')
+      blog = FactoryBot.build(:blog, twitter_consumer_secret: '67890')
       expect(blog.has_twitter_configured?).to eq(false)
     end
 
     it 'A blog with a twitter_consumer_secret and an empty twitter_consumer_key should not have Twitter configured' do
-      blog = FactoryGirl.build(:blog, twitter_consumer_secret: '67890', twitter_consumer_key: '')
+      blog = FactoryBot.build(:blog, twitter_consumer_secret: '67890', twitter_consumer_key: '')
       expect(blog.has_twitter_configured?).to eq(false)
     end
 
     it 'A blog with a twitter_consumer_key and a twitter_consumer_secret should have Twitter configured' do
-      blog = FactoryGirl.build(:blog, twitter_consumer_key: '12345', twitter_consumer_secret: '67890')
+      blog = FactoryBot.build(:blog, twitter_consumer_key: '12345', twitter_consumer_secret: '67890')
       expect(blog.has_twitter_configured?).to eq(true)
     end
   end
@@ -150,15 +150,4 @@ http://anotherurl.net/other_line")
     it { expect(blog.per_page('atom')).to eq(4) }
   end
 
-  describe '#humans' do
-    context 'default value with publify txt' do
-      let(:blog) { create :blog }
-      it { expect(blog.humans).to_not be_nil }
-    end
-
-    context 'default value with publify txt' do
-      let(:blog) { create(:blog, humans: 'something to say') }
-      it { expect(blog.humans).to eq('something to say') }
-    end
-  end
 end

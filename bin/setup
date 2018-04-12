@@ -22,22 +22,5 @@ cp config/database.yml.postgres config/database.yml
 # Set up database and add any development seed data
 bundle exec rake db:create db:migrate db:seed db:test:prepare
 
-# Set up staging and production git remotes.
-git remote add staging git@heroku.com:mas-marketing-blog-staging.git || true
-git remote add production git@heroku.com:mas-marketing-blog.git || true
-
-# Join the staging and production apps.
-if heroku join --app mas-marketing-blog-staging &> /dev/null; then
-  echo 'You are a collaborator on the "mas-marketing-blog-staging" Heroku app'
-else
-  echo 'Ask for access to the "mas-marketing-blog-staging" Heroku app'
-fi
-
-if heroku join --app mas-marketing-blog &> /dev/null; then
-  echo 'You are a collaborator on the "mas-marketing-blog" Heroku app'
-else
-  echo 'Ask for access to the "mas-marketing-blog" Heroku app'
-fi
-
 # This needs fixing
 #bundle exec rake generate_popular_articles
