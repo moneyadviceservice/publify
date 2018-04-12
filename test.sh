@@ -26,7 +26,7 @@ bowndler update --production --config.interactive=false
 
 echo 'Running Database Schema Load'
 echo '-------------------'
-RAILS_ENV=test bundle exec rake db:schema:load
+RAILS_ENV=test bundle exec rake db:drop db:create db:schema:load db:migrate
 
 echo 'Running RSpec tests'
 echo '-------------------'
