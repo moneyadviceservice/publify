@@ -26,8 +26,9 @@ bowndler update --production --config.interactive=false
 
 echo 'Running Database Schema Load'
 echo '-------------------'
-RAILS_ENV=test bundle exec rake db:schema:load
+cp config/database.yml.postgres config/database.yml
+RAILS_ENV=test bundle exec rake db:drop db:create db:schema:load db:migrate
 
 echo 'Running RSpec tests'
 echo '-------------------'
-bundle exec rspec spec --format html --out tmp/spec.html --format RspecJunitFormatter --profile --format progress --deprecation-out log/rspec_deprecations.txt
+bundle exec rspec spec --format html --out tmp/spec.html --profile --format progress --deprecation-out log/rspec_deprecations.txt

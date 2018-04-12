@@ -1,7 +1,7 @@
 describe TagsController, 'showing a single tag', type: :controller do
   before do
-    FactoryGirl.create(:blog)
-    @tag = FactoryGirl.create(:tag, name: 'Foo')
+    FactoryBot.create(:blog)
+    @tag = FactoryBot.create(:tag, name: 'Foo')
   end
 
   def do_get
@@ -10,7 +10,7 @@ describe TagsController, 'showing a single tag', type: :controller do
 
   describe 'with some articles' do
     before do
-      @articles = 2.times.map { FactoryGirl.create(:article) }
+      @articles = 2.times.map { FactoryBot.create(:article) }
       @tag.articles << @articles
     end
 
@@ -58,7 +58,7 @@ end
 
 describe TagsController, 'showing a non-existant tag', type: :controller do
   it 'should raise a recordnotfound' do
-    FactoryGirl.create(:blog)
+    FactoryBot.create(:blog)
     expect {
       get 'show', id: 'thistagdoesnotexist'
     }.to raise_error(ActiveRecord::RecordNotFound)
@@ -67,9 +67,9 @@ end
 
 describe TagsController, 'SEO Options', type: :controller do
   before(:each) do
-    @blog = FactoryGirl.create(:blog)
-    @a = FactoryGirl.create(:article)
-    @foo = FactoryGirl.create(:tag, name: 'foo', articles: [@a])
+    @blog = FactoryBot.create(:blog)
+    @a = FactoryBot.create(:article)
+    @foo = FactoryBot.create(:tag, name: 'foo', articles: [@a])
   end
 
   describe 'keywords' do

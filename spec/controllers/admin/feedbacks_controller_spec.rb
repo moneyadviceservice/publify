@@ -37,12 +37,12 @@ describe Admin::FeedbacksController, type: :controller do
     end
 
     def feedback_from_own_article
-      @article ||= FactoryGirl.create(:article, user: @admin)
-      @comment_own ||= FactoryGirl.create(:comment, article: @article)
+      @article ||= FactoryBot.create(:article, user: @admin)
+      @comment_own ||= FactoryBot.create(:comment, article: @article)
     end
 
     def feedback_from_not_own_article
-      @spam_comment_not_own ||= FactoryGirl.create(:spam_comment)
+      @spam_comment_not_own ||= FactoryBot.create(:spam_comment)
     end
 
     describe 'remove and destroy actions' do
@@ -105,8 +105,8 @@ describe Admin::FeedbacksController, type: :controller do
 
     describe 'edit action' do
       it 'should render edit form' do
-        article = FactoryGirl.create(:article)
-        comment = FactoryGirl.create(:comment, article: article)
+        article = FactoryBot.create(:article)
+        comment = FactoryBot.create(:comment, article: article)
         get 'edit', id: comment.id
         expect(response).to be_success
         expect(response).to render_template('edit')
@@ -116,8 +116,8 @@ describe Admin::FeedbacksController, type: :controller do
     describe 'update action' do
 
       it 'should update comment if post request' do
-        article = FactoryGirl.create(:article)
-        comment = FactoryGirl.create(:comment, article: article)
+        article = FactoryBot.create(:article)
+        comment = FactoryBot.create(:comment, article: article)
         post 'update', id: comment.id,
                        comment: { author: 'Bob Foo2',
                                     url: 'http://fakeurl.com',
@@ -132,21 +132,21 @@ describe Admin::FeedbacksController, type: :controller do
   describe 'publisher access' do
 
     before :each do
-      FactoryGirl.create(:blog)
+      FactoryBot.create(:blog)
       #TODO remove this delete_all after removing all fixture
       Profile.delete_all
-      @publisher = FactoryGirl.create(:user, profile: FactoryGirl.create(:profile_publisher))
+      @publisher = FactoryBot.create(:user, profile: FactoryBot.create(:profile_publisher))
       request.session = { user: @publisher.id }
     end
 
     def feedback_from_own_article
-      @article ||= FactoryGirl.create(:article, user: @publisher)
-      @feedback_own_article ||= FactoryGirl.create(:comment, article: @article)
+      @article ||= FactoryBot.create(:article, user: @publisher)
+      @feedback_own_article ||= FactoryBot.create(:comment, article: @article)
     end
 
     def feedback_from_not_own_article
-      @article ||= FactoryGirl.create(:article, user: FactoryGirl.create(:user, login: 'other_user'))
-      @feedback_not_own_article ||= FactoryGirl.create(:comment, article: @article)
+      @article ||= FactoryBot.create(:article, user: FactoryBot.create(:user, login: 'other_user'))
+      @feedback_not_own_article ||= FactoryBot.create(:comment, article: @article)
     end
 
     describe 'destroy action' do
@@ -182,65 +182,65 @@ describe Admin::FeedbacksController, type: :controller do
 
       it 'delete all spam' do
         Feedback.delete_all
-        comment = FactoryGirl.create(:comment, state: :spam)
+        comment = FactoryBot.create(:comment, state: :spam)
         post :bulkops, bulkop_top: 'Delete all spam'
         expect(Feedback.count).to eq(0)
       end
 
       it 'delete all spam and only confirmed spam' do
         Feedback.delete_all
-        FactoryGirl.create(:comment, state: :presumed_spam)
-        FactoryGirl.create(:comment, state: :spam)
-        FactoryGirl.create(:comment, state: :presumed_ham)
-        FactoryGirl.create(:comment, state: :ham)
+        FactoryBot.create(:comment, state: :presumed_spam)
+        FactoryBot.create(:comment, state: :spam)
+        FactoryBot.create(:comment, state: :presumed_ham)
+        FactoryBot.create(:comment, state: :ham)
         post :bulkops, bulkop_top: 'Delete all spam'
         expect(Feedback.count).to eq(3)
       end
 
       it 'mark presumed spam comments as spam' do
-        comment = FactoryGirl.create(:comment, state: :presumed_spam)
+        comment = FactoryBot.create(:comment, state: :presumed_spam)
         post :bulkops, bulkop_top: 'Mark Checked Items as Spam', feedback_check: { comment.id.to_s => 'on' }
         expect(Feedback.find(comment.id)).to be_spam
       end
 
       it 'mark confirmed spam comments as spam' do
-        comment = FactoryGirl.create(:comment, state: :spam)
+        comment = FactoryBot.create(:comment, state: :spam)
         post :bulkops, bulkop_top: 'Mark Checked Items as Spam', feedback_check: { comment.id.to_s => 'on' }
         expect(Feedback.find(comment.id)).to be_spam
       end
 
       it 'mark presumed ham comments as spam' do
-        comment = FactoryGirl.create(:comment, state: :presumed_ham)
+        comment = FactoryBot.create(:comment, state: :presumed_ham)
         post :bulkops, bulkop_top: 'Mark Checked Items as Spam', feedback_check: { comment.id.to_s => 'on' }
         expect(Feedback.find(comment.id)).to be_spam
       end
 
       it 'mark ham comments as spam' do
-        comment = FactoryGirl.create(:comment, state: :ham)
+        comment = FactoryBot.create(:comment, state: :ham)
         post :bulkops, bulkop_top: 'Mark Checked Items as Spam', feedback_check: { comment.id.to_s => 'on' }
         expect(Feedback.find(comment.id)).to be_spam
       end
 
       it 'mark presumed spam comments as ham' do
-        comment = FactoryGirl.create(:comment, state: :presumed_spam)
+        comment = FactoryBot.create(:comment, state: :presumed_spam)
         post :bulkops, bulkop_top: 'Mark Checked Items as Ham', feedback_check: { comment.id.to_s => 'on' }
         expect(Feedback.find(comment.id)).to be_ham
       end
 
       it 'mark confirmed spam comments as ham' do
-        comment = FactoryGirl.create(:comment, state: :spam)
+        comment = FactoryBot.create(:comment, state: :spam)
         post :bulkops, bulkop_top: 'Mark Checked Items as Ham', feedback_check: { comment.id.to_s => 'on' }
         expect(Feedback.find(comment.id)).to be_ham
       end
 
       it 'mark presumed ham comments as ham' do
-        comment = FactoryGirl.create(:comment, state: :presumed_ham)
+        comment = FactoryBot.create(:comment, state: :presumed_ham)
         post :bulkops, bulkop_top: 'Mark Checked Items as Ham', feedback_check: { comment.id.to_s => 'on' }
         expect(Feedback.find(comment.id)).to be_ham
       end
 
       it 'mark ham comments as ham' do
-        comment = FactoryGirl.create(:comment, state: :ham)
+        comment = FactoryBot.create(:comment, state: :ham)
         post :bulkops, bulkop_top: 'Mark Checked Items as Ham', feedback_check: { comment.id.to_s => 'on' }
         expect(Feedback.find(comment.id)).to be_ham
       end

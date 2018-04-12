@@ -1,6 +1,7 @@
 config/mail.yml
 config/timezone.yml
 config/secret.token
+/config/database.yml
 *.log
 *~
 db/db*
