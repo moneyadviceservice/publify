@@ -452,7 +452,7 @@ GEM
       thor (>= 0.18.1, < 2.0)
     rainbow (3.0.0)
     raindrops (0.19.0)
-    rake (10.3.2)
+    rake (10.4.2)
     rbovirt (0.1.5)
       nokogiri
       rest-client (> 1.7.0)
@@ -640,9 +640,6 @@ DEPENDENCIES
   uuidtools (~> 2.1.1)
   webpurify
   xmlrpc
-
-RUBY VERSION
-   ruby 2.2.0p0
 
 BUNDLED WITH
    1.16.1
