@@ -15,7 +15,7 @@ test:
   <<: *login
   username: go
   password: go
-  
+
 production:
   adapter: postgresql
   pool: 5
