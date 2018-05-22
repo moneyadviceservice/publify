@@ -28,7 +28,8 @@ class AccountsController < ApplicationController
 
   def recover_password
     return unless request.post?
-    @user = User.where('login = ? or email = ?', params[:user][:login], params[:user][:login]).first
+    @user = User.where(login: params[:user][:login]).first ||
+            User.where(email: params[:user][:login]).first
 
     if @user
       @user.generate_password!

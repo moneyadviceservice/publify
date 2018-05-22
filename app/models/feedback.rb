@@ -3,6 +3,12 @@ require_dependency 'dotenv'
 class Feedback < ActiveRecord::Base
   self.table_name = 'feedback'
 
+  # Add database encryption and blind index for login, name and email
+  attr_encrypted :author,
+                 :email,
+                 :ip,
+                 key: ENV['ATTR_CRYPT_KEY']
+
   belongs_to :text_filter
   belongs_to :article
 
@@ -201,6 +207,7 @@ class Feedback < ActiveRecord::Base
   end
 
   private
+
   @@akismet = nil
 
   def akismet

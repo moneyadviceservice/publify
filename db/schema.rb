@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161129152334) do
+ActiveRecord::Schema.define(version: 20180522090314) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -114,7 +114,7 @@ ActiveRecord::Schema.define(version: 20161129152334) do
   create_table "feedback", force: :cascade do |t|
     t.string   "type"
     t.string   "title"
-    t.string   "author"
+    t.string   "author_old"
     t.text     "body"
     t.text     "excerpt"
     t.datetime "created_at"
@@ -124,15 +124,21 @@ ActiveRecord::Schema.define(version: 20161129152334) do
     t.integer  "text_filter_id"
     t.text     "whiteboard"
     t.integer  "article_id"
-    t.string   "email"
+    t.string   "email_old"
     t.string   "url"
-    t.string   "ip",               limit: 40
+    t.string   "ip_old",              limit: 40
     t.string   "blog_name"
-    t.boolean  "published",                   default: false
+    t.boolean  "published",                      default: false
     t.datetime "published_at"
     t.string   "state"
     t.boolean  "status_confirmed"
     t.string   "user_agent"
+    t.string   "encrypted_author"
+    t.string   "encrypted_author_iv"
+    t.string   "encrypted_email"
+    t.string   "encrypted_email_iv"
+    t.string   "encrypted_ip"
+    t.string   "encrypted_ip_iv"
   end
 
   add_index "feedback", ["article_id"], name: "index_feedback_on_article_id", using: :btree
@@ -242,10 +248,10 @@ ActiveRecord::Schema.define(version: 20161129152334) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "login"
+    t.string   "login_old"
     t.string   "password"
-    t.text     "email"
-    t.text     "name"
+    t.text     "email_old"
+    t.text     "name_old"
     t.boolean  "notify_via_email"
     t.boolean  "notify_on_new_articles"
     t.boolean  "notify_on_comments"
@@ -257,6 +263,17 @@ ActiveRecord::Schema.define(version: 20161129152334) do
     t.datetime "last_connection"
     t.text     "settings"
     t.integer  "resource_id"
+    t.string   "encrypted_login"
+    t.string   "encrypted_login_iv"
+    t.string   "encrypted_login_bidx"
+    t.string   "encrypted_name"
+    t.string   "encrypted_name_iv"
+    t.string   "encrypted_email"
+    t.string   "encrypted_email_iv"
+    t.string   "encrypted_email_bidx"
   end
+
+  add_index "users", ["encrypted_email_bidx"], name: "index_users_on_encrypted_email_bidx", unique: true, using: :btree
+  add_index "users", ["encrypted_login_bidx"], name: "index_users_on_encrypted_login_bidx", unique: true, using: :btree
 
 end
