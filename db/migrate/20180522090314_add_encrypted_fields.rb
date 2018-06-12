@@ -19,10 +19,10 @@ class AddEncryptedFields < ActiveRecord::Migration
     User.reset_column_information
     User.find_each do |instance|
       #this will set the encrypted_reply based on attr_encrypted
-      User.email = user.email_old
-      User.login = user.login_old
-      User.name = user.name_old
-      User.save!
+      instance.email = instance.email_old
+      instance.login = instance.login_old
+      instance.name = instance.name_old
+      instance.save!
     end
   end
 
