@@ -3,7 +3,7 @@ class AuthorController < ContentController
   layout :pick_layout
 
   def show
-    if (@author = User.find_by_login(params[:id])).present?
+    if (@author = User.find_by(login: params[:id])).present?
       @articles = @author.articles.published.page(params[:page]).per(this_blog.per_page(params[:format]))
 
       respond_to do |format|

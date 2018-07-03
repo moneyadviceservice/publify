@@ -1,4 +1,5 @@
 require 'digest/sha1'
+require 'dotenv'
 
 # Publify user.
 class User < ActiveRecord::Base
@@ -22,6 +23,19 @@ class User < ActiveRecord::Base
   STATUS = ['active', 'inactive']
 
   attr_accessor :filename
+
+  # Add database encryption and blind index for login, name and email
+  attr_encrypted :login,
+                 :email,
+                 :name,
+                 key: ENV['ATTR_CRYPT_KEY'],
+                 salt: ENV['ATTR_CRYPT_SALT']
+  blind_index :login, key: ENV['BIDX_CRYPT_KEY']
+  blind_index :email, key: ENV['BIDX_CRYPT_KEY']
+
+  before_validation :compute_blind_index, if: lambda { |u|
+    u.encrypted_email_changed? || u.encrypted_login_changed?
+  }
 
   # Settings
   setting :notify_watch_my_articles,   :boolean, true
@@ -65,7 +79,7 @@ class User < ActiveRecord::Base
   end
 
   def self.authenticate(login, pass)
-    where('login = ? AND password = ? AND state = ?', login, password_hash(pass), 'active').first
+    where(login: login, password: password_hash(pass), state: 'active').first
   end
 
   def update_connection_time
@@ -193,6 +207,11 @@ class User < ActiveRecord::Base
   end
 
   protected
+
+  def compute_blind_index
+    compute_email_bidx
+    compute_login_bidx
+  end
 
   # Apply SHA1 encryption to the supplied password.
   # We will additionally surround the password with a salt

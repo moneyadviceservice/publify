@@ -191,8 +191,15 @@ describe AccountsController, type: :controller do
     end
 
     context 'post' do
-      before(:each) { post :recover_password, user: { login: user.login } }
-      it { expect(response).to redirect_to(login_path) }
+      context 'with users email supplied' do
+        before(:each) { post :recover_password, user: { login: user.email } }
+        it { expect(response).to redirect_to(login_path) }
+      end
+
+      context 'with users username supplied' do
+        before(:each) { post :recover_password, user: { login: user.login } }
+        it { expect(response).to redirect_to(login_path) }
+      end
     end
 
     context 'post with an unknown login' do

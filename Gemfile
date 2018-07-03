@@ -2,7 +2,10 @@ source 'https://rubygems.org'
 source 'http://gems.dev.mas.local'
 
 gem 'dough-ruby', '~> 5.0', require: 'dough'
+gem 'attr_encrypted', '~> 3.1'
+gem 'blind_index'
 
+gem 'attr_encrypted', '~> 3.1'
 gem 'pg', '~> 0.15.1'
 gem 'rails', '~> 4.2.10'
 gem 'htmlentities'
