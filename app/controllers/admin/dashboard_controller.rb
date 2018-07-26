@@ -28,7 +28,6 @@ class Admin::DashboardController < Admin::BaseController
 
     @statspam = Comment.spam.count
     @inbound_links = inbound_links
-    @publify_links = publify_dev
   end
 
   private
@@ -38,11 +37,6 @@ class Admin::DashboardController < Admin::BaseController
     return [] if Rails.env.development?
     url = "http://www.google.com/search?q=link:#{host}&tbm=blg&output=rss"
     parse(url).reverse.compact
-  end
-
-  def publify_dev
-    url = 'http://blog.publify.co/articles.rss'
-    parse(url)[0..2]
   end
 
   def parse(url)
