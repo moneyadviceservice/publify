@@ -31,12 +31,9 @@ gem 'newrelic_rpm'
 gem 'nokogiri'
 gem 'fastimage'
 gem 'xmlrpc'
-
 gem 'jquery-rails', '~> 3.1.0'
 gem 'jquery-ui-rails', '~> 5.0.2'
-
 gem 'rails-timeago', '~> 2.0'
-
 gem 'rails_autolink', '~> 1.1.0'
 gem 'dynamic_form', '~> 1.1.4'
 gem 'sass-rails', ' ~> 4.0.3'
@@ -44,16 +41,13 @@ gem 'non-stupid-digest-assets'
 gem 'mailjet'
 gem 'unicorn'
 gem 'responders', '~> 2.0'
-
 # removed from Rails-core as Rails 4.0
 gem 'actionpack-page_caching', '~> 1.0.2'
 gem 'rails-observers', '~> 0.1.2'
 gem 'ckeditor', '~> 4.1.6'
-
 gem 'oauth2', '1.0.0'
 gem 'google-api-client', '0.7.1'
 gem 'legato', '0.4.0'
-
 gem 'autoprefixer-rails'
 gem 'jshint_ruby'
 gem 'csslint_ruby'
