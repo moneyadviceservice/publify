@@ -5,7 +5,6 @@ gem 'dough-ruby', '~> 5.0', require: 'dough'
 gem 'attr_encrypted', '~> 3.1'
 gem 'blind_index'
 
-gem 'attr_encrypted', '~> 3.1'
 gem 'pg', '~> 0.15.1'
 gem 'rails', '~> 4.2.10'
 gem 'htmlentities'
@@ -50,7 +49,7 @@ gem 'responders', '~> 2.0'
 # removed from Rails-core as Rails 4.0
 gem 'actionpack-page_caching', '~> 1.0.2'
 gem 'rails-observers', '~> 0.1.2'
-gem 'ckeditor', git: 'https://github.com/galetahub/ckeditor'
+gem 'ckeditor', '~> 4.2.4'
 
 gem 'oauth2', '1.0.0'
 gem 'google-api-client', '0.7.1'
