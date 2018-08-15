@@ -585,7 +585,7 @@ DEPENDENCIES
   akismet (~> 1.0)
   attr_encrypted (~> 3.1)
   autoprefixer-rails
-  blind_index
+  blind_index (= 0.2.0)
   bluecloth (~> 2.1)
   bowndler (~> 1.0)
   byebug
