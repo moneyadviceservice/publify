@@ -1,4 +1,4 @@
-require 'fog'
+require 'carrierwave/storage/fog'
 
 class Admin::ProfilesController < Admin::BaseController
   def edit
