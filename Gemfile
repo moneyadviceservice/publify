@@ -3,7 +3,7 @@ source 'http://gems.dev.mas.local'
 
 gem 'dough-ruby', '~> 5.0', require: 'dough'
 gem 'attr_encrypted', '~> 3.1'
-gem 'blind_index'
+gem 'blind_index', '0.2.0'
 gem 'pg', '~> 0.21.0'
 gem 'rails', '~> 4.2.10'
 gem 'htmlentities'
@@ -48,7 +48,7 @@ gem 'ckeditor', '~> 4.2.2'
 gem 'oauth2', '1.0.0'
 gem 'google-api-client', '0.7.1'
 gem 'legato', '0.4.0'
-gem 'autoprefixer-rails'
+gem 'autoprefixer-rails', '~> 8.2.0'
 gem 'jshint_ruby'
 gem 'csslint_ruby'
 gem 'compass-rails'
@@ -75,7 +75,7 @@ end
 
 group :test do
   gem 'site_prism'
-  gem 'capybara'
+  gem 'capybara', '~> 2.18.0'
   gem 'rspec_junit_formatter'
 end
 
