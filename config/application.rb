@@ -6,10 +6,6 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-unless Rails.env.development? || Rails.env.test?
-  ENV['RAILS_RELATIVE_URL_ROOT'] = '/blog'
-end
-
 module Publify
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
