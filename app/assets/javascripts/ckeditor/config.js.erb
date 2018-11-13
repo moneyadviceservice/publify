@@ -6,7 +6,11 @@ CKEDITOR.editorConfig = function (config) {
   config.filebrowserUploadUrl = <%= "'#{Rails.application.config.relative_url_root}/admin/ckeditor/attachment_files';" %>
   config.extraPlugins = 'sourcedialog';
   config.allowedContent = true;
-  config.contentsCss = <%= "'#{Rails.application.config.relative_url_root}/assets/ckeditor/editor.css';" %>
+  config.contentsCss = <%= "'" +
+                           (Rails.application.config.action_controller.asset_host || '') +
+                           Rails.application.config.assets.prefix +
+                           "/ckeditor/editor.css';"
+                       %>
 
   config.toolbar =
   [

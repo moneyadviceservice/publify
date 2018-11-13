@@ -61,6 +61,9 @@ Rails.application.configure do
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   config.action_controller.asset_host = ENV['AZURE_ASSETS_STORAGE_BLOG_URL']
 
+  # Override assets prefix
+  config.assets.prefix = config.relative_url_root + '/assets'
+
   # Precompile additional assets.
   # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
   # config.assets.precompile += %w( search.js )
