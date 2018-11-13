@@ -1,12 +1,19 @@
+<%
+  base_path = ''
+  base_path << (Rails.application.config.action_controller.asset_host || '')
+  base_path << (Rails.application.config.relative_url_root || '')
+  base_path << Rails.application.config.assets.prefix
+%>
+
 CKEDITOR.editorConfig = function (config) {
-  config.filebrowserImageBrowseLinkUrl = <%= "'#{Rails.application.config.relative_url_root}/admin/ckeditor/pictures';" %>
-  config.filebrowserImageBrowseUrl = <%= "'#{Rails.application.config.relative_url_root}/admin/ckeditor/pictures';" %>
-  config.filebrowserImageUploadUrl = <%= "'#{Rails.application.config.relative_url_root}/admin/ckeditor/pictures';" %>
-  config.filebrowserBrowseUrl = <%= "'#{Rails.application.config.relative_url_root}/admin/ckeditor/attachment_files';" %>
-  config.filebrowserUploadUrl = <%= "'#{Rails.application.config.relative_url_root}/admin/ckeditor/attachment_files';" %>
+  config.filebrowserImageBrowseLinkUrl = <%= "'#{base_path}/admin/ckeditor/pictures';" %>
+  config.filebrowserImageBrowseUrl = <%= "'#{base_path}/admin/ckeditor/pictures';" %>
+  config.filebrowserImageUploadUrl = <%= "'#{base_path}/admin/ckeditor/pictures';" %>
+  config.filebrowserBrowseUrl = <%= "'#{base_path}/admin/ckeditor/attachment_files';" %>
+  config.filebrowserUploadUrl = <%= "'#{base_path}/admin/ckeditor/attachment_files';" %>
   config.extraPlugins = 'sourcedialog';
   config.allowedContent = true;
-  config.contentsCss = <%= "'#{Rails.application.config.relative_url_root}/assets/ckeditor/editor.css';" %>
+  config.contentsCss = <%= "'#{base_path}/ckeditor/editor.css';" %>
 
   config.toolbar =
   [
