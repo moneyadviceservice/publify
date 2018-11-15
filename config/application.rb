@@ -12,6 +12,9 @@ module Publify
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
 
+    # Mount app to a subdirectory.
+    config.relative_url_root = '/blog'
+
     #define default secret token to avoid information duplication
     $default_token = "08aac1f2d29e54c90efa24a4aefef843ab62da7a2610d193bc0558a50254c7debac56b48ffd0b5990d6ed0cbecc7dc08dce1503b6b864d580758c3c46056729a"
 
@@ -32,6 +35,10 @@ module Publify
 
     # Time to step into asset pipeline…
     config.assets.enabled = true
+
+    # Changes the directory to compile assets to.
+    config.assets.prefix =
+      "#{ENV['AZURE_ASSETS_STORAGE_BLOG_CONTAINER']}/assets"
 
     # Mime type is fully determined by url
     config.action_dispatch.ignore_accept_header = true
