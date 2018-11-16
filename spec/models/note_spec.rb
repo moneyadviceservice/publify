@@ -32,7 +32,7 @@ describe Note, type: :model do
       context 'with a particular blog' do
         before(:each) do
           allow_any_instance_of(Blog).to receive(:custom_url_shortener).and_return(url_shortener)
-          allow_any_instance_of(Blog).to receive(:base_url).and_return('http://mybaseurl.net')
+          allow_any_instance_of(Blog).to receive(:base_url).and_return('http://mybaseurl.net/blog')
         end
 
         context 'with a blog that have a custome url shortener' do
@@ -42,14 +42,14 @@ describe Note, type: :model do
 
         context 'with a blog that have a custome url shortener' do
           let(:url_shortener) { nil }
-          it { expect(note.short_link).to eq("mybaseurl.net #{note.redirects.first.from_path}") }
+          it { expect(note.short_link).to eq("mybaseurl.net/blog #{note.redirects.first.from_path}") }
         end
       end
     end
 
     describe 'redirects' do
       let(:note) { create(:note) }
-      it { expect(note.redirects.map(&:to_path)).to eq(["#{blog.base_url}/#{note.permalink}"]) }
+      it { expect(note.redirects.map(&:to_path)).to eq(["#{blog.base_url}/blog/#{note.permalink}"]) }
     end
 
     describe 'scopes' do
