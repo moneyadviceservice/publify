@@ -12,7 +12,7 @@ RSpec.describe 'sitemaps/show.xml.builder', type: :view do
       let(:article) { create :article, permalink: 'how-to-save-a-life' }
 
       it 'shows article sitemap' do
-        expect(rendered).to include('<loc>http://test.host/how-to-save-a-life</loc>')
+        expect(rendered).to include('<loc>http://test.host/blog/how-to-save-a-life</loc>')
       end
     end
 
@@ -27,19 +27,19 @@ RSpec.describe 'sitemaps/show.xml.builder', type: :view do
       let(:article) { create :article, tags: tags, permalink: 'money-matters' }
 
       it 'shows xml items for articles only' do
-        expect(rendered).to include('<loc>http://test.host/money-matters</loc>')
+        expect(rendered).to include('<loc>http://test.host/blog/money-matters</loc>')
       end
 
       it 'does not show xml items for article tags' do
-        expect(rendered).to_not include('<loc>http://test.host/finance</loc>')
-        expect(rendered).to_not include('<loc>http://test.host/debt-management</loc>')
+        expect(rendered).to_not include('<loc>http://test.host/blog/finance</loc>')
+        expect(rendered).to_not include('<loc>http://test.host/blog/debt-management</loc>')
       end
     end
   end
 
   describe 'exclude page' do
     it 'does not show page items' do
-      expect(rendered).to_not include('<loc>http://test.host/commenting-policy</loc>')
+      expect(rendered).to_not include('<loc>http://test.host/blog/commenting-policy</loc>')
     end
   end
 end

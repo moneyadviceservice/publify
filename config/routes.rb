@@ -48,7 +48,7 @@ Rails.application.routes.draw do
     resources :notes, except: [:new]
     resource :cache, controller: 'cache', only: [:show, :destroy]
     resources :campaigns, except: [:show]
-    
+
     resources :contents, path: :articles do
       collection do
         get :auto_complete_for_article_keywords
@@ -88,7 +88,7 @@ Rails.application.routes.draw do
 
     # Looks like removal has been omitted from the interface
     resources :users, except: :destroy
-    
+
     get '/settings/general', to: 'settings#general', as: :general_settings
     get '/settings/write', to: 'settings#write', as: :write_settings
     get '/settings/feedback', to: 'settings#feedback', as: :feedback_settings
@@ -100,7 +100,7 @@ Rails.application.routes.draw do
     resource :profile, only: [:edit, :update]
   end
 
-  get '/accounts', to: redirect('/accounts/login')
+  get '/accounts', to: redirect("#{Rails.application.config.relative_url_root}/accounts/login")
   get '/accounts/login', to: 'accounts#login', as: :login
   post '/accounts/login', to: 'accounts#login'
   get '/accounts/logout', to: 'accounts#logout', as: :logout
