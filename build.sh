@@ -61,14 +61,7 @@ EOT
 
 echo 'Precompiling assets'
 echo '----'
-RAILS_ENV=production rake assets:precompile
-
-echo 'Copying assets'
-echo '----'
-assets_src_path="$(pwd)/public/${AZURE_ASSETS_STORAGE_BLOG_CONTAINER}/assets"
-assets_dst_path="$(pwd)/public/assets"
-mkdir -p "${assets_dst_path}"
-cp -r "${assets_src_path}" "${assets_dst_path}"
+RAILS_ENV=production RAILS_GROUPS=assets rake assets:precompile
 
 echo 'Running Bundle package'
 echo '----'
@@ -80,4 +73,4 @@ echo '----'
 
 echo 'Creating RPM'
 echo '----'
-create_rails_rpm $artifact_name $version_number --rpm-attr 0755,mas,service:/srv/blog/public/cache
+create_rails_rpm $artifact_name $version_number --rpm-attr 0755,mas,service:/srv/blog/public/cache 
