@@ -36,10 +36,6 @@ module Publify
     # Time to step into asset pipeline…
     config.assets.enabled = true
 
-    # Changes the directory to compile assets to.
-    config.assets.prefix =
-      "#{ENV['AZURE_ASSETS_STORAGE_BLOG_CONTAINER']}/assets"
-
     # Mime type is fully determined by url
     config.action_dispatch.ignore_accept_header = true
 

@@ -37,7 +37,7 @@ class Ckeditor::ApplicationController < ApplicationController
     url = Ckeditor::Utils.escape_single_quotes(asset.url_content)
 
     if URI(url).relative?
-      "#{config.assets.prefix}#{url}"
+      "#{config.relative_url_root}#{url}"
     else
       url
     end
