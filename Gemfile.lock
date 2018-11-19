@@ -366,7 +366,7 @@ GEM
       multi_json
     letter_opener (1.6.0)
       launchy (~> 2.2)
-    loofah (2.2.2)
+    loofah (2.2.3)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     mail (2.7.0)
@@ -392,7 +392,7 @@ GEM
     naught (1.1.0)
     netrc (0.11.0)
     newrelic_rpm (5.0.0.342)
-    nokogiri (1.8.2)
+    nokogiri (1.8.5)
       mini_portile2 (~> 2.3.0)
     non-stupid-digest-assets (1.0.9)
       sprockets (>= 2.0)
@@ -649,4 +649,4 @@ DEPENDENCIES
   xmlrpc
 
 BUNDLED WITH
-   1.16.1
+   1.17.1
