@@ -1,12 +1,12 @@
 CKEDITOR.editorConfig = function (config) {
-  config.filebrowserImageBrowseLinkUrl = <%= "'#{Rails.application.config.action_controller.asset_host}/#{Rails.application.config.assets.prefix}/admin/ckeditor/pictures';" %>
-  config.filebrowserImageBrowseUrl = <%= "'#{Rails.application.config.action_controller.asset_host}/#{Rails.application.config.assets.prefix}/admin/ckeditor/pictures';" %>
-  config.filebrowserImageUploadUrl = <%= "'#{Rails.application.config.action_controller.asset_host}/#{Rails.application.config.assets.prefix}/admin/ckeditor/pictures';" %>
-  config.filebrowserBrowseUrl = <%= "'#{Rails.application.config.action_controller.asset_host}/#{Rails.application.config.assets.prefix}/admin/ckeditor/attachment_files';" %>
-  config.filebrowserUploadUrl = <%= "'#{Rails.application.config.action_controller.asset_host}/#{Rails.application.config.assets.prefix}/admin/ckeditor/attachment_files';" %>
+  config.filebrowserImageBrowseLinkUrl = <%= "'#{Rails.application.config.action_controller.asset_host}/#{Rails.application.config.relative_url_root}/admin/ckeditor/pictures';" %>
+  config.filebrowserImageBrowseUrl = <%= "'#{Rails.application.config.action_controller.asset_host}/#{Rails.application.config.relative_url_root}/admin/ckeditor/pictures';" %>
+  config.filebrowserImageUploadUrl = <%= "'#{Rails.application.config.action_controller.asset_host}/#{Rails.application.config.relative_url_root}/admin/ckeditor/pictures';" %>
+  config.filebrowserBrowseUrl = <%= "'#{Rails.application.config.action_controller.asset_host}/#{Rails.application.config.relative_url_root}/admin/ckeditor/attachment_files';" %>
+  config.filebrowserUploadUrl = <%= "'#{Rails.application.config.action_controller.asset_host}/#{Rails.application.config.relative_url_root}/admin/ckeditor/attachment_files';" %>
   config.extraPlugins = 'sourcedialog';
   config.allowedContent = true;
-  config.contentsCss = <%= "'#{Rails.application.config.action_controller.asset_host}/#{Rails.application.config.assets.prefix}/ckeditor/editor.css';" %>
+  config.contentsCss = <%= "'#{Rails.application.config.action_controller.asset_host}/#{Rails.application.config.relative_url_root}/ckeditor/editor.css';" %>
 
   config.toolbar =
   [
