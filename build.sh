@@ -63,6 +63,12 @@ echo 'Precompiling assets'
 echo '----'
 RAILS_ENV=production rake assets:precompile
 
+echo 'Moving assets to relative path /blog'
+echo '----'
+mkdir -p $(pwd)/public/blog/assets && \
+  mv $(pwd)/public/assets/* $(pwd)/public/blog/assets/ && \
+  rm -rf $(pwd)/public/assets
+
 echo 'Running Bundle package'
 echo '----'
 bundle package --all
