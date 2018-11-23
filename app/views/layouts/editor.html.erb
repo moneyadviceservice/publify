@@ -9,7 +9,6 @@
   <%
     base_path = ''
     base_path << (Rails.application.config.action_controller.asset_host || '')
-    base_path << (Rails.application.config.relative_url_root || '')
     base_path << Rails.application.config.assets.prefix
     base_path << '/ckeditor/'
   %>
