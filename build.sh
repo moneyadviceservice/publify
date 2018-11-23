@@ -61,7 +61,7 @@ EOT
 
 echo 'Precompiling assets'
 echo '----'
-RAILS_ENV=production rake assets:precompile
+AZURE_ASSETS_STORAGE_BLOG_URL=https://masassets.blob.core.windows.net/blog-cultivate RAILS_ENV=production rake assets:precompile
 
 echo 'Running Bundle package'
 echo '----'
