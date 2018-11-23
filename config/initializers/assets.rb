@@ -18,7 +18,6 @@ Rails.application.configure do
 
   # Stylesheets
   config.assets.precompile += %w(
-    ckeditor/*
     enhanced_responsive.css
     enhanced_fixed.css
     publify_admin.css
