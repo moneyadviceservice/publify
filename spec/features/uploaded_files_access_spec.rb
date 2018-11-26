@@ -4,29 +4,29 @@ feature 'Uploaded files access' do
   end
 
   scenario 'when user is not an admin' do
-    visit admin_ckeditor.attachment_files_path
+    visit '/blog/admin/ckeditor/attachment_files'
 
-    expect(current_path).to eq('/accounts/login')
+    expect(current_path).to eq('/blog/accounts/login')
   end
 
   scenario 'when user is an admin' do
     sign_in(:as_admin)
-    visit admin_ckeditor.attachment_files_path
+    visit '/blog/admin/ckeditor/attachment_files'
 
-    expect(current_path).to eq(admin_ckeditor.attachment_files_path)
+    expect(current_path).to eq('/blog/admin/ckeditor/attachment_files')
   end
 
   scenario 'when user is a publisher' do
     sign_in(:as_publisher)
-    visit admin_ckeditor.attachment_files_path
+    visit '/blog/admin/ckeditor/attachment_files'
 
-    expect(current_path).to eq(admin_ckeditor.attachment_files_path)
+    expect(current_path).to eq('/blog/admin/ckeditor/attachment_files')
   end
 
   scenario 'when user is a contributor' do
     sign_in(:as_publisher)
-    visit admin_ckeditor.attachment_files_path
+    visit '/blog/admin/ckeditor/attachment_files'
 
-    expect(current_path).to eq(admin_ckeditor.attachment_files_path)
+    expect(current_path).to eq('/blog/admin/ckeditor/attachment_files')
   end
 end
