@@ -11,7 +11,7 @@ describe ArticlesController, 'base', type: :controller do
       allow(Campaign).to receive(:lead).and_return([campaign])
       allow(PopularArticle).to receive(:find).and_return([])
 
-      get :index 
+      get :index
     end
 
     it { expect(response).to render_template(:index) }
