@@ -1,6 +1,6 @@
 class CampaignsPage < SitePrism::Page
-  set_url "/admin/campaigns"
-  set_url_matcher /campaigns/
+  set_url '/blog/admin/campaigns'
+  set_url_matcher(/campaigns/)
 
-  element :delete, "a.btn-danger"
+  element :delete, 'a.btn-danger'
 end
