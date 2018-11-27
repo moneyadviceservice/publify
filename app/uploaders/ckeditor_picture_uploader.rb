@@ -6,7 +6,7 @@ class CkeditorPictureUploader < CarrierWave::Uploader::Base
     "pictures/#{model.id}"
   end
 
-  process :read_dimensions
+  process :extract_dimensions
 
   version :thumb do
     process resize_to_fill: [118, 100]

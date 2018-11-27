@@ -4,22 +4,22 @@ feature 'Pictures page access' do
   end
 
   scenario 'when user is not logged in' do
-    visit admin_ckeditor.pictures_path
+    visit '/blog/admin/ckeditor/pictures'
 
-    expect(current_path).to eq('/accounts/login')
+    expect(current_path).to eq('/blog/accounts/login')
   end
 
   scenario 'when user is an admin' do
     sign_in(:as_admin)
-    visit admin_ckeditor.pictures_path
+    visit '/blog/admin/ckeditor/pictures'
 
-    expect(current_path).to eq(admin_ckeditor.pictures_path)
+    expect(current_path).to eq('/blog/admin/ckeditor/pictures')
   end
 
   scenario 'when user is a publisher' do
     sign_in(:as_publisher)
-    visit admin_ckeditor.pictures_path
+    visit '/blog/admin/ckeditor/pictures'
 
-    expect(current_path).to eq(admin_ckeditor.pictures_path)
+    expect(current_path).to eq('/blog/admin/ckeditor/pictures')
   end
 end
