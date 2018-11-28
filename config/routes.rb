@@ -38,9 +38,9 @@ Rails.application.routes.draw do
 
   get '/robots', to: 'text#robots', format: 'txt'
 
-  namespace :admin do
-    mount Ckeditor::Engine => '/ckeditor', as: 'ckeditor'
+  mount Ckeditor::Engine => '/admin/ckeditor', as: 'ckeditor'
 
+  namespace :admin do
     get '/', to: 'dashboard#index', as: 'dashboard'
 
     resources :popular_articles, only: [:new, :create]
