@@ -204,6 +204,10 @@ en:
       comments:
         one: "1 comment"
         other: "%{count} comments"
+  footer:
+    sfgb_part_of: Part of the
+    sfgb_single_financial: Single Financial
+    sfgb_guidance_body: Guidance Body
   admin:
     base:
       restart_application: "For security reasons, you should restart your Publify application. Enjoy your blogging experience."
