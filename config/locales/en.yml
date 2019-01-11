@@ -205,6 +205,9 @@ en:
         one: "1 comment"
         other: "%{count} comments"
   footer:
+    copyright: Copyright
+    money_advice_service: The Money Advice Service
+    address: 120 Holborn, London EC1N 2TD
     sfgb_part_of: Part of the
     sfgb_single_financial: Single Financial
     sfgb_guidance_body: Guidance Body
