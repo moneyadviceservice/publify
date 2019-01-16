@@ -5,7 +5,6 @@ gem 'dough-ruby', '~> 5.0', require: 'dough'
 gem 'attr_encrypted', '~> 3.1'
 gem 'blind_index', '0.2.0'
 
-gem 'attr_encrypted', '~> 3.1'
 gem 'pg', '~> 0.15.1'
 gem 'rails', '~> 4.2.10'
 gem 'htmlentities'
