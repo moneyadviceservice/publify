@@ -6,6 +6,7 @@
 .DS_Store
 .bundle/
 .rbenv-version
+.rubocop-*
 .sass-cache/
 /.env
 /config/database.yml
