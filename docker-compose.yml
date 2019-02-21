@@ -1,0 +1,36 @@
+version: '3'
+services:
+  postgres:
+    image: postgres:9.4
+    ports:
+      - 5432
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -h 'postgres' -p '5432'"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+  rails:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      - POSTGRESHOST=postgres
+      - GITHUB_USER=$GITHUB_TOKEN_USR
+      - GITHUB_PASS=$GITHUB_TOKEN_PSW
+      - DANGER_GITHUB_API_TOKEN=$GITHUB_TOKEN_PSW
+      - CHANGE_ID=$DANGER_CHANGE_ID
+      - GIT_URL=$DANGER_GIT_URL
+      - JENKINS_URL=$DANGER_JENKINS_URL
+      - HTTP_REQUEST_TIMEOUT=10
+      - LANG=C.UTF-8
+    env_file:
+      - ${ENV_VARS}
+    links:
+      - postgres
+volumes:
+  postgres: {}
