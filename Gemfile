@@ -81,9 +81,13 @@ group :development, :test do
 end
 
 group :test do
-  gem 'site_prism'
+  gem 'brakeman', require: false
   gem 'capybara'
+  gem 'danger', require: false
+  gem 'danger-rubocop', require: false
   gem 'rspec_junit_formatter'
+  gem 'site_prism'
+  gem 'tzinfo-data'
 end
 
 group :production do
