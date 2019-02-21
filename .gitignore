@@ -39,3 +39,5 @@ gems/
 # dough related files
 vendor/assets/bower_components
 bower.json
+
+.rubocop-*
