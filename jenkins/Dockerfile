@@ -4,6 +4,7 @@ MAINTAINER development.team@moneyadviceservice.org.uk
 RUN apt-get -qq update > /dev/null && \
   apt-get -qq dist-upgrade > /dev/null && \
   apt-get -qq clean  > /dev/null && \
+  apt-get install libcurl4-gnutls-dev && \
   rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 COPY . /var/tmp/app/

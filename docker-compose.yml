@@ -1,9 +1,12 @@
-version: '3'
+version: '2.1'
 services:
   postgres:
     image: postgres:9.4
     ports:
       - 5432
+    environment:
+      - POSTGRES_PASSWORD=go
+      - POSTGRES_USER=go
     volumes:
       - postgres:/var/lib/postgresql/data
     healthcheck:
@@ -14,12 +17,16 @@ services:
   rails:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: jenkins/Dockerfile
     depends_on:
       postgres:
         condition: service_healthy
+    env_file:
+      - ${ENV_VARS}
     environment:
       - POSTGRESHOST=postgres
+      - POSTGRESPASS=go
+      - POSTGRESUSER=go
       - GITHUB_USER=$GITHUB_TOKEN_USR
       - GITHUB_PASS=$GITHUB_TOKEN_PSW
       - DANGER_GITHUB_API_TOKEN=$GITHUB_TOKEN_PSW
@@ -28,8 +35,6 @@ services:
       - JENKINS_URL=$DANGER_JENKINS_URL
       - HTTP_REQUEST_TIMEOUT=10
       - LANG=C.UTF-8
-    env_file:
-      - ${ENV_VARS}
     links:
       - postgres
 volumes:
