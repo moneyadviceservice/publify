@@ -70,6 +70,7 @@ group :development, :test do
   gem 'factory_bot', '~> 4.8.0'
   gem 'simplecov', require: false
   gem 'pry-rails'
+  gem 'pry-byebug'
   gem 'rubocop', require: false
   gem 'launchy'
   gem 'poltergeist'

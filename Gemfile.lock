@@ -451,6 +451,9 @@ GEM
     pry (0.11.3)
       coderay (~> 1.1.0)
       method_source (~> 0.9.0)
+    pry-byebug (3.6.0)
+      byebug (~> 10.0)
+      pry (~> 0.10)
     pry-rails (0.3.6)
       pry (>= 0.10.4)
     psych (3.1.0)
@@ -671,6 +674,7 @@ DEPENDENCIES
   oauth2 (= 1.0.0)
   pg (~> 0.15.1)
   poltergeist
+  pry-byebug
   pry-rails
   rack-trailing_slashes
   rails (~> 4.2.10)
