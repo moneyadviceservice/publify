@@ -55,11 +55,6 @@ describe Admin::TokenChecker do
       rval = checker.generate_token
       expect(rval).to be_truthy
     end
-
-    it 'propagates errors on failure' do
-      File.chmod(0444, fixture)
-      expect { checker.generate_token }.to raise_error
-    end
   end
 
   after do
