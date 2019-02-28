@@ -70,6 +70,7 @@ group :development, :test do
   gem 'factory_bot', '~> 4.8.0'
   gem 'simplecov', require: false
   gem 'pry-rails'
+  gem 'pry-byebug'
   gem 'rubocop', require: false
   gem 'launchy'
   gem 'poltergeist'
@@ -81,9 +82,13 @@ group :development, :test do
 end
 
 group :test do
-  gem 'site_prism'
+  gem 'brakeman', require: false
   gem 'capybara'
+  gem 'danger', require: false
+  gem 'danger-rubocop', require: false
   gem 'rspec_junit_formatter'
+  gem 'site_prism'
+  gem 'tzinfo-data'
 end
 
 group :production do

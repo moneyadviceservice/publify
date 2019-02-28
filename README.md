@@ -40,7 +40,7 @@ You will need to remove the `username` and `password` lines from the `config/dat
 
 #### Enviroment File Setup
 
-You'll need to set the environment keys this repo requires in `.env`. If this file doesn't already exist, it will be auto generated when you run the setup script. Otherwise, confirm that the variables in your `.env` match those in `.sample.env`. You will need to change the `WEBPURIFY_API_KEY` value which you can find on [WebPurify's website](https://www.webpurify.com/). Login details for the MAS account are on KeePassX.
+You'll need to set the environment keys this repo requires in `.env`. If this file doesn't already exist, it will be auto generated when you run the setup script. Otherwise, confirm that the variables in your `.env` match those in `.env-example`. You will need to change the `WEBPURIFY_API_KEY` value which you can find on [WebPurify's website](https://www.webpurify.com/). Login details for the MAS account are on KeePassX.
 
 #### Setup Script
 This repository comes equipped with a self-setup script:
