@@ -79,6 +79,7 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'rspec-rails'
   gem 'byebug'
+  gem 'rb-readline'
 end
 
 group :test do
