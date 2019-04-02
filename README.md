@@ -50,6 +50,8 @@ $ ./bin/setup
 $ rails s
 ```
 
+The blog is on /blog, and admin is /blog/admin
+
 #### Testing
 
 ```bash

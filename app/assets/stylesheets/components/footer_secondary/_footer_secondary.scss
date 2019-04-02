@@ -12,7 +12,7 @@
   margin-top: baseline-unit(3);
 
   @include respond-to($mq-l) {
-    @include column(4);
+    @include column(5);
     margin-top: 0;
   }
 }
@@ -26,7 +26,7 @@
   }
 
   @include respond-to($mq-l) {
-    @include column(8);
+    @include column(7);
     text-align: right;
     float: right;
     padding-bottom: 0;
@@ -66,12 +66,12 @@
   margin-right: 4px;
 }
 
-.sfgb-logo__img {
-  width: 33px;
+.mps-logo__img {
+  height: 38px;
   margin-left: 5px;
 }
 
-.footer-secondary__sfgb-text {
+.footer-secondary__mps-text {
   line-height: 1;
   display: inline-block;
 
