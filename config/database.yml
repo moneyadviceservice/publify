@@ -13,6 +13,8 @@ development:
 test:
   database: blog_test
   <<: *login
+  # username: go
+  # password: go
 
 production:
   adapter: postgresql
