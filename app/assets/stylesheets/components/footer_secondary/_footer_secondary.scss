@@ -1,0 +1,25 @@
+.icon {
+  background-image: image_url('accessibility-icon-sprite.png');
+  background-repeat: no-repeat;
+  @include inline-block;
+}
+
+.icon--accessibility {
+  background-position: 0 -8px; 
+  width: 20px;
+  height: 20px;
+}
+
+@include device-pixel-ratio() {
+  .icon {
+    background-size: 200% 100%;
+  }
+
+  %icon {
+    // prevent HD screens from breaking when extending .icon
+    background-size: 200% 100%;
+  }
+  .icon--accessibility {
+    background-position: -20px 1px; 
+  }
+}
