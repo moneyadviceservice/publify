@@ -123,23 +123,33 @@
     </div>
   </div>
 
+  <div class="l-constrained">
   <p class="footer__copyright">
     <%= "&copy; #{t('footer.copyright')} #{DateTime.now.year} #{t('footer.money_advice_service')} #{t('footer.address')}"%>
   </p>
+  </div>
 
   <div class="l-footer-secondary t-footer-secondary">
-    <div class="l-constrained footer-secondary__inner">
+    <div class="l-constrained">
+    <div class="l-footer-secondary--inner">
       <div class="l-footer-secondary__list--left">
-        <ul class="footer-secondary__list unstyled-list">
-          <li class="footer-secondary__list-item accessibility-feedback-link">
-            <a class="footer-secondary__link" href="http://accessin.org/usersubmit_mas.php?param=nojscript" onclick="window.open('http://accessin.org/usersubmit_mas.php?param=' + window.location,'', 'resizable=yes,location=no,scrollbars=yes,toolbar=no,left=20,top=0,height=900,width=800'); return false;" title="Please use this button to tell us if you have an accessibility issue on our website" target="_blank">
-              <span class="icon icon--accessibility"></span>Accessibility feedback
-              <span class="visually-hidden">Feedback form opens in a new window</span>
-            </a>
+        <ul class="l-footer-secondary__list">
+          <li class="l-footer-secondary__list-item accessibility-feedback-link">
+            <form target="_blank" class="accessin" id="AccessIN_form" action="https://accessin.org/app/accessin/index.php/welcome/index_AccessIN" method="post">
+              <input type="hidden" name="ai_url" id="AccessIN_url" value="unset">
+              <input type="hidden" name="ai_dom" id="AccessIN_dom" value="unset">
+              <button type="submit" class="accessin__submit">
+                <span class="icon icon--accessibility"></span>
+                <span>Report an accessibility problem</span>
+              </button>
+            </form>
+            <% content_for(:javascripts) do %>
+              <script type="text/javascript" src="https://accessin.org/app/accessin/resources/AccessIN.js"></script>
+            <% end %>
           </li>
 
-          <li class="footer-secondary__list-item mps-link">
-            <a class="footer-secondary__link" href="https://moneyandpensionsservice.org.uk/" target="_blank">
+          <li class="l-footer-secondary__list-item footer-secondary__mps-link">
+            <a href="https://moneyandpensionsservice.org.uk/" target="_blank">
               <span class="footer-secondary__mps-text">
                 <span><%= t('footer.mps_provided_1') %></span>
                 <span><%= t('footer.mps_provided_2') %></span>
@@ -151,25 +161,30 @@
           </li>
         </ul>
       </div>
+
       <div class="l-footer-secondary__list--right">
-        <ul class="footer-secondary__list unstyled-list">
-          <li class="footer-secondary__list-item">
-            <a class="footer-secondary__link" href="https://www.moneyadviceservice.org.uk/en/sitemap">Sitemap</a>
+        <ul class="l-footer-secondary__list">
+          <li class="l-footer-secondary__list-item">
+            <a href="https://www.moneyadviceservice.org.uk/en/corporate/contact-us">Contact us</a>
           </li>
-          <li class="footer-secondary__list-item">
-            <a class="footer-secondary__link" href="http://www.moneyadviceservice.org.uk/en/static/accessibility">Accessibility</a>
+          <li class="l-footer-secondary__list-item">
+            <a href="http://www.moneyadviceservice.org.uk/en/static/terms-and-conditions">Terms &amp; conditions</a>
           </li>
-          <li class="footer-secondary__list-item">
-            <a class="footer-secondary__link" href="http://www.moneyadviceservice.org.uk/en/static/terms-and-conditions">Terms &amp; conditions</a>
+          <li class="l-footer-secondary__list-item">
+            <a href="http://www.moneyadviceservice.org.uk/en/static/privacy">Privacy notice</a>
           </li>
-          <li class="footer-secondary__list-item">
-            <a class="footer-secondary__link" href="http://www.moneyadviceservice.org.uk/en/static/privacy">Privacy statement</a>
+          <li class="l-footer-secondary__list-item">
+            <a href="http://www.moneyadviceservice.org.uk/en/static/accessibility">Accessibility</a>
           </li>
-          <li class="footer-secondary__list-item">
-            <a class="footer-secondary__link" href="http://www.moneyadviceservice.org.uk/en/static/cookie_notice_en">Cookie guide</a>
+          <li class="l-footer-secondary__list-item">
+            <a href="http://www.moneyadviceservice.org.uk/en/static/cookie_notice_en">Cookies</a>
+          </li>
+          <li class="l-footer-secondary__list-item">
+            <a href="https://www.moneyadviceservice.org.uk/en/sitemap">Sitemap</a>
           </li>
         </ul>
       </div>
+    </div>
     </div>
   </div>
 </footer>
