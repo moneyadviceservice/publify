@@ -61,18 +61,6 @@
   }
 }
 
-.sharing__button--google {
-  background-color: $google-plus-red;
-  background-position: -132px 0;
-  &:hover {
-    background-color: $google-plus-red--hover;
-  }
-
-  .svg & {
-    background-image: asset-url('sharing/google-plus.svg');
-  }
-}
-
 .sharing__button--pinterest {
   background-color: $pinterest-red;
   background-position: -88px 0;

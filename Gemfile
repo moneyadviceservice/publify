@@ -5,9 +5,8 @@ gem 'dough-ruby', '~> 5.0', require: 'dough'
 gem 'attr_encrypted', '~> 3.1'
 gem 'blind_index', '0.2.0'
 
-gem 'attr_encrypted', '~> 3.1'
 gem 'pg', '~> 0.15.1'
-gem 'rails', '~> 4.2.10'
+gem 'rails', '~> 4.2.11'
 gem 'htmlentities'
 gem 'bluecloth', '~> 2.1'
 gem 'dotenv-rails'
@@ -71,6 +70,7 @@ group :development, :test do
   gem 'factory_bot', '~> 4.8.0'
   gem 'simplecov', require: false
   gem 'pry-rails'
+  gem 'pry-byebug'
   gem 'rubocop', require: false
   gem 'launchy'
   gem 'poltergeist'
@@ -79,12 +79,17 @@ group :development, :test do
   gem 'database_cleaner'
   gem 'rspec-rails'
   gem 'byebug'
+  gem 'rb-readline'
 end
 
 group :test do
-  gem 'site_prism'
+  gem 'brakeman', require: false
   gem 'capybara'
+  gem 'danger', require: false
+  gem 'danger-rubocop', require: false
   gem 'rspec_junit_formatter'
+  gem 'site_prism'
+  gem 'tzinfo-data'
 end
 
 group :production do

@@ -9,9 +9,6 @@
     <a class="sharing__button sharing__button--pinterest t-pinterest-button" href="http://www.pinterest.com/pin/create/button/?url=<%= u(url) %>&amp;media=<%= @article && @article.hero_image.present? ? u(@article.hero_image.url(:resized)) : '' %>"><span class="visually-hidden">Share this article on Pinterest</span></a>
   </li>
   <li class="sharing__item">
-    <a class="sharing__button sharing__button--google t-google-button" href="https://plus.google.com/share?url=<%= u(url) %>" target="_blank"><span class="visually-hidden">Share this article on Google+</span></a>
-  </li>
-  <li class="sharing__item">
     <a class="sharing__button sharing__button--rss t-rss-button" href="https://webfeeds.moneyadviceservice.org.uk/feeds/469.rss" target="_blank"><span class="visually-hidden">View RSS feed</span></a>
   </li>
   <li class="sharing__item">
