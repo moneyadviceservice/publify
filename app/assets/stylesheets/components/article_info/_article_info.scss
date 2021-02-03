@@ -53,7 +53,7 @@
 
 .article-info__image {
   float: right;
-  border-radius: 75px;
+  border-radius: $maps-radius;
 
   @include respond-to($mq-two-col) {
     float: none;
