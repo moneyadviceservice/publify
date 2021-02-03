@@ -28,7 +28,7 @@
   border-radius: 4px;
   font-weight: 700;
   margin-right: baseline-unit(2);
-  box-shadow: 0px 3px 0px rgba(0, 11, 59, 0.25);
+  box-shadow: $maps-box-shadow;
 
   &:link,
   &:hover,
