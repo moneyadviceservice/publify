@@ -3,10 +3,11 @@
 }
 
 .also-like__subheader {
-  margin: baseline-unit(6) 0 baseline-unit(4);
-  text-align: center;
-  @include font-size(24);
-  color: $black;
+  @include column(12);
+  @include font-size(32);
+  margin: baseline-unit(6) 0 baseline-unit(2);
+  padding: 0 baseline-unit(3);
+  color: $maps-primary-blue;
   float: left;
   width: 100%;
 
