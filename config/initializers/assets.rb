@@ -15,6 +15,7 @@ Rails.application.configure do
 
   # Fonts
   config.assets.precompile << /\.(?:png|svg|eot|woff|ttf)$/
+  config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
 
   # Stylesheets
   config.assets.precompile += %w(
