@@ -2,7 +2,7 @@ h1, h2, h3, h4, h5, h6 {
   margin-top: 0;
   line-height: 1.2;
   font-weight: $font-weight-bold;
-  color: $heading-color-primary;
+  color: $maps-primary-blue !important;
 }
 
 h1 {
@@ -10,9 +10,9 @@ h1 {
 }
 
 h2 {
-  @include font-size(30);
+  @include font-size(38);
 }
 
 h3 {
-  @include font-size(24);
+  @include font-size(32);
 }
