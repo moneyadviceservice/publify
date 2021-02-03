@@ -100,7 +100,6 @@
 
 .l-header__top {
   overflow: hidden;
-  border-bottom: 1px solid #1f5d8e;
 
   @include respond-to($mq-m) {
     border-bottom: 0;
@@ -133,18 +132,18 @@
 .l-logo {
   background: asset-url('logo.svg') no-repeat;
   margin: baseline-unit(3) 0 baseline-unit(4) 0;
-  width: 175px;
-  height: 29px;
+  width: 120px;
+  height: 60px;
   float: left;
 
   @include respond-to($mq-m) {
     margin-top: baseline-unit(2);
-    width: 240px;
-    height: 37px;
+    width: 120px;
+    height: 60px;
   }
 
   @include respond-to($mq-l) {
-    margin: baseline-unit(2) 0 baseline-unit(2) baseline-unit(3);
+    margin: baseline-unit(2) 0 baseline-unit(2) baseline-unit(3) 0;
   }
 }
 
@@ -160,9 +159,9 @@
 
 .l-header__search-button {
   display: inline-block;
-  width: 60px;
-  height: 48px;
-  background: #185786;
+  width: 40px;
+  height: 40px;
+  background: $maps-primary-magenta;
   border-radius: 8px;
   margin: baseline-unit(2) 0;
   position: absolute;
@@ -173,8 +172,8 @@
     position: absolute;
     content: "";
     display: inline-block;
-    top: 10px;
-    left: 16px;
+    top: 7px;
+    left: 8px;
     width: 26px;
     height: 26px;
     background: asset-url('magnify.svg') no-repeat;
@@ -242,16 +241,16 @@
 
   .homepage & {
     clear: both;
-    @include font-size(36);
+    @include font-size(23);
     margin-top: 0;
     line-height: baseline-unit(6);
     margin-bottom: 0;
     margin-left: 0;
     width: 100%;
-    text-align: center;
+    text-align: left;
 
     @include respond-to($mq-l) {
-      @include font-size(48);
+      @include font-size(27);
       margin-top: baseline-unit(1);
     }
   }
@@ -324,11 +323,10 @@
 .l-header__description {
   display: block;
   font-weight: $font-weight-light;
-  text-align: center;
+  text-align: left;
   color: $link-color--negative;
   width: 100%;
   margin: 0 auto;
-  max-width: 530px;
   margin-bottom: baseline-unit(2);
 
   @include respond-to($mq-m) {
