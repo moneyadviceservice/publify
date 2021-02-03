@@ -19,7 +19,7 @@
 .l-article__header {
   margin-top: baseline-unit(2);
   @include font-size(36);
-  color: $outer-space;
+  color: $maps-primary-blue;
 
   @include respond-to($mq-two-col) {
     @include push(3);
