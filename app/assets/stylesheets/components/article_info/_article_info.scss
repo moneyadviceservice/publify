@@ -41,6 +41,16 @@
   }
 }
 
+.article-info__comments--in-page {
+  color: $maps-primary-magenta;
+
+  &:hover,
+  &:focus,
+  &:visited {
+    color: $maps-primary-magenta;
+  }
+}
+
 .article-info__image {
   float: right;
   border-radius: 75px;
