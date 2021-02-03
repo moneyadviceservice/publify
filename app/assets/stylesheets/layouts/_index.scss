@@ -17,19 +17,24 @@
 }
 
 .l-index-archive__link {
-  background: $deep-cerulean;
+  background: $white;
   padding: baseline-unit(3);
   display: block;
   margin-top: -5px;
   @include font-size(30);
   text-align: center;
   width: 100%;
+  border: 1px solid $maps-outline;
+  border-radius: 4px;
+  font-weight: 700;
+  margin-right: baseline-unit(2);
+  box-shadow: 0px 3px 0px rgba(0, 11, 59, 0.25);
 
   &:link,
   &:hover,
   &:focus,
   &:visited {
-    color: $white;
+    color: $maps-primary-magenta;
   }
 }
 
