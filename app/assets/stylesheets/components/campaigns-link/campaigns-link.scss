@@ -2,7 +2,7 @@
   @include font-size(16);
   line-height: 1.2;
   font-weight: 500;
-  color: $color-link-default;
+  color: $maps-primary-magenta;
   display: table;
   width: 100%;
   position: relative;
@@ -12,6 +12,7 @@
 .campaigns-link__text {
   display: table-cell;
   vertical-align: middle;
+  color: $maps-primary-magenta;
 }
 
 .campaigns-link__arrow {
