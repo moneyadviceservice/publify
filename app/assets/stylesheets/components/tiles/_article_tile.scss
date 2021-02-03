@@ -2,7 +2,6 @@ $less-than-mq-l: ($mq-l) - .01;
 
 @mixin article-tile--green {
   background-color: $article-tile-bg--green;
-  color: $maps-primary-blue;
 }
 
 @mixin article-tile--white {
@@ -23,28 +22,29 @@ $less-than-mq-l: ($mq-l) - .01;
 
 @mixin article-tile--popular {
   background-color: $article-tile-bg--popular;
+  color: $white;
 
   padding-top: baseline-unit(5);
   padding-bottom: baseline-unit(5);
 }
 
 @mixin article-tile__heading--green {
-  color: $white;
+  color: $article-tile-text--green;
 
   &:hover,
   &:focus,
   &:visited {
-    color: $white;
+    color: $article-tile-text--green;
   }
 }
 
 @mixin article-tile__heading--white {
-  color: $maps-primary-blue;
+  color: $color-link-default;
 
   &:hover,
   &:focus,
   &:visited {
-    color: $maps-primary-blue;
+    color: $color-link-default;
   }
 }
 
@@ -65,10 +65,10 @@ $less-than-mq-l: ($mq-l) - .01;
 @mixin article-tile__heading--popular {
   text-transform: uppercase;
   @include font-size(18);
-  color: $white;
+  color: $black;
 
   &:hover {
-    color: $white;
+    color: $black;
   }
 }
 
@@ -96,7 +96,7 @@ $less-than-mq-l: ($mq-l) - .01;
   background-color: $article-tile-comments-bg--white;
 
   &:before {
-    border-color: transparent $maps-teal transparent transparent;
+    border-color: transparent $article-tile-comments-bg--white transparent transparent;
   }
 }
 
@@ -113,7 +113,7 @@ $less-than-mq-l: ($mq-l) - .01;
 
   position: relative;
   width: 100%;
-  padding: baseline-unit(22) baseline-unit(5);
+  padding: baseline-unit(13) baseline-unit(5);
   min-height: 400px;
 
   .flexbox & {
@@ -163,6 +163,11 @@ $less-than-mq-l: ($mq-l) - .01;
 
   .homepage .l-tile:nth-child(3) & { // 3
     @include article-tile--popular;
+
+    .article-tile__heading,
+    .artile-tile-list__item-link {
+      color: $white;
+    }
   }
 
   .article-page & {
@@ -176,8 +181,7 @@ $less-than-mq-l: ($mq-l) - .01;
 
 .article-tile__heading {
   @include article-tile__heading--blue;
-  @include font-size(32);
-  font-family: $brand-font-family;
+  @include font-size(30);
   line-height: 1.2;
   display: block;
 
@@ -225,7 +229,7 @@ $less-than-mq-l: ($mq-l) - .01;
 
 .article-tile__date {
   @include article-tile__date--blue;
-  @include font-size(16);
+  @include font-size(18);
   font-weight: $font-weight-bold;
 
   @include respond-to(0, $less-than-mq-l) {
@@ -244,13 +248,9 @@ $less-than-mq-l: ($mq-l) - .01;
 
   @include respond-to($mq-l) {
     .non-article-page .l-tile:nth-child(6n+1) &, // 1,6,7,12
-    .non-article-page .l-tile:nth-child(12) & {
-      color: $maps-primary-text;
-    }
-
     .non-article-page .l-tile:nth-child(6) &,
-    .non-article-page .l-tile:nth-child(1) & {
-      @include article-tile__date--white;
+    .non-article-page .l-tile:nth-child(12) & {
+      @include article-tile__date--green;
     }
 
     .non-article-page .l-tile:nth-child(2) &, // 2,4,8,10
@@ -309,7 +309,7 @@ $less-than-mq-l: ($mq-l) - .01;
   min-width: 52px;
   text-align: center;
   display: block;
-  color: $white;
+  color: $article-tile-text--green;
 
   &:focus,
   &:hover,
@@ -391,13 +391,23 @@ $less-than-mq-l: ($mq-l) - .01;
 }
 
 .artile-tile-list__item-link {
-  @include font-size(32);
-  text-decoration: underline;
-
   &:link,
   &:visited,
   &:hover,
   &:focus {
-    color: $white;
+    color: $black;
+  }
+}
+
+.non-article-page .l-tile:nth-child(6n+1) .article-tile,
+.non-article-page .l-tile:nth-child(6) .article-tile {
+  background-color: $maps-teal-light;
+
+  .article-tile__heading {
+    color: $maps-primary-blue;
+  }
+
+  .article-tile__date {
+    color: $maps-primary-text;
   }
 }
