@@ -18,7 +18,7 @@ $less-than-mq-l: ($mq-l) - .01;
 }
 
 @mixin article-tile--mas {
-  background-color: $article-tile-bg--mas-green;
+  background-color: $maps-primary-blue;
 }
 
 @mixin article-tile--popular {
@@ -113,7 +113,7 @@ $less-than-mq-l: ($mq-l) - .01;
 
   position: relative;
   width: 100%;
-  padding: baseline-unit(13) baseline-unit(5);
+  padding: baseline-unit(22) baseline-unit(5);
   min-height: 400px;
 
   .flexbox & {
@@ -176,8 +176,8 @@ $less-than-mq-l: ($mq-l) - .01;
 
 .article-tile__heading {
   @include article-tile__heading--blue;
-  @include font-size(30);
-  font-family: 'Roobert', Arial, sans-serif;
+  @include font-size(32);
+  font-family: $brand-font-family;
   line-height: 1.2;
   display: block;
 
@@ -225,7 +225,7 @@ $less-than-mq-l: ($mq-l) - .01;
 
 .article-tile__date {
   @include article-tile__date--blue;
-  @include font-size(18);
+  @include font-size(16);
   font-weight: $font-weight-bold;
 
   @include respond-to(0, $less-than-mq-l) {
