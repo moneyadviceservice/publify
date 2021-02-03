@@ -1,5 +1,6 @@
 a {
   text-decoration: none;
+  color: $maps-primary-magenta;
 
   .l-article__inner p &,
   .l-footer-links &,
@@ -10,11 +11,16 @@ a {
   &:hover,
   &:focus {
     text-decoration: underline;
+    color: $maps-primary-magenta;
 
     .l-article__inner p &,
     .l-footer-links &,
     .l-footer-contact &:not([href^=tel]) {
       text-decoration: none;
     }
+  }
+
+  &:visited {
+    color: $maps-primary-magenta;
   }
 }

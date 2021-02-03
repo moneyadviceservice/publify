@@ -206,10 +206,10 @@ en:
         other: "%{count} comments"
   footer:
     copyright: Copyright
-    money_advice_service: The Money Advice Service
+    money_advice_service: Money and Pensions Service
     address: 120 Holborn, London EC1N 2TD
-    mps_provided_1: The Money 
-    mps_provided_2: Advice Service 
+    mps_provided_1: ' '
+    mps_provided_2: MoneyHelper is
     mps_provided_3: is provided by
     mps: Money & Pensions Service 
   admin:
