@@ -1,6 +1,6 @@
 .l-tiles {
   @extend %clearfix;
-  margin-bottom: $baseline-unit*4;
+  padding-bottom: baseline-unit(5);
 }
 
 .l-tiles__inner {
@@ -97,6 +97,10 @@
 }
 
 .l-tile--archive {
+  background-color: none;
+  border: 0;
+  box-shadow: none;
+
   .non-article-page & {
     float: right;
 
