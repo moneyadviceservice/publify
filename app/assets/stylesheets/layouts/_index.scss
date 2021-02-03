@@ -3,11 +3,11 @@
 }
 
 .l-index--campaign {
-  margin-top: baseline-unit(-20);
+  margin-top: baseline-unit(-16);
   padding-top: baseline-unit(20);
 
   @include respond-to($mq-l) {
-    margin-top: baseline-unit(-28);
+    margin-top: baseline-unit(-22);
     padding-top: baseline-unit(28);
   }
 }
