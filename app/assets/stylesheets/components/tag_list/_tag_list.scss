@@ -23,6 +23,7 @@
 
 .tag-list__trigger {
   @extend %base-font-style;
+  @include font-size(16);
   display: none;
   margin-bottom: baseline-unit(1);
 
