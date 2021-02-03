@@ -177,6 +177,7 @@ $less-than-mq-l: ($mq-l) - .01;
 .article-tile__heading {
   @include article-tile__heading--blue;
   @include font-size(30);
+  font-family: 'Roobert', Arial, sans-serif;
   line-height: 1.2;
   display: block;
 
