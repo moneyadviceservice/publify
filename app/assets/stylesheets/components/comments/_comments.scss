@@ -70,12 +70,10 @@
 }
 
 .comment-list-item {
-  border-top: 1px solid $comment-list-item-border;
+  border-top: 1px solid $maps-outline;
   padding-top: baseline-unit(2);
 
   @include respond-to($mq-two-col) {
-    @include push(1);
-    @include pull(1);
 
     &:first-child {
       margin-top: baseline-unit(14);
@@ -94,7 +92,7 @@
 }
 
 .comment-list-item__headline-date {
-  font-weight: normal;
+  font-family: $brand-font-family;
 }
 
 .comment-list-item__report-link {
