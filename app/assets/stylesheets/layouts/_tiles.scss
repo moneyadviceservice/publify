@@ -47,18 +47,21 @@
 
 .l-tile {
   width: 100%;
-  margin-bottom: 5px;
+  margin-bottom: 25px;
+  box-shadow: 0px 3px 0px rgba(0, 11, 59, 0.25);
+  border-radius: 4px;
+  border: 1px solid $maps-outline;
 
   @include respond-to($mq-m) {
     float: left;
 
     .non-article-page & {
-      width: 49.75%;
-      margin-right: .5%;
+      width: 48.75%;
+      margin-right: 1.5%;
 
       .flexbox & {
         display: flex;
-        flex-basis: 49.75%;
+        flex-basis: 48.75%;
         float: none;
         min-height: 0;
       }
@@ -72,18 +75,18 @@
   @include respond-to($mq-l) {
     .non-article-page &,
     .article-page & {
-      width: 33%;
-      margin-right: .5%;
+      width: 32%;
+      margin-right: 1.5%;
 
       .flexbox & {
         display: flex;
-        flex-basis: 33%;
+        flex-basis: 32%;
         float: none;
         min-height: 0;
       }
 
       &:nth-child(2n) {
-        margin-right: .5%;
+        margin-right: 1.5%;
       }
 
       &:nth-child(3n) {
