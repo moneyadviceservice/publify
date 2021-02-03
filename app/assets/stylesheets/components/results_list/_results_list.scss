@@ -58,10 +58,6 @@
   @include font-size(16);
   display: block;
   margin-top: baseline-unit(2);
-
-  .comments-count {
-    text-decoration: underline;
-  }
 }
 
 .results-list-pagination {
