@@ -21,23 +21,17 @@
 }
 
 .l-tiles-title {
-  background: $header-bg-color;
-  color: $white;
-  text-transform: uppercase;
-  font-weight: $brand-font-weight;
-  text-align: center;
-  padding-top: baseline-unit(3);
-  padding-bottom: baseline-unit(5);
-
-  @include respond-to($mq-m) {
-    padding-top: baseline-unit(7);
-    padding-bottom: baseline-unit(9);
-  }
+  color: $maps-primary-text;
+  font-weight: $base-font-family;
+  text-align: left;
+  padding: baseline-unit(4) baseline-unit(3);
+  margin: 0 auto;
+  max-width: 75em;
 }
 
 .l-tiles-title__header {
   @include font-size(36);
-  color: $white;
+  color: $maps-primary-blue;
   font-family: $brand-font-stack;
   font-weight: $brand-font-weight;
   padding-bottom: baseline-unit(2);

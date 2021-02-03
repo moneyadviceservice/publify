@@ -3,6 +3,11 @@
   src: url('Roobert-Regular.woff');
 }
 
+@font-face {
+  font-family: 'Roobert-Bold';
+  src: url('Roobert-Bold.woff');
+}
+
 html {
   // prevents bootstrap bollocks from screwing with my styles.
   font-size: 100%;
