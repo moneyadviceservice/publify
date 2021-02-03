@@ -2,6 +2,7 @@ $less-than-mq-l: ($mq-l) - .01;
 
 @mixin article-tile--green {
   background-color: $article-tile-bg--green;
+  color: $maps-primary-blue;
 }
 
 @mixin article-tile--white {
@@ -28,22 +29,22 @@ $less-than-mq-l: ($mq-l) - .01;
 }
 
 @mixin article-tile__heading--green {
-  color: $article-tile-text--green;
+  color: $white;
 
   &:hover,
   &:focus,
   &:visited {
-    color: $article-tile-text--green;
+    color: $white;
   }
 }
 
 @mixin article-tile__heading--white {
-  color: $color-link-default;
+  color: $maps-primary-blue;
 
   &:hover,
   &:focus,
   &:visited {
-    color: $color-link-default;
+    color: $maps-primary-blue;
   }
 }
 
@@ -64,10 +65,10 @@ $less-than-mq-l: ($mq-l) - .01;
 @mixin article-tile__heading--popular {
   text-transform: uppercase;
   @include font-size(18);
-  color: $black;
+  color: $white;
 
   &:hover {
-    color: $black;
+    color: $white;
   }
 }
 
@@ -242,9 +243,13 @@ $less-than-mq-l: ($mq-l) - .01;
 
   @include respond-to($mq-l) {
     .non-article-page .l-tile:nth-child(6n+1) &, // 1,6,7,12
-    .non-article-page .l-tile:nth-child(6) &,
     .non-article-page .l-tile:nth-child(12) & {
-      @include article-tile__date--green;
+      color: $maps-primary-text;
+    }
+
+    .non-article-page .l-tile:nth-child(6) &,
+    .non-article-page .l-tile:nth-child(1) & {
+      @include article-tile__date--white;
     }
 
     .non-article-page .l-tile:nth-child(2) &, // 2,4,8,10
@@ -385,10 +390,13 @@ $less-than-mq-l: ($mq-l) - .01;
 }
 
 .artile-tile-list__item-link {
+  @include font-size(32);
+  text-decoration: underline;
+
   &:link,
   &:visited,
   &:hover,
   &:focus {
-    color: $black;
+    color: $white;
   }
 }
