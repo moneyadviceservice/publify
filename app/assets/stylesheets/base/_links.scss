@@ -11,7 +11,7 @@ a {
   &:hover,
   &:focus {
     text-decoration: underline;
-    color: $maps-primary-magenta;
+    color: $maps-primary-magenta-dark;
 
     .l-article__inner p &,
     .l-footer-links &,
@@ -20,7 +20,16 @@ a {
     }
   }
 
+  &:focus {
+    color: $maps-primary-text !important;
+    text-decoration: none;
+    border-bottom: 4px solid #8200D1;
+    background-color: $maps-yellow;
+    outline: none !important;
+    border-radius: none;
+  }
+
   &:visited {
-    color: $maps-primary-magenta;
+    color: $maps-support-purple;
   }
 }
