@@ -1,7 +1,10 @@
 .next-steps {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
   position: relative;
-  padding: baseline-unit(3);
-  max-width: $callout-max-width;
+  padding: 19px;
+  margin: 35px 0;
   background: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjxzdmcgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNDAiIGhlaWdodD0iNTAiIHg9IjBweCIgeT0iMHB4IiB2aWV3Qm94PSIwIDAgNDAgNTAiIHhtbDpzcGFjZT0icHJlc2VydmUiPjxsaW5lIHN0cm9rZT0iI2NlY2VjZSIgc3Ryb2tlLXdpZHRoPSIyIiB4MT0iMCIgeTE9IjUxIiB4Mj0iNDAiIHkyPSItMSIgLz48L3N2Zz4NCg==");
   background-size: 10px 13px;
 }
@@ -17,17 +20,17 @@
 .next-steps__container-link {
   @include body(18, 26);
   display: table;
-  width: 100%;
+  width: auto;
   background-color: $white;
   font-weight: $font-weight-bold;
   color: $maps-primary-magenta;
   text-decoration: underline;
-  padding: baseline-unit(3);
+  padding: 19px;
 
   &:link,
   &:focus,
   &:visited {
-    color: $maps-primary-magenta
+    color: $maps-primary-magenta;
   }
 }
 
