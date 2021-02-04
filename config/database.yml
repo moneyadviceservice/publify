@@ -5,7 +5,6 @@ login: &login
   timeout: 5000
   encoding: utf8
 
-
 development:
   database: blog_development
   <<: *login
@@ -13,8 +12,6 @@ development:
 test:
   database: blog_test
   <<: *login
-  # username: go
-  # password: go
 
 production:
   adapter: postgresql
