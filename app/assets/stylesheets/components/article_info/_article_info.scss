@@ -1,3 +1,7 @@
+.article-info {
+  margin-top: 72px;
+}
+
 .article-info__comments {
   @include inline-block();
   @include font-size(18);
