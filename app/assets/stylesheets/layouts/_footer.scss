@@ -183,3 +183,15 @@
 .l-footer-secondary {
   background-color: $maps-primary-text !important;
 }
+
+.l-footer-secondary__list-item {
+  a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    & .footer-secondary__mps-text {
+      margin-right: 12px;
+    }
+  }
+}
