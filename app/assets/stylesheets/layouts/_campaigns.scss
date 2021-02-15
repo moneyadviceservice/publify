@@ -37,27 +37,25 @@
 }
 
 .l-campaigns__panel {
+  @include column(12);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
   background: $gallery;
   box-shadow: $maps-box-shadow;
   border-radius: 4px;
   border: 1px solid $maps-outline;
   overflow: hidden;
 
-  @include column(12);
+  @include respond-to($mq-l) {
+    flex-direction: row;
+    padding: 35px;
+  }
 
   .l-campaign--fullbleed & {
     background: $white;
-  }
-}
-
-.l-campaigns__intro,
-.l-campaigns__links {
-  margin: 0 baseline_unit(5);
-
-  @include respond-to($mq-l) {
-    display: inline;
-    float: left;
-    width: 43%;
   }
 }
 
@@ -73,7 +71,8 @@
   font-weight: 700;
   color: $eastern-blue;
 
-  a, a:visited {
+  a,
+  a:visited {
     color: $maps-primary-blue;
   }
 }
@@ -84,21 +83,28 @@
 }
 
 .l-campaigns__intro {
-  margin-top: baseline_unit(8);
+  // margin-top: baseline_unit(8);
+  width: 100%;
 
   @include respond-to($mq-l) {
-    margin-bottom: baseline_unit(6);
+    width: 65%;
+    padding-right: 60px;
+    // margin-bottom: baseline_unit(6);
   }
 }
 
 .l-campaigns__links {
   list-style: none;
   padding-left: 0;
+  width: 100%;
 
   @include respond-to($mq-l) {
-    margin-top: baseline_unit(10);
-    margin-bottom: baseline_unit(8);
-    float: right;
+    width: 35%;
+    padding: 0;
+    margin: 0;
+    // margin-top: baseline_unit(10);
+    // margin-bottom: baseline_unit(8);
+    // float: right;
   }
 }
 
