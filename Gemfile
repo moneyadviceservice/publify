@@ -1,7 +1,18 @@
 source 'https://rubygems.org'
 source 'http://gems.dev.mas.local'
 
-gem 'rails', '~> 4.2.11'
+source 'https://gems.railslts.com' do
+  gem 'rails', '~> 4.2.11.17'
+  gem 'actionmailer',     require: false
+  gem 'actionpack',       require: false
+  gem 'actionview',       require: false
+  gem 'activejob',        require: false
+  gem 'activemodel',      require: false
+  gem 'activerecord',     require: false
+  gem 'activesupport',    require: false
+  gem 'railslts-version', require: false
+  gem 'railties',         require: false
+end
 
 
 gem 'actionpack-page_caching', '~> 1.0.2' # Security: needs update
@@ -21,7 +32,7 @@ gem 'csslint_ruby'
 gem 'dotenv-rails'
 gem 'dough-ruby', '~> 5.0', require: 'dough'
 gem 'dynamic_form', '~> 1.1.4'
-gem "excon", ">= 0.71.0"
+gem 'excon', '>= 0.71.0'
 gem 'fastimage'
 gem 'flickraw-cached'
 gem 'fog'
@@ -31,13 +42,13 @@ gem 'jbuilder'
 gem 'jquery-rails', '~> 3.1.0'
 gem 'jquery-ui-rails', '~> 5.0.2'
 gem 'jshint_ruby'
-gem "json", "= 2.4.0"
-gem "kaminari", "= 1.2.1"
-gem "kramdown", ">= 2.3.0"
+gem 'json', '= 2.4.0'
+gem 'kaminari'
+gem 'kramdown', '>= 2.3.0'
 gem 'legato', '0.4.0'
 gem 'loofah', '= 2.7.0'
 gem 'mailjet'
-gem 'mini_magick', ">= 4.9.4", require: 'mini_magick'
+gem 'mini_magick', '>= 4.9.4', require: 'mini_magick'
 gem 'newrelic_rpm'
 gem 'nokogiri', '< 1.11.0'
 gem 'non-stupid-digest-assets'
@@ -47,7 +58,6 @@ gem 'rack-trailing_slashes'
 gem 'rails-html-sanitizer', '= 1.3.0'
 gem 'rails-observers', '~> 0.1.2'
 gem 'rails-timeago', '~> 2.0'
-#gem 'rake', '~> 10.3.2'
 gem 'rake', '~> 12.3.3'
 gem 'recaptcha', require: 'recaptcha/rails'
 gem 'RedCloth', '~> 4.2.8'
@@ -60,7 +70,7 @@ gem 'uglifier'
 gem 'unicorn'
 gem 'uuidtools', '~> 2.1.1'
 gem 'webpurify'#, require: 'web_purify'
-gem "websocket-extensions", ">= 0.1.5"
+gem 'websocket-extensions', '>= 0.1.5'
 gem 'xmlrpc'
 
 

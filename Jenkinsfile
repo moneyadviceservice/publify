@@ -4,6 +4,7 @@ pipeline {
         COMPOSE_PROJECT_NAME = "${env.JOB_NAME}"
         GITHUB_TOKEN = credentials('masbuild-github-token')
         ENV_VARS = credentials('publify-env')
+        RAILS_LOGIN = credentials('RAILS_LTS_USER_PASSWORD')
     }
     stages {
         stage('prepare') {
