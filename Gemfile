@@ -59,7 +59,7 @@ gem 'twitter', '~> 6.2.0'
 gem 'uglifier'
 gem 'unicorn'
 gem 'uuidtools', '~> 2.1.1'
-gem 'webpurify', require: 'web_purify'
+gem 'webpurify'#, require: 'web_purify'
 gem "websocket-extensions", ">= 0.1.5"
 gem 'xmlrpc'
 
