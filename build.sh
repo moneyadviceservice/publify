@@ -43,6 +43,10 @@ echo '-----------------------'
 bower cache clean
 rm -rf vendor/assets/bower_components
 
+echo 'Configuring credentials for Rails LTS'
+echo '----'
+bundle config gems.railslts.com RAILS_LTS_USERNAME:RAILS_LTS_PASSWORD
+
 echo 'Running bundler'
 echo '-----------------------'
 bundle install

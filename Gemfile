@@ -1,66 +1,76 @@
 source 'https://rubygems.org'
 source 'http://gems.dev.mas.local'
 
-gem 'dough-ruby', '~> 5.0', require: 'dough'
-gem 'attr_encrypted', '~> 3.1'
-gem 'blind_index', '0.2.0'
+source 'https://gems.railslts.com' do
+  gem 'rails', '~> 4.2.11.17'
+  gem 'actionmailer',     require: false
+  gem 'actionpack',       require: false
+  gem 'actionview',       require: false
+  gem 'activejob',        require: false
+  gem 'activemodel',      require: false
+  gem 'activerecord',     require: false
+  gem 'activesupport',    require: false
+  gem 'railslts-version', require: false
+  gem 'railties',         require: false
+end
 
-gem 'pg', '~> 0.15.1'
-gem 'rails', '~> 4.2.11'
-gem 'htmlentities'
-gem 'bluecloth', '~> 2.1'
-gem 'dotenv-rails'
-gem 'coderay', '~> 1.1.0'
-gem 'kaminari'
-gem 'RedCloth', '~> 4.2.8'
+gem 'actionpack-page_caching', '~> 1.0.2' # Security: needs update
 gem 'addressable', '~> 2.1', require: 'addressable/uri'
-gem 'mini_magick', '~> 3.8.1', require: 'mini_magick'
-gem 'uuidtools', '~> 2.1.1'
-gem 'flickraw-cached'
-gem 'rubypants', '~> 0.2.0'
-gem 'rake', '~> 10.3.2'
-gem 'fog'
-gem 'recaptcha', require: 'recaptcha/rails'
-gem 'carrierwave', '~> 0.10.0'
-gem 'carrierwave-azure'
 gem 'akismet', '~> 1.0'
-gem 'twitter', '~> 6.2.0'
-gem 'jbuilder'
-gem 'webpurify', require: 'web_purify'
-gem 'rack-trailing_slashes'
-gem 'newrelic_rpm'
-gem 'nokogiri'
+gem 'attr_encrypted', '~> 3.1'
+gem 'autoprefixer-rails'
+gem 'blind_index', '0.2.0'
+gem 'bluecloth', '~> 2.1'
+gem 'carrierwave', '~> 0.10.0' # Security: needs update to 1.3.2
+gem 'carrierwave-azure'
+gem 'ckeditor', git: 'https://github.com/galetahub/ckeditor'
+gem 'coderay', '~> 1.1.0'
+gem 'coffee-rails', ' ~> 4.0.1'
+gem 'compass-rails'
+gem 'csslint_ruby'
+gem 'dotenv-rails'
+gem 'dough-ruby', '~> 5.0', require: 'dough'
+gem 'dynamic_form', '~> 1.1.4'
+gem 'excon', '>= 0.71.0'
 gem 'fastimage'
-gem 'xmlrpc'
-
+gem 'flickraw-cached'
+gem 'fog'
+gem 'google-api-client', '0.7.1'
+gem 'htmlentities'
+gem 'jbuilder'
 gem 'jquery-rails', '~> 3.1.0'
 gem 'jquery-ui-rails', '~> 5.0.2'
-
-gem 'rails-timeago', '~> 2.0'
-
-gem 'rails_autolink', '~> 1.1.0'
-gem 'dynamic_form', '~> 1.1.4'
-gem 'sass-rails', ' ~> 4.0.3'
-gem 'non-stupid-digest-assets'
-gem 'mailjet'
-gem 'unicorn'
-gem 'responders', '~> 2.0'
-
-# removed from Rails-core as Rails 4.0
-gem 'actionpack-page_caching', '~> 1.0.2'
-gem 'rails-observers', '~> 0.1.2'
-gem 'ckeditor', git: 'https://github.com/galetahub/ckeditor'
-
-gem 'oauth2', '1.0.0'
-gem 'google-api-client', '0.7.1'
-gem 'legato', '0.4.0'
-
-gem 'autoprefixer-rails'
 gem 'jshint_ruby'
-gem 'csslint_ruby'
-gem 'compass-rails'
-gem 'coffee-rails', ' ~> 4.0.1'
+gem 'json', '= 2.4.0'
+gem 'kaminari'
+gem 'kramdown', '>= 2.3.0'
+gem 'legato', '0.4.0'
+gem 'loofah', '= 2.7.0'
+gem 'mailjet'
+gem 'mini_magick', '>= 4.9.4', require: 'mini_magick'
+gem 'newrelic_rpm'
+gem 'nokogiri', '< 1.11.0'
+gem 'non-stupid-digest-assets'
+gem 'oauth2', '1.0.0'
+gem 'pg', '~> 0.20.0'
+gem 'rack-trailing_slashes'
+gem 'rails-html-sanitizer', '= 1.3.0'
+gem 'rails-observers', '~> 0.1.2'
+gem 'rails-timeago', '~> 2.0'
+gem 'rake', '~> 12.3.3'
+gem 'recaptcha', require: 'recaptcha/rails'
+gem 'RedCloth', '~> 4.2.8'
+gem 'responders', '~> 2.0'
+gem 'rails_autolink', '~> 1.1.0'
+gem 'rubypants', '~> 0.2.0'
+gem 'sass-rails', ' ~> 4.0.3'
+gem 'twitter', '~> 6.2.0'
 gem 'uglifier'
+gem 'unicorn'
+gem 'uuidtools', '~> 2.1.1'
+gem 'webpurify' # Disabled. When renabling uncomment this: require: 'web_purify'
+gem 'websocket-extensions', '>= 0.1.5'
+gem 'xmlrpc'
 
 group :build, :test, :development do
   gem 'bowndler', '~> 1.0'
