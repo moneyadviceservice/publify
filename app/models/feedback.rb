@@ -104,8 +104,10 @@ class Feedback < ActiveRecord::Base
     rescue NoMethodError
     end
 
-    # Yeah, three state logic is evil...
-    case sp_is_spam? || akismet_is_spam? || is_profane?
+    # This test used to check for profanity
+    # We have cancelled subscription to web_purify, so this causes errors
+    # Add is_profane? back into the below condition if required
+    case sp_is_spam? || akismet_is_spam?
     when nil; :spam
     when true; :spam
     when false; :ham

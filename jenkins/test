@@ -34,12 +34,14 @@ function info {
 }
 
 run rm -rf vendor/cache .bundle/config
+run bundle config github.com $GITHUB_USER:$GITHUB_PASS
+run bundle config gems.railslts.com $RAILS_USER:$RAILS_PASS
 run bundle install
 run npm install --quiet
 
 run bundle exec bowndler update --allow-root
 run bundle exec rake db:create db:schema:load db:migrate
 run bundle exec rspec spec --format html --out tmp/spec.html --format RspecJunitFormatter --out tmp/spec.xml --format progress --profile --deprecation-out log/rspec_deprecations.txt
-info brakeman -q --no-pager --ensure-latest
+info brakeman -q --no-pager --ensure-latest --no-exit-on-warn
 run bundle exec danger --dangerfile=jenkins/Dangerfile --verbose
 

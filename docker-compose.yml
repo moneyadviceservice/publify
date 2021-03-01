@@ -35,6 +35,8 @@ services:
       - JENKINS_URL=$DANGER_JENKINS_URL
       - HTTP_REQUEST_TIMEOUT=10
       - LANG=C.UTF-8
+      - RAILS_USER=$RAILS_LOGIN_USR
+      - RAILS_PASS=$RAILS_LOGIN_PSW
     links:
       - postgres
 volumes:

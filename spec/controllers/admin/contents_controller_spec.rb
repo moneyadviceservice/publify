@@ -28,7 +28,7 @@ describe Admin::ContentsController, type: :controller do
 
       context 'search for state' do
         let!(:draft_article) { create(:article, state: 'draft') }
-        let!(:pending_article) { create(:article, state: 'publication_pending', published_at: '2020-01-01') }
+        let!(:pending_article) { create(:article, state: 'publication_pending', published_at: Date.tomorrow) }
         before(:each) { get :index, search: state }
 
         context 'draft only' do
@@ -359,7 +359,7 @@ describe Admin::ContentsController, type: :controller do
         it { expect(Article.count).to eq(1) }
       end
     end
-    
+
     describe '#destroy' do
       context 'with an article from other user' do
         let(:article) { create(:article, user: create(:user, login: 'other_user')) }
