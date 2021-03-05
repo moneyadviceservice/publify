@@ -9,8 +9,8 @@
     @include font-size(18);
   }
 
-  p > a:not([href*="moneyadviceservice.org.uk"]):after,
-  li > a:not([href*="moneyadviceservice.org.uk"]):after {
+  p > a:not([href*="moneyhelper.org.uk"]):after,
+  li > a:not([href*="moneyhelper.org.uk"]):after {
     content: "";
     display: inline-block;
     width: 18px;
