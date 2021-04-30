@@ -14,6 +14,7 @@ $less-than-mq-l: ($mq-l) - .01;
 
 @mixin article-tile--grey {
   background-color: $article-tile-bg--grey;
+  color: $maps-primary-text;
 }
 
 @mixin article-tile--mas {
@@ -39,12 +40,12 @@ $less-than-mq-l: ($mq-l) - .01;
 }
 
 @mixin article-tile__heading--white {
-  color: $color-link-default;
+  color: $maps-primary-blue;
 
   &:hover,
   &:focus,
   &:visited {
-    color: $color-link-default;
+    color: $maps-primary-blue;
   }
 }
 
