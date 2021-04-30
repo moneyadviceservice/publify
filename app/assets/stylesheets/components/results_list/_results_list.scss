@@ -24,6 +24,7 @@
 
 .results-list-item {
   margin-top: baseline-unit(6);
+  color: $maps-primary-text;
 
   @include respond-to($mq-l) {
     margin-top: baseline-unit(5);
@@ -31,12 +32,16 @@
 }
 
 .results-list-item__header {
-  @include font-size(20);
-  margin: 0;
+  @include font-size(23);
+  margin: 0 0 baseline-unit(2);
 
   @include respond-to($mq-l) {
-    @include font-size(22);
+    @include font-size(27);
     font-weight: normal;
+  }
+
+  a {
+    text-decoration: underline;
   }
 }
 

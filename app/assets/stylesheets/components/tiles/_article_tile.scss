@@ -14,14 +14,16 @@ $less-than-mq-l: ($mq-l) - .01;
 
 @mixin article-tile--grey {
   background-color: $article-tile-bg--grey;
+  color: $maps-primary-text;
 }
 
 @mixin article-tile--mas {
-  background-color: $article-tile-bg--mas-green;
+  background-color: $maps-primary-blue;
 }
 
 @mixin article-tile--popular {
   background-color: $article-tile-bg--popular;
+  color: $white;
 
   padding-top: baseline-unit(5);
   padding-bottom: baseline-unit(5);
@@ -38,12 +40,12 @@ $less-than-mq-l: ($mq-l) - .01;
 }
 
 @mixin article-tile__heading--white {
-  color: $color-link-default;
+  color: $maps-primary-blue;
 
   &:hover,
   &:focus,
   &:visited {
-    color: $color-link-default;
+    color: $maps-primary-blue;
   }
 }
 
@@ -162,6 +164,11 @@ $less-than-mq-l: ($mq-l) - .01;
 
   .homepage .l-tile:nth-child(3) & { // 3
     @include article-tile--popular;
+
+    .article-tile__heading,
+    .artile-tile-list__item-link {
+      color: $white;
+    }
   }
 
   .article-page & {
@@ -390,5 +397,18 @@ $less-than-mq-l: ($mq-l) - .01;
   &:hover,
   &:focus {
     color: $black;
+  }
+}
+
+.non-article-page .l-tile:nth-child(6n+1) .article-tile,
+.non-article-page .l-tile:nth-child(6) .article-tile {
+  background-color: $maps-teal-light;
+
+  .article-tile__heading {
+    color: $maps-primary-blue;
+  }
+
+  .article-tile__date {
+    color: $maps-primary-text;
   }
 }

@@ -1,6 +1,6 @@
 .l-tiles {
   @extend %clearfix;
-  margin-bottom: $baseline-unit*4;
+  padding-bottom: baseline-unit(5);
 }
 
 .l-tiles__inner {
@@ -16,28 +16,23 @@
 
     @include respond-to($mq-m) {
       display: flex;
+      justify-content: space-between;
     }
   }
 }
 
 .l-tiles-title {
-  background: $header-bg-color;
-  color: $white;
-  text-transform: uppercase;
-  font-weight: $brand-font-weight;
-  text-align: center;
-  padding-top: baseline-unit(3);
-  padding-bottom: baseline-unit(5);
-
-  @include respond-to($mq-m) {
-    padding-top: baseline-unit(7);
-    padding-bottom: baseline-unit(9);
-  }
+  color: $maps-primary-text;
+  font-weight: $base-font-family;
+  text-align: left;
+  padding: baseline-unit(4) baseline-unit(3);
+  margin: 0 auto;
+  max-width: 75em;
 }
 
 .l-tiles-title__header {
   @include font-size(36);
-  color: $white;
+  color: $maps-primary-blue;
   font-family: $brand-font-stack;
   font-weight: $brand-font-weight;
   padding-bottom: baseline-unit(2);
@@ -47,24 +42,22 @@
 
 .l-tile {
   width: 100%;
-  margin-bottom: 5px;
+  margin-bottom: 25px;
+  box-shadow: $maps-box-shadow;
+  border-radius: 4px;
+  border: 1px solid $maps-outline;
 
   @include respond-to($mq-m) {
     float: left;
 
     .non-article-page & {
-      width: 49.75%;
-      margin-right: .5%;
+      width: 48.75%;
 
       .flexbox & {
         display: flex;
-        flex-basis: 49.75%;
+        flex-basis: 48.75%;
         float: none;
         min-height: 0;
-      }
-
-      &:nth-child(2n) {
-        margin-right: 0;
       }
     }
   }
@@ -72,34 +65,27 @@
   @include respond-to($mq-l) {
     .non-article-page &,
     .article-page & {
-      width: 33%;
-      margin-right: .5%;
+      width: 32%;
 
       .flexbox & {
         display: flex;
-        flex-basis: 33%;
+        flex-basis: 32%;
         float: none;
         min-height: 0;
-      }
-
-      &:nth-child(2n) {
-        margin-right: .5%;
-      }
-
-      &:nth-child(3n) {
-        margin-right: 0;
       }
     }
   }
 }
 
 .l-tile--archive {
+  background-color: none;
+  border: 0;
+  box-shadow: none;
+
   .non-article-page & {
     float: right;
 
     @include respond-to($mq-m) {
-      margin-right: 0;
-
       .flexbox & {
         margin-left: auto;
         float: none;
@@ -109,7 +95,7 @@
 
     @include respond-to($mq-l) {
       .flexbox & {
-        flex-basis: 33%;
+        flex-basis: 32%;
       }
     }
   }

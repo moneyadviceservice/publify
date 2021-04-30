@@ -3,11 +3,11 @@
 }
 
 .l-index--campaign {
-  margin-top: baseline-unit(-20);
+  margin-top: baseline-unit(-16);
   padding-top: baseline-unit(20);
 
   @include respond-to($mq-l) {
-    margin-top: baseline-unit(-28);
+    margin-top: baseline-unit(-22);
     padding-top: baseline-unit(28);
   }
 }
@@ -17,19 +17,23 @@
 }
 
 .l-index-archive__link {
-  background: $deep-cerulean;
+  background: $white;
   padding: baseline-unit(3);
   display: block;
   margin-top: -5px;
   @include font-size(30);
   text-align: center;
   width: 100%;
+  border: 1px solid $maps-outline;
+  border-radius: 4px;
+  font-weight: 700;
+  box-shadow: $maps-box-shadow;
 
   &:link,
   &:hover,
   &:focus,
   &:visited {
-    color: $white;
+    color: $maps-primary-magenta;
   }
 }
 

@@ -9,29 +9,29 @@ $link-color--negative: $white;
 $base-font-size: 16 !default;
 $base-line-height: 1.4;
 
-$base-font-family: 'museo_sans';
-$base-font-stack: $base-font-family, Helvetica, Arial, sans-serif;
+$base-font-family: 'Roobert';
+$base-font-stack: $base-font-family, sans-serif;
 
 $font-weight-bold: 700;
 $font-weight-medium: 500;
 $font-weight-light: 300;
 
-$brand-font-family: 'museo_slab';
-$brand-font-stack: $brand-font-family, Helvetica, Arial, sans-serif;
+$brand-font-family: 'Roobert-Bold';
+$brand-font-stack: $brand-font-family, sans-serif;
 $brand-font-weight: 900;
 
 $text-color: $nevada;
 
-$heading-color-primary: $astronaut-blue;
+$heading-color-primary: $maps-primary-text;
 $heading-color-secondary: $outer-space;
 
-$emphasised-text-color: $astronaut-blue; // this is used for introducion text
+$emphasised-text-color: $maps-primary-text; // this is used for introducion text
 
 // ui geometry
 $border-radius: 5px !default;
 
 // ui colors
-$header-bg-color: $deep-cerulean;
+$header-bg-color: $maps-primary-blue;
 
 $tag-primary-bgcolor--solid: $black;
 $tag-primary-bgcolor--translucent: $black--translucent;
@@ -46,27 +46,27 @@ $brand-green: $green-leaf !default;
 $banner-bg-color: $concrete;
 
 // Tiles
-$article-tile-bg--green: $elf-green;
+$article-tile-bg--green: $maps-teal;
 $article-tile-text--green: $white;
 $article-tile-date--green: $white;
-$article-tile-comments-bg--green: $deep-sea-green;
+$article-tile-comments-bg--green: $maps-teal;
 
 $article-tile-bg--white: $white;
-$article-tile-text--white: $eastern-blue;
+$article-tile-text--white: $maps-teal;
 $article-tile-date--white: $outer-space;
-$article-tile-comments-bg--white: $eastern-blue;
+$article-tile-comments-bg--white: $maps-teal;
 
-$article-tile-bg--blue: $deep-cerulean;
+$article-tile-bg--blue: $maps-primary-blue;
 $article-tile-text--blue: $white;
 $article-tile-date--blue: $white;
-$article-tile-comments-bg--blue: $bay-of-many;
+$article-tile-comments-bg--blue: $maps-teal;
 
 $article-tile-bg--grey: $concrete;
 
 $article-tile-bg--mas-green: $green-leaf;
 $article-tile-text--mas: $white;
 
-$article-tile-bg--popular: $cream-can;
+$article-tile-bg--popular: $maps-primary-magenta;
 
 $article-tile-date--mas: $white;
 
@@ -82,3 +82,8 @@ $z-foreground: 2;
 $mq-two-col: 768px !default;
 
 $error-color: $cardinal;
+
+// Maps Specific
+
+$maps-radius: 4px;
+$maps-box-shadow: 0px 3px 0px rgba(0, 11, 59, 0.25);

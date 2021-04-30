@@ -13,6 +13,6 @@
   </p>
 
   <% if article.published_comments.size > 0 %>
-    <a class="article-info__comments" href="#comments"><%= article.published_comments.size %> Comment<%= article.published_comments.size > 1 ? 's' : '' %></a>
+    <a class="article-info__comments article-info__comments--in-page" href="#comments"><%= article.published_comments.size %> Comment<%= article.published_comments.size > 1 ? 's' : '' %></a>
   <% end %>
 </div>

@@ -1,6 +1,5 @@
 .comments {
   clear: left;
-  background: $concrete;
   padding: baseline-unit(3);
   margin-bottom: baseline-unit(3);
 
@@ -12,19 +11,22 @@
 }
 
 .comments__headline {
+  color: $maps-primary-blue;
   margin-top: baseline-unit(4);
-  text-align: center;
+  text-align: left;
   @include font-size(30);
   max-width: none;
 }
 
 .comments__text {
-  text-align: center;
+  color: $maps-primary-text;
+  text-align: left;
   max-width: none;
 }
 
 .comment-form {
   @include row();
+  color: $maps-primary-text;
 }
 
 .comment-form__errors {
@@ -39,9 +41,7 @@
 .comment-form__group--email_address,
 .comment-form__group--policy {
   @include respond-to($mq-two-col) {
-    @include column(8);
-    @include push(2);
-    @include pull(2);
+    @include column(12);
   }
 }
 
@@ -49,12 +49,6 @@
   @include column(12);
   text-align: right;
   margin-top: $baseline-unit*4;
-
-  @include respond-to($mq-two-col) {
-    @include column(8);
-    @include push(2);
-    @include pull(2);
-  }
 }
 
 .comment-form__group {
@@ -63,6 +57,7 @@
     margin-top: $baseline-unit;
     margin-bottom: $baseline-unit*2;
     padding: $baseline-unit*2;
+    border-radius: 4px;
   }
 }
 
@@ -75,12 +70,10 @@
 }
 
 .comment-list-item {
-  border-top: 1px solid $comment-list-item-border;
+  border-top: 1px solid $maps-outline;
   padding-top: baseline-unit(2);
 
   @include respond-to($mq-two-col) {
-    @include push(1);
-    @include pull(1);
 
     &:first-child {
       margin-top: baseline-unit(14);
@@ -99,7 +92,7 @@
 }
 
 .comment-list-item__headline-date {
-  font-weight: normal;
+  font-family: $brand-font-family;
 }
 
 .comment-list-item__report-link {
@@ -118,4 +111,18 @@
 .comments .validation-summary__error {
   margin-top: 0;
   margin-bottom: $baseline-unit;
+}
+
+.maps-button {
+  @include font-size(16);
+  font-family: $brand-font-family;
+  color: $white !important;
+  border: none;
+  border-radius: $maps-radius;
+  padding: baseline-unit(2) baseline-unit(4);
+  box-shadow: $maps-box-shadow;
+}
+
+.maps-button--primary {
+  background-color: $maps-primary-magenta !important;
 }

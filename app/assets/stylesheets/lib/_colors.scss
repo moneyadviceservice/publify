@@ -4,15 +4,20 @@ $white: #FFFFFF !default;
 $black: #000000 !default;
 $black--translucent: rgba(0,0,0, .8) !default;
 
+$maps-primary-text: #000B3B !default;
+
 // Greys
 $nevada: #6a6d6d !default;
-$outer-space: #2e3030 !default;
+$outer-space: #000B3B !default;
 $alto: #D1D1D1 !default;
 $silver: #cccccc !default;
-$concrete: #f3f3f3;
+$concrete: #f3f1f3;
 $sirocco: #76898c !default;
 $mercury: #e4e4e4 !default;
 $gallery: #ececec !default;
+
+$maps-light-grey: #F3F1F3 !default;
+$maps-outline: #9DA1CA !default;
 
 // Blues
 $deep-cerulean: #0076AB !default;
@@ -29,6 +34,8 @@ $chambray: #385b8f !default;
 $shakespeare: #4ea7cf !default;
 $picton-blue: #3f9de3 !default;
 
+$maps-primary-blue: #0F19A0;
+
 // Reds
 $burnt-sienna: #eb745a !default;
 $roof-terracotta: #b43a23;
@@ -36,9 +43,20 @@ $milano-red: #b70e09;
 $mojo: #bb3d36 !default;
 $cardinal: #d11d32 !default;
 
+$maps-primary-magenta: #C82A87;
+$maps-primary-magenta-dark: #AE0060;
+
 // Greens
 $green-leaf: #3e8406 !default;
-$elf-green: #0b8573;
+$elf-green: #6FD8D8;
 $cream-can: #f1d75f !default;
 $bilbao: #3f7d12 !default;
 $deep-sea-green: #075045 !default;
+
+$maps-teal: #00788F;
+$maps-teal-light: #6FD8D8;
+
+// Other Maps Colours
+
+$maps-yellow: #F0F05A;
+$maps-support-purple: #792B9E;

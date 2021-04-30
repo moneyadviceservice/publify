@@ -11,9 +11,9 @@
 .tag-list__item,
 .tag-list__trigger-content {
   @include inline-block();
-  background-color: $tag-secondary-bgcolor--solid;
-  background-color: $tag-secondary-bgcolor--translucent;
-  border-radius: $border-radius;
+  background-color: $white;
+  border-radius: $maps-radius;
+  border: 1px solid $maps-outline;
 
   @include respond-to ($mq-m) {
     margin-left: baseline-unit(1);
@@ -23,6 +23,7 @@
 
 .tag-list__trigger {
   @extend %base-font-style;
+  @include font-size(14);
   display: none;
   margin-bottom: baseline-unit(1);
 
@@ -43,13 +44,14 @@
   &:before {
     content: "\2026";
     line-height: 0;
-    color: $white;
+    color: $maps-primary-magenta;
   }
 }
 
 .tag-list__item--title {
-  background-color: $tag-primary-bgcolor--solid;
-  background-color: $tag-primary-bgcolor--translucent;
+  background-color: $maps-primary-blue;
+  color: $white;
+  border: none;
 
   @include respond-to ($mq-xs, $mq-m - 0.01) { // needs to go up to, not including
     @include visually-hidden();
@@ -78,19 +80,14 @@
 .tag-list__trigger-content {
   padding: baseline-unit(1) baseline-unit(2);
   display: block;
-  color: $white;
 
   &:visited,
   &:hover {
-    color: $white;
+    color: $maps-primary-magenta;
   }
 
   @include respond-to ($mq-m) {
-    padding: baseline-unit(2) baseline-unit(2);
-  }
-
-  @include respond-to ($mq-l) {
-    padding: baseline-unit(3) baseline-unit(3);
+    padding: baseline-unit(2) baseline-unit(3);
   }
 }
 

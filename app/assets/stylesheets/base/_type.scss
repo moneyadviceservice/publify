@@ -1,10 +1,20 @@
+@font-face {
+  font-family: 'Roobert';
+  src: url('Roobert-Regular.woff');
+}
+
+@font-face {
+  font-family: 'Roobert-Bold';
+  src: url('Roobert-Bold.woff');
+}
+
 html {
   // prevents bootstrap bollocks from screwing with my styles.
   font-size: 100%;
 }
 
 body {
-  font-family: $base-font-stack;
+  font-family: 'Roobert', sans-serif;
   font-size: $base-font-size + px;
   line-height: $base-line-height;
   font-weight: $font-weight-light;
